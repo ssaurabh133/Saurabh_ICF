@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="575" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_CUSTOMER_ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_indian_rupee_logo" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT IFNULL(CUST.SALUTATION,'')SALUTATION,IN_CAMEL_CASE(IFNULL(CUST.CUSTOMER_NAME,''))CUSTOMER_NAME,
+IN_CAMEL_CASE(IFNULL(CUST.FATHER_HUSBAND_NAME,''))FATHER_HUSBAND_NAME,IN_CAMEL_CASE(IFNULL(CUST.HUSBAND_NAME,''))HUSBAND_NAME,IN_CAMEL_CASE(IFNULL(CUST.MOTHER_NAME,''))MOTHER_NAME,
+CUST.CUSTOMER_DOB,IN_CAMEL_CASE(IFNULL(GM.DESCRIPTION,'')) GENDER,IN_CAMEL_CASE(IFNULL(GEN.DESCRIPTION,'')) MARITAL_STATUS,
+IN_CAMEL_CASE(IFNULL(GENERIC.DESCRIPTION,'')) CASTE_CATEGORY,IN_CAMEL_CASE(IFNULL(GEN_M.DESCRIPTION,'')) EDU_DETAIL,
+IFNULL(CUST.NUMBER_OF_DEPENDENT,'')NUMBER_OF_DEPENDENT,DECRYPT_STRING(IFNULL(CUST.CUSTMER_PAN,''))CUSTMER_PAN,
+IN_CAMEL_CASE(IFNULL(GEN_ADDR.DESCRIPTION,'')) ADDRESS_TYPE,IN_CAMEL_CASE(IFNULL(RESIDENTIAL_STATUS.DESCRIPTION,'')) RESIDENTIAL_STATUS,CUST.PHOTO_STREAM
+FROM CR_DEAL_CUSTOMER_M CUST
+LEFT JOIN GENERIC_MASTER GM ON (GM.GENERIC_KEY='GENDER_INDIVIDUAL' AND GM.VALUE=CUST.GENDER)
+LEFT JOIN GENERIC_MASTER GEN ON (GEN.GENERIC_KEY='MARITAL_STATUS' AND GEN.VALUE=CUST.MARITAL_STATUS)
+LEFT JOIN GENERIC_MASTER GENERIC ON (GENERIC.GENERIC_KEY='CAST_CATEGORY' AND GENERIC.VALUE=CUST.CASTE_CATEGORY)
+LEFT JOIN GENERIC_MASTER GEN_M ON (GEN_M.GENERIC_KEY='EDU_DETAIL' AND GEN_M.VALUE=CUST.EDU_DETAIL)
+LEFT JOIN CR_DEAL_ADDRESS_M CDAM ON(CUST.CUSTOMER_ID=CDAM.BPID AND CDAM.COMMUNICATION_ADDRESS='Y')
+LEFT JOIN GENERIC_MASTER GEN_ADDR ON (GEN_ADDR.GENERIC_KEY='ADDRESS_TYPE' AND GEN_ADDR.VALUE=CDAM.ADDRESS_TYPE)
+LEFT JOIN GENERIC_MASTER RESIDENTIAL_STATUS ON (RESIDENTIAL_STATUS.GENERIC_KEY='RESIDENTIAL_STATUS' AND RESIDENTIAL_STATUS.VALUE=CUST.RESIDENTIAL_STATUS)
+WHERE CUST.CUSTOMER_ID=$P{P_CUSTOMER_ID} AND 'DEAL'=$P{p_stage}
+UNION ALL
+SELECT IFNULL(CUST.SALUTATION,'')SALUTATION,
+IN_CAMEL_CASE(CONCAT(IFNULL(CUST.FIRST_NAME,''),' ',IFNULL(CUST.MIDDLE_NAME,''),' ',IFNULL(CUST.LAST_NAME,'')))CUSTOMER_NAME,
+IN_CAMEL_CASE(IFNULL(CUST.FATHER_HUSBAND_NAME,''))FATHER_HUSBAND_NAME,IN_CAMEL_CASE(IFNULL(CUST.HUSBAND_NAME,''))HUSBAND_NAME,IN_CAMEL_CASE(IFNULL(CUST.MOTHER_NAME,''))MOTHER_NAME,
+CUST.CUSTOMER_DOB,IN_CAMEL_CASE(IFNULL(GM.DESCRIPTION,'')) GENDER,IN_CAMEL_CASE(IFNULL(GEN.DESCRIPTION,'')) MARITAL_STATUS,
+IN_CAMEL_CASE(IFNULL(GENERIC.DESCRIPTION,'')) CASTE_CATEGORY,IN_CAMEL_CASE(IFNULL(GEN_M.DESCRIPTION,'')) EDU_DETAIL,
+IFNULL(CUST.NUMBER_OF_DEPENDENT,'')NUMBER_OF_DEPENDENT,IFNULL(CUST.PAN,'')CUSTMER_PAN,
+IN_CAMEL_CASE(IFNULL(GEN_ADDR.DESCRIPTION,'')) ADDRESS_TYPE,IN_CAMEL_CASE(IFNULL(RESIDENTIAL_STATUS.DESCRIPTION,'')) RESIDENTIAL_STATUS,CUST.PHOTO_STREAM
+FROM STAGE_CUSTOMER_DTL CUST
+LEFT JOIN GENERIC_MASTER GM ON (GM.GENERIC_KEY='GENDER_INDIVIDUAL' AND GM.VALUE=CUST.GENDER)
+LEFT JOIN GENERIC_MASTER GEN ON (GEN.GENERIC_KEY='MARITAL_STATUS' AND GEN.VALUE=CUST.MARITAL_STATUS)
+LEFT JOIN GENERIC_MASTER GENERIC ON (GENERIC.GENERIC_KEY='CAST_CATEGORY' AND GENERIC.VALUE=CUST.CASTE_CATEGORY)
+LEFT JOIN GENERIC_MASTER GEN_M ON (GEN_M.GENERIC_KEY='EDU_DETAIL' AND GEN_M.VALUE=CUST.EDU_DETAIL)
+LEFT JOIN STAGE_ADDRESS_DTL CDAM ON(CUST.ID=CDAM.CUSTOMER_ID AND CDAM.COMMUNICATION_ADDRESS='Y')
+LEFT JOIN GENERIC_MASTER GEN_ADDR ON (GEN_ADDR.GENERIC_KEY='ADDRESS_TYPE' AND GEN_ADDR.VALUE=CDAM.ADDRESS_TYPE)
+LEFT JOIN GENERIC_MASTER RESIDENTIAL_STATUS ON (RESIDENTIAL_STATUS.GENERIC_KEY='RESIDENTIAL_STATUS' AND RESIDENTIAL_STATUS.VALUE=CUST.RESIDENTIAL_STATUS)
+WHERE CUST.ID=$P{P_CUSTOMER_ID} AND 'STAGE'=$P{p_stage}]]>
+	</queryString>
+	<field name="SALUTATION" class="java.lang.String"/>
+	<field name="CUSTOMER_NAME" class="java.lang.String"/>
+	<field name="FATHER_HUSBAND_NAME" class="java.lang.String"/>
+	<field name="HUSBAND_NAME" class="java.lang.String"/>
+	<field name="MOTHER_NAME" class="java.lang.String"/>
+	<field name="CUSTOMER_DOB" class="java.sql.Date"/>
+	<field name="GENDER" class="java.lang.String"/>
+	<field name="MARITAL_STATUS" class="java.lang.String"/>
+	<field name="CASTE_CATEGORY" class="java.lang.String"/>
+	<field name="EDU_DETAIL" class="java.lang.String"/>
+	<field name="NUMBER_OF_DEPENDENT" class="java.lang.String"/>
+	<field name="CUSTMER_PAN" class="java.lang.String"/>
+	<field name="ADDRESS_TYPE" class="java.lang.String"/>
+	<field name="RESIDENTIAL_STATUS" class="java.lang.String"/>
+	<field name="PHOTO_STREAM" class="java.lang.String"/>
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["1. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="0" width="559" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SALUTATION}+". "+$F{CUSTOMER_NAME}+"  "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["2. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="0" width="445" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FATHER_HUSBAND_NAME}+"    "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="117" y="0" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="16" y="0" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Father's Name "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15"/>
+		<band height="96" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="27" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["7. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="27" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Marital Status "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="247" y="27" width="98" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Residential Status "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="345" y="27" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="27" width="18" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["8. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="247" y="55" width="98" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Category "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="247" y="41" width="98" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Education "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="41" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["9. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="41" width="18" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["10. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="345" y="41" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="357" y="55" width="120" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CASTE_CATEGORY}+"    "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="357" y="41" width="120" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{EDU_DETAIL}+"  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="55" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["No. of Dependents "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="55" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["11. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="41" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PAN "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="345" y="55" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="55" width="18" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["12. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="55" width="99" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NUMBER_OF_DEPENDENT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="41" width="99" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSTMER_PAN}+"   "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="69" width="289" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["13. Current Address : "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="13" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date of Bith "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="247" y="13" width="98" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Gender "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="13" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["5. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="357" y="13" width="120" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GENDER}+"   "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="229" y="13" width="18" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["6. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="345" y="13" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="13" width="99" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{CUSTOMER_DOB}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="357" y="27" width="120" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RESIDENTIAL_STATUS}+"  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="117" y="13" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="117" y="27" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="117" y="41" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="117" y="55" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="27" width="99" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MARITAL_STATUS}+"   "]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement stretchType="RelativeToBandHeight" x="478" y="12" width="97" height="76" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream(org.apache.commons.codec.binary.Base64.decodeBase64($F{PHOTO_STREAM}.getBytes()))]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="-1" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["4. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="16" y="-1" width="98" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Mother's Name "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="117" y="-1" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="130" y="-1" width="445" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MOTHER_NAME}+"   "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="16" y="-15" width="101" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Spouse Name "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="118" y="-15" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="130" y="-15" width="445" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{HUSBAND_NAME}+"    "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1" y="-15" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["3. "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="13">
+			<subreport>
+				<reportElement x="0" y="0" width="575" height="13"/>
+				<subreportParameter name="p_SNO">
+					<subreportParameterExpression><![CDATA[14]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_indian_rupee_logo">
+					<subreportParameterExpression><![CDATA[$P{p_indian_rupee_logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_label"/>
+				<subreportParameter name="P_CUSTOMER_ID">
+					<subreportParameterExpression><![CDATA[$P{P_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_type">
+					<subreportParameterExpression><![CDATA["REI"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_ADDRESS_DTL.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="289" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["16. Permanent  Address : "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="13">
+			<subreport>
+				<reportElement x="0" y="0" width="575" height="13"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_SNO">
+					<subreportParameterExpression><![CDATA[16]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_indian_rupee_logo">
+					<subreportParameterExpression><![CDATA[$P{p_indian_rupee_logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_label"/>
+				<subreportParameter name="P_CUSTOMER_ID">
+					<subreportParameterExpression><![CDATA[$P{P_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_type">
+					<subreportParameterExpression><![CDATA["PERMANENT"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_ADDRESS_DTL.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="18" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["18. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="18" y="0" width="142" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Preferred Mailing Address :  "]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="160" y="0" width="415" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ADDRESS_TYPE}+" "]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+		<band height="25">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="10" width="575" height="15" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Occupation Details ("+$F{SALUTATION}+". "+$F{CUSTOMER_NAME}+") "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="575" height="15"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_CUSTOMER_ID">
+					<subreportParameterExpression><![CDATA[$P{P_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_OCCUPATION.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+
+	<class name="com.scz.vo.PoolIdMakerVO" table="CR_SECURITIZATION_POOL_M" dynamic-update="true">
+		<id name="poolID" column="POOL_ID" type="int" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="poolName" column ="POOL_NAME" length="50" />
+		<property name="poolCreationDate1" column ="POOL_CREATION_DATE" />
+		<property name="cutOffDate1" column ="POOL_CUTOFF_DATE"  />
+		<property name="poolApprovalDate" column ="POOL_APPROVAL_DATE" />
+		<property name="poolType" column ="POOL_TYPE" length="10" />
+		<property name="poolDescription" column ="POOL_DESCRIPTION" length="500"/>
+		<property name="lbxinstituteID" column ="POOL_INSTITUTION_ID" length="10"/>
+		
+		<property name="assignType" column ="ASSIGNMENT_TYPE" length="50"/>
+		<property name="assignDate1" column ="ASSIGNMENT_DATE"  />
+		
+		<property name="dealAmount" column ="DEAL_AMOUNT" type="big_decimal" precision="22" scale="4"  />
+		<property name="interestRate" column ="INTEREST_RATE" type="big_decimal" precision="22" scale="4"  />
+		
+		<property name="creditEnhancement" column ="CREDIT_ENHANCE_FLAG" length="1"/>
+		<property name="multipleInvestor" column ="MULTI_INVESTOR_FLAG" length="1" />
+		
+		<property name="recStatus" column ="REC_STATUS" length="1"/>
+		<property name="makerID" column ="MAKER_ID" length="10" />
+		<property name="makerDate1" column ="MAKER_DATE" />
+		<property name="makerRemark" column ="MAKER_REMARKS" length="1000"/>
+		<property name="authorID" column ="AUTHOR_ID" length="10" />
+		<property name="authorDate1" column ="AUTHOR_DATE" />
+		<property name="authorRemark" column ="AUTHOR_REMARKS" length="1000"/>
+		<property name="assignmentPercentage" column ="Assignment_Percentage" length="5"/>	<!-- seema -->		
+	</class>
+	
+	<class name="com.scz.vo.PoolDownloadVO" table="SCZ_POOL_DOWNLOAD_PARAMETERS" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="parameters" length="500" column ="PARAMETER"  />
+		<property name="type" column ="TYPE"  />
+		<property name="requestTime" column ="REQUEST_DATE" type="java.sql.Date" />
+		<property name="processStartTime" column ="PROCESS_START_TIME" type="java.sql.Timestamp" />
+		<property name="processEndTime" column ="PROCESS_END_TIME" type="java.sql.Timestamp" />
+		<property name="status" column ="CURR_STATUS"  />
+		<property name="makerID" column ="MAKER_ID"  />
+	</class>
+	
+</hibernate-mapping>
+
+	

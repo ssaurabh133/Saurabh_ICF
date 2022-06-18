@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+ 
+     
+ <servlet>
+  <servlet-name>action</servlet-name>
+  <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+  <init-param>
+   <param-name>config</param-name>
+   <param-value>
+   		/WEB-INF/struts-config.xml,
+   		/WEB-INF/struts-cpConfig.xml,
+   		/WEB-INF/struts-cmConfig.xml,
+   		/WEB-INF/struts-debtConfig.xml,
+   		/WEB-INF/struts-glConfig.xml,
+   		/WEB-INF/struts-masterConfig.xml,
+   		/WEB-INF/struts-securityConfig.xml,
+   		/WEB-INF/struts-payConfig.xml,
+   		/WEB-INF/struts-legalConfig.xml,
+   		/WEB-INF/struts-repoConfig.xml,
+   		/WEB-INF/struts-omniFinReportConfig.xml,
+
+   		/WEB-INF/struts-uploadConfig.xml,
+   		/WEB-INF/struts-omniFinUploadConfig.xml,
+		/WEB-INF/struts-sczConfig.xml
+		
+   </param-value>
+  </init-param>
+
+  <init-param>
+   <param-name>debug</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <init-param>
+   <param-name>detail</param-name>
+   <param-value>3</param-value>
+  </init-param>
+  <load-on-startup>0</load-on-startup>
+ </servlet>
+ 
+ <servlet-mapping>
+  <servlet-name>action</servlet-name>
+  <url-pattern>*.do</url-pattern> 
+ </servlet-mapping>
+ 
+ <servlet>
+  <servlet-name>LockStartup</servlet-name> 
+  <servlet-class>com.lockRecord.action.LockStartup</servlet-class> 
+  <load-on-startup>1</load-on-startup> 
+  </servlet>
+ <!-- Code for Payout Start here-->
+ <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>PayoutContextInitializerServlet</servlet-name>
+    <servlet-class>com.payout.adapter.PayoutContextInitializerServlet</servlet-class>
+  <!--   <load-on-startup>2</load-on-startup>   -->
+  </servlet> 
+ <!-- Code for Payout End here-->
+   <!-- Code for Data Integration Start here-->
+ <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DataIntergartionContextInitializerServlet</servlet-name>
+    <servlet-class>com.data.integration.servlet.DataIntergartionContextInitializerServlet</servlet-class>
+     <!--<load-on-startup>2</load-on-startup> -->
+  </servlet>
+  <!-- Code for Data Integration End here-->
+   <!-- Code for Communication utility Start here-->
+   <servlet>
+    <servlet-name>EmailInvoke</servlet-name>
+    <servlet-class>com.communication.engn.servlets.EmailInvoke</servlet-class>
+<!-- Rohit Changes start for email-->
+ <!-- <init-param>
+   		<param-name>HOUR</param-name>
+   		<param-value>01</param-value>
+  	</init-param>
+  	<init-param>
+   		<param-name>MINUTE</param-name>
+   		<param-value>01</param-value>
+  	</init-param>
+  	<init-param>
+   		<param-name>SECOND</param-name>
+   		<param-value>01</param-value>
+  	</init-param> 
+   <load-on-startup>3</load-on-startup>  -->
+<!-- Rohit Changes end for email-->
+  </servlet>
+     <servlet>
+       <servlet-name>rptchartofaccounts</servlet-name>
+    	<servlet-class>com.Report.rptchartofaccounts</servlet-class>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>rptchartofaccounts</servlet-name>
+    <url-pattern>/rptchartofaccounts</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>ReportfrmSchudule</servlet-name>
+    <servlet-class>com.Report.ReportfrmSchudule</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>ReportfrmSchudule</servlet-name>
+    <url-pattern>/ReportfrmSchudule</url-pattern>
+  </servlet-mapping>
+<!-- Code for Communication utility End here-->
+ <welcome-file-list>
+  <welcome-file>JSP/View.jsp</welcome-file>
+ </welcome-file-list>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+ <error-page>
+	 <exception-type>java.lang.Throwable</exception-type>
+	 <location>/JSP/errorJsp.jsp </location>
+</error-page>
+
+	<listener>
+		<listener-class>com.session.sessionlistener.SessionListener</listener-class>
+	</listener>
+	<session-config>
+		<session-timeout>50</session-timeout>
+	</session-config>
+<!-- Rohit Changes starts for security -->
+					<!-- For security Add By Rohit -->
+					<security-constraint> 
+					<display-name>excluded</display-name> 
+					<web-resource-collection> 
+					<web-resource-name>No Access</web-resource-name> 
+					<url-pattern>/*</url-pattern> 	
+					<http-method>OPTIONS</http-method> 
+					<http-method>TRACE</http-method> 
+					</web-resource-collection> 
+					<auth-constraint /> 
+					</security-constraint> 
+					<!--  End Add By Rohit -->
+<filter> 
+	<filter-name>SecurityFilter</filter-name> 
+ 	<filter-class>com.a3s.omnifin.security.WebSecurityFilter</filter-class> 
+	 </filter> 
+		 <filter-mapping> 
+			<filter-name>SecurityFilter</filter-name> 
+			<url-pattern>/*</url-pattern> 
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>SecurityFilter</filter-name>
+			<url-pattern>*.jsp</url-pattern>
+		</filter-mapping>
+   <filter> 
+	<filter-name>SaltFilter</filter-name> 
+ 	<filter-class>com.a3s.omnifin.security.SaltFilter</filter-class> 
+ </filter>
+	 <filter-mapping> 
+ 			<filter-name>SaltFilter</filter-name> 
+			<url-pattern>/loadLMS.do</url-pattern> 
+	</filter-mapping>
+	<filter-mapping> 
+ 			<filter-name>SaltFilter</filter-name> 
+			<url-pattern>/pageLoadAction.do</url-pattern> 
+	</filter-mapping>
+	 <filter-mapping> 
+ 			<filter-name>SaltFilter</filter-name> 
+			<url-pattern>/changePasswordMaster.do</url-pattern> 
+	</filter-mapping>
+	
+	<!-- code for security -->
+
+	<!-- FOR FTP VOUCHER UPLOAD -->
+	<context-param>
+        <param-name>quartz:shutdown-on-unload</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>quartz:wait-on-shutdown</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>quartz:start-on-load</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+      <listener>
+         <listener-class>com.GL.action.FTPVoucherUploadListener</listener-class>
+     </listener>  
+	
+	<!-- FOR FTP VOUCHER UPLOAD -->
+</web-app>

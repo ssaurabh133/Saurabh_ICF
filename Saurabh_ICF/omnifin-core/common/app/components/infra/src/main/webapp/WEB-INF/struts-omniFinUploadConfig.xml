@@ -1,0 +1,283 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+		
+		<form-bean name="ExcelSheetUploadForm" type="com.GL.actionForm.ExcelSheetUploadForm"  />
+		<!--<form-bean name="ExcelSheetUploadFormCM" type="com.cm.actionform.ExcelSheetUploadFormCM"  />-->
+		<form-bean name="BankStatementUploadForm" type="com.GL.actionForm.BankStatementUploadForm"  />
+		<form-bean name="cmUploadForm" type="com.cm.actionForm.CMUploadForm"  />
+		
+		<form-bean name="PresentationsProcessDynaValidatorForm" 
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bank" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.Integer" />
+			<form-property name="lbxBranchID" type="java.lang.Integer" />
+			<form-property name="presentationDate" type="java.lang.String" />
+			<form-property name="bankAccount" type="java.lang.String" />
+			<form-property name="makerID" type="java.lang.String" />
+			<form-property name="makerDate" type="java.lang.String" />
+			<form-property name="fileName" type="java.lang.String" />
+			<form-property name="DocPath" type="java.lang.String" />
+			<form-property name="docFile" type="org.apache.struts.upload.FormFile" />
+			<form-property name="micr" type="java.lang.String" />
+			<form-property name="ifscCode" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="PoolIDMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+
+			<form-property name="poolID" type="java.lang.String" />
+			<form-property name="lbxPoolID" type="java.lang.String" />
+			<form-property name="poolName" type="java.lang.String" />
+			<form-property name="cutOffDate" type="java.lang.String" />
+			<form-property name="instituteID" type="java.lang.String" />
+			<form-property name="lbxinstituteID" type="java.lang.String" />
+			<form-property name="poolCreationDate" type="java.lang.String" />
+			<form-property name="poolType" type="java.lang.String" />
+			<form-property name="docFile" type="org.apache.struts.upload.FormFile"></form-property>
+		 <form-property name="customerName" type="java.lang.String" />
+		 
+			
+			<form-property name="lbxLoanNoHID" type="java.lang.String" />
+			<form-property name="loanAccNo" type="java.lang.String" />
+			<form-property name="loanID" type="java.lang.String" />
+			<form-property name="loanProduct" type="java.lang.String" />
+			<form-property name="loanScheme" type="java.lang.String" />
+			<form-property name="loanCustomerID" type="java.lang.String" />
+			<form-property name="loanCustomerType" type="java.lang.String" />
+			<form-property name="loanCustomerCtegory" type="java.lang.String" />
+			
+	
+	         <form-property name="loanCustomerConstituion" type="java.lang.String" />
+			<form-property name="loanCustomerBusinessSeg" type="java.lang.String" />
+			<form-property name="loanIndustry" type="java.lang.String" />
+			<form-property name="loanSubIndustry" type="java.lang.String" />
+			<form-property name="loanDisbursalDate" type="java.lang.String" />
+			 
+			<form-property name="loanMaturityDate" type="java.lang.String" />
+			<form-property name="loanTenure" type="java.lang.String" />
+	
+	
+	        <form-property name="loanBalanceTenure" type="java.lang.String" />
+			<form-property name="loanInstallmentNum" type="java.lang.String" />
+			<form-property name="loanAdvEMINUm" type="java.lang.String" />
+			<form-property name="loanInitRate" type="java.lang.String" />
+			<form-property name="loanDisbursalStatus" type="java.lang.String" />
+			<form-property name="loanNPAFlag" type="java.lang.String" />
+			<form-property name="loanDPD" type="java.lang.String" />
+			<form-property name="loanDPDString" type="java.lang.String" />
+       
+       
+            <form-property name="loanAssetCost" type="java.lang.String" />
+			<form-property name="loanAmount" type="java.lang.String" />
+			<form-property name="loanEMI" type="java.lang.String" />
+			<form-property name="loanAdvEMIAmount" type="java.lang.String" />
+			<form-property name="loanBalPrincipal" type="java.lang.String" />
+			 
+			<form-property name="loanOverduePrincipal" type="java.lang.String" />
+			<form-property name="loanReceivedPrincipal" type="java.lang.String" />
+		    <form-property name="loanOverdueInstNo" type="java.lang.String" />
+			<form-property name="loanOverdueAmount" type="java.lang.String" />
+			<form-property name="loanBalnceInstNo" type="java.lang.String" />
+			<form-property name="loanBalInstlAmount" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="authorID" type="java.lang.String" />
+			<form-property name="authorDate" type="java.lang.String" />
+			<form-property name="reportingToUserId" type="java.lang.String" />
+			<form-property name="userName" type="java.lang.String" />
+ 
+		</form-bean>
+		
+		
+		 <form-bean name="PoolCreationDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			<form-property name="loanAccountNumber" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="customerCategory" type="java.lang.String" />
+			<form-property name="customerSegment" type="java.lang.String" />
+			<form-property name="constitution" type="java.lang.String" />
+			<form-property name="assetCategory" type="java.lang.String" />
+			<form-property name="industry" type="java.lang.String" />
+			<form-property name="subIndustry" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="disbursalDate1" type="java.lang.String" />
+			<form-property name="disbursalDate2" type="java.lang.String" />
+			<form-property name="maturityDate2" type="java.lang.String" />
+			<form-property name="maturityDate1" type="java.lang.String" />
+			<form-property name="loanAmount1" type="java.lang.String" />
+			<form-property name="loanAmount2" type="java.lang.String" />
+			<form-property name="installmentAmount1" type="java.lang.String" />
+			<form-property name="installmentAmount2" type="java.lang.String" />
+			<form-property name="interestRate1" type="java.lang.String" />
+			<form-property name="interestRate2" type="java.lang.String" />
+			<form-property name="rateType" type="java.lang.String" />
+			<form-property name="amountOutstanding1" type="java.lang.String" />
+			<form-property name="amountOutstanding2" type="java.lang.String" />
+			<form-property name="totalInstallments1" type="java.lang.String" />
+			<form-property name="totalInstallments2" type="java.lang.String" />
+			<form-property name="installmentReceived1" type="java.lang.String" />
+			<form-property name="installmentReceived2" type="java.lang.String" />
+			<form-property name="overDueAmount1" type="java.lang.String" />
+			<form-property name="overDueAmount2" type="java.lang.String" />
+			<form-property name="DPD1" type="java.lang.String" />
+			<form-property name="DPD2" type="java.lang.String" />
+			<form-property name="cutOffDate" type="java.lang.String" />
+			<form-property name="lbxValue" type="java.lang.String" />
+			<form-property name="lbxAssetCollId" type="java.lang.String" />
+			<form-property name="lbxIndustry" type="java.lang.String" />
+			<form-property name="lbxSubIndustry" type="java.lang.String" />
+			<form-property name="poolID" type="java.lang.String" />
+			<form-property name="lbxPoolID" type="java.lang.String" />
+			<form-property name="lbxScheme" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="checkId" type="java.lang.String" />
+			<form-property name="legacyLoan" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="reportType" type="java.lang.String" />
+			<form-property name="lbxinstituteID" type="java.lang.String" />	
+			<form-property name="poolType" type="java.lang.String" />					
+			<form-property name="docFile" type="org.apache.struts.upload.FormFile" />
+			<form-property name="stateid" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="instMode" type="java.lang.String" />
+		</form-bean>
+		
+		
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+	 
+	     	<action path="/glExcelSheetUploadCM" type="com.cm.actions.ExcelSheetUploadingActionCM"	name="ExcelSheetUploadFormCM"
+    		scope="request" validate="true">
+    	          <forward name="sucesss" path="/JSP/CMJSP/glExcelUpload.jsp" />		
+            </action>  
+            
+           <action path="/bankStatementUploading" type="com.GL.action.BankStatementUploadingAction"
+			name="BankStatementUploadForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankStatementUploading.jsp" />
+			<forward name="search" path="/JSP/glForm/bankStatementUploadingSearch.jsp" />
+			<forward name="ajaxPage" path="/JSP/glForm/ajaxforBanktoBanklReconcileList.jsp" />
+		 </action>
+		 
+		 <action path="/presentationProcessBehindAction" type="com.cm.actions.PresentationProcessBehindAction"
+			scope="request">
+			<forward name="success" path="/JSP/CMJSP/presentationProcess.jsp" />
+		</action>
+
+		<action path="/presentaionProcessMain"  name="PresentationsProcessDynaValidatorForm"
+			attribute="PresentationsProcessDynaValidatorForm" parameter="method"
+			type="com.cm.actions.PresentationProcess" scope="request" input="/JSP/CMJSP/presentationProcess.jsp">
+			<forward name="success" path="/JSP/CMJSP/presentationProcess.jsp" />
+		</action>
+		<action path="/presentaionProcUpload" parameter="method" type="com.cm.actions.PresentationProcess" name="cmUploadForm">
+			<forward name="success" path="/JSP/CMJSP/presentationProcess.jsp" />
+		</action>
+		
+		 <action path="/poolIdBehindMaker" type="com.cm.actions.PoolIdBehindMakerAction">
+			<forward name="onSuccess" path="/JSP/CMJSP/poolIdMakerCreation.jsp" />
+		</action>
+		
+		<!-- 		sidharth -->
+		<action path="/poolUploadBehind" type="com.cm.actions.PoolUploadBehindAction">
+			<forward name="onSuccess" path="/JSP/CMJSP/securitizationPoolUpload.jsp" />
+		</action>
+		
+		<action path="/PoolUploadBehindAction"  name="PoolIDMakerDynaValidatorForm"
+			attribute="PresentationsProcessDynaValidatorForm" parameter="method"
+			type="com.cm.actions.PoolUploadKtrAction" scope="request" input="/JSP/CMJSP/securitizationPoolUpload.jsp">
+			<forward name="onSuccess" path="/JSP/CMJSP/securitizationPoolUpload.jsp" />
+		</action>
+		<action path="/poolProcUpload" parameter="method" type="com.cm.actions.PoolUploadKtrAction" name="cmUploadForm">
+			<forward name="success" path="/JSP/CMJSP/securitizationPoolUpload.jsp" />
+		</action>
+		
+					
+<!-- 		sidharth -->
+		
+		<action name="PoolIDMakerDynaValidatorForm" 
+		    input="/JSP/CMJSP/poolIdMakerCreation.jsp"
+			parameter="method" attribute="PoolIDMakerDynaValidatorForm" scope="request"
+			path="/poolIdMakerProcessAction" type="com.cm.actions.PoolIdMakerProcessAction"
+			validate="false">
+			
+			
+			<forward name="poolIdMakerSearch" path="/JSP/CMJSP/poolIdMakerCreation.jsp" />	
+			
+			
+			<forward name="poolIdMakerShowData" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />
+			<forward name="success" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />	
+			<forward name="submitPoolIdUpload" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />	
+			<forward name="deletePoolID" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />
+			<forward name="openWindowForaddPoolID" path="/JSP/CMJSP/openWindowpoolIdMakerAdd.jsp" />
+			<forward name="retriveValueByLoanforPool" path="/JSP/CMJSP/ajaxopenWindowpoolIdMakerAdd.jsp" />
+			<forward name="saveLoanInPoolID" path="/JSP/CMJSP/openWindowpoolIdMakerAdd.jsp" />
+			<forward name="forwardPoolId" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />
+			<forward name="deletePoolIDEdit" path="/JSP/CMJSP/poolIdAddEdit.jsp" />	
+			
+
+		     </action>
+		     
+		     
+		 <action name="PoolCreationDynaValidatorForm" input="/JSP/CMJSP/poolCreation.jsp"
+			parameter="method" attribute="PoolCreationDynaValidatorForm" scope="request"
+			path="/poolCreationProcessAction" type="com.cm.actions.PoolCreationProcessAction"
+			validate="false">
+			<forward name="search" path="/JSP/CMJSP/poolCreationSearch.jsp" />
+			<forward name="editScreen" path="/JSP/CMJSP/poolCreationEdit.jsp" />
+			<forward name="removeRowData" path="/JSP/CMJSP/poolCreationEdit.jsp" />
+			<forward name="addRowData" path="/JSP/CMJSP/poolCreationEdit.jsp" />
+			<forward name="show" path="/JSP/CMJSP/poolCreation.jsp" />
+			<forward name="success" path="/JSP/CMJSP/poolCreationSearch.jsp" />
+		    <forward name="errorLog" path="/JSP/CMJSP/poolIdMakerAdd.jsp" />
+		    <forward name="success1" path="/JSP/CMJSP/poolReport.jsp" />
+
+		     </action>
+		     
+		    <action path="/poolIdAddEditProcessAction" attribute="PoolIDMakerDynaValidatorForm"
+			input="/JSP/CMJSP/poolCreationEdit.jsp" name="PoolIDMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.cm.actions.PoolIdAddEditProcessAction">			
+			<forward name="poolIdAddEditSearch" path="/JSP/CMJSP/poolIdAddEditSearch.jsp" />		
+			<forward name="poolIdEditShow" path="/JSP/CMJSP/poolIdAddEdit.jsp" />
+			<forward name="openWindowPoolIDEdit" path="/JSP/CMJSP/openWindowpoolIdMakerAdd.jsp" />
+			<forward name="saveLoanInPoolID" path="/JSP/CMJSP/openWindowpoolIdMakerAdd.jsp" />
+            <forward name="Show" path="/JSP/CMJSP/poolIdAddEdit.jsp" />
+            </action>
+            
+            	
+		  <action path="/poolIdAddEditBehindAction" type="com.cm.actions.poolIdAddEditBehindAction">
+			<forward name="onAddEdit" path="/JSP/CMJSP/poolIdAddEditSearch.jsp" />
+		</action>
+		
+		   <action path="/poolIdMakerProcessActionNew" type="com.cm.actions.PoolIdMakerProcessAction" scope="request" name="PoolIDMakerForm"  parameter="method">
+			<forward name="deletePoolIDEdit" path="/JSP/CMJSP/poolIdAddEdit.jsp" />	
+		  </action>
+		
+		
+        
+	
+	</action-mappings>
+
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

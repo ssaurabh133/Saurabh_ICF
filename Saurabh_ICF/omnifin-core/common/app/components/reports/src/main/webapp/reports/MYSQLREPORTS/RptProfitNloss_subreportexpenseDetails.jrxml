@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptProffitNLoss-_subreport1" language="groovy" pageWidth="249" pageHeight="802" columnWidth="249" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_sub_session_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_root_ledger" class="java.lang.Integer"/>
+	<parameter name="p_sql_date" class="java.lang.String"/>
+	<parameter name="p_as_on_date" class="java.lang.String"/>
+	<parameter name="p_report_format" class="java.lang.String"/>
+	<parameter name="p_branchHeaders" class="java.lang.String"/>
+	<parameter name="p_businessHeaders" class="java.lang.String"/>
+	<parameter name="p_productheaders" class="java.lang.String"/>
+	<parameter name="p_costcentreheaders" class="java.lang.Integer"/>
+	<parameter name="p_state" class="java.lang.String"/>
+	<parameter name="p_district" class="java.lang.String"/>
+	<parameter name="p_region" class="java.lang.String"/>
+	<parameter name="p_country" class="java.lang.String"/>
+	<parameter name="p_detailOrSum" class="java.lang.String"/>
+	<parameter name="p_product_category" class="java.lang.String"/>
+	<parameter name="p_app_path" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select if(Ledger_ID = -100000 , 1,0) as SNo ,  convert(sl_code,decimal), replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(LEDGER_DESC,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')LEDGER_DESC , Ledger_ID  ,
+Session_ID , sum(CURR_DR_Amount  - CURR_CR_Amount) as Balance , ledger_group.Nature,
+(select PARAMETER_VALUE from parameter_mst where PARAMETER_KEY = 'APPLICATION_PATH') as AppPah
+ from temp_trial_balance
+left join (select group_id as ID , GROUP_DESC as Description , 'G' AS Nature , Company_ID from gl_group_m
+union all
+select LEDGER_ID as ID , LEDGER_DESC as Description , 'A' AS Nature , Company_ID from gl_ledger_m) ledger_group
+on temp_trial_balance.Company_ID = ledger_group.Company_ID and temp_trial_balance.LEDGER_ID = ledger_group.ID
+where Acc_type = 'E' and Session_ID = concat('R-',reverse($P{p_sub_session_id}))
+and convert(CUSTOMER_NAME,decimal) = $P{p_root_ledger}
+group by if(Ledger_ID = -100000 , 1,0) ,
+convert(sl_code,decimal),
+ LEDGER_DESC , Ledger_ID  ,    Session_ID order by SNo,Ledger_ID]]>
+	</queryString>
+	<field name="SNo" class="java.lang.Integer"/>
+	<field name="convert(sl_code,decimal)" class="java.math.BigDecimal"/>
+	<field name="LEDGER_DESC" class="java.lang.String"/>
+	<field name="Ledger_ID" class="java.lang.Integer"/>
+	<field name="Session_ID" class="java.lang.String"/>
+	<field name="Balance" class="java.lang.Double"/>
+	<field name="Nature" class="java.lang.String"/>
+	<field name="AppPah" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yy" isBlankWhenNull="false" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="45" y="0" width="136" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LEDGER_DESC} + " "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="false">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="181" y="0" width="68" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Balance}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="45" height="18">
+					<printWhenExpression><![CDATA[$F{Ledger_ID}< 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Ledger_ID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,1858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cibilAccountInformationReport " language="groovy" pageWidth="554" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="554" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5026296018031553"/>
+	<property name="ireport.x" value="108"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cibilId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select  DISTINCT  IFNULL(REPORTER_SHORT_NAME,'')REPORTER_SHORT_NAME,ACCOUNT_NUMBER,
+(select ACCOUNT_TYPE_DESC from cr_account_type_and_enquiry_dtl where ACCOUNT_ID=CR_CIBIL_ACCOUNT_SEGMENT_TL.ACCOUNT_TYPE limit 1)ACCOUNT_TYPE
+,CASE OWNERSHIP_INDICATOR WHEN 1 THEN 'INDIVIDUAL ' WHEN 2 THEN 'AUTHORISED USER(REFERS TO SUPPLEMENTARY CREDIT CARD HOLDER ' WHEN 3 THEN 'GUARNATOR ' WHEN 4 THEN 'JOINT ' END AS   OWNERSHIP_INDICATOR
+,DATE_AC_DISBURSED,DATE_CLOSED,DATE_LAST_PAYMENT,DATE_REPORTED_CERTIFIED
+,CREDIT_LIMIT,HIGH_CREDIT_AMOUNT,CURRENT_BALANCE,CASH_LIMIT,AMOUNT_OVER_DUE,RATE_OF_INTEREST
+,REPAYMENT_TENURE,EMI_AMMOUNT,
+case PAYMENT_FREQUENCY when '01' then 'Weekly' when '02' then 'Fortnightly' when '03' then 'Monthly' when '04' then 'Quarterly' else PAYMENT_FREQUENCY end as PAYMENT_FREQUENCY,
+ACTUAL_AMOUNT_PAYMENT
+,VALUE_OF_COLLATERAL,TYPE_OF_COLLATERAL,SUIT_FILED,WRITTEN_OFF_STATUS,WRITTEN_OFF_AMOUNT_TOTAL,WRITTEN_OFF_AMOUNT_PRINCIPAL,SETTLEMENT_AMOUNT
+,PAYMENT_HST_1,PAYMENT_HST_2,DATE_PAYMENT_HST_START,DATE_PAYMENT_HST_END,PAYMENT_HST_1
+,@b:=1,@a:=SUBSTRING(PAYMENT_HST_1,1,3)as "c1",
+@a1:=SUBSTRING(PAYMENT_HST_1,4,3)as "c2",@b:=@b+3,
+@a2:=SUBSTRING(PAYMENT_HST_1,7,3)as "c3",
+@b:=@b+3,
+@a3:=SUBSTRING(PAYMENT_HST_1,10,3)as "c4",@b:=@b+3,
+@a4:=SUBSTRING(PAYMENT_HST_1,13,3)as "c5",
+@b:=@b+3,
+@a5:=SUBSTRING(PAYMENT_HST_1,16,3)as "c6",
+@b:=@b+3,
+@a6:=SUBSTRING(PAYMENT_HST_1,19,3)as "c7",
+@b:=@b+3,
+@a7:=SUBSTRING(PAYMENT_HST_1,22,3)as "c8",
+@b:=@b+3,
+@a8:=SUBSTRING(PAYMENT_HST_1,25,3)as "c9",
+@b:=@b+3,
+@a9:=SUBSTRING(PAYMENT_HST_1,28,3)as "c10",
+@b:=@b+3,
+@a10:=SUBSTRING(PAYMENT_HST_1,31,3)as "c11",
+@b:=@b+3,
+@a11:=SUBSTRING(PAYMENT_HST_1,34,3)as "c12",
+@b:=@b+3,
+@a12:=SUBSTRING(PAYMENT_HST_1,37,3)as "c13",
+@b:=@b+3,
+@a13:=SUBSTRING(PAYMENT_HST_1,40,3)as "c14",
+@b:=@b+3,
+@a14:=SUBSTRING(PAYMENT_HST_1,43,3)as "c15",
+@b:=@b+3,
+@a15:=SUBSTRING(PAYMENT_HST_1,46,3)as "c16",
+@b:=@b+3,
+@a16:=SUBSTRING(PAYMENT_HST_1,49,3)as "c17",
+@b:=@b+3,
+@a17:=SUBSTRING(PAYMENT_HST_1,52,3)as "c18",
+
+@f:=1,@h:=SUBSTRING(PAYMENT_HST_2,1,3)as "e1",
+@h1:=SUBSTRING(PAYMENT_HST_2,4,3)as "e2",@f:=@f+3,
+@h2:=SUBSTRING(PAYMENT_HST_2,7,3)as "e3",
+@f:=@f+3,
+@h3:=SUBSTRING(PAYMENT_HST_2,10,3)as "e4",@f:=@f+3,
+@h4:=SUBSTRING(PAYMENT_HST_2,13,3)as "e5",
+@f:=@f+3,
+@h5:=SUBSTRING(PAYMENT_HST_2,16,3)as "e6",
+@f:=@f+3,
+@h6:=SUBSTRING(PAYMENT_HST_2,19,3)as "e7",
+@f:=@f+3,
+@h7:=SUBSTRING(PAYMENT_HST_2,22,3)as "e8",
+@f:=@f+3,
+@h8:=SUBSTRING(PAYMENT_HST_2,25,3)as "e9",
+@f:=@f+3,
+@h9:=SUBSTRING(PAYMENT_HST_2,28,3)as "e10",
+@f:=@f+3,
+@h10:=SUBSTRING(PAYMENT_HST_2,31,3)as "e11",
+@f:=@f+3,
+@h11:=SUBSTRING(PAYMENT_HST_2,34,3)as "e12",
+@f:=@f+3,
+@h12:=SUBSTRING(PAYMENT_HST_2,37,3)as "e13",
+@f:=@f+3,
+@h13:=SUBSTRING(PAYMENT_HST_2,40,3)as "e14",
+@f:=@f+3,
+@h14:=SUBSTRING(PAYMENT_HST_2,43,3)as "e15",
+@f:=@f+3,
+@h15:=SUBSTRING(PAYMENT_HST_2,46,3)as "e16",
+@f:=@f+3,
+@h16:=SUBSTRING(PAYMENT_HST_2,49,3)as "e17",
+@f:=@f+3,
+@h17:=SUBSTRING(PAYMENT_HST_2,52,3)as "e18",
+
+SUBSTRING(date_Format(DATE_PAYMENT_HST_START,'%d-%m-%y'),4,5)as "d1",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 1 MONTH),'%d-%m-%y'),4,5)as "d2" ,
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 2 MONTH),'%d-%m-%y'),4,5)as "d3" ,SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 3 MONTH),'%d-%m-%y'),4,5)as "d4",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 4 MONTH),'%d-%m-%y'),4,5)as "d5",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 5 MONTH),'%d-%m-%y'),4,5)as "d6",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 6 MONTH),'%d-%m-%y'),4,5)as "d7",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 7 MONTH),'%d-%m-%y'),4,5)as "d8",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 8 MONTH),'%d-%m-%y'),4,5) as "d9",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 9 MONTH),'%d-%m-%y'),4,5)as "d10",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 10 MONTH),'%d-%m-%y'),4,5)as "d11",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 11 MONTH),'%d-%m-%y'),4,5)as "d12",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 12 MONTH),'%d-%m-%y'),4,5)as "d13",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 13 MONTH),'%d-%m-%y'),4,5)as "d14",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 14 MONTH),'%d-%m-%y'),4,5)as "d15",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 15 MONTH),'%d-%m-%y'),4,5)as "d16",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 16 MONTH),'%d-%m-%y'),4,5)as "d17",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 17 MONTH),'%d-%m-%y'),4,5)as "d18",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 18 MONTH),'%d-%m-%y'),4,5)as "d19",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 19 MONTH),'%d-%m-%y'),4,5)as "d20",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 20 MONTH),'%d-%m-%y'),4,5)as "d21",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 21 MONTH),'%d-%m-%y'),4,5)as "d22",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 22 MONTH),'%d-%m-%y'),4,5)as "d23",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 23 MONTH),'%d-%m-%y'),4,5)as "d24",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 24 MONTH),'%d-%m-%y'),4,5)as "d25",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 25 MONTH),'%d-%m-%y'),4,5)as "d26",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 26 MONTH),'%d-%m-%y'),4,5)as "d27",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 27 MONTH),'%d-%m-%y'),4,5)as "d28",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 28 MONTH),'%d-%m-%y'),4,5)as "d29",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 29 MONTH),'%d-%m-%y'),4,5)as "d30",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 30 MONTH),'%d-%m-%y'),4,5)as "d31",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 31 MONTH),'%d-%m-%y'),4,5)as "d32",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 32 MONTH),'%d-%m-%y'),4,5)as "d33",
+SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 33 MONTH),'%d-%m-%y'),4,5)as "d34",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 34 MONTH),'%d-%m-%y'),4,5)as "d35",SUBSTRING(date_format((DATE_PAYMENT_HST_START- INTERVAL 35 MONTH),'%d-%m-%y'),4,5)as "d36"
+from CR_CIBIL_ACCOUNT_SEGMENT_TL where cibil_id=$P{cibilId}]]>
+	</queryString>
+	<field name="REPORTER_SHORT_NAME" class="java.lang.String"/>
+	<field name="ACCOUNT_NUMBER" class="java.lang.String"/>
+	<field name="ACCOUNT_TYPE" class="java.lang.String"/>
+	<field name="OWNERSHIP_INDICATOR" class="java.lang.String"/>
+	<field name="DATE_AC_DISBURSED" class="java.sql.Date"/>
+	<field name="DATE_CLOSED" class="java.sql.Date"/>
+	<field name="DATE_LAST_PAYMENT" class="java.sql.Date"/>
+	<field name="DATE_REPORTED_CERTIFIED" class="java.sql.Date"/>
+	<field name="CREDIT_LIMIT" class="java.lang.String"/>
+	<field name="HIGH_CREDIT_AMOUNT" class="java.lang.String"/>
+	<field name="CURRENT_BALANCE" class="java.lang.String"/>
+	<field name="CASH_LIMIT" class="java.lang.String"/>
+	<field name="AMOUNT_OVER_DUE" class="java.lang.String"/>
+	<field name="RATE_OF_INTEREST" class="java.lang.String"/>
+	<field name="REPAYMENT_TENURE" class="java.lang.String"/>
+	<field name="EMI_AMMOUNT" class="java.lang.String"/>
+	<field name="PAYMENT_FREQUENCY" class="java.lang.String"/>
+	<field name="ACTUAL_AMOUNT_PAYMENT" class="java.lang.String"/>
+	<field name="VALUE_OF_COLLATERAL" class="java.lang.String"/>
+	<field name="TYPE_OF_COLLATERAL" class="java.lang.String"/>
+	<field name="SUIT_FILED" class="java.lang.String"/>
+	<field name="WRITTEN_OFF_STATUS" class="java.lang.String"/>
+	<field name="WRITTEN_OFF_AMOUNT_TOTAL" class="java.lang.String"/>
+	<field name="WRITTEN_OFF_AMOUNT_PRINCIPAL" class="java.lang.String"/>
+	<field name="SETTLEMENT_AMOUNT" class="java.lang.String"/>
+	<field name="PAYMENT_HST_1" class="java.lang.String"/>
+	<field name="PAYMENT_HST_2" class="java.lang.String"/>
+	<field name="DATE_PAYMENT_HST_START" class="java.sql.Date"/>
+	<field name="DATE_PAYMENT_HST_END" class="java.sql.Date"/>
+	<field name="@b:=1" class="java.lang.Long"/>
+	<field name="c1" class="java.lang.String"/>
+	<field name="c2" class="java.lang.String"/>
+	<field name="@b:=@b+3" class="java.lang.Double"/>
+	<field name="c3" class="java.lang.String"/>
+	<field name="c4" class="java.lang.String"/>
+	<field name="c5" class="java.lang.String"/>
+	<field name="c6" class="java.lang.String"/>
+	<field name="c7" class="java.lang.String"/>
+	<field name="c8" class="java.lang.String"/>
+	<field name="c9" class="java.lang.String"/>
+	<field name="c10" class="java.lang.String"/>
+	<field name="c11" class="java.lang.String"/>
+	<field name="c12" class="java.lang.String"/>
+	<field name="c13" class="java.lang.String"/>
+	<field name="c14" class="java.lang.String"/>
+	<field name="c15" class="java.lang.String"/>
+	<field name="c16" class="java.lang.String"/>
+	<field name="c17" class="java.lang.String"/>
+	<field name="c18" class="java.lang.String"/>
+	<field name="@f:=1" class="java.lang.Long"/>
+	<field name="e1" class="java.lang.String"/>
+	<field name="e2" class="java.lang.String"/>
+	<field name="@f:=@f+3" class="java.lang.Double"/>
+	<field name="e3" class="java.lang.String"/>
+	<field name="e4" class="java.lang.String"/>
+	<field name="e5" class="java.lang.String"/>
+	<field name="e6" class="java.lang.String"/>
+	<field name="e7" class="java.lang.String"/>
+	<field name="e8" class="java.lang.String"/>
+	<field name="e9" class="java.lang.String"/>
+	<field name="e10" class="java.lang.String"/>
+	<field name="e11" class="java.lang.String"/>
+	<field name="e12" class="java.lang.String"/>
+	<field name="e13" class="java.lang.String"/>
+	<field name="e14" class="java.lang.String"/>
+	<field name="e15" class="java.lang.String"/>
+	<field name="e16" class="java.lang.String"/>
+	<field name="e17" class="java.lang.String"/>
+	<field name="e18" class="java.lang.String"/>
+	<field name="d1" class="java.lang.String"/>
+	<field name="d2" class="java.lang.String"/>
+	<field name="d3" class="java.lang.String"/>
+	<field name="d4" class="java.lang.String"/>
+	<field name="d5" class="java.lang.String"/>
+	<field name="d6" class="java.lang.String"/>
+	<field name="d7" class="java.lang.String"/>
+	<field name="d8" class="java.lang.String"/>
+	<field name="d9" class="java.lang.String"/>
+	<field name="d10" class="java.lang.String"/>
+	<field name="d11" class="java.lang.String"/>
+	<field name="d12" class="java.lang.String"/>
+	<field name="d13" class="java.lang.String"/>
+	<field name="d14" class="java.lang.String"/>
+	<field name="d15" class="java.lang.String"/>
+	<field name="d16" class="java.lang.String"/>
+	<field name="d17" class="java.lang.String"/>
+	<field name="d18" class="java.lang.String"/>
+	<field name="d19" class="java.lang.String"/>
+	<field name="d20" class="java.lang.String"/>
+	<field name="d21" class="java.lang.String"/>
+	<field name="d22" class="java.lang.String"/>
+	<field name="d23" class="java.lang.String"/>
+	<field name="d24" class="java.lang.String"/>
+	<field name="d25" class="java.lang.String"/>
+	<field name="d26" class="java.lang.String"/>
+	<field name="d27" class="java.lang.String"/>
+	<field name="d28" class="java.lang.String"/>
+	<field name="d29" class="java.lang.String"/>
+	<field name="d30" class="java.lang.String"/>
+	<field name="d31" class="java.lang.String"/>
+	<field name="d32" class="java.lang.String"/>
+	<field name="d33" class="java.lang.String"/>
+	<field name="d34" class="java.lang.String"/>
+	<field name="d35" class="java.lang.String"/>
+	<field name="d36" class="java.lang.String"/>
+	<variable name="srNo" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{srNo}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="81">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="117" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT DETAILS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="15" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[MEMBER NAME  ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="15" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REPORTER_SHORT_NAME}+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="27" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT NUMBER ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="27" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="39" width="147" height="19" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT TYPE ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="131" y="39" width="146" height="19" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_TYPE}.trim()+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="1" y="58" width="147" height="23" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[OWNERSHIP ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="132" y="58" width="146" height="23" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OWNERSHIP_INDICATOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="15" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DATE OPENED/DISBURSED  ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="15" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_AC_DISBURSED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="27" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DATE CLOSED ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="27" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_CLOSED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="39" width="147" height="19" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DATE LAST PAYMENT ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="39" width="130" height="19" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_LAST_PAYMENT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="278" y="58" width="147" height="23" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[DATE REPORTED AND CERTIFIED  ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="425" y="58" width="130" height="23" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_REPORTED_CERTIFIED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="2" width="117" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[DATES ]]></text>
+			</staticText>
+		</band>
+		<band height="79">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="117" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT STATUS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="16" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[CREDIT LIMIT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="16" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CREDIT_LIMIT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="28" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[HIGH CREDIT/SANTION AMOUNT  ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="28" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{HIGH_CREDIT_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="40" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[CURRENT BALANCE ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="40" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CURRENT_BALANCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="52" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[CASH LIMIT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="52" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CASH_LIMIT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="64" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[AMOUNT OVERDUE ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="64" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{AMOUNT_OVER_DUE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="16" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[RATE OF INTEREST ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="16" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RATE_OF_INTEREST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="28" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[REPAYMENT TENURE ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="28" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REPAYMENT_TENURE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="40" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[EMI AMMOUNT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="40" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{EMI_AMMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="52" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[PAYMENT FREQUENCY ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="52" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PAYMENT_FREQUENCY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="64" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[ACTUAL PAYMENT AMOUNT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="64" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACTUAL_AMOUNT_PAYMENT}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="78">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="117" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[COLLATERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="277" y="1" width="117" height="13" forecolor="#306191" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="14" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[VALUE OF COLLATERAL ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="14" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VALUE_OF_COLLATERAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="26" width="147" height="14" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[TYPE OF COLLATERAL ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="26" width="146" height="14" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TYPE_OF_COLLATERAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="14" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[SUIT FILED / WILFUL DEFAULT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="14" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SUIT_FILED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="26" width="147" height="14" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WRITTEN-OFF STATUS ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="26" width="130" height="14" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WRITTEN_OFF_STATUS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="40" width="147" height="24" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WRITTEN-OFF AMOUNT (TOTAL)  ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="40" width="146" height="24" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WRITTEN_OFF_AMOUNT_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="40" width="147" height="24" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WRITTEN-OFF AMOUNT (PRINCIPAL)  ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="40" width="130" height="24" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{WRITTEN_OFF_AMOUNT_PRINCIPAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="64" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[SETTLEMENT AMOUNT ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="64" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SETTLEMENT_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="64" width="277" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+		<band height="42">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="9" width="554" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[PAYMENT HISTORY (UP TO 36 MONTHS; LEFT TO RIGHT BEGINNING WITH THE MOST RECENT PAYMENT)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="22" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[PAYMENT START DATE  ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="131" y="22" width="146" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_PAYMENT_HST_END}  ]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="22" width="147" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[PAYMENT END DATE  ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="424" y="22" width="130" height="12" forecolor="#333333" backcolor="#EFF1F1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{DATE_PAYMENT_HST_START}    ]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="150">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="554" height="13" forecolor="#306191" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[DAYS PAST DUE/ASSET CLASSIFICATION (UP TO 36 MONTHS; LEFT TO RIGHT) ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="13" width="554" height="73" forecolor="#000000" backcolor="#EFF1F1"/>
+			</rectangle>
+			<elementGroup>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="31" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e2}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e2}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="148" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e6}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e6}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="412" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e15}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e15}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="1" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e1}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e1}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c1}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c1}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="440" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c16}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c16}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="323" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c12}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c12}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="117" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c5}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d5}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="382" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c14}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c14}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="382" y="29" width="29" height="14" forecolor="#000000" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c14}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d14}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="411" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c15}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d15}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="60" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e3}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d21}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="528" y="29" width="26" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="60" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e3}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e3}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="352" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c13}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d13}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="440" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c16}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d16}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="59" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c3}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c3}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="207" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e8}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d26}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="177" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e7}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e7}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="411" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c15}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c15}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="352" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c13}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c13}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="59" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c3}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d3}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="147" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c6}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d6}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="88" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c4}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d4}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="528" y="14" width="26" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="88" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c4}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c4}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c1}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d1}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="499" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d18}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="118" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e5}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d23}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="89" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e4}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d22}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="177" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e7}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d25}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="236" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e9}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d27}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="293" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c11}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c11}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="324" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e12}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d30}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="499" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c18}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="353" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e13}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e13}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="294" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e11}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e11}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="265" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e10}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d28}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="412" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e15}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d33}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="117" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c5}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c5}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="323" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c12}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d12}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="147" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c6}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c6}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="176" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c7}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d7}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="293" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c11}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d11}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="470" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e17}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e17}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="235" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c9}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d9}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="383" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e14}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d32}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="148" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e6}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d24}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="441" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e16}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e16}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="118" y="45" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e5}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e5}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="529" y="60" width="25" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="500" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e18}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="441" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e16}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d34}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="176" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c7}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c7}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="30" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c2}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d2}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="236" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e9}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e9}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="470" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e17}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d35}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="235" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c9}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c9}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="529" y="45" width="25" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="30" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c2}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c2}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="207" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e8}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e8}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="294" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e11}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d29}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="1" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e1}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d19}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="31" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e2}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d20}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="89" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e4}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e4}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="324" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e12}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e12}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="265" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e10}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e10}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="383" y="45" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e14}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{e14}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="264" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c10}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c10}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="206" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c8}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d8}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="353" y="60" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e13}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d31}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="469" y="14" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c17}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c17}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="264" y="29" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c10}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d10}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="206" y="14" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c8}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{c8}+" "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="500" y="60" width="29" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{e18}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d36}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="469" y="29" width="30" height="14" forecolor="#333333" backcolor="#EFF1F1">
+						<printWhenExpression><![CDATA[$F{c17}.length()!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{d17}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

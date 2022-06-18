@@ -1,0 +1,2873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loan_dump_report" language="groovy" pageWidth="8200" pageHeight="3744" orientation="Landscape" columnWidth="8160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="7176"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<parameter name="p_printed_by" class="java.lang.String"/>
+	<parameter name="p_printed_date" class="java.lang.String"/>
+	<parameter name="p_report_format" class="java.lang.String"/>
+	<parameter name="p_branch_type" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_branch" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="productCategory" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="loanClass" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_user_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_p_date_from" class="java.lang.String"/>
+	<parameter name="p_p_date_to" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT A.LOAN_REFERENCE_NO, A.LOAN_NO,A.LOAN_CUSTOMER_ID,concat(B.CUSTOMER_NAME,' ')as CUSTOMER_NAME,replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(D.PRODUCT_DESC,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')PRODUCT_DESC ,replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(C.SCHEME_DESC,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')SCHEME_DESC ,A.LOAN_LOAN_AMOUNT,A.LOAN_APPROVAL_DATE,
+
+case A.REC_STATUS when 'A' then 'APPROVED '
+
+when 'C' then 'CLOSED '
+
+when 'P' then 'PENDING '
+
+when 'F' then 'PENDING FOR APPROVAL '
+
+when 'X' then 'REJECTED '
+
+when 'L' then 'CANCELLED '
+
+end as REC_STATUS,
+
+(SELECT concat(A.MAKER_ID,' - ',USER_NAME,' ') FROM SEC_USER_M WHERE (USER_ID=A.MAKER_ID))as MAKER_ID,
+
+concat(NPA_FLAG,' ')NPA_FLAG,
+
+
+
+IF(A.REC_STATUS = 'A',A.LOAN_DPD,0) AS DPD,
+
+
+
+concat(F.QUEUE_DESC_L,' ')as QUEUE,
+
+
+
+-- IF(A.REC_STATUS = 'L' OR A.REC_STATUS = 'C',0,A.LOAN_BALANCE_PRINCIPAL) AS POS,
+
+
+
+/*IF(A.REC_STATUS = 'A',(SELECT IFNULL(SUM(B.PRIN_COMP),0) FROM CR_REPAYSCH_DTL B WHERE B.LOAN_ID = A.LOAN_ID
+
+ AND B.BILL_FLAG= 'N' AND IFNULL(B.REC_STATUS,'N') <>'X' ),0)AS POS,
+
+*/
+
+  IF(A.REC_STATUS = 'A',
+
+    IF(IFNULL(A.DISBURSAL_STATUS,'')='F',
+
+            (SELECT IFNULL(SUM(B.PRIN_COMP),0) FROM CR_REPAYSCH_DTL B WHERE B.LOAN_ID = A.LOAN_ID AND B.BILL_FLAG= 'N' AND IFNULL(B.REC_STATUS,'N') <>'X' ),
+
+        IF(IFNULL(A.DISBURSAL_STATUS,'')='P',
+
+           ((SELECT IFNULL(ROUND(SUM(C.advice_amount),2),0) FROM cr_txnadvice_dtl C WHERE C.LOAN_ID = A.LOAN_ID AND C.REC_STATUS = 'A' and C.TXN_TYPE='DIA')-(SELECT ifnull(ROUND(SUM(D.advice_amount),2),0) FROM cr_txnadvice_dtl D WHERE D.LOAN_ID = A.LOAN_ID AND D.REC_STATUS = 'A' and D.TXN_TYPE='PPA')),
+
+        IF(IFNULL(A.DISBURSAL_STATUS,'')='',
+
+           ROUND(A.LOAN_LOAN_AMOUNT,2),'')
+
+    )),0) AS POS,
+
+
+
+/*IF(A.REC_STATUS = 'A',(select IFNULL(SUM(PRIN_COMP-PRIN_COMP_RECD),0) from cr_repaysch_dtl
+
+where loan_id=A.loan_id and REC_TYPE<>'D' and bill_flag='Y'),0) as OVERDUE_POS,
+
+*/
+
+
+
+IF(A.REC_STATUS = 'A',
+
+(select IFNULL(SUM(PRIN_COMP-PRIN_COMP_RECD),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE NOT IN ('D','P') and bill_flag='Y'),0) as OVERDUE_POS,
+
+
+
+
+
+/*IF(A.REC_STATUS = 'A',
+
+ ((select IFNULL(SUM(INT_COMP-INT_COMP_RECD),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE<>'D' and bill_flag='Y')),0) as OVERDUE_INTEREST,
+
+*/
+
+
+
+IF(A.REC_STATUS = 'A',
+
+((select IFNULL(SUM((INT_COMP+EXCESS_INT)-(INT_COMP_RECD+EXCESS_INT_RECD)),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE<>'D' and bill_flag='Y')),0) as OVERDUE_INTEREST,
+
+
+
+/*IF(A.REC_STATUS = 'A',
+
+ ((select IFNULL(SUM(INSTL_AMOUNT-INSTL_AMOUNT_RECD),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE<>'D' and bill_flag='Y' AND INSTL_NO <> 0)),0) as OVERDUE_EMI,
+
+ */
+
+
+
+ IF(A.REC_STATUS = 'A',
+
+ ((select IFNULL(SUM(INSTL_AMOUNT-INSTL_AMOUNT_RECD),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE <> 'D' and bill_flag='Y' AND INSTL_NO <> 0)),0) as OVERDUE_EMI,
+
+
+
+/*IF(A.REC_STATUS = 'A',
+
+(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=110 and REC_STATUS='A' group by LOAN_ID),0) as BCC_CHARGES,
+
+*/
+
+
+
+IF(A.REC_STATUS = 'A',
+
+IFNULL((select
+sum(if(ADVICE_TYPE='R',1,-1) * (IFNULL(ADVICE_AMOUNT,0)-IFNULL(TXN_ADJUSTED_AMOUNT,0))) as BCC_CHARGES
+from cr_txnadvice_dtl
+where LOAN_ID=A.LOAN_ID AND charge_code_id =110 and cr_txnadvice_dtl.rec_status ='A'
+group by DEAL_ID,loan_id
+having sum(if(ADVICE_TYPE='R',1,-1) * (IFNULL(ADVICE_AMOUNT,0)-IFNULL(TXN_ADJUSTED_AMOUNT,0))) <> 0),0),0)as BCC_CHARGES,
+
+/*(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=110 and REC_STATUS='A' group by LOAN_ID),0)as BCC_CHARGES,*/
+
+
+
+/*IF(A.REC_STATUS = 'A',
+
+(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=109 and REC_STATUS='A' group by loan_id),0) as LPP_CHARGES,
+
+*/
+
+IF(A.REC_STATUS = 'A',
+
+IFNULL((select
+sum(if(ADVICE_TYPE='R',1,-1) * (IFNULL(ADVICE_AMOUNT,0)-IFNULL(TXN_ADJUSTED_AMOUNT,0))) as LPP_CHARGES
+from cr_txnadvice_dtl
+where LOAN_ID=A.LOAN_ID AND charge_code_id =109 and cr_txnadvice_dtl.rec_status ='A'
+group by DEAL_ID,loan_id
+having sum(if(ADVICE_TYPE='R',1,-1) * (IFNULL(ADVICE_AMOUNT,0)-IFNULL(TXN_ADJUSTED_AMOUNT,0))) <> 0),0),0)as LPP_CHARGES,
+
+/*IF(A.REC_STATUS = 'A',
+
+(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=109 and REC_STATUS='A' group by loan_id),0) as LPP_CHARGES,*/
+
+IF(A.REC_STATUS = 'A',
+
+(IF(A.LOAN_LOAN_AMOUNT-(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=2 and REC_STATUS='A' group by loan_id)<0,0,
+
+A.LOAN_LOAN_AMOUNT-(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=2 and REC_STATUS='A' group by loan_id))),0)as PENDING_DISBURSEMENT,
+
+
+
+(select sum(TXN_ADJUSTED_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=103 and REC_STATUS='A' group by loan_id)as COLLATERAL_MONEY,
+
+
+
+IF(A.REC_STATUS = 'A',
+
+((SELECT IFNULL(SUM(B.PRIN_COMP),0) FROM CR_REPAYSCH_DTL B WHERE B.LOAN_ID = A.LOAN_ID
+
+ AND B.BILL_FLAG= 'N' AND IFNULL(B.REC_STATUS,'N') <>'X' )+(select IFNULL(SUM(PRIN_COMP-PRIN_COMP_RECD),0) from cr_repaysch_dtl where loan_id=A.loan_id and REC_TYPE<>'D' and bill_flag='Y')),0) as TOTAL_POS,
+
+
+
+case  A.LOAN_REPAYMENT_MODE when 'P' then 'PDC' when 'E' then 'ECS' when 'DIR' then 'DIRECT DEBIT' WHEN 'H' THEN 'ACH' WHEN 'Q' THEN 'PDC' end as MODE,
+
+A.LOAN_IRR2 as IRR, A.LOAN_EFF_RATE as EFFECTIVE_ROI, A.LOAN_FINAL_RATE as FINAL_ROI,
+
+concat(A.LOAN_TENURE,' ')as TENURE,
+
+case A.LOAN_INSTALLMENT_MODE when 'A' then 'ADVANCE' when 'R' then 'ARREAR' end as INSTALLMENT_MODE,
+
+A.LOAN_REPAY_EFF_DATE as REPAY_EFF_DATE,DATE_FORMAT(A.NEXT_DUE_DATE,'%d-%b-%Y') as INST_START_DATE,(select Max(instl_date) from cr_repaysch_dtl crt where crt.loan_id=A.LOAN_ID) as MATURITY_DATE,
+
+case A.DISBURSAL_STATUS when 'F' then 'FULLY' when 'P' then 'PARTIAL' when 'N' then 'NOT DISBURSED' else '' end as DISBURSAL_STATUS,
+
+(select sum(sd_interest) from cr_sd_m where txn_id=A.LOAN_ID group by txn_id)as CM_INT,
+
+case sd.SD_INTEREST_TYPE when 'S' then 'SIMPLE' when 'C' then 'COMPOUNDING' when 'N' then 'NO INTEREST' end as INT_METHOD,
+
+(select IFNULL(sum(ADVICE_AMOUNT),0) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=106  group by loan_id)as PROC_FEE,
+
+(SELECT replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(H.BRANCH_DESC_L,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')BRANCH_DESC_L  FROM com_branch_m H WHERE H.BRANCH_ID=A.LOAN_BRANCH) BRANCH_DESC_L,
+
+case A.LOAN_SECTOR_TYPE when 'NPSL' then 'NON PRIORITY SECTOR LENDING' when 'PSL' then 'PRIORITY SECTOR LENDING' when 'AGRI' then 'AGRICULTURE' else '' end as SECTOR_TYPE,
+
+case A.LOAN_EXISTING_CUSTOMER when 'N' then 'NEW' when 'Y' then 'OLD' else '' end as CLIENT_TYPE,
+
+(select sum(ADVICE_AMOUNT) from cr_txnadvice_dtl where LOAN_ID=A.LOAN_ID and CHARGE_CODE_ID=129 and REC_STATUS='A' group by loan_id)as ADV_FEE
+
+,replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(sm.USER_NAME,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')DEAL_RM,
+
+
+
+ IF((A.REC_STATUS='C') OR (instAmount.LOAN_EMI_AMOUNT IS NULL) OR (instAmount.LOAN_EMI_AMOUNT='') OR (instAmount.LOAN_EMI_AMOUNT=0) ,
+
+(SELECT ifnull(INSTL_AMOUNT,0) FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND INSTL_NO IN (IF((SELECT MAX(INSTL_NO)-1 FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND REC_TYPE='I' GROUP BY LOAN_ID)<>0,
+
+(SELECT MAX(INSTL_NO)-1 FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND REC_TYPE='I' GROUP BY LOAN_ID),(SELECT MAX(INSTL_NO) FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND REC_TYPE='I' GROUP BY LOAN_ID)
+
+)) ORDER BY 1 DESC LIMIT 1),instAmount.LOAN_EMI_AMOUNT) AS LOAN_EMI_AMOUNT,
+
+
+
+cdd.deal_no,IF(A.REC_STATUS = 'A',ifnull(pmt.txn_adjusted_amount,0),0) as loanPaid,ifnull(sd.sd_interest_rate,0)sd_interest_rate,ifnull(sd.sd_tenure,0)sd_tenure,
+
+ifnull(st.stamp,0)StampDuty,ifnull(roc.roc_amt,0)ROC,ifnull(insu.INSURANCE_BY,'')INSURANCE_BY,
+
+case A.po_do_flag when 'P' then 'PO ' when 'D' then 'DO ' else 'NA ' end as po_do_flag
+
+
+
+,ASSET.ASSET_COLLATERAL_DESC,
+
+
+
+ IFNULL(B.FATHER_HUSBAND_NAME,'')AS FATHER_HUSBAND_NAME,
+
+concat(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+CAM.ADDRESS_LINE1
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ') is null,concat(if(CAM.ADDRESS_LINE2 is null,if(CAM.ADDRESS_LINE3 is null,' ',concat(CAM.ADDRESS_LINE3,' ')),
+
+concat (replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(CAM.ADDRESS_LINE3 is null,concat(CAM.ADDRESS_LINE2,' '),concat(concat(CAM.ADDRESS_LINE2,','),concat(CAM.ADDRESS_LINE3,' ')))
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ')
+
+,' ')),' '),
+
+concat (replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(CAM.ADDRESS_LINE2 is null,if(CAM.ADDRESS_LINE3 is null,concat(CAM.ADDRESS_LINE1,' '),concat(concat(CAM.ADDRESS_LINE1,','),concat(CAM.ADDRESS_LINE3,' '))),
+
+if(CAM.ADDRESS_LINE3 is null,concat(concat(CAM.ADDRESS_LINE1,','),concat(CAM.ADDRESS_LINE2,' ')),concat(concat(concat(CAM.ADDRESS_LINE1,','),
+
+concat(CAM.ADDRESS_LINE2,',')),concat(CAM.ADDRESS_LINE3,' '))))
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ')
+
+,' '))
+
+
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ') ,' ')as addressLine1,
+
+
+
+concat(if(CDM.DISTRICT_DESC is null,if(CSM.STATE_DESC is null,if(Z.COUNTRY_DESC is null,' ',concat('(',Z.COUNTRY_DESC,') ')),if(Z.COUNTRY_DESC is null,concat(CSM.STATE_DESC,' '),concat(concat(CSM.STATE_DESC,','),concat('(',Z.COUNTRY_DESC,') ')))),if(CSM.STATE_DESC is null,if(Z.COUNTRY_DESC is null,concat(CDM.DISTRICT_DESC,' '),concat(concat(CDM.DISTRICT_DESC,','),concat('(',Z.COUNTRY_DESC,') '))),if(Z.COUNTRY_DESC is null,concat(concat(CDM.DISTRICT_DESC,','),concat(CSM.STATE_DESC,' ')),concat(concat(concat(CDM.DISTRICT_DESC,','),concat(CSM.STATE_DESC,',')),concat('(',Z.COUNTRY_DESC,') '))))),if(CAM.PINCODE is null,' ',concat('- ',CAM.PINCODE)))as addressLine2,
+
+IFNULL(cr_deal_address_m.PRIMARY_PHONE,'') AS PRIMARY_PHONE,IFNULL(cr_deal_address_m.ALTERNATE_PHONE,'') AS ALTERNATE_PHONE,IFNULL(GCM1.CUSTOMER_NAME,'')AS GUAR_NAME,
+
+IFNULL(GCM1.FATHER_HUSBAND_NAME,'')AS GUAR_FATHER_HUSBAND_NAME,
+
+
+
+concat(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+CAM1.ADDRESS_LINE1
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ') is null,concat(if(CAM1.ADDRESS_LINE2 is null,if(CAM1.ADDRESS_LINE3 is null,' ',concat(CAM1.ADDRESS_LINE3,' ')),
+
+concat (replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(CAM1.ADDRESS_LINE3 is null,concat(CAM1.ADDRESS_LINE2,' '),concat(concat(CAM1.ADDRESS_LINE2,','),concat(CAM1.ADDRESS_LINE3,' ')))
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ')
+
+,' ')),' '),
+
+concat (replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+
+if(CAM1.ADDRESS_LINE2 is null,if(CAM1.ADDRESS_LINE3 is null,concat(CAM1.ADDRESS_LINE1,' '),concat(concat(CAM1.ADDRESS_LINE1,','),concat(CAM1.ADDRESS_LINE3,' '))),
+
+if(CAM1.ADDRESS_LINE3 is null,concat(concat(CAM1.ADDRESS_LINE1,','),concat(CAM1.ADDRESS_LINE2,' ')),concat(concat(concat(CAM1.ADDRESS_LINE1,','),
+
+concat(CAM1.ADDRESS_LINE2,',')),concat(CAM1.ADDRESS_LINE3,' '))))
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ')
+
+,' '))
+
+
+
+,'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'\"','\" '),'/','/ '),'?','? '),'.','. '),',',', ') ,' ')as GUAR_addressLine1,
+
+
+
+concat(if(CDM1.DISTRICT_DESC is null,if(CSM1.STATE_DESC is null,if(Z1.COUNTRY_DESC is null,' ',concat('(',Z1.COUNTRY_DESC,') ')),if(Z1.COUNTRY_DESC is null,concat(CSM1.STATE_DESC,' '),concat(concat(CSM1.STATE_DESC,','),concat('(',Z1.COUNTRY_DESC,') ')))),if(CSM1.STATE_DESC is null,if(Z1.COUNTRY_DESC is null,concat(CDM1.DISTRICT_DESC,' '),concat(concat(CDM1.DISTRICT_DESC,','),concat('(',Z1.COUNTRY_DESC,') '))),if(Z1.COUNTRY_DESC is null,concat(concat(CDM1.DISTRICT_DESC,','),concat(CSM1.STATE_DESC,' ')),concat(concat(concat(CDM1.DISTRICT_DESC,','),concat(CSM1.STATE_DESC,',')),concat('(',Z1.COUNTRY_DESC,') '))))),if(CAM1.PINCODE is null,' ',concat('- ',CAM1.PINCODE)))as GUAR_addressLine2,
+
+IFNULL(CAM1.PRIMARY_PHONE,'') AS GUAR_PRIMARY_PHONE,IFNULL(CAM1.ALTERNATE_PHONE,'') AS GUAR_ALTERNATE_PHONE,
+
+IFNULL(A.LOAN_DUE_DAY,'')AS LOAN_DUE_DAY,IFNULL(MIN(DISB.DISBURSAL_DATE),'') AS DISBURSAL_DATE,
+
+PARTNER_DTL.SERVICE_PARTNER_LOAN_AMOUNT, PARTNER_DTL.LEAD_PARTNER_LOAN_AMOUNT, PARTNER_DTL.FUNDING_TYPE
+
+, (IFNULL(SUM(CTD.ADVICE_AMOUNT),0) - IFNULL(SUM(CTD.TXN_ADJUSTED_AMOUNT),0))AS PREEMI_OVERDUE,
+
+ASSET.ASSET_COLLATERAL_VALUE,
+
+COAPPL.COAPPL_NAME,
+
+IFNULL(ASSET.NET_LTV , 0)NET_LTV,
+
+LOAN.LOAN_PURPOSE,IFNULL(DEAL_SOURCE_TYPE,'') AS DEAL_SOURCE_TYPE ,IFNULL(DEAL_SOURCE_NAME,'') AS DEAL_SOURCE_NAME,IFNULL(CDCMM.NATURE_OF_BUSINESS,'') AS NATURE_OF_BUSINESS,
+
+A.Loan_Branch,
+
+TEMP_LOAN_DUMP_SCZ.POOL_ID as POOL_ID,
+
+TEMP_LOAN_DUMP_SCZ.POOL_NAME as POOL_NAME,
+
+ROUND(TEMP_LOAN_DUMP_SCZ.ASSIGNMENT_PERCENTAGE,0) as ASSIGNMENT_PERCENTAGE,
+
+ROUND(TEMP_LOAN_DUMP_SCZ.INTEREST_RATE,2) as INTEREST_RATE,ifnull(b.UCIC_NO,'') as UCIC_NO,ifnull(b.UCIC_REJECT_REASON,'') as UCIC_REJECT_REASON,
+IF(CASE_ST.CASE_STATUS='RESTRUC','NPA RESTRUCUTRE',IF(CASE_ST.CASE_STATUS='NONRESTRUC','NON NPA RESTRUCTURE','')) AS Restructured_Type,
+CASE_MARKING_DATE AS Restructure_date
+
+FROM  CR_LOAN_DTL A
+
+
+-- left join cr_deal_dtl dl on(A.loan_deal_id=dl.deal_id)
+
+left join cr_deal_dtl cdd on A.LOAN_DEAL_ID= cdd.DEAL_ID
+
+left join sec_user_m sm on sm.USER_ID=cdd.DEAL_RM
+
+join GCD_CUSTOMER_M B on (A.LOAN_CUSTOMER_ID=B.CUSTOMER_ID)
+
+join CR_SCHEME_M C on (A.LOAN_SCHEME=C.SCHEME_ID)
+
+join cr_product_m D on (A.LOAN_PRODUCT=D.PRODUCT_ID)
+
+left join coll_case_dtl E on (E.LOAN_ID=A.LOAN_ID)
+
+left join coll_queue_def_m F on (E.QUEUE_CODE=F.QUEUE_CODE)
+
+LEFT JOIN CR_TXNADVICE_DTL CTD ON (CTD.LOAN_ID = A.LOAN_ID AND CTD.CHARGE_CODE_ID=6)
+
+left join cr_deal_address_m on cr_deal_address_m.bpid=B.customer_id
+
+-- left join cr_sd_dtl G on (G.LOAN_ID=A.LOAN_ID)
+
+left join
+
+(
+
+	select loan_id,sum(ifnull(txn_adjusted_amount,0))txn_adjusted_amount from cr_txnadvice_dtl where charge_code_id=2  and advice_date>=str_to_date($P{p_p_date_from},'%d-%m-%Y') and  advice_date<=str_to_date($P{p_p_date_to},'%d-%m-%Y')
+
+group by loan_id
+
+)pmt on(pmt.loan_id=A.loan_id)
+
+left join cr_sd_m sd on(sd.txn_id=A.loan_id and SD.txn_type='LIM')
+
+left join
+
+(
+
+	select loan_id,sum(ifnull(advice_amount ,0))stamp   -- 120
+
+	from cr_txnadvice_dtl
+
+	where charge_code_id=120  and advice_date>=str_to_date($P{p_p_date_from},'%d-%m-%Y') and  advice_date<=str_to_date($P{p_p_date_to},'%d-%m-%Y')
+
+	group by loan_id
+
+)st on(st.loan_id=A.loan_id)
+
+left join
+
+(
+
+	select loan_id,sum(ifnull(advice_amount ,0))roc_amt   -- 128
+
+	from cr_txnadvice_dtl
+
+	where charge_code_id=128 and advice_date>=str_to_date($P{p_p_date_from},'%d-%m-%Y') and  advice_date<=str_to_date($P{p_p_date_to},'%d-%m-%Y')
+
+	group by loan_id
+
+)roc on(roc.loan_id=A.loan_id)
+
+left join
+
+(
+
+	select loan_id,group_concat((case INSURANCE_BY when 'B' then 'BORROWER ' when 'L' then 'LENDER ' else 'NA' end) SEPARATOR '|')INSURANCE_BY
+
+	from cr_asset_insurance_dtl
+
+	group by loan_id
+
+)insu on(insu.loan_id=A.loan_id)
+
+LEFT JOIN
+
+(
+
+SELECT CLD.LOAN_ID, CASE CLD.FUNDING_TYPE WHEN 'CP' THEN 'CONSORTIUM' WHEN 'OF' THEN 'OWN FUNDED' END AS FUNDING_TYPE,
+
+IFNULL(CBPD1.LOAN_AMOUNT,0) AS SERVICE_PARTNER_LOAN_AMOUNT, IFNULL(CBPD2.LOAN_AMOUNT,0) AS LEAD_PARTNER_LOAN_AMOUNT
+
+FROM CR_LOAN_DTL CLD
+
+LEFT JOIN CR_BUSINESS_PARTNER_DTL CBPD1 ON (CBPD1.LOAN_ID = CLD.LOAN_ID AND CBPD1.SERVICE_PARTNER_FLAG='Y')
+
+LEFT JOIN CR_BUSINESS_PARTNER_DTL CBPD2 ON (CBPD2.LOAN_ID = CLD.LOAN_ID AND CBPD2.SERVICE_PARTNER_FLAG='N')
+
+)PARTNER_DTL ON (PARTNER_DTL.LOAN_ID = A.LOAN_ID)
+
+
+
+LEFT JOIN
+
+(
+
+SELECT
+
+A.LOAN_ID, SUM(IFNULL(CACM.ASSET_COLLATERAL_VALUE,0))ASSET_COLLATERAL_VALUE,
+
+((IFNULL(A.LOAN_LOAN_AMOUNT,0)*100) / (SUM(IFNULL(CACM.ASSET_COLLATERAL_VALUE,0)))) AS NET_LTV,
+
+GROUP_CONCAT(IFNULL(CACM.ASSET_COLLATERAL_CLASS,''),'  ')AS ASSET_COLLATERAL_DESC
+
+FROM CR_LOAN_DTL A
+
+LEFT JOIN cr_loan_collateral_m CLCM ON CLCM.LOAN_ID=A.LOAN_ID
+
+LEFT JOIN cr_asset_collateral_m CACM ON CACM.ASSET_ID=CLCM.ASSETID
+
+GROUP BY LOAN_ID
+
+)ASSET ON (ASSET.LOAN_ID = A.LOAN_ID)
+
+LEFT JOIN
+
+(
+
+SELECT A.loan_id,
+
+GROUP_CONCAT(IFNULL(GCM2.CUSTOMER_NAME,''),' ')AS COAPPL_NAME
+
+FROM  CR_LOAN_DTL A
+
+LEFT JOIN CR_LOAN_CUSTOMER_ROLE CLCR1 ON CLCR1.LOAN_ID=A.LOAN_ID AND CLCR1.LOAN_CUSTOMER_ROLE_TYPE='COAPPL'
+
+LEFT JOIN GCD_CUSTOMER_M GCM2 ON GCM2.CUSTOMER_ID=CLCR1.GCD_ID
+
+group by a.loan_id
+
+)COAPPL ON (COAPPL.LOAN_ID = A.LOAN_ID)
+
+
+
+LEFT JOIN
+
+(
+
+SELECT
+
+CLD.LOAN_ID, CLD.LOAN_PRODUCT, CDLD.DEAL_LOAN_ID, IFNULL(GM.DESCRIPTION,'') AS LOAN_PURPOSE
+
+FROM CR_LOAN_DTL CLD
+
+LEFT JOIN CR_DEAL_LOAN_DTL CDLD ON (CLD.LOAN_DEAL_LOAN_ID = CDLD.DEAL_LOAN_ID)
+
+LEFT JOIN GENERIC_MASTER GM ON (GM.VALUE = CDLD.DEAL_LOAN_PURPOSE AND GM.PARENT_VALUE = CLD.LOAN_PRODUCT AND GM.GENERIC_KEY =  'LOAN_PURPOSE')
+
+ORDER BY CLD.LOAN_ID
+
+)LOAN ON (LOAN.LOAN_ID = A.LOAN_ID)
+
+
+
+LEFT JOIN com_address_m CAM ON CAM.BPID=B.CUSTOMER_ID AND CAM.ADDRESS_TYPE in ('REI','PERMANENT') AND CAM.COMMUNICATION_ADDRESS='Y'
+
+LEFT JOIN com_country_m Z ON Z.COUNTRY_ID=CAM.COUNTRY
+
+LEFT JOIN COM_STATE_M CSM ON CSM.STATE_ID=CAM.STATE
+
+LEFT JOIN com_district_m CDM ON CDM.DISTRICT_ID=CAM.DISTRICT
+
+LEFT JOIN CR_LOAN_CUSTOMER_ROLE CLCR ON CLCR.LOAN_ID=A.LOAN_ID AND CLCR.LOAN_CUSTOMER_ROLE_TYPE='GUARANTOR'
+
+LEFT JOIN GCD_CUSTOMER_M GCM1 ON GCM1.CUSTOMER_ID=CLCR.GCD_ID
+
+LEFT JOIN com_address_m CAM1 ON CAM1.BPID=GCM1.CUSTOMER_ID AND CAM1.ADDRESS_TYPE in ('REI','PERMANENT') AND CAM1.COMMUNICATION_ADDRESS='Y'
+
+LEFT JOIN com_country_m Z1 ON Z1.COUNTRY_ID=CAM1.COUNTRY
+
+LEFT JOIN COM_STATE_M CSM1 ON CSM1.STATE_ID=CAM1.STATE
+
+LEFT JOIN com_district_m CDM1 ON CDM1.DISTRICT_ID=CAM1.DISTRICT
+
+LEFT JOIN CR_LOAN_DISBURSAL_DTL DISB ON DISB.LOAN_ID=A.LOAN_ID
+
+left join cr_deal_address_m abc on CAM.ADDRESS_ID=abc.ADDRESS_ID
+
+LEFT JOIN cr_deal_customer_m CDCMM ON CDCMM.CUSTOMER_ID=B.CUSTOMER_ID
+
+left join (select loan_id,ifnull(INSTL_AMOUNT,0) LOAN_EMI_AMOUNT,min(instl_no) instl_no from cr_repaysch_dtl where BILL_FLAG='N'  group by loan_id) instAmount on a.loan_id = instAmount.loan_id
+
+left join temp_loan_dump_scz on temp_loan_dump_scz.loan_id=A.loan_id
+LEFT JOIN CR_CASE_MARKING_DTL CASE_ST ON CASE_ST.LOAN_ID=A.LOAN_ID AND CASE_STATUS IN ('RESTRUC','NONRESTRUC') AND CASE_ST.CASE_MARKING_FLAG='Y'
+
+
+-- LEFT JOIN (SELECT loan_id,ifnull(INSTL_AMOUNT,0) LOAN_EMI_AMOUNT FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND INSTL_NO IN (SELECT MAX(INSTL_NO)-1 FROM CR_REPAYSCH_DTL WHERE LOAN_ID=A.LOAN_ID AND REC_TYPE='I' GROUP BY LOAN_ID))
+
+-- instAmount on a.loan_id = instAmount.loan_id
+
+where
+(($P{p_branch_type}='All' and A.loan_BRANCH in (SELECT BRANCH_ID FROM sec_user_branch_dtl where  user_id=  $P{p_user_id})) or (FIND_IN_SET(A.loan_BRANCH ,$P{p_branch})))
+    and (($P{productCategory}='All' and 'A'='A' ) or (A.LOAN_PRODUCT_CATEGORY =($P{productCategory})))
+    and (($P{loanClass}='All' and 'A'='A') or (A.sale_off_flag=$P{loanClass})) and A.LOAN_APPROVAL_DATE>=str_to_date($P{p_p_date_from},'%d-%m-%Y') and A.LOAN_APPROVAL_DATE<=str_to_date($P{p_p_date_to},'%d-%m-%Y')
+group by A.loan_id]]>
+	</queryString>
+	<field name="LOAN_REFERENCE_NO" class="java.lang.String"/>
+	<field name="LOAN_NO" class="java.lang.String"/>
+	<field name="LOAN_CUSTOMER_ID" class="java.lang.Integer"/>
+	<field name="CUSTOMER_NAME" class="java.lang.String"/>
+	<field name="PRODUCT_DESC" class="java.lang.String"/>
+	<field name="SCHEME_DESC" class="java.lang.String"/>
+	<field name="LOAN_LOAN_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="LOAN_APPROVAL_DATE" class="java.sql.Timestamp"/>
+	<field name="REC_STATUS" class="java.lang.String"/>
+	<field name="MAKER_ID" class="java.lang.String"/>
+	<field name="NPA_FLAG" class="java.lang.String"/>
+	<field name="DPD" class="java.lang.Long"/>
+	<field name="QUEUE" class="java.lang.String"/>
+	<field name="POS" class="java.lang.String"/>
+	<field name="OVERDUE_POS" class="java.math.BigDecimal"/>
+	<field name="OVERDUE_INTEREST" class="java.math.BigDecimal"/>
+	<field name="OVERDUE_EMI" class="java.math.BigDecimal"/>
+	<field name="BCC_CHARGES" class="java.math.BigDecimal"/>
+	<field name="LPP_CHARGES" class="java.math.BigDecimal"/>
+	<field name="PENDING_DISBURSEMENT" class="java.math.BigDecimal"/>
+	<field name="COLLATERAL_MONEY" class="java.math.BigDecimal"/>
+	<field name="TOTAL_POS" class="java.math.BigDecimal"/>
+	<field name="MODE" class="java.lang.String"/>
+	<field name="IRR" class="java.math.BigDecimal"/>
+	<field name="EFFECTIVE_ROI" class="java.math.BigDecimal"/>
+	<field name="FINAL_ROI" class="java.math.BigDecimal"/>
+	<field name="TENURE" class="java.lang.String"/>
+	<field name="INSTALLMENT_MODE" class="java.lang.String"/>
+	<field name="REPAY_EFF_DATE" class="java.sql.Date"/>
+	<field name="INST_START_DATE" class="java.lang.String"/>
+	<field name="MATURITY_DATE" class="java.sql.Date"/>
+	<field name="DISBURSAL_STATUS" class="java.lang.String"/>
+	<field name="CM_INT" class="java.math.BigDecimal"/>
+	<field name="INT_METHOD" class="java.lang.String"/>
+	<field name="PROC_FEE" class="java.math.BigDecimal"/>
+	<field name="BRANCH_DESC_L" class="java.lang.String"/>
+	<field name="SECTOR_TYPE" class="java.lang.String"/>
+	<field name="CLIENT_TYPE" class="java.lang.String"/>
+	<field name="ADV_FEE" class="java.math.BigDecimal"/>
+	<field name="DEAL_RM" class="java.lang.String"/>
+	<field name="LOAN_EMI_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="deal_no" class="java.lang.String"/>
+	<field name="loanPaid" class="java.math.BigDecimal"/>
+	<field name="sd_interest_rate" class="java.math.BigDecimal"/>
+	<field name="sd_tenure" class="java.lang.Long"/>
+	<field name="StampDuty" class="java.math.BigDecimal"/>
+	<field name="ROC" class="java.math.BigDecimal"/>
+	<field name="INSURANCE_BY" class="java.lang.String"/>
+	<field name="po_do_flag" class="java.lang.String"/>
+	<field name="ASSET_COLLATERAL_DESC" class="java.lang.String"/>
+	<field name="FATHER_HUSBAND_NAME" class="java.lang.String"/>
+	<field name="addressLine1" class="java.lang.String"/>
+	<field name="addressLine2" class="java.lang.String"/>
+	<field name="PRIMARY_PHONE" class="java.lang.String"/>
+	<field name="ALTERNATE_PHONE" class="java.lang.String"/>
+	<field name="GUAR_NAME" class="java.lang.String"/>
+	<field name="GUAR_FATHER_HUSBAND_NAME" class="java.lang.String"/>
+	<field name="GUAR_addressLine1" class="java.lang.String"/>
+	<field name="GUAR_addressLine2" class="java.lang.String"/>
+	<field name="GUAR_PRIMARY_PHONE" class="java.lang.String"/>
+	<field name="GUAR_ALTERNATE_PHONE" class="java.lang.String"/>
+	<field name="LOAN_DUE_DAY" class="java.lang.String"/>
+	<field name="DISBURSAL_DATE" class="java.lang.String"/>
+	<field name="SERVICE_PARTNER_LOAN_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="LEAD_PARTNER_LOAN_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="FUNDING_TYPE" class="java.lang.String"/>
+	<field name="PREEMI_OVERDUE" class="java.math.BigDecimal"/>
+	<field name="ASSET_COLLATERAL_VALUE" class="java.math.BigDecimal"/>
+	<field name="COAPPL_NAME" class="java.lang.String"/>
+	<field name="NET_LTV" class="java.math.BigDecimal"/>
+	<field name="LOAN_PURPOSE" class="java.lang.String"/>
+	<field name="DEAL_SOURCE_TYPE" class="java.lang.String"/>
+	<field name="DEAL_SOURCE_NAME" class="java.lang.String"/>
+	<field name="NATURE_OF_BUSINESS" class="java.lang.String"/>
+	<field name="Loan_Branch" class="java.lang.Integer"/>
+	<field name="POOL_ID" class="java.lang.Integer"/>
+	<field name="POOL_NAME" class="java.lang.String"/>
+	<field name="ASSIGNMENT_PERCENTAGE" class="java.math.BigDecimal"/>
+	<field name="INTEREST_RATE" class="java.math.BigDecimal"/>
+	<field name="UCIC_NO" class="java.lang.String"/>
+	<field name="UCIC_REJECT_REASON" class="java.lang.String"/>
+	<field name="Restructured_Type" class="java.lang.String"/>
+	<field name="Restructure_date" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Prevent">
+			<staticText>
+				<reportElement x="246" y="24" width="5985" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Dump Report  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="88" width="78" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Application Form Number  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="175" y="88" width="102" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Number  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="88" width="116" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="476" y="88" width="158" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="634" y="88" width="84" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Scheme  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="789" y="88" width="85" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1326" y="88" width="67" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approval Date  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1393" y="88" width="53" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3674" y="88" width="114" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maker Name ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="175" y="0" width="5985" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="175" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="718" y="88" width="71" height="30" forecolor="#000000" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NPA Flag ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1502" y="88" width="33" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DPD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1535" y="88" width="53" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Queue ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1588" y="88" width="55" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[POS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1643" y="88" width="67" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overdue POS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1710" y="88" width="53" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overdue Interest]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1763" y="88" width="56" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overdue EMI ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2286" y="88" width="70" height="30" forecolor="#000000" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total POS ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1819" y="88" width="134" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overdue BCC Charges]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1953" y="88" width="112" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overdue LPP Charges]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2216" y="88" width="70" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Collateral Money ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2356" y="88" width="61" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Re-Payment Mode  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2417" y="88" width="44" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IRR ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2065" y="88" width="70" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pending Disbursement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2461" y="88" width="46" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Effective ROI ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2507" y="88" width="43" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Final ROI ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2550" y="88" width="44" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Tenure  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2594" y="88" width="57" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Installment Mode   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2651" y="88" width="71" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Repayment Effective Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2722" y="88" width="57" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Next Due Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2779" y="88" width="57" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maturity Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2836" y="88" width="76" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disbursal Status  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2912" y="88" width="57" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Processing Fee  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3282" y="88" width="93" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3375" y="88" width="135" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sector Type ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3510" y="88" width="84" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Client ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3594" y="88" width="80" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advisory Fee ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3788" y="88" width="87" height="30" forecolor="#000000" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[RM ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1446" y="88" width="56" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMI AMOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="78" y="88" width="97" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deal Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2135" y="88" width="81" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Paid ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2969" y="88" width="66" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stamp Duty ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3035" y="88" width="66" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROC ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3101" y="88" width="115" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Insurance Done by ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3216" y="88" width="66" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO/DO Flag ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4028" y="88" width="134" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Father Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3875" y="88" width="153" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Asset Details  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4162" y="88" width="577" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Residence Address   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4739" y="88" width="147" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="4886" y="88" width="152" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guarantor Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5038" y="88" width="134" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guarantor Father Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5172" y="88" width="449" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guarantor Address   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5621" y="88" width="147" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Guarantor Mobile No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5768" y="88" width="129" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disbursal Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5897" y="88" width="132" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Due Day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1154" y="88" width="85" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Service Partner Loan Amount ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1239" y="88" width="87" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lead Partner Loan Amount ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1054" y="88" width="100" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Business Type ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="874" y="88" width="95" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Pre EMI Overdue ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="969" y="88" width="85" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Collateral Value ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6029" y="88" width="202" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Co-Appl Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6231" y="88" width="73" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net LTV ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6304" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan Purpose ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6431" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Source]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6558" y="88" width="178" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Source Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6736" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NATURE OF BUSINESS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="393" y="88" width="83" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6863" y="88" width="106" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="6969" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[POOL_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7096" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[POOL_NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7223" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSIGNMENT_PERCENTAGE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7350" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INTEREST_RATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7477" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UCIC NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7604" y="88" width="256" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UCIC REJECT REASON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="8009" y="88" width="127" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restructure_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="7860" y="88" width="148" height="30" backcolor="#999999"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Restructured_Type]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="78" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_REFERENCE_NO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="175" y="0" width="102" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_NO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="277" y="0" width="116" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSTOMER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="634" y="0" width="84" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SCHEME_DESC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="789" y="0" width="85" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LOAN_LOAN_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1326" y="0" width="67" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{LOAN_APPROVAL_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1393" y="0" width="53" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REC_STATUS}+"  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3674" y="0" width="114" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAKER_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="476" y="0" width="158" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRODUCT_DESC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="718" y="0" width="71" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isItalic="false"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NPA_FLAG}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1502" y="0" width="33" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DPD}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1535" y="0" width="53" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{QUEUE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1588" y="0" width="55" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{POS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1643" y="0" width="67" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OVERDUE_POS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1710" y="0" width="53" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OVERDUE_INTEREST}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1763" y="0" width="56" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OVERDUE_EMI}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1953" y="0" width="112" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LPP_CHARGES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2065" y="0" width="70" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PENDING_DISBURSEMENT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2286" y="0" width="70" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TOTAL_POS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2356" y="0" width="61" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MODE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2417" y="0" width="44" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{IRR}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2461" y="0" width="46" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{EFFECTIVE_ROI}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2507" y="0" width="43" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{FINAL_ROI}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2550" y="0" width="44" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TENURE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2594" y="0" width="57" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INSTALLMENT_MODE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2836" y="0" width="76" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DISBURSAL_STATUS}+"  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1819" y="0" width="134" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{BCC_CHARGES}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2216" y="0" width="70" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{COLLATERAL_MONEY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2651" y="0" width="71" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{REPAY_EFF_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2722" y="0" width="57" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INST_START_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2779" y="0" width="57" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{MATURITY_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2912" y="0" width="57" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PROC_FEE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="3282" y="0" width="93" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BRANCH_DESC_L}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="3375" y="0" width="135" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SECTOR_TYPE}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="3510" y="0" width="84" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CLIENT_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="3594" y="0" width="80" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ADV_FEE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="3788" y="0" width="87" height="16" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_RM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1446" y="0" width="56" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LOAN_EMI_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="78" y="0" width="97" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{deal_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="2135" y="0" width="81" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{loanPaid}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="2969" y="0" width="66" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{StampDuty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3035" y="0" width="66" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ROC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3101" y="0" width="115" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INSURANCE_BY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3216" y="0" width="66" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{po_do_flag}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="3875" y="0" width="153" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSET_COLLATERAL_DESC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="4028" y="0" width="134" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FATHER_HUSBAND_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="4162" y="0" width="577" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{addressLine1}+$F{addressLine2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="4739" y="0" width="147" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRIMARY_PHONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="4886" y="0" width="152" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GUAR_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5038" y="0" width="134" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GUAR_FATHER_HUSBAND_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5172" y="0" width="449" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GUAR_addressLine1}+$F{GUAR_addressLine2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5621" y="0" width="147" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GUAR_PRIMARY_PHONE}+","+$F{GUAR_ALTERNATE_PHONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5768" y="0" width="129" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DISBURSAL_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1154" y="0" width="85" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SERVICE_PARTNER_LOAN_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1239" y="0" width="87" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LEAD_PARTNER_LOAN_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="1054" y="0" width="100" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{FUNDING_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="874" y="0" width="95" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PREEMI_OVERDUE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="969" y="0" width="85" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ASSET_COLLATERAL_VALUE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="5897" y="0" width="132" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_DUE_DAY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6029" y="0" width="202" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{COAPPL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6304" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_PURPOSE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="6231" y="0" width="73" height="16" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{NET_LTV}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6431" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_SOURCE_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6558" y="0" width="178" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_SOURCE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6736" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NATURE_OF_BUSINESS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="393" y="0" width="83" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_CUSTOMER_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6863" y="0" width="106" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Loan_Branch}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="6969" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{POOL_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7096" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{POOL_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7223" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSIGNMENT_PERCENTAGE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7350" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{INTEREST_RATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7477" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UCIC_NO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7604" y="0" width="256" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{UCIC_REJECT_REASON}.trim()+"   "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="7861" y="0" width="148" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Restructured_Type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="8010" y="0" width="127" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Restructure_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="3596" height="18">
+					<printWhenExpression><![CDATA[$P{p_report_format}=='E' ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="6160" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(*****End of Report*****) ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

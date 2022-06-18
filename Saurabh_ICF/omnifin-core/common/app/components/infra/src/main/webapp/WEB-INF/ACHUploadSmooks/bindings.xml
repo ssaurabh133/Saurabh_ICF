@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<smooks-resource-list 
+	xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd" 
+	xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.2.xsd">
+
+    <jb:bean beanId="obj" class="com.genericUpload.beans.ACHUploadBean" createOnElement="objs">
+        
+        <jb:value property="serial_no"         data="objs/obj/Serial_No"              decoder="String" />
+        <jb:value property="LOAN_ID"         data="objs/obj/LOAN_ID"              decoder="String" />
+		<jb:value property="VENDOR_NAME" data="objs/obj/VENDOR_NAME"       decoder="String" />
+		<jb:value property="UMRN_NO"      data="objs/obj/UMRN_NO"     decoder="String" />
+		<jb:value property="FACILITY"    data="objs/obj/FACILITY"    decoder="String" />
+		<jb:value property="ACH_STATUS"    data="objs/obj/ACH_STATUS"     decoder="String" />
+		<jb:value property="STATUS_DATE"    data="objs/obj/STATUS_DATE"     decoder="String" />
+		<jb:value property="REMARKS"    data="objs/obj/REMARKS"     decoder="String" />
+    </jb:bean>
+
+</smooks-resource-list>
+

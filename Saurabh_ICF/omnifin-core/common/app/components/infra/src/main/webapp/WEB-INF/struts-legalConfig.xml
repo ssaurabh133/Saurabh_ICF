@@ -1,0 +1,822 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+	
+
+
+	<!-- Vinod work space start for legal -->
+	
+	
+		<form-bean name="caseTypeMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="caseTypeCode" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			
+		</form-bean>
+		
+		<form-bean name="lawFirmMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="lawFirmCode" type="java.lang.String" />
+			<form-property name="lawFirmDesc" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="address1" type="java.lang.String" />
+			<form-property name="address2" type="java.lang.String" />
+			<form-property name="countryCode" type="java.lang.String" />
+			<form-property name="countryDesc" type="java.lang.String" />
+			<form-property name="stateCode" type="java.lang.String" />
+			<form-property name="stateDesc" type="java.lang.String" />
+			<form-property name="cityCode" type="java.lang.String" />
+			<form-property name="cityDesc" type="java.lang.String" />
+			<form-property name="zipCode" type="java.lang.String" />
+			<form-property name="phone1" type="java.lang.String" />
+			<form-property name="phone2" type="java.lang.String" />
+			<form-property name="panNo" type="java.lang.String" />
+			<form-property name="sapCode" type="java.lang.String" />
+			<form-property name="bankAccNo" type="java.lang.String" />
+			<form-property name="mobileNo" type="java.lang.String" />
+			<form-property name="emailId" type="java.lang.String" />
+			<form-property name="dateOfAppointment" type="java.lang.String" />
+			<form-property name="constitutionOfFirm" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="dist" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			
+		</form-bean>
+		
+		
+		<form-bean name="advocateMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="advocateCode" type="java.lang.String" />
+			<form-property name="advocateDesc" type="java.lang.String" />
+			<form-property name="advocateTypeFlag" type="java.lang.String" />
+			<form-property name="lawFirmCode" type="java.lang.String" />
+			<form-property name="address1" type="java.lang.String" />
+			<form-property name="address2" type="java.lang.String" />
+			<form-property name="countryCode" type="java.lang.String" />
+			<form-property name="countryDesc" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="stateCode" type="java.lang.String" />
+			<form-property name="stateDesc" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="cityCode" type="java.lang.String" />
+			<form-property name="cityDesc" type="java.lang.String" />
+			<form-property name="dist" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="zipCode" type="java.lang.String" />
+			<form-property name="phone1" type="java.lang.String" />
+			<form-property name="phone2" type="java.lang.String" />
+			<form-property name="mobileNo" type="java.lang.String" />
+			<form-property name="emailId" type="java.lang.String" />
+			<form-property name="panNo" type="java.lang.String" />
+			<form-property name="bankAccNo" type="java.lang.String" />
+			<form-property name="dateOfAppointment" type="java.lang.String" />
+			<form-property name="membershipLicNo" type="java.lang.String" />
+			<form-property name="tenureOfRetainership" type="java.lang.String" />
+			<form-property name="regularRetainerFlag" type="java.lang.String" />
+			<form-property name="retainershipValidUpto" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="lbxCaseTypeCodes" type="java.lang.String" />
+			<form-property name="caseTypeCode" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="lbxlawFirmCode" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="sapCode" type="java.lang.String" />
+			<form-property name="classification" type="java.lang.String" />	<!-- added by Rohit -->				
+		</form-bean>
+		
+		<form-bean name="legalNoticeInitiationMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="noticeId" type="java.lang.String" />
+			<form-property name="noticeCode" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="reasonCode" type="java.lang.String" />
+			<form-property name="makerRemarks" type="java.lang.String" />
+			<form-property name="autherRemarks" type="java.lang.String" />
+			<form-property name="noticeAmount" type="java.lang.String" />
+			<form-property name="modeOfNotice" type="java.lang.String" />
+			<form-property name="dateOfConciliation" type="java.lang.String" />
+			<form-property name="timeOfConciliation" type="java.lang.String" />
+			<form-property name="venueOfConciliation" type="java.lang.String" />
+			<form-property name="nameOfConciliator" type="java.lang.String" />
+			<form-property name="designationOfConciliator" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="lbxNoticeCode" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="noticeDesc" type="java.lang.String" />
+			<form-property name="checkerDecision" type="java.lang.String" />
+			<form-property name="declineDispatchDecision" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="customerId" type="java.lang.String" /><!-- Rohit changes -->
+			<form-property name="lbxcustomerId" type="java.lang.String" /><!-- Rohit changes -->
+			<form-property name="custButton" type="java.lang.String" /><!-- Rohit changes -->
+			<form-property name="custRole" type="java.lang.String" /><!-- Rohit changes -->
+			
+			
+		</form-bean>
+	
+		<form-bean name="legalCaseInitiationMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="initMakerImemo" type="java.lang.String" />
+			<form-property name="initMakerRemarks" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="advocateCode" type="java.lang.String" />
+			<form-property name="reject" type="java.lang.String" />
+			<form-property name="legalId" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="dpd" type="java.lang.String" />
+			<form-property name="totalOutsatanding" type="java.lang.String" />
+			<form-property name="pos" type="java.lang.String" />
+			<form-property name="caseType" type="java.lang.String" />
+			<form-property name="iMemoBy" type="java.lang.String" />
+			<form-property name="reason" type="java.lang.String" />
+			<form-property name="remark" type="java.lang.String" />
+			<form-property name="otherCharges" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="lbxscheme" type="java.lang.String" />
+			<form-property name="advocateDesc" type="java.lang.String" />
+		
+			
+		</form-bean>
+		
+		<form-bean name="legalCaseFileMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="fileMakerRemarks" type="java.lang.String" />
+			<form-property name="recoveryAmount" type="java.lang.String" />
+			<form-property name="lbxPoa" type="java.lang.String" />
+			<form-property name="poaDesc" type="java.lang.String" />
+			<form-property name="judgeName" type="java.lang.String" />
+			<form-property name="courtNameDesc" type="java.lang.String" />
+			<form-property name="lbxCourtName" type="java.lang.String" />
+			<form-property name="lbxCourtType" type="java.lang.String" />
+			<form-property name="courtTypeDesc" type="java.lang.String" />
+			<form-property name="section" type="java.lang.String" />
+			<form-property name="stageDesc" type="java.lang.String" />
+			<form-property name="lbxStage" type="java.lang.String" />
+			<form-property name="dateOfHearing" type="java.lang.String" />
+			<form-property name="caseFileDate" type="java.lang.String" />
+			<form-property name="courtFee" type="java.lang.String" />
+			<form-property name="caseNo" type="java.lang.String" />
+			<form-property name="advocate" type="java.lang.String" />
+			<form-property name="legalId" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="initMakerImemo" type="java.lang.String" />
+			<form-property name="initMakerRemarks" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="saveForwardFlag" type="java.lang.String" />
+			
+		</form-bean>
+		
+		<form-bean name="legalCourtProcessingMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			<form-property name="sessionLegalId" type="java.lang.String" />
+			<form-property name="courtProcessingMakerRemarks" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="fileMakerRemarks" type="java.lang.String" />
+			<form-property name="recoveryAmount" type="java.lang.String" />
+			<form-property name="lbxPoa" type="java.lang.String" />
+			<form-property name="poaDesc" type="java.lang.String" />
+			<form-property name="judgeName" type="java.lang.String" />
+			<form-property name="courtNameDesc" type="java.lang.String" />
+			<form-property name="lbxCourtName" type="java.lang.String" />
+			<form-property name="lbxCourtType" type="java.lang.String" />
+			<form-property name="courtTypeDesc" type="java.lang.String" />
+			<form-property name="section" type="java.lang.String" />
+			<form-property name="stageDesc" type="java.lang.String" />
+			<form-property name="lbxStage" type="java.lang.String" />
+			<form-property name="dateOfHearing" type="java.lang.String" />
+			<form-property name="caseFileDate" type="java.lang.String" />
+			<form-property name="courtFee" type="java.lang.String" />
+			<form-property name="caseNo" type="java.lang.String" />
+			<form-property name="advocate" type="java.lang.String" />
+			<form-property name="legalId" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="initMakerImemo" type="java.lang.String" />
+			<form-property name="initMakerRemarks" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="saveForwardFlag" type="java.lang.String" />
+			<form-property name="listSize" type="java.lang.String" />
+	
+		</form-bean>
+		
+		<form-bean name="legalAdvocateCaseMisDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="caseTypeDesc" type="java.lang.String" />
+			<form-property name="advocateDesc" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			
+		</form-bean>
+
+	<!-- vinod work space end for legal  -->
+
+	<!-- Richa work space start -->
+
+	
+	
+		<form-bean name="courtTypeMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="courtTypeCode" type="java.lang.String" />
+			<form-property name="courtTypeDesc" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="courtNameMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="courtType" type="java.lang.String" />
+			<form-property name="lbxCourtTypeCode" type="java.lang.String" />
+			<form-property name="courtNameCode" type="java.lang.String" />
+			<form-property name="courtNameDesc" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+
+		</form-bean>
+
+		
+		
+		<form-bean name="poaMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+	
+			<form-property name="courtName" type="java.lang.String" />
+			<form-property name="poaCode" type="java.lang.String" />
+			<form-property name="poaDesc" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="poa" type="java.lang.String" />
+			<form-property name="userId" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="lbxCourtNameCode" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="NoticeCheckerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			<form-property name="checkerDecision" type="java.lang.String" />
+			<form-property name="noticeId" type="java.lang.String" />
+			<form-property name="noticeCode" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="reasonCode" type="java.lang.String" />
+			<form-property name="makerRemarks" type="java.lang.String" />
+			<form-property name="autherRemarks" type="java.lang.String" />
+			<form-property name="noticeAmount" type="java.lang.String" />
+			<form-property name="modeOfNotice" type="java.lang.String" />
+			<form-property name="dateOfConciliation" type="java.lang.String" />
+			<form-property name="timeOfConciliation" type="java.lang.String" />
+			<form-property name="venueOfConciliation" type="java.lang.String" />
+			<form-property name="nameOfConciliator" type="java.lang.String" />
+			<form-property name="designationOfConciliator" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="lbxNoticeCode" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="noticeDesc" type="java.lang.String" />
+			<form-property name="hideAsterik" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="lbxLoanNoHID" type="java.lang.String" />
+			<form-property name="instrumentID" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="autherId" type="java.lang.String" />
+			<form-property name="autherDate" type="java.lang.String" />
+			<form-property name="businessPartnerType" type="java.lang.String" />
+			
+			
+		</form-bean>
+	
+	
+	<!--Richa work space end  -->
+	
+	<!-- Nazia work space start -->
+	
+		
+		<form-bean name="noticeTypeMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="noticeTypeCode" type="java.lang.String" />
+			<form-property name="noticeTypeDesc" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			
+		</form-bean>
+	
+	
+		<form-bean name="stageTypeMasterDynaValidatorForm"
+				type="org.apache.struts.validator.DynaValidatorForm">
+				<form-property name="stageCode" type="java.lang.String" />
+				<form-property name="stageTypeDesc" type="java.lang.String" />
+				<form-property name="sequenceNumber" type="java.lang.String" />
+				<form-property name="caseType" type="java.lang.String" />
+				<form-property name="stageProduct" type="java.lang.String" />
+				<form-property name="closureStage" type="java.lang.String" />
+				<form-property name="recStatus" type="java.lang.String" />
+				<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+				<form-property name="lbxProductSearchID" type="java.lang.String" />
+				
+				
+			</form-bean>
+			
+			
+
+
+			<form-bean name="reassignCaseDynaValidatorForm"
+				type="org.apache.struts.validator.DynaValidatorForm">
+				<form-property name="loanNo" type="java.lang.String" />
+				<form-property name="customerName" type="java.lang.String" />
+				<form-property name="caseType" type="java.lang.String" />
+				<form-property name="caseFileDate" type="java.lang.String" />
+				<form-property name="dateOfhearing" type="java.lang.String" />
+				<form-property name="caseNo" type="java.lang.String" />
+				<form-property name="advocateName" type="java.lang.String" />
+				<form-property name="stage" type="java.lang.String" />
+				<form-property name="section" type="java.lang.String" />
+				<form-property name="courtName" type="java.lang.String" />
+				<form-property name="poa" type="java.lang.String" />			
+				<form-property name="recStatus" type="java.lang.String" />
+				<form-property name="loanNoLink" type="java.lang.String" />
+				<form-property name="legalId" type="java.lang.String" />
+				<form-property name="remarks" type="java.lang.String" />
+				<form-property name="initMakerRemarks" type="java.lang.String" />
+				<form-property name="reasonDesc" type="java.lang.String" />
+				<form-property name="initMakerImemo" type="java.lang.String" />
+				<form-property name="caseTypeDesc" type="java.lang.String" />
+				<form-property name="principalOutstanding" type="java.lang.String" />
+				<form-property name="otherCharges" type="java.lang.String" />
+				<form-property name="totalOutstanding" type="java.lang.String" />
+				<form-property name="dpd" type="java.lang.String" />
+				<form-property name="scheme" type="java.lang.String" />
+				<form-property name="product" type="java.lang.String" />
+				<form-property name="branch" type="java.lang.String" />
+				<form-property name="lbxReasonId" type="java.lang.String" />
+				<form-property name="lbxCaseTypeCode" type="java.lang.String" />
+				<form-property name="lbxUserId" type="java.lang.String" />	
+				<form-property name="lbxLoanId" type="java.lang.String" />	
+				
+								
+			</form-bean>
+		
+		
+	<!-- Nazia work space end  -->
+	
+	
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+	
+	
+
+
+	<!-- vinod work space start for legal -->
+
+		  
+		 <!-- Case Type Master Start-->
+		<action path="/caseTypeMaster" parameter="method" scope="request"
+			name="caseTypeMasterDynaValidatorForm" type="com.legal.actions.CaseTypeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/caseTypeMasterAdd.jsp" />
+			<forward name="search" path="/caseTypeMasterBehind.do" />
+			<forward name="editCaseType" path="/JSP/LEGALJSP/caseTypeMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		<action path="/caseTypeMasterBehind" parameter="method" scope="request"
+			name="caseTypeMasterDynaValidatorForm" type="com.legal.actions.CaseTypeMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/caseTypeMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/caseTypeMasterAdd.jsp" path="/caseTypeMasterAdd"
+			parameter="method" scope="request" name="caseTypeMasterDynaValidatorForm"
+			type="com.legal.actions.CaseTypeMasterDispatchAction">
+			<forward name="searchPage" path="/caseTypeMasterBehind.do" />
+		</action>
+		<!-- Case Type Master End-->
+		
+		
+		
+		 <!-- Law Firm Master Start-->
+		<action path="/lawFirmMaster" parameter="method" scope="request"
+			name="lawFirmMasterDynaValidatorForm" type="com.legal.actions.LawFirmMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/lawFirmMasterAdd.jsp" />
+			<forward name="search" path="/lawFirmMasterBehind.do" />
+			<forward name="editLawFirm" path="/JSP/LEGALJSP/lawFirmMasterAdd.jsp"></forward>
+		</action>
+		
+		<action path="/lawFirmMasterBehind" parameter="method" scope="request"
+			name="lawFirmMasterDynaValidatorForm" type="com.legal.actions.LawFirmMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/lawFirmMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/lawFirmMasterAdd.jsp" path="/lawFirmMasterAdd"
+			parameter="method" scope="request" name="lawFirmMasterDynaValidatorForm"
+			type="com.legal.actions.LawFirmMasterDispatchAction">
+			<forward name="searchPage" path="/lawFirmMasterBehind.do" />
+		</action>
+		<!-- Law Firm Master End-->
+		
+		
+		
+		 <!-- Advocate Master Start-->
+		<action path="/advocateMaster" parameter="method" scope="request"
+			name="advocateMasterDynaValidatorForm" type="com.legal.actions.AdvocateMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/advocateMasterAdd.jsp" />
+			<forward name="search" path="/advocateMasterBehind.do" />
+			<forward name="editAdvocate" path="/JSP/LEGALJSP/advocateMasterAdd.jsp"></forward>
+		</action>
+		
+		<action path="/advocateMasterBehind" parameter="method" scope="request"
+			name="advocateMasterDynaValidatorForm" type="com.legal.actions.AdvocateMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/advocateMasterSearch.jsp" />
+		</action>
+
+		<action path="/advocateMasterAdd" input="/JSP/LEGALJSP/advocateMasterAdd.jsp" 
+			parameter="method" scope="request" name="advocateMasterDynaValidatorForm"
+			type="com.legal.actions.AdvocateMasterDispatchAction">
+			<forward name="searchPage" path="/advocateMasterBehind.do" />
+		</action>
+		<!-- Advocate Master End-->
+		
+		
+		 <!-- Legal Notice Initiation Maker start-->
+		<action path="/legalNoticeInitiationMaker" parameter="method" scope="request"
+			name="legalNoticeInitiationMakerDynaValidatorForm" type="com.legal.actions.LegalNoticeInitiationMakerDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp" />
+			<forward name="search" path="/legalNoticeInitiationMakerBehind.do" />
+			<forward name="editLegalNoticeInitiationMaker" path="/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp"></forward>
+		</action>
+		
+		
+		<action path="/legalNoticeInitiationMakerBehind" parameter="method" scope="request"
+			name="legalNoticeInitiationMakerDynaValidatorForm" type="com.legal.actions.LegalNoticeInitiationMakerBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/legalNoticeInitiationMakerSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp" path="/legalNoticeInitiationMakerAdd"
+			parameter="method" scope="request" name="legalNoticeInitiationMakerDynaValidatorForm"
+			type="com.legal.actions.LegalNoticeInitiationMakerDispatchAction">
+			<forward name="searchPage" path="/legalNoticeInitiationMakerBehind.do" />
+		</action>
+		<!-- Legal Notice Initiation Maker End-->
+		
+		<!-- Legal Case Initiation Start-->
+		
+		<action input="/JSP/LEGALJSP/legalCaseInitiationMaker.jsp" path="/legalCaseInitiationMakerDispatch" parameter="method" scope="request"
+			name="legalCaseInitiationMakerDynaValidatorForm" type="com.legal.actions.LegalCaseInitiationMakerDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalCaseInitiationMakerSearch.jsp" />
+			<forward name="edit" path="/JSP/LEGALJSP/legalCaseInitiationMaker.jsp" />
+		</action>
+		
+		<!-- Legal Case Initiation End-->
+		
+		<!-- Legal Case File Maker Start-->
+		
+		<action input="/JSP/LEGALJSP/legalCaseFileMaker.jsp" path="/legalCaseFileMakerDispatch" parameter="method" scope="request"
+			name="legalCaseFileMakerDynaValidatorForm" type="com.legal.actions.LegalCaseFileMakerDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalCaseFileMakerSearch.jsp" />
+			<forward name="edit" path="/JSP/LEGALJSP/legalCaseFileMaker.jsp" />
+		</action>
+		
+		<!-- Legal Case File Maker End-->
+		
+		<!-- Legal Case File Author Start-->
+		
+		<action path="/legalCaseFileAuthorDispatch" attribute="legalCaseFileMakerDynaValidatorForm"
+			input="/JSP/LEGALJSP/caseFileAuthor.jsp" name="legalCaseFileMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.LegalCaseFileAuthorDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalCaseFileAuthorSearch.jsp" />
+			<forward name="detail" path="/JSP/LEGALJSP/LEGAL_frames_caseFile.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/caseFileAuthor.jsp" />
+		</action>
+	
+		<!-- Legal Case File Author end-->
+		
+		<!-- Legal Court Processing Maker Start-->
+		
+		<action input="/JSP/LEGALJSP/legalCourtProcessingMaker.jsp" path="/legalCourtProcessingMakerDispatch" parameter="method" scope="request"
+			name="legalCourtProcessingMakerDynaValidatorForm" type="com.legal.actions.LegalCourtProcessingMakerDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalCourtProcessingMakerSearch.jsp" />
+			<forward name="edit" path="/JSP/LEGALJSP/legalCourtProcessingMaker.jsp" />
+			<forward name="openAddStage" path="/JSP/LEGALJSP/legalCourtProcessingAddStage.jsp" />
+			<forward name="saved" path="/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp" />
+		</action>
+		
+		<!-- Legal Court Processing Maker End-->
+		
+		<!-- Legal Court Processing Author Start-->
+		
+		<action path="/legalCourtProcessingAuthorDispatch" attribute="legalCourtProcessingMakerDynaValidatorForm"
+			input="/JSP/LEGALJSP/legalCourtProcessingAuthor.jsp" name="legalCourtProcessingMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.LegalCourtProcessingMakerDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalCourtProcessingAuthorSearch.jsp" />
+			<forward name="makerScreen" path="/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/legalCourtProcessingAuthor.jsp" />
+			<forward name="detail" path="/JSP/LEGALJSP/legal_frames_courtProcessing.jsp" />
+			<forward name="saved" path="/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp" />
+		</action>
+	
+		<!-- Legal Court Processing Author end-->
+		
+		<!-- Legal Reopen Closed Case Start-->
+		
+		<action path="/legalReopenClosedCaseDispatchAction" attribute="legalCourtProcessingMakerDynaValidatorForm"
+			input="/JSP/LEGALJSP/legalReopenClosedCaseAuthor.jsp" name="legalCourtProcessingMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.LegalCourtProcessingMakerDispatchAction">
+			<forward name="search" path="/JSP/LEGALJSP/legalReopenClosedCaseSearch.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/legalReopenClosedCaseAuthor.jsp" />
+			<forward name="detail" path="/JSP/LEGALJSP/legal_frames_reopenClosedCase.jsp" />
+		</action>
+	
+		<!-- Legal Reopen Closed Case end-->
+		
+		<!-- Legal Advocate Case Mis Start-->
+		
+		<action path="/legalAdvocateCaseMisDispatchAction" attribute="legalAdvocateCaseMisDynaValidatorForm"
+			input="/JSP/LEGALJSP/legalAdvocateCaseMis.jsp" name="legalAdvocateCaseMisDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.LegalAdvocateCaseMisDispatchAction">
+			<forward name="success" path="/JSP/LEGALJSP/legalAdvocateCaseMis.jsp" />
+		</action>
+	
+		<!-- Legal  Advocate Case Mis end-->
+	
+	<!-- vinod work space end for legal  -->
+
+
+<!-- Richa work space start -->
+	
+	
+		  
+		  
+		 <!-- Court Type Master Start-->
+		<action path="/courtTypeMaster" parameter="method" scope="request"
+			name="courtTypeMasterDynaValidatorForm" type="com.legal.actions.CourtTypeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/courtTypeMasterAdd.jsp" />
+			<forward name="search" path="/courtTypeMasterBehind.do" />
+			<forward name="editCourtType" path="/JSP/LEGALJSP/courtTypeMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		
+		<action path="/courtTypeMasterBehind" parameter="method" scope="request"
+			name="courtTypeMasterDynaValidatorForm" type="com.legal.actions.CourtTypeMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/courtTypeMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/courtTypeMasterAdd.jsp" path="/courtTypeMasterAdd"
+			parameter="method" scope="request" name="courtTypeMasterDynaValidatorForm"
+			type="com.legal.actions.CourtTypeMasterDispatchAction">
+			<forward name="searchPage" path="/courtTypeMasterBehind.do" />
+		</action>
+		<!-- Court Type Master End-->
+		
+	
+	 <!-- Court Name Master Start-->
+		<action path="/courtNameMaster" parameter="method" scope="request"
+			name="courtNameMasterDynaValidatorForm" type="com.legal.actions.CourtNameMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/courtNameMasterAdd.jsp" />
+			<forward name="search" path="/courtNameMasterBehind.do" />
+			<forward name="editCourtName" path="/JSP/LEGALJSP/courtNameMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		
+		<action path="/courtNameMasterBehind" parameter="method" scope="request"
+			name="courtNameMasterDynaValidatorForm" type="com.legal.actions.CourtNameMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/courtNameMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/courtNameMasterAdd.jsp" path="/courtNameMasterAdd"
+			parameter="method" scope="request" name="courtNameMasterDynaValidatorForm"
+			type="com.legal.actions.CourtNameMasterDispatchAction">
+			<forward name="searchPage" path="/courtNameMasterBehind.do" />
+		</action>
+		<!-- Court Name Master End-->
+	
+	
+	<!-- POA Master Start-->
+		<action path="/poaMaster" parameter="method" scope="request"
+			name="poaMasterDynaValidatorForm" type="com.legal.actions.POAMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/poaMasterAdd.jsp" />
+			<forward name="search" path="/poaMasterBehind.do" />
+			<forward name="openEditPOA" path="/JSP/LEGALJSP/poaMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		
+		<action path="/poaMasterBehind" parameter="method" scope="request"
+			name="poaMasterDynaValidatorForm" type="com.legal.actions.POAMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/poaMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/poaMasterAdd.jsp" path="/poaMasterAdd"
+			parameter="method" scope="request" name="poaMasterDynaValidatorForm"
+			type="com.legal.actions.POAMasterDispatchAction">
+			<forward name="searchPage" path="/poaMasterBehind.do" />
+		</action>
+		<!-- POA Master End-->
+		
+	<!-- Legal Notice Checker start-->
+		
+		<action path="/noticeCheckerBehind" type="com.legal.actions.NoticeCheckerBehindAction"
+			scope="request" name="NoticeCheckerDynaValidatorForm" attribute="NoticeCheckerDynaValidatorForm">
+			<forward name="success" path="/JSP/LEGALJSP/noticeChecker.jsp" />
+		</action>
+
+		<action path="/noticeCheckerDispatchAction" attribute="NoticeCheckerDynaValidatorForm"
+			input="/JSP/LEGALJSP/noticeCheckerAuthor.jsp" name="NoticeCheckerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.NoticeCheckerDispatchAction">
+			<forward name="noticeCheckerSearch" path="/JSP/LEGALJSP/noticeChecker.jsp" />
+			<forward name="editNoticeChecker" path="/JSP/LEGALJSP/CMS_frames_Notice.jsp" />
+			<forward name="noticeCheckerAuthor" path="/JSP/LEGALJSP/noticeCheckerAuthor.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/noticeCheckerAuthor.jsp" />
+			<forward name="success" path="/noticeCheckerBehind.do" />
+		</action>
+	
+	<!-- Legal Notice Checker End-->
+	
+	
+ <!--Legal Assign/Reject Case start-->
+		
+		<action path="/assignRejectCaseBehind" type="com.legal.actions.AssignRejectCaseBehindAction"
+			scope="request" name="legalCaseInitiationMakerDynaValidatorForm" attribute="legalCaseInitiationMakerDynaValidatorForm">
+			<forward name="success" path="/JSP/LEGALJSP/assignRejectCase.jsp" />
+		</action>
+
+		<action path="/assignRejectCaseDispatchAction" attribute="legalCaseInitiationMakerDynaValidatorForm"
+			input="/JSP/LEGALJSP/assignRejectCaseAuthor.jsp" name="legalCaseInitiationMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.AssignRejectCaseDispatchAction">
+			<forward name="noticeCheckerSearch" path="/JSP/LEGALJSP/assignRejectCase.jsp" />
+			<forward name="openEditAssignRejectCase" path="/JSP/LEGALJSP/LP_frames_AssignReject.jsp" />
+			<forward name="noticeCheckerAuthor" path="/JSP/LEGALJSP/assignRejectCaseAuthor.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/assignRejectCaseAuthor.jsp" />
+			<forward name="success" path="/assignRejectCaseBehind.do" />
+		</action>
+	
+	<!-- Legal Assign/Reject Case  End-->
+
+	<!-- Richa work space end  -->
+	
+	<!-- Nazia work space start -->
+		
+		
+		
+		 <!-- Notice Type Master Start-->
+		<action path="/noticeTypeMaster" parameter="method" scope="request"
+			name="noticeTypeMasterDynaValidatorForm" type="com.legal.actions.NoticeTypeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/noticeTypeMasterAdd.jsp" />
+			<forward name="search" path="/noticeTypeMasterBehind.do" />
+			<forward name="editNoticeType" path="/JSP/LEGALJSP/noticeTypeMasterAdd.jsp"></forward>
+		</action>
+		
+		<!-- search -->
+		
+		<action path="/noticeTypeMasterBehind" parameter="method" scope="request"
+			name="noticeTypeMasterDynaValidatorForm" type="com.legal.actions.NoticeTypeMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/noticeTypeMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/noticeTypeMasterAdd.jsp" path="/noticeTypeMasterAdd"
+			parameter="method" scope="request" name="noticeTypeMasterDynaValidatorForm"
+			type="com.legal.actions.NoticeTypeMasterDispatchAction">
+			<forward name="searchPage" path="/noticeTypeMasterBehind.do" />
+		</action>
+		<!-- Notice Type Master End-->
+		
+		
+		 <!-- Stage Type Master Start-->
+		<action path="/stageTypeMaster" parameter="method" scope="request"
+			name="stageTypeMasterDynaValidatorForm" type="com.legal.actions.StageTypeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/LEGALJSP/stageTypeMasterAdd.jsp" />
+			<forward name="search" path="/stageTypeMasterBehind.do" />
+			<forward name="editStageType" path="/JSP/LEGALJSP/stageTypeMasterAdd.jsp"></forward>
+		</action>
+		
+		<!-- search -->
+		
+		<action path="/stageTypeMasterBehind" parameter="method" scope="request"
+			name="stageTypeMasterDynaValidatorForm" type="com.legal.actions.StageTypeMasterBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/stageTypeMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/LEGALJSP/stageTypeMasterAdd.jsp" path="/stageTypeMasterAdd"
+			parameter="method" scope="request" name="stageTypeMasterDynaValidatorForm"
+			type="com.legal.actions.StageTypeMasterDispatchAction">
+			<forward name="searchPage" path="/stageTypeMasterBehind.do" />
+		</action>
+		<!-- Stage Type Master End-->
+	
+		<!-- Legal Decline Dispatch Notice Strart-->
+		
+		<action path="/legalDeclineDispatchNoticeBehind" parameter="method" scope="request"
+			name="legalNoticeInitiationMakerDynaValidatorForm" type="com.legal.actions.LegalDeclineDispatchNoticeBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/legalDeclineDispatchNoticeSearch.jsp" />
+		</action>
+		
+		<action path="/legalDeclineDispatchNoticeAction" attribute="legalNoticeInitiationMakerDynaValidatorForm"
+			input="/JSP/LEGALJSP/Legal_decline_author.jsp" name="legalNoticeInitiationMakerDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.LegalDeclineDispatchNoticeDispatchAction">
+			<forward name="editDeclineDispatch" path="/JSP/LEGALJSP/LP_frame_decline_dispatch.jsp" />
+			<forward name="view" path="/JSP/LEGALJSP/legalDecline.jsp" />
+			<forward name="author" path="/JSP/LEGALJSP/legalDecline.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/Legal_decline_author.jsp" />
+			<forward name="success" path="/legalDeclineDispatchNoticeBehind.do" />
+		</action>
+	
+	<!-- Legal Decline Dispatch Notice End-->
+	
+	<!-- reassign case start here -->
+	
+	<action path="/reassignCaseBehind" parameter="method" scope="request"
+			name="reassignCaseDynaValidatorForm" type="com.legal.actions.ReassignCaseBehindAction">
+			<forward name="success" path="/JSP/LEGALJSP/reassignCaseSearch.jsp" />
+		</action>
+		
+		<action path="/reassignCaseAction" attribute="reassignCaseDynaValidatorForm"
+			input="/JSP/LEGALJSP/reassignCaseAuthor.jsp" name="reassignCaseDynaValidatorForm"
+			scope="request" parameter="method" type="com.legal.actions.ReassignCaseDispatchAction">
+			<forward name="reassignCase" path="/JSP/LEGALJSP/reassignCaseSearch.jsp" />
+			<forward name="editReassignCase" path="/JSP/LEGALJSP/LP_frame_reassignCase.jsp" />
+			<forward name="maker" path="/JSP/LEGALJSP/reassign_Case_view.jsp" />
+			<forward name="authorScreen" path="/JSP/LEGALJSP/reassignCaseAuthor.jsp" />
+			<forward name="success" path="/reassignCaseBehind.do" />
+			
+		</action>
+	
+			<!-- reassign case ends here -->
+	
+	<!-- Nazia work space end  -->
+
+	</action-mappings>
+
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

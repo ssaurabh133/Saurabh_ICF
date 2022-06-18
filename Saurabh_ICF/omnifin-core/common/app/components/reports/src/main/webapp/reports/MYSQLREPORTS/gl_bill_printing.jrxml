@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gl_bill_printing" language="groovy" pageWidth="667" pageHeight="841" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="627" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_bill_no" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_head_type" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_expense_code" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_from_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_to_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_date_format" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select bill_gen_id ,supplier_bill_no, bill_date , concat(gl_expense_head_m.RECIEVPAY_CODE,' ') as expense_head_code ,concat(gl_party_dtl.PARTY_NAME) as supplier  ,
+concat (com_department_m.DEPARTMENT_DESC,' ')as department ,due_date , concat(com_module_m.MODULE_DESCRIPTION,' ')as module_id , concat(com_product_m.PRODUCT_DESCRIPTION,' ')as product_id ,reference_no, total_amount, tax1_rate, tax2_rate, tax1_amount, tax2_amount,
+net_total,case when expense_type='R' then 'Receivable ' when expense_type='P' then 'Payable ' end as expense_type, gl_expense_head_m.RECIEVPAY_ID from gl_bill_generation
+left outer join gl_expense_head_m on gl_expense_head_m.RECIEVPAY_ID =gl_bill_generation.expense_head_code
+left outer join gl_party_dtl on gl_party_dtl.PARTY_CODE = gl_bill_generation.supplier
+left outer join com_department_m on com_department_m.DEPARTMENT_ID = gl_bill_generation.department
+left outer join com_module_m on com_module_m.MODULE_ID = gl_bill_generation.module_id
+left outer join com_product_m on com_product_m.PRODUCT_ID=gl_bill_generation.product_id
+where  gl_bill_generation.bill_date>=STR_TO_DATE($P{p_from_date},$P{p_date_format})
+and gl_bill_generation.bill_date<=STR_TO_DATE($P{p_to_date},$P{p_date_format})
+and gl_bill_generation.expense_type=$P{p_head_type}
+and if($P{p_expense_code}='0',true,gl_expense_head_m.RECIEVPAY_ID=$P{p_expense_code})
+and if($P{p_bill_no}='0',true,supplier_bill_no=$P{p_bill_no})]]>
+	</queryString>
+	<field name="bill_gen_id" class="java.lang.Integer"/>
+	<field name="supplier_bill_no" class="java.lang.String"/>
+	<field name="bill_date" class="java.sql.Date"/>
+	<field name="expense_head_code" class="java.lang.String"/>
+	<field name="supplier" class="java.lang.String"/>
+	<field name="department" class="java.lang.String"/>
+	<field name="due_date" class="java.sql.Date"/>
+	<field name="module_id" class="java.lang.String"/>
+	<field name="product_id" class="java.lang.String"/>
+	<field name="reference_no" class="java.lang.String"/>
+	<field name="total_amount" class="java.lang.Double"/>
+	<field name="tax1_rate" class="java.lang.Double"/>
+	<field name="tax2_rate" class="java.lang.Double"/>
+	<field name="tax1_amount" class="java.lang.Double"/>
+	<field name="tax2_amount" class="java.lang.Double"/>
+	<field name="net_total" class="java.lang.Double"/>
+	<field name="expense_type" class="java.lang.String"/>
+	<field name="RECIEVPAY_ID" class="java.lang.Integer"/>
+	<group name="bill_no" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{supplier_bill_no}]]></groupExpression>
+		<groupHeader>
+			<band height="100" splitType="Prevent">
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="0" width="195" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{expense_head_code}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="20" width="123" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Supplier ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="20" width="195" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{supplier}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="123" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Expense Head ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="40" width="123" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Bill Date ]]></text>
+				</staticText>
+				<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+					<reportElement x="123" y="40" width="195" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{bill_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="318" y="0" width="150" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Bill Number ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="318" y="20" width="150" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Due Date ]]></text>
+				</staticText>
+				<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+					<reportElement x="468" y="20" width="159" height="20"/>
+					<box>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{due_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="318" y="40" width="150" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Product  ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="468" y="40" width="159" height="20"/>
+					<box>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{product_id}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="60" width="123" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Department ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="60" width="195" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{department}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="318" y="60" width="150" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Transation Reference No  ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="468" y="60" width="159" height="20"/>
+					<box>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{reference_no}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="468" y="0" width="159" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement>
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{supplier_bill_no}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="80" width="195" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="9"/>
+						<paragraph leftIndent="4"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{module_id}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="80" width="123" height="20"/>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="11" isBold="true"/>
+						<paragraph leftIndent="3"/>
+					</textElement>
+					<text><![CDATA[Business ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="468" y="80" width="159" height="20"/>
+					<box>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="64">
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="386" y="32" width="124" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{tax2_rate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="386" y="16" width="124" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{tax1_rate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="510" y="16" width="117" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{tax1_amount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="510" y="32" width="117" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{tax2_amount}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="386" y="48" width="241" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_total}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="386" y="0" width="241" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_amount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="256" y="16" width="130" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[Tax 1 Rate ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="32" width="130" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[Tax 2 Rate ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="48" width="130" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[Net Amount ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="256" y="0" width="130" height="16"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<text><![CDATA[Tax Amount ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="256" height="64"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="523" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="523" y="0" width="104" height="34"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement x="1" y="0" width="626" height="40"/>
+				<subreportParameter name="p_bill_gen_id">
+					<subreportParameterExpression><![CDATA[$F{bill_gen_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "gl_bill_printing_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="602" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"+" "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="602" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="626" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (****END OF THE REPORT****) ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

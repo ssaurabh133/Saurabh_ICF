@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <all-uploads>
+		<default-config>
+			<!-- Below default properties can be overriden in specific upload configuration-->
+			<name>default</name>
+			<smooksConfigFolder>/WEB-INF/uploadsConfig/</smooksConfigFolder>
+			<maker-proc-name>abc</maker-proc-name>
+			<author-proc-name>xyz</author-proc-name>
+			<auto-forward-to-author>boolean</auto-forward-to-author>
+			<autho-author>boolean</autho-author>
+			<auto-author-userid>userid</auto-author-userid>
+		</default-config>
+		<upload>
+			<maker-function-id>1000033622</maker-function-id>
+			<author-function-id>10000336323</author-function-id>
+			<name>Voucher Upload</name>
+			<smooksfiles>/WEB-INF/smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.gl.glvo.VoucherUploadBean</smooks-csv-bean>
+			<java-script-file-name>voucherUpload.js</java-script-file-name>
+			<auto-forward-to-author>boolean</auto-forward-to-author>
+			<auto-author>false</auto-author>
+			<auto-author-userid>userid</auto-author-userid>
+		</upload>
+
+		<upload>
+			<maker-function-id>500000088</maker-function-id>
+			<author-function-id>500000089</author-function-id>
+			<name>ARAP_PAYMENT_UPLOAD</name>
+			<what-upload>ARAP_PAYMENT_UPLOAD</what-upload>
+			<smooksfiles>/WEB-INF/ApPaymentUploadSmooks/arappayment-smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.genericUpload.beans.ArapPaymentUploadBean</smooks-csv-bean>
+			<java-script-file-name>ArapPaymentUpload.js</java-script-file-name>
+			<auto-author>true</auto-author>
+			<maker-proc-name>PAYMENT_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+			<author-proc-name>PAYMENT_UPLOAD_VALIDATION_AUTHOR</author-proc-name>
+			<transfer-proc-name>PAYMENT_UPLOAD_AUTHOR</transfer-proc-name>
+			<temp-table-name>temp_gl_payment_upload</temp-table-name>
+			<main-table-dump-query>select * from GL_PAYMENT_UPLOAD_VOUCHER where batch_id = </main-table-dump-query>
+			<temp-table-dump-query>select * from  temp_gl_payment_upload where batch_id = </temp-table-dump-query>
+			<lov-id>19099</lov-id>
+        </upload> 
+        
+        <upload>
+			<maker-function-id>500000090</maker-function-id>
+			<author-function-id>500000091</author-function-id>
+			<name>ARAP_GL_BILL_UPLOAD</name>
+			<what-upload>ARAP_GL_BILL_UPLOAD</what-upload>
+			<smooksfiles>/WEB-INF/ARAPBillUploadSmooks/arapglbill-smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.genericUpload.beans.ArapGlBillUploadBean</smooks-csv-bean>
+			<java-script-file-name></java-script-file-name>
+			<auto-author>true</auto-author>
+			<maker-proc-name>ARAP_BILL_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+			<author-proc-name>ARAP_BILL_UPLOAD_VALIDATION_AUTHOR</author-proc-name>
+			<transfer-proc-name>ARAP_BILL_UPLOAD_AUTHOR</transfer-proc-name>
+			<temp-table-name>temp_gl_bill_dtl</temp-table-name>
+			<main-table-dump-query>select * from temp_gl_bill_dtl where batch_id = </main-table-dump-query>
+			<temp-table-dump-query>select * from temp_gl_bill_dtl where batch_id = </temp-table-dump-query>
+			<lov-id></lov-id>
+        </upload> 
+        
+      <upload>
+	<maker-function-id>6001627</maker-function-id>
+	<author-function-id>6001628</author-function-id>
+	<name>Bank_Recon_Upload</name>
+	<what-upload>Bank_Recon_Upload</what-upload>
+	<smooksfiles>/WEB-INF/BankReconUploadSmooks/recon-smooks-config.xml</smooksfiles>
+	<smooks-csv-bean>com.genericUpload.beans.subLedgerUploadBean</smooks-csv-bean>
+	<java-script-file-name>ReconUpload.js</java-script-file-name>
+	<auto-author>true</auto-author>
+	<maker-proc-name>SUBLEDGER_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+	<author-proc-name>SUBLEDGER_UPLOAD_VALIDATION_AUTHOR</author-proc-name>
+	<transfer-proc-name>SUBLEDGER_UPLOAD_AUTHOR</transfer-proc-name>
+	<temp-table-name>temp_gl_bank_recon_upload</temp-table-name>
+	<main-table-dump-query>select * from gl_sub_ledger where batch_id = </main-table-dump-query>
+	<temp-table-dump-query>select * from  temp_gl_bank_recon_upload where batch_id = </temp-table-dump-query>
+	<lov-id></lov-id>
+</upload> 
+ <upload>
+			<maker-function-id>10000836</maker-function-id>
+			<author-function-id>10000835</author-function-id>
+			<name>ACH Upload</name>
+			<what-upload>ACH</what-upload>
+			<smooksfiles>/WEB-INF/ACHUploadSmooks/smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.genericUpload.beans.ACHUploadBean</smooks-csv-bean>
+			 <java-script-file-name>ACHUpload.js</java-script-file-name> 
+			<auto-author>true</auto-author>
+		 	<maker-proc-name>ACH_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+			<author-proc-name>ACH_UPLOAD_VALIDATION_AUTHOR</author-proc-name>
+			<transfer-proc-name>ACH_UPLOAD_AUTHOR</transfer-proc-name> 
+			<temp-table-name>cr_ach_tracking_dtl_temp</temp-table-name>
+			<main-table-dump-query>select * from cr_ach_tracking_dtl where BATCH_ID = </main-table-dump-query>
+			<temp-table-dump-query>select * from  cr_ach_tracking_dtl_temp where BATCH_ID = </temp-table-dump-query>
+			<lov-id>192029</lov-id>
+</upload>     
+		
+		
+		     
+        <upload>
+			<maker-function-id>500000126</maker-function-id>
+			<author-function-id>500000127</author-function-id>
+			<name>Supplier_Upload</name>
+			<what-upload>Supplier_Upload</what-upload>
+			<smooksfiles>/WEB-INF/SupplierUploadSmooks/SupplierUpload-smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.genericUpload.beans.SupplierUploadBean</smooks-csv-bean>
+		    <java-script-file-name>SupplierUpload.js</java-script-file-name>
+			<auto-author>true</auto-author>
+			<maker-proc-name>GL_SUPPLIER_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+			<author-proc-name>GL_SUPPLIER_UPLOAD_AUTHOR</author-proc-name>
+			<transfer-proc-name>GENERIC_UPLOAD_VALIDATION_AUTHOR</transfer-proc-name>
+			<temp-table-name>temp_supplier_upload</temp-table-name>
+			<main-table-dump-query>select * from temp_supplier_upload where batch_id =  </main-table-dump-query>
+			<temp-table-dump-query>select * from temp_supplier_upload where batch_id = </temp-table-dump-query>
+			<lov-id></lov-id>
+        </upload> 
+        
+               
+        <upload>
+			<maker-function-id>500000128</maker-function-id>
+			<author-function-id>500000129</author-function-id>
+			<name>Supplier_GST_dtl_Upload</name>
+			<what-upload>Supplier_GST_dtl_Upload</what-upload>
+			<smooksfiles>/WEB-INF/SupplierGSTdtlUploadSmooks/SupplierGSTdtlUpload-smooks-config.xml</smooksfiles>
+			<smooks-csv-bean>com.genericUpload.beans.SupplierGSTUploadBean</smooks-csv-bean>
+		    <java-script-file-name>SupplierGSTdtlUpload.js</java-script-file-name>
+			<auto-author>true</auto-author>
+			<maker-proc-name>GL_SUPPLIER_GST_DTL_UPLOAD_VALIDATION_MAKER</maker-proc-name>
+			<author-proc-name>GL_SUPPLIER_GST_DTL_UPLOAD_AUTHOR</author-proc-name>
+			<transfer-proc-name>GENERIC_UPLOAD_VALIDATION_AUTHOR</transfer-proc-name>
+			<temp-table-name>TEMP_SUPPLIER_GST_DTL_UPLOAD</temp-table-name>
+			<main-table-dump-query>select * from TEMP_SUPPLIER_GST_DTL_UPLOAD where batch_id =  </main-table-dump-query>
+			<temp-table-dump-query>select * from TEMP_SUPPLIER_GST_DTL_UPLOAD where batch_id = </temp-table-dump-query>
+			<lov-id></lov-id>
+        </upload> 
+		
+        
+        
+     </all-uploads>
+ </config>

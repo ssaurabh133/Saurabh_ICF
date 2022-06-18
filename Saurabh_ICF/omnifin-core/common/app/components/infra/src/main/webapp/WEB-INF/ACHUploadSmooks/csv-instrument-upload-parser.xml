@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd" xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.5.xsd">
+
+    <!--
+    Configure the CSV to parse the message into a stream of SAX events.
+    -->
+	<csv:reader fields="Serial_No,LOAN_ID,VENDOR_NAME,UMRN_NO,FACILITY,ACH_STATUS,STATUS_DATE,REMARKS" rootElementName="objs" recordElementName="obj" skipLines="1" />
+ 
+</smooks-resource-list>
+
+
+

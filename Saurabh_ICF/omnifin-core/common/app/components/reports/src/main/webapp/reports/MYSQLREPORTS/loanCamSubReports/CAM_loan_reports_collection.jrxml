@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="deal_details" language="groovy" pageWidth="842" pageHeight="504" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_deal_id" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_loan_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select cr_deal_loan_dtl.DEAL_LOAN_ID,cr_deal_loan_dtl.DEAL_ID  from cr_deal_loan_dtl
+ where cr_deal_loan_dtl.DEAL_ID=$P{p_deal_id}]]>
+	</queryString>
+	<field name="DEAL_LOAN_ID" class="java.lang.Integer"/>
+	<field name="DEAL_ID" class="java.lang.Integer"/>
+	<group name="DEAL_LOAN_ID">
+		<groupExpression><![CDATA[$F{DEAL_LOAN_ID}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="-22" y="0" width="200" height="100"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_loan_id">
+					<subreportParameterExpression><![CDATA[$P{p_loan_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="loan_id">
+					<subreportParameterExpression><![CDATA[$F{DEAL_LOAN_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "cam_loan_details.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

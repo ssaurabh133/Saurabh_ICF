@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+                      xmlns:core="http://www.milyn.org/xsd/smooks/smooks-core-1.3.xsd"
+	                  xmlns:db="http://www.milyn.org/xsd/smooks/db-routing-1.1.xsd">
+   <core:filterSettings type="SAX" />
+
+   <import file="csv-recon-upload-parser.xml" />
+   <import file="recon-datasources.xml"/>
+   <import file="recon-bindings.xml"/>
+
+   <db:executor executeOnElement="obj" datasource="DBExtractTransformLoadDS" executeBefore="false">
+    	<db:statement>
+ INSERT INTO temp_gl_bank_recon_upload(serial_no,voucher_bank,voucher_no,sequence_no,voucher_dr_amt,voucher_cr_amt,bank_transaction_id,
+ bank_dr_amt,bank_cr_amt,bank_ledger_id,recon_type,recon_date,user_id,batch_id) 
+ VALUES(${obj.serial_no},${obj.voucher_bank},${obj.voucher_no},${obj.sequence_no},${obj.voucher_dr_amt},${obj.voucher_cr_amt},
+ ${obj.bank_transaction_id},${obj.bank_dr_amt},${obj.bank_cr_amt},${obj.bank_ledger_id},
+ ${obj.recon_type},${obj.recon_date},${obj.user_id},${obj.batch_id})                           
+    	</db:statement>
+   </db:executor>
+
+</smooks-resource-list>

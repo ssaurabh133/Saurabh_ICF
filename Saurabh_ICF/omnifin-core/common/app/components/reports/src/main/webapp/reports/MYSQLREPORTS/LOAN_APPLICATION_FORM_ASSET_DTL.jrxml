@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LOAN_APPLICATION_FORM_ASSET_DTL" language="groovy" pageWidth="575" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="9"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_asset_id" class="java.lang.Integer"/>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT IFNULL(IN_CAMEL_CASE(GM.DESCRIPTION),'')CATEGORY_OF_SELLER_DESC,
+IFNULL(ASSET.customer_declared_amount,0.00)CUSTOMER_DECLARED_AMOUNT,IFNULL(IN_CAMEL_CASE(GEN.DESCRIPTION),'')PROPERTY_TYPE_DESC,
+IFNULL(IN_CAMEL_CASE(G.DESCRIPTION),'')POSSESSION_DESC,
+@AST_ADDRESS_DTL:=CONCAT('Plot No : ',IFNULL(ASSET.PLOT_NO,''))ADD_LINE0,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.ADDRESS_LINE3 IS NULL OR TRIM(ASSET.ADDRESS_LINE3)='') THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Building No : ',ASSET.ADDRESS_LINE3) ELSE CONCAT(@AST_ADDRESS_DTL,', Building No : ',ASSET.ADDRESS_LINE3) END) END ADD_LINE1,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.ADDRESS_LINE2 IS NULL OR TRIM(ASSET.ADDRESS_LINE2)='') THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Building/ Street Name : ',ASSET.ADDRESS_LINE2) ELSE CONCAT(@AST_ADDRESS_DTL,', Building/ Street Name : ',ASSET.ADDRESS_LINE2) END) END ADD_LINE2,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.FLOOR_NO IS NULL OR TRIM(ASSET.FLOOR_NO)='')THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Floor No : ',ASSET.FLOOR_NO) ELSE CONCAT(@AST_ADDRESS_DTL,', Floor No : ',ASSET.FLOOR_NO) END) END ADD_LINE3,
+IN_CAMEL_CASE(CASE WHEN (ASSET.PROPERTY_ADDRESS IS NULL OR TRIM(ASSET.PROPERTY_ADDRESS)='')THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Flat/ House No : ',ASSET.PROPERTY_ADDRESS) ELSE CONCAT(@AST_ADDRESS_DTL,', Flat/ House No : ',ASSET.PROPERTY_ADDRESS) END) END) ADDRESS,
+IFNULL(IN_CAMEL_CASE(ifnull(ASSET.VILLAGE_NAME_LANDMARK,'')),' ')VILLAGE_NAME_LANDMARK,IN_CAMEL_CASE(CONCAT(ifnull(CTM.DESCRIPTION,''),' '))TEHSIL,ifnull(ASSET.PINCODE,'')PINCODE,
+CCM.COUNTRY_ID,IN_CAMEL_CASE(CONCAT(ifnull(CCM.COUNTRY_DESC,''),' '))COUNTRY_DESC,
+CSM.STATE_ID,IN_CAMEL_CASE(CONCAT(ifnull(CSM.STATE_DESC,''),' '))STATE_DESC,CDM.DISTRICT_ID,IN_CAMEL_CASE(CONCAT(ifnull(CDM.DISTRICT_DESC,''),' '))DISTRICT_DESC
+FROM CR_ASSET_COLLATERAL_M ASSET
+LEFT JOIN GENERIC_MASTER GM ON (GM.GENERIC_KEY='CATEGORY_OF_SELLER' AND GM.VALUE=ASSET.CATEGORY_OF_SELLER)
+LEFT JOIN GENERIC_MASTER GEN ON (GEN.GENERIC_KEY='PROPERTY_TYPE' AND GEN.VALUE=ASSET.PROPERTY_TYPE)
+LEFT JOIN GENERIC_MASTER G ON (G.GENERIC_KEY='POSSESSION' AND G.VALUE=ASSET.POSSESSION)
+LEFT JOIN COM_COUNTRY_M CCM ON(CCM.COUNTRY_ID=ASSET.COUNTRY)
+LEFT JOIN COM_STATE_M CSM ON (CSM.STATE_ID=ASSET.STATE)
+LEFT JOIN COM_DISTRICT_M CDM ON(CDM.DISTRICT_ID=ASSET.DISTRICT)
+LEFT JOIN COM_TEHSIL_M CTM ON(CTM.ID=ASSET.TEHSIL)
+WHERE ASSET.ASSET_ID=$P{p_asset_id} AND 'DEAL'=$P{p_stage}
+
+UNION ALL
+
+SELECT IFNULL(IN_CAMEL_CASE(GM.DESCRIPTION),'')CATEGORY_OF_SELLER_DESC,
+IFNULL(ASSET.CUSTOMER_DECLARED_AMOUNT,0.00)CUSTOMER_DECLARED_AMOUNT,IFNULL(IN_CAMEL_CASE(GEN.DESCRIPTION),'')PROPERTY_TYPE_DESC,
+IFNULL(IN_CAMEL_CASE(G.DESCRIPTION),'')POSSESSION_DESC,
+@AST_ADDRESS_DTL:=CONCAT('Plot No : ',IFNULL(ASSET.PLOT_NO,''))ADD_LINE0,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.ADDRESS_LINE3 IS NULL OR TRIM(ASSET.ADDRESS_LINE3)='') THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Building No : ',ASSET.ADDRESS_LINE3) ELSE CONCAT(@AST_ADDRESS_DTL,', Building No : ',ASSET.ADDRESS_LINE3) END) END ADD_LINE1,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.ADDRESS_LINE2 IS NULL OR TRIM(ASSET.ADDRESS_LINE2)='') THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Building/ Street Name : ',ASSET.ADDRESS_LINE2) ELSE CONCAT(@AST_ADDRESS_DTL,', Building/ Street Name : ',ASSET.ADDRESS_LINE2) END) END ADD_LINE2,
+@AST_ADDRESS_DTL:=CASE WHEN (ASSET.FLOOR_NO IS NULL OR TRIM(ASSET.FLOOR_NO)='')THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Floor No : ',ASSET.FLOOR_NO) ELSE CONCAT(@AST_ADDRESS_DTL,', Floor No : ',ASSET.FLOOR_NO) END) END ADD_LINE3,
+IN_CAMEL_CASE(CASE WHEN (ASSET.PROPERTY_ADDRESS IS NULL OR TRIM(ASSET.PROPERTY_ADDRESS)='')THEN @AST_ADDRESS_DTL ELSE (CASE WHEN @AST_ADDRESS_DTL='' THEN CONCAT('Flat/ House No : ',ASSET.PROPERTY_ADDRESS) ELSE CONCAT(@AST_ADDRESS_DTL,', Flat/ House No : ',ASSET.PROPERTY_ADDRESS) END) END) ADDRESS,
+IFNULL(IN_CAMEL_CASE(IFNULL(ASSET.VILLAGE_NAME_LANDMARK,'')),' ')VILLAGE_NAME_LANDMARK,IN_CAMEL_CASE(CONCAT(IFNULL(CTM.DESCRIPTION,''),' '))TEHSIL,IFNULL(ASSET.PINCODE,'')PINCODE,
+CCM.COUNTRY_ID,IN_CAMEL_CASE(CONCAT(IFNULL(CCM.COUNTRY_DESC,''),' '))COUNTRY_DESC,
+CSM.STATE_ID,IN_CAMEL_CASE(CONCAT(IFNULL(CSM.STATE_DESC,''),' '))STATE_DESC,CDM.DISTRICT_ID,IN_CAMEL_CASE(CONCAT(IFNULL(CDM.DISTRICT_DESC,''),' '))DISTRICT_DESC
+FROM STAGE_ASSET_COLLATERAL_DTL ASSET
+LEFT JOIN GENERIC_MASTER GM ON (GM.GENERIC_KEY='CATEGORY_OF_SELLER' AND GM.VALUE=ASSET.CATEGORY_OF_SELLER)
+LEFT JOIN GENERIC_MASTER GEN ON (GEN.GENERIC_KEY='PROPERTY_TYPE' AND GEN.VALUE=ASSET.PROPERTY_TYPE)
+LEFT JOIN GENERIC_MASTER G ON (G.GENERIC_KEY='POSSESSION' AND G.VALUE=ASSET.POSSESSION)
+LEFT JOIN COM_COUNTRY_M CCM ON(CCM.COUNTRY_ID=ASSET.COUNTRY)
+LEFT JOIN COM_STATE_M CSM ON (CSM.STATE_ID=ASSET.STATE)
+LEFT JOIN COM_DISTRICT_M CDM ON(CDM.DISTRICT_ID=ASSET.DISTRICT)
+LEFT JOIN COM_TEHSIL_M CTM ON(CTM.ID=ASSET.TEHSIL)
+WHERE ASSET.ID=$P{p_asset_id} AND 'STAGE'=$P{p_stage}]]>
+	</queryString>
+	<field name="CATEGORY_OF_SELLER_DESC" class="java.lang.String"/>
+	<field name="CUSTOMER_DECLARED_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="PROPERTY_TYPE_DESC" class="java.lang.String"/>
+	<field name="POSSESSION_DESC" class="java.lang.String"/>
+	<field name="ADD_LINE0" class="java.lang.String"/>
+	<field name="ADD_LINE1" class="java.lang.String"/>
+	<field name="ADD_LINE2" class="java.lang.String"/>
+	<field name="ADD_LINE3" class="java.lang.String"/>
+	<field name="ADDRESS" class="java.lang.String"/>
+	<field name="VILLAGE_NAME_LANDMARK" class="java.lang.String"/>
+	<field name="TEHSIL" class="java.lang.String"/>
+	<field name="PINCODE" class="java.lang.String"/>
+	<field name="COUNTRY_ID" class="java.lang.Integer"/>
+	<field name="COUNTRY_DESC" class="java.lang.String"/>
+	<field name="STATE_ID" class="java.lang.Integer"/>
+	<field name="STATE_DESC" class="java.lang.String"/>
+	<field name="DISTRICT_ID" class="java.lang.Integer"/>
+	<field name="DISTRICT_DESC" class="java.lang.String"/>
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["1. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="16" y="0" width="93" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Property Type "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="266" y="0" width="16" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["2. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="282" y="0" width="135" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Possession "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="417" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="0" width="144" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PROPERTY_TYPE_DESC}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="430" y="0" width="145" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{POSSESSION_DESC}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["3. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="282" y="0" width="135" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Estimated market value of Property "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="430" y="0" width="145" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CUSTOMER_DECLARED_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="417" y="0" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="266" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["4. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="0" width="93" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Category of Seller "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="122" y="0" width="144" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CATEGORY_OF_SELLER_DESC}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["5. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="16" y="0" width="93" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Property Address "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="122" y="0" width="453" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ADDRESS}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="52" y="0" width="57" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Landmark "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="0" width="453" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VILLAGE_NAME_LANDMARK}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="52" y="0" width="57" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["City "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="430" y="0" width="145" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DISTRICT_DESC}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="122" y="0" width="181" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TEHSIL}.trim()+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="324" y="0" width="93" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["District "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="417" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="52" y="0" width="57" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PIN "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="122" y="0" width="181" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PINCODE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="324" y="0" width="93" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["State "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="417" y="0" width="13" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="430" y="0" width="145" height="15" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{STATE_DESC}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

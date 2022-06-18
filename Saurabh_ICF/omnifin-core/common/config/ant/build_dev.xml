@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- ==================================================== -->
+      <!--      Build file for web application        -->
+	<!-- ==================================================== -->
+
+
+<project name="LMS" default="all" basedir=".">
+	<target name="init">
+		<property name="project-name" value="${ant.project.name}" />
+		<property name="ear.base" value="${basedir}"/>
+		
+		
+		<!-- Please give path of working environment -->
+		
+
+		<property name="workspaces.location" value="E:\CheckOut\4.0 CheckOut\indostar"/>
+		<property name="src.INDOSTAR_ICF_PROD" value="${workspaces.location}\INDOSTAR_ICF_PROD\omnifin-core"/>
+		
+		 <property name="gl.location" value="E:\CheckOut\OMNIFIN_COMMON_CORE_4.0"/>
+		<property name="src.GL_COMMON" value="${gl.location}\OMNIFIN_CORE_DEV\omnifin-core"/> 
+				
+		<!-- <property name="lbl.location" value="E:\CheckOut\OMNIFIN_CORE_4.0\CORE_DEV"/>
+		<property name="src.CORE_LIABLITY" value="${lbl.location}/CORE_LIABLITY/omnifin-core"/> -->
+
+		
+		<property name="ear.temp" value="common\archives\temp"/>
+		<property name="ear.component" value="common\app\components"/>
+		<property name="deploymentdescription" value="${ear.base}/deploymentdescriptors"/>
+		<property name="warFile" value="${project-name}.war"/>
+		<property name="warPCPSFile" value="pcps.war"/>
+		<property name="glJarFile" value="LMSUploadsEJB.jar"/><!-- Rohit generic upload -->
+		<property name="jarFile" value="OmniFinServer.jar"/>
+		<property name="earFile" value="OmniFin.ear"/>
+		<property name="deploymentLocation" value="${src.INDOSTAR_ICF_PROD}\common\archives\ear"/>
+		<property name="Common.Componemt" value="common\app\components"/>
+		<property name="serverDeploymentLocation" value="E:\CheckOut\4.0 CheckOut\indostar\EAR"/>
+		<delete file="${serverDeploymentLocation}/${earFile}"></delete>
+		<delete file="${src.INDOSTAR_ICF_PROD}/common\archives\ear\${earFile}"></delete>
+	</target>
+	
+	
+	
+	<target name="all" depends="init,copyCoreBaseSrc,compile,copyLib,copyJar,buildEar,deploy,serverDeploy,delPre"/>
+	
+	<!--Target from Jenkins or standalone build-->
+	<target name="standaloneBuildAndDeploy" depends="init,initAddOnsUsingInputParameters,copyCoreBaseSrc,compile,copyLib,copyJar,buildEar,deploy"/>
+	
+	<!--Add overrides required by jenkins or standalone(e.g. when running build independent of eclipse) build here-->
+	<target name="initAddOnsUsingInputParameters">
+		<!--Supply value to workspaces.location property as an input-->
+		<property name="workspaces.location" value="${workspaces.location}"/>
+		<property name="gl.location" value="${gl.location}"/>
+		<property name="lbl.location" value="${lbl.location}"/>
+		<property name="repo.location" value="${lbl.location}"/>
+		<property name="legal.location" value="${legal.location}"/>
+	</target>
+	
+	<!-- copy core base -->
+	<target name="copyCoreBaseSrc">
+	<echo message="Create a directory and copy the src"/>
+	<echo message="Copy src from Core Base"/>
+	 <mkdir dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}"/>
+	 <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\src"> 
+	 	
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cms\src\main\java" />
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cps\src\main\java" />
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\generic\src\main\java" />
+	 	<!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\genericUpload\src\main\java" />   -->
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\legal\src\main\java" /> 
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reports\src\main\java" />
+	  <!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\securitization\src\main\java" />   -->
+	    <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\dms\src\main\java" />
+	 	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\gcd\src\main\java" />
+	 	<fileset dir="${src.GL_COMMON}/${ear.component}\gl\src\main\java" />
+	 	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\infra\src\main\java" />
+	 	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\masters\src\main\java" />
+	 	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\payout\src\main\java" />
+	 	 <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reposession\src\main\java" /> 
+	 	<!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\pcps\src\main\java" />  -->
+	 	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\addons\src\main\java" />
+	  </copy>
+	  
+	  <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\src">
+
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cms\src\main\resources" />
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cps\src\main\resources" />
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\generic\src\main\resources" />
+	  	 	 <!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\genericUpload\src\main\resources" />  -->
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\legal\src\main\resources" /> 
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reports\src\main\resources" />
+			  <!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\securitization\src\main\resources" />   -->
+	  
+	  	      <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\dms\src\main\resources" />
+	  		  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\gcd\src\main\resources" />
+	  	 	  <fileset dir="${src.GL_COMMON}/${ear.component}\gl\src\main\resources" />
+	  		  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\infra\src\main\resources" />
+	  		  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\masters\src\main\resources" />
+		  	  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\payout\src\main\resources" />
+	  	      <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reposession\src\main\resources" /> 
+	  	     <!--  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\pcps\src\main\resources" />  -->
+	  	      <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\addons\src\main\resources" />
+	  </copy>
+	  
+	  <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\WebRoot">
+	  
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cms\src\main\webapp" />
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\cps\src\main\webapp" />
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\generic\src\main\webapp" />
+	  	     <!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\genericUpload\src\main\webapp" />  -->
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\legal\src\main\webapp" /> 
+			  <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reports\src\main\webapp" />
+			  <!-- <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\securitization\src\main\webapp" />   -->
+			   <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\dms\src\main\webapp" />
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\gcd\src\main\webapp" />
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\masters\src\main\webapp" />
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\payout\src\main\webapp" />
+			  	<fileset dir="${src.GL_COMMON}/${ear.component}\gl\src\main\webapp" />
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\infra\src\main\webapp" />
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\reposession\src\main\webapp" />  
+			  	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\addons\src\main\webapp" />
+	  </copy>
+	 
+	<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}">
+	  <fileset dir="${src.INDOSTAR_ICF_PROD}/common\config\ear" />
+	</copy>
+ </target>
+	
+	<target name="compile" >  
+			<echo message="Java Runtime Environment version: ${java.version}"/>
+					  <mkdir dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes"/>
+			      	  <javac srcdir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\src\com" destdir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes" extdirs="${src.INDOSTAR_ICF_PROD}/${ear.temp}\WebRoot/WEB-INF/lib" debug="true"/>
+						<mkdir dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\classes "/>
+							<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\src">
+								<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\java" />
+								<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\resources" />
+							</copy>	
+							<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\WebRoot">
+								<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\webapp" />
+							</copy>
+					<javac srcdir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\src" destdir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\classes" classpath="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes" extdirs="${src.INDOSTAR_ICF_PROD}/${ear.temp}\WebRoot/WEB-INF/lib"  debug="true"/>	
+			<echo message="Java installation directory: ${java.home}"/>
+		</target>
+	<target name="copyLib">
+		    <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\lib">
+		        <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\WebRoot/WEB-INF/lib" >
+		        	<include name="*.jar" />
+		        </fileset>
+		    </copy>
+		</target>
+	
+	<target name="copyJar" depends="compile">
+	<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes/com">
+	    	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/src/com" >
+	    		   <include name="yourcompany/**" />
+	    		 <include name="**/vo/*.hbm.xml" />
+	    	</fileset>
+		</copy>
+		
+		<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes">
+	    	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\src">
+				<include name="**.xml" />
+				</fileset>
+		</copy>
+		
+	  <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\jar">
+	        <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot/WEB-INF/classes" >
+	        	<include name="**/**" />
+	            <exclude name="com/**/leadDaoImplMSSQL/**"/>  <!-- REMOVE leadDaoImplMSSQL package   -->
+	        	<exclude name="com/**/fundFlowDaoImplMSSQL/**"/>  <!-- REMOVE fundFlowDaoImplMSSQL package  -->
+	        	<exclude name="com/**/financialDaoImplMSSQL/**"/>  <!-- REMOVE financialDaoImplMSSQL package  -->
+	        	<exclude name="com/**/dealDaoImplMSSQL/**"/>  <!-- REMOVE dealDaoImplMSSQL package  -->
+	        	<exclude name="com/**/daoImplMSSQL/**"/>  <!-- REMOVE daoImplMSSQL package  -->
+	        	<exclude name="com/**/DAOImplMSSQL/**"/>  <!-- REMOVE DAOImplMSSQL package(GL)  -->
+	        	<exclude name="com/**/capsDaoImplMSSQL/**"/>  <!-- REMOVE capsDaoImplMSSQL package  -->
+	        	<exclude name="com/**/action/**"/>
+	    		<exclude name="com/**/actions/**"/>
+	        	<exclude name="*.cfg.xml"/>
+	        	<exclude name="*.xml"/>
+				<exclude name="com/**.xml"/>
+	        	<exclude name="*.properties" />
+	    	</fileset>
+	    </copy>
+		<copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\GLJAR">
+			<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP\classes" >
+			   <include name="**/**" />
+			</fileset>
+		</copy>	
+				 <copy todir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\pcps/WEB-INF/classes">
+									        <fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.component}" >
+									        	<include name="**/**.wsdl" />
+									        	<include name="**/**.xsd" />
+									    	</fileset>
+								 </copy> 
+	</target>
+	
+	
+	
+		<target name="buildEar" depends="compile">
+			
+			<war needxmlfile="false" warfile="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${warFile}" >
+							
+				<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot">
+		        	<include name="**/**" />
+		        	<exclude name="WEB-INF/lib/**"/>
+		        	<exclude name="WEB-INF/classes/com/**"/>
+					<!-- Remove .jrxml files from mysql war -->
+					    <exclude name="collReports/*.jrxml"/> 
+						<exclude name="reports/*.jrxml"/> 
+						<exclude name="reports/payoutReport/*.jrxml"/> 
+						<exclude name="reports/loanSubReports/*.jrxml"/> 
+						<exclude name="reports/dealSubReports/*.jrxml"/> 
+						<exclude name="reports/Dashboard/*.jrxml"/>  
+						<exclude name="reports/MYSQLREPORTS/*.jrxml"/>
+					    <exclude name="reports/MYSQLREPORTS/camSubReports/*.jrxml"/>
+						<exclude name="reports/MYSQLREPORTS/Dashboard/*.jrxml"/>
+						<exclude name="reports/MYSQLREPORTS/dealSubReports/*.jrxml"/>
+						<exclude name="reports/MYSQLREPORTS/loanSubReports/*.jrxml"/>
+						<exclude name="reports/MYSQLREPORTS/payoutReport/*.jrxml"/>
+					<!-- Remove .jrxml files from mysql war -->
+					<exclude name="reports/MSSQLREPORTS/**"/> 
+		        </fileset>
+		    	<fileset dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}/WebRoot">
+		        	<include name="WEB-INF/classes/com/**/*Remote.class"/>
+		    		<include name="WEB-INF/classes/com/**/Property*.class"/>
+		    		<include name="WEB-INF/classes/com/**/action/**"/>
+		    		<include name="WEB-INF/classes/com/**/actions/**"/>
+		    		<include name="WEB-INF/classes/com/cache/engine/CacheManager.class"/>
+		        </fileset>	
+			</war>
+			
+			<war needxmlfile="false" warfile="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${warPCPSFile}" >
+			</war>	
+			
+			<jar jarfile="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${jarFile}" basedir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\jar"/>
+<jar jarfile="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${glJarFile}" basedir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\GLJAR"/><!--Rohit For Generic upload -->
+			<jar jarfile="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${earFile}" basedir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\" >
+<include name="${glJarFile}"/><!--Rohit for generic upload -->
+				<include name="${jarFile}"/>
+				<include name="${warFile}"/>
+				<include name="${warPCPSFile}"/>
+				<!--<include name="${src.INDOSTAR_ICF_PROD}/common\app\components\infra\src\main\webapp\META-INF/**"/>-->
+				<include name="META-INF/**"/>
+				<include name="lib/**"/>
+				
+			</jar>
+		</target>
+	
+	<target name="deploy" depends="buildEar">
+				<echo message="Deploy location directory: ${deploymentLocation}"/>
+					<copy file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${earFile}" todir="${deploymentLocation}" />
+			</target>
+	<target name="serverDeploy" depends="buildEar">
+				<echo message="Server Deploy location directory: ${serverDeploymentLocation}"/>
+				<copy file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${earFile}" todir="${serverDeploymentLocation}" />
+			</target>
+	<target name="delPre">
+			
+			<delete file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${warFile}"></delete>
+			<delete file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${warPCPSFile}"></delete>
+			<delete file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${jarFile}"></delete>
+			<delete file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${earFile}"></delete>
+			<delete dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\lib"></delete>
+			<delete dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\jar"></delete>
+			<delete dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\META-INF"></delete>
+			<delete dir="${src.INDOSTAR_ICF_PROD}/${ear.temp}\GLJAR"></delete>
+			<delete dir="${src.INDOSTAR_ICF_PROD}/${ear.component}\LMSUploadsEJB\src\main\TEMP"></delete>
+			<delete file="${src.INDOSTAR_ICF_PROD}/${ear.temp}\${glJarFile}"></delete>
+			
+			
+	</target>
+		
+	
+	
+</project>

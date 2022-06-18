@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LOAN_APPLICATION_FORM_subreport1" language="groovy" pageWidth="575" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_CUSTOMER_ID" class="java.lang.Integer"/>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT MAP.BANK_ID,MAP.BANK_BRANCH_ID,CONCAT(IN_CAMEL_CASE(BANK.BANK_NAME),' ')BANK_NAME,CONCAT(IN_CAMEL_CASE(BRANCH.BANK_BRANCH_NAME),' ')BANK_BRANCH_NAME,
+CONCAT(IN_CAMEL_CASE(GM.DESCRIPTION),' ') ACCOUNT_TYPE,
+CONCAT(IN_CAMEL_CASE(MAP.BANK_ACCOUNT),' ')BANK_ACCOUNT,CONCAT(REPLACE(IN_CAMEL_CASE(MAP.ACCOUNT_HOLDER_NAME),'$#$',','),' ')ACCOUNT_HOLDER_NAME,
+CONCAT(IFNULL(MAP.YEAR,0))ACCOUNT_SINCE
+FROM CR_DEAL_CUST_BANK_DETAILS_M MAP
+JOIN COM_BANK_M BANK ON(MAP.BANK_ID=BANK.BANK_ID)
+JOIN COM_BANKBRANCH_M BRANCH ON(MAP.BANK_BRANCH_ID=BRANCH.BANK_BRANCH_ID)
+LEFT JOIN GENERIC_MASTER GM ON(GM.VALUE=MAP.ACCOUNT_TYPE AND GM.GENERIC_KEY='AC_TYPE' AND GM.REC_STATUS ='A')
+WHERE MAP.CUSTOMER_ID=$P{P_CUSTOMER_ID} AND 'DEAL'=$P{p_stage}
+UNION ALL
+
+SELECT MAP.BANK_ID,MAP.BANK_BRANCH_ID,CONCAT(IN_CAMEL_CASE(BANK.BANK_NAME),' ')BANK_NAME,CONCAT(IN_CAMEL_CASE(BRANCH.BANK_BRANCH_NAME),' ')BANK_BRANCH_NAME,
+CONCAT(IN_CAMEL_CASE(GM.DESCRIPTION),' ') ACCOUNT_TYPE,
+CONCAT(IN_CAMEL_CASE(MAP.BANK_ACCOUNT),' ')BANK_ACCOUNT,CONCAT(REPLACE(IN_CAMEL_CASE(MAP.ACCOUNT_HOLDER_NAME),'$#$',','),' ')ACCOUNT_HOLDER_NAME,
+CONCAT(IFNULL(MAP.YEAR,0))ACCOUNT_SINCE
+FROM stage_customer_bank_dtl MAP
+JOIN COM_BANK_M BANK ON(MAP.BANK_ID=BANK.BANK_ID)
+JOIN COM_BANKBRANCH_M BRANCH ON(MAP.BANK_BRANCH_ID=BRANCH.BANK_BRANCH_ID)
+LEFT JOIN GENERIC_MASTER GM ON(GM.VALUE=MAP.ACCOUNT_TYPE AND GM.GENERIC_KEY='AC_TYPE' AND GM.REC_STATUS ='A')
+WHERE MAP.CUSTOMER_ID=$P{P_CUSTOMER_ID} AND 'STAGE'=$P{p_stage}]]>
+	</queryString>
+	<field name="BANK_ID" class="java.lang.Integer"/>
+	<field name="BANK_BRANCH_ID" class="java.lang.Integer"/>
+	<field name="BANK_NAME" class="java.lang.String"/>
+	<field name="BANK_BRANCH_NAME" class="java.lang.String"/>
+	<field name="ACCOUNT_TYPE" class="java.lang.String"/>
+	<field name="BANK_ACCOUNT" class="java.lang.String"/>
+	<field name="ACCOUNT_HOLDER_NAME" class="java.lang.String"/>
+	<field name="ACCOUNT_SINCE" class="java.lang.String"/>
+	<title>
+		<band height="18">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="5" width="104" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Name of Bank "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="104" y="5" width="113" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Branch Name "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="217" y="5" width="82" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account Type "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="299" y="5" width="82" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account Since "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="381" y="5" width="89" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account Number "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="470" y="5" width="105" height="13"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Account Holder Name "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="11">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="104" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BANK_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="104" y="0" width="113" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BANK_BRANCH_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="217" y="0" width="82" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="381" y="0" width="89" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BANK_ACCOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="470" y="0" width="105" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_HOLDER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="299" y="0" width="82" height="11" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_SINCE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

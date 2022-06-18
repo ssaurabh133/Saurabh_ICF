@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/caseTypeMaster.do" location="2339,0" dimension="303,96" />
+  <StrutsActivity path="/caseTypeMasterBehind.do" location="2375,543" dimension="294,96" />
+  <StrutsActivity path="/caseTypeMasterAdd.do" location="2280,347" dimension="303,96" />
+  <StrutsActivity path="/lawFirmMaster.do" location="57,835" dimension="297,96" />
+  <StrutsActivity path="/lawFirmMasterBehind.do" location="93,1378" dimension="288,96" />
+  <StrutsActivity path="/lawFirmMasterAdd.do" location="0,1182" dimension="297,96" />
+  <StrutsActivity path="/advocateMaster.do" location="2773,0" dimension="302,96" />
+  <StrutsActivity path="/advocateMasterBehind.do" location="2809,543" dimension="293,96" />
+  <StrutsActivity path="/advocateMasterAdd.do" location="2714,347" dimension="302,96" />
+  <StrutsActivity path="/legalNoticeInitiationMaker.do" location="73,0" dimension="359,96" />
+  <StrutsActivity path="/legalNoticeInitiationMakerBehind.do" location="110,543" dimension="350,96" />
+  <StrutsActivity path="/legalNoticeInitiationMakerAdd.do" location="0,347" dimension="359,96" />
+  <StrutsActivity path="/legalCaseInitiationMakerDispatch.do" location="2394,2938" dimension="349,96" />
+  <StrutsActivity path="/legalCaseFileMakerDispatch.do" location="265,3230" dimension="320,96" />
+  <StrutsActivity path="/legalCaseFileAuthorDispatch.do" location="1600,2938" dimension="324,96" />
+  <StrutsActivity path="/legalCourtProcessingMakerDispatch.do" location="692,2646" dimension="364,96" />
+  <StrutsActivity path="/legalCourtProcessingAuthorDispatch.do" location="1997,2646" dimension="364,96" />
+  <StrutsActivity path="/legalReopenClosedCaseDispatchAction.do" location="523,2938" dimension="364,96" />
+  <StrutsActivity path="/legalAdvocateCaseMisDispatchAction.do" location="644,3230" dimension="338,96" />
+  <StrutsActivity path="/courtTypeMaster.do" location="1461,0" dimension="308,96" />
+  <StrutsActivity path="/courtTypeMasterBehind.do" location="1496,543" dimension="299,96" />
+  <StrutsActivity path="/courtTypeMasterAdd.do" location="1400,347" dimension="308,96" />
+  <StrutsActivity path="/courtNameMaster.do" location="567,0" dimension="314,96" />
+  <StrutsActivity path="/courtNameMasterBehind.do" location="603,543" dimension="305,96" />
+  <StrutsActivity path="/courtNameMasterAdd.do" location="505,347" dimension="314,96" />
+  <StrutsActivity path="/poaMaster.do" location="478,835" dimension="276,96" />
+  <StrutsActivity path="/poaMasterBehind.do" location="514,1378" dimension="267,96" />
+  <StrutsActivity path="/poaMasterAdd.do" location="426,1182" dimension="276,96" />
+  <StrutsActivity path="/noticeCheckerBehind.do" location="681,2354" dimension="285,96" />
+  <StrutsActivity path="/noticeCheckerDispatchAction.do" location="352,2158" dimension="294,96" />
+  <StrutsActivity path="/assignRejectCaseBehind.do" location="2122,1866" dimension="299,96" />
+  <StrutsActivity path="/assignRejectCaseDispatchAction.do" location="1782,1670" dimension="308,96" />
+  <StrutsActivity path="/noticeTypeMaster.do" location="1015,0" dimension="313,96" />
+  <StrutsActivity path="/noticeTypeMasterBehind.do" location="1051,543" dimension="304,96" />
+  <StrutsActivity path="/noticeTypeMasterAdd.do" location="953,347" dimension="313,96" />
+  <StrutsActivity path="/stageTypeMaster.do" location="1901,0" dimension="307,96" />
+  <StrutsActivity path="/stageTypeMasterBehind.do" location="1937,543" dimension="298,96" />
+  <StrutsActivity path="/stageTypeMasterAdd.do" location="1840,347" dimension="307,96" />
+  <StrutsActivity path="/legalDeclineDispatchNoticeBehind.do" location="1836,1031" dimension="355,96" />
+  <StrutsActivity path="/legalDeclineDispatchNoticeAction.do" location="1060,835" dimension="364,96" />
+  <StrutsActivity path="/reassignCaseBehind.do" location="1022,1866" dimension="278,96" />
+  <StrutsActivity path="/reassignCaseAction.do" location="660,1670" dimension="287,96" />
+  <StrutsActivity path="/JSP/LEGALJSP/caseTypeMasterAdd.jsp" location="2312,196" dimension="238,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/caseTypeMasterSearch.jsp" location="2397,739" dimension="251,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/lawFirmMasterAdd.jsp" location="33,1031" dimension="231,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/lawFirmMasterSearch.jsp" location="115,1574" dimension="244,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/advocateMasterAdd.jsp" location="2747,196" dimension="237,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/advocateMasterSearch.jsp" location="2831,739" dimension="250,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp" location="33,196" dimension="293,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalNoticeInitiationMakerSearch.jsp" location="132,739" dimension="306,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCaseInitiationMakerSearch.jsp" location="2108,3134" dimension="296,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCaseInitiationMaker.jsp" location="2504,3134" dimension="261,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCaseFileMakerSearch.jsp" location="0,3426" dimension="267,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCaseFileMaker.jsp" location="367,3426" dimension="232,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/LEGAL_frames_caseFile.jsp" location="1131,3134" dimension="252,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCaseFileAuthorSearch.jsp" location="1483,3134" dimension="271,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/caseFileAuthor.jsp" location="1854,3134" dimension="209,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingAddStage.jsp" location="0,2842" dimension="294,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingMakerSearch.jsp" location="394,2842" dimension="311,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp" location="1181,2842" dimension="354,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingMaker.jsp" location="805,2842" dimension="276,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legal_frames_courtProcessing.jsp" location="1635,2842" dimension="287,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingAuthorSearch.jsp" location="2022,2842" dimension="315,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalCourtProcessingAuthor.jsp" location="2437,2842" dimension="280,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legal_frames_reopenClosedCase.jsp" location="0,3134" dimension="300,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalReopenClosedCaseSearch.jsp" location="400,3134" dimension="292,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalReopenClosedCaseAuthor.jsp" location="792,3134" dimension="294,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalAdvocateCaseMis.jsp" location="688,3426" dimension="250,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/courtTypeMasterAdd.jsp" location="1432,196" dimension="243,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/courtTypeMasterSearch.jsp" location="1518,739" dimension="256,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/courtNameMasterAdd.jsp" location="537,196" dimension="249,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/courtNameMasterSearch.jsp" location="624,739" dimension="262,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/poaMasterAdd.jsp" location="460,1031" dimension="209,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/poaMasterSearch.jsp" location="537,1574" dimension="222,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/noticeChecker.jsp" location="800,2550" dimension="207,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/CMS_frames_Notice.jsp" location="0,2376" dimension="237,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/noticeCheckerAuthor.jsp" location="337,2376" dimension="244,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/assignRejectCase.jsp" location="2246,2062" dimension="221,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/LP_frames_AssignReject.jsp" location="1407,1888" dimension="257,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/assignRejectCaseAuthor.jsp" location="1764,1888" dimension="258,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/noticeTypeMasterAdd.jsp" location="985,196" dimension="248,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/noticeTypeMasterSearch.jsp" location="1072,739" dimension="261,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/stageTypeMasterAdd.jsp" location="1872,196" dimension="243,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/stageTypeMasterSearch.jsp" location="1958,739" dimension="256,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalDeclineDispatchNoticeSearch.jsp" location="1858,1227" dimension="311,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/legalDecline.jsp" location="826,1053" dimension="195,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/Legal_decline_author.jsp" location="1121,1053" dimension="242,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/LP_frame_decline_dispatch.jsp" location="1463,1053" dimension="273,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/reassignCaseSearch.jsp" location="1128,2062" dimension="234,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/LP_frame_reassignCase.jsp" location="0,1888" dimension="253,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/reassign_Case_view.jsp" location="353,1888" dimension="233,51" />
+  <StrutsActivity path="/JSP/LEGALJSP/reassignCaseAuthor.jsp" location="686,1888" dimension="236,51" />
+  <StrutsTransition id="/JSP/LEGALJSP/assignRejectCaseAuthor.jsp,null,/assignRejectCaseDispatchAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1979,1888" />
+      <AbsolutePoint location="1979,1801" />
+      <AbsolutePoint location="1962,1801" />
+      <AbsolutePoint location="1962,1766" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/noticeTypeMasterAdd.jsp,null,/noticeTypeMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1109,247" />
+      <AbsolutePoint location="1109,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/poaMaster.do,search,/poaMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="708,931" />
+      <AbsolutePoint location="708,981" />
+      <AbsolutePoint location="733,981" />
+      <AbsolutePoint location="733,1328" />
+      <AbsolutePoint location="714,1328" />
+      <AbsolutePoint location="714,1378" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/caseTypeMasterAdd.do,searchPage,/caseTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2431,443" />
+      <AbsolutePoint location="2431,493" />
+      <AbsolutePoint location="2449,493" />
+      <AbsolutePoint location="2449,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseAction.do,editReassignCase,/JSP/LEGALJSP/LP_frame_reassignCase.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="684,1766" />
+      <AbsolutePoint location="684,1801" />
+      <AbsolutePoint location="126,1801" />
+      <AbsolutePoint location="126,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeAction.do,editDeclineDispatch,/JSP/LEGALJSP/LP_frame_decline_dispatch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1333,931" />
+      <AbsolutePoint location="1333,996" />
+      <AbsolutePoint location="1600,996" />
+      <AbsolutePoint location="1600,1053" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalNoticeInitiationMakerBehind.do,success,/JSP/LEGALJSP/legalNoticeInitiationMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="285,639" />
+      <AbsolutePoint location="285,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/caseFileAuthor.jsp,null,/legalCaseFileAuthorDispatch.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2010,3134" />
+      <AbsolutePoint location="2010,3069" />
+      <AbsolutePoint location="1883,3069" />
+      <AbsolutePoint location="1883,3034" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseFileAuthorDispatch.do,detail,/JSP/LEGALJSP/LEGAL_frames_caseFile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1640,3034" />
+      <AbsolutePoint location="1640,3069" />
+      <AbsolutePoint location="1257,3069" />
+      <AbsolutePoint location="1257,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseFileMakerDispatch.do,edit,/JSP/LEGALJSP/legalCaseFileMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="425,3326" />
+      <AbsolutePoint location="425,3426" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingMakerDispatch.do,saved,/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1019,2742" />
+      <AbsolutePoint location="1019,2777" />
+      <AbsolutePoint location="1269,2777" />
+      <AbsolutePoint location="1269,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/lawFirmMasterAdd.do,searchPage,/lawFirmMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="148,1278" />
+      <AbsolutePoint location="148,1328" />
+      <AbsolutePoint location="165,1328" />
+      <AbsolutePoint location="165,1378" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/caseTypeMasterBehind.do,success,/JSP/LEGALJSP/caseTypeMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2522,639" />
+      <AbsolutePoint location="2522,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseFileMakerDispatch.do,search,/JSP/LEGALJSP/legalCaseFileMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="318,3326" />
+      <AbsolutePoint location="318,3376" />
+      <AbsolutePoint location="133,3376" />
+      <AbsolutePoint location="133,3426" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp,null,/legalNoticeInitiationMakerAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="179,247" />
+      <AbsolutePoint location="179,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeAction.do,author,/JSP/LEGALJSP/legalDecline.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1090,931" />
+      <AbsolutePoint location="1090,966" />
+      <AbsolutePoint location="875,966" />
+      <AbsolutePoint location="875,1053" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/caseTypeMasterAdd.jsp,null,/caseTypeMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2431,247" />
+      <AbsolutePoint location="2431,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeBehind.do,success,/JSP/LEGALJSP/legalDeclineDispatchNoticeSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2014,1127" />
+      <AbsolutePoint location="2014,1227" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingAuthorDispatch.do,authorScreen,/JSP/LEGALJSP/legalCourtProcessingAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2252,2742" />
+      <AbsolutePoint location="2252,2807" />
+      <AbsolutePoint location="2507,2807" />
+      <AbsolutePoint location="2507,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerBehind.do,success,/JSP/LEGALJSP/noticeChecker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="823,2450" />
+      <AbsolutePoint location="823,2500" />
+      <AbsolutePoint location="852,2500" />
+      <AbsolutePoint location="852,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeAction.do,authorScreen,/JSP/LEGALJSP/Legal_decline_author.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1212,931" />
+      <AbsolutePoint location="1212,966" />
+      <AbsolutePoint location="1182,966" />
+      <AbsolutePoint location="1182,1053" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseFileAuthorDispatch.do,search,/JSP/LEGALJSP/legalCaseFileAuthorSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1721,3034" />
+      <AbsolutePoint location="1721,3099" />
+      <AbsolutePoint location="1618,3099" />
+      <AbsolutePoint location="1618,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalCaseFileMaker.jsp,null,/legalCaseFileMakerDispatch.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="541,3426" />
+      <AbsolutePoint location="541,3376" />
+      <AbsolutePoint location="531,3376" />
+      <AbsolutePoint location="531,3326" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/caseTypeMaster.do,openAdd,/JSP/LEGALJSP/caseTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2491,96" />
+      <AbsolutePoint location="2491,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalAdvocateCaseMisDispatchAction.do,success,/JSP/LEGALJSP/legalAdvocateCaseMis.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="728,3326" />
+      <AbsolutePoint location="728,3376" />
+      <AbsolutePoint location="750,3376" />
+      <AbsolutePoint location="750,3426" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/poaMasterAdd.do,searchPage,/poaMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="564,1278" />
+      <AbsolutePoint location="564,1328" />
+      <AbsolutePoint location="581,1328" />
+      <AbsolutePoint location="581,1378" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeTypeMasterBehind.do,success,/JSP/LEGALJSP/noticeTypeMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1203,639" />
+      <AbsolutePoint location="1203,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingMakerDispatch.do,search,/JSP/LEGALJSP/legalCourtProcessingMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="801,2742" />
+      <AbsolutePoint location="801,2807" />
+      <AbsolutePoint location="549,2807" />
+      <AbsolutePoint location="549,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtTypeMaster.do,editCourtType,/JSP/LEGALJSP/courtTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1615,96" />
+      <AbsolutePoint location="1615,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingAuthorDispatch.do,detail,/JSP/LEGALJSP/legal_frames_courtProcessing.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2106,2742" />
+      <AbsolutePoint location="2106,2807" />
+      <AbsolutePoint location="1778,2807" />
+      <AbsolutePoint location="1778,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stageTypeMasterAdd.do,searchPage,/stageTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1994,443" />
+      <AbsolutePoint location="1994,493" />
+      <AbsolutePoint location="2011,493" />
+      <AbsolutePoint location="2011,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/advocateMasterAdd.do,searchPage,/advocateMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2865,443" />
+      <AbsolutePoint location="2865,493" />
+      <AbsolutePoint location="2882,493" />
+      <AbsolutePoint location="2882,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerDispatchAction.do,editNoticeChecker,/JSP/LEGALJSP/CMS_frames_Notice.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="377,2254" />
+      <AbsolutePoint location="377,2289" />
+      <AbsolutePoint location="118,2289" />
+      <AbsolutePoint location="118,2376" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/courtTypeMasterAdd.jsp,null,/courtTypeMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1554,247" />
+      <AbsolutePoint location="1554,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stageTypeMaster.do,editStageType,/JSP/LEGALJSP/stageTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2055,96" />
+      <AbsolutePoint location="2055,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalNoticeInitiationMakerAdd.do,searchPage,/legalNoticeInitiationMakerBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="179,443" />
+      <AbsolutePoint location="179,493" />
+      <AbsolutePoint location="197,493" />
+      <AbsolutePoint location="197,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalNoticeInitiationMaker.do,editLegalNoticeInitiationMaker,/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="133,96" />
+      <AbsolutePoint location="133,146" />
+      <AbsolutePoint location="106,146" />
+      <AbsolutePoint location="106,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseDispatchAction.do,openEditAssignRejectCase,/JSP/LEGALJSP/LP_frames_AssignReject.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1808,1766" />
+      <AbsolutePoint location="1808,1801" />
+      <AbsolutePoint location="1536,1801" />
+      <AbsolutePoint location="1536,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/advocateMaster.do,openAdd,/JSP/LEGALJSP/advocateMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2824,96" />
+      <AbsolutePoint location="2824,146" />
+      <AbsolutePoint location="2806,146" />
+      <AbsolutePoint location="2806,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalReopenClosedCaseAuthor.jsp,null,/legalReopenClosedCaseDispatchAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1012,3134" />
+      <AbsolutePoint location="1012,3069" />
+      <AbsolutePoint location="842,3069" />
+      <AbsolutePoint location="842,3034" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseInitiationMakerDispatch.do,edit,/JSP/LEGALJSP/legalCaseInitiationMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2569,3034" />
+      <AbsolutePoint location="2569,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/caseTypeMaster.do,search,/caseTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2592,96" />
+      <AbsolutePoint location="2592,146" />
+      <AbsolutePoint location="2613,146" />
+      <AbsolutePoint location="2613,493" />
+      <AbsolutePoint location="2596,493" />
+      <AbsolutePoint location="2596,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeAction.do,view,/JSP/LEGALJSP/legalDecline.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1151,931" />
+      <AbsolutePoint location="1151,996" />
+      <AbsolutePoint location="972,996" />
+      <AbsolutePoint location="972,1053" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseBehind.do,success,/JSP/LEGALJSP/assignRejectCase.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2272,1962" />
+      <AbsolutePoint location="2272,2012" />
+      <AbsolutePoint location="2302,2012" />
+      <AbsolutePoint location="2302,2062" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/lawFirmMasterBehind.do,success,/JSP/LEGALJSP/lawFirmMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="237,1474" />
+      <AbsolutePoint location="237,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseDispatchAction.do,noticeCheckerAuthor,/JSP/LEGALJSP/assignRejectCaseAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1859,1766" />
+      <AbsolutePoint location="1859,1831" />
+      <AbsolutePoint location="1807,1831" />
+      <AbsolutePoint location="1807,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseAction.do,reassignCase,/JSP/LEGALJSP/reassignCaseSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="923,1766" />
+      <AbsolutePoint location="923,1801" />
+      <AbsolutePoint location="1330,1801" />
+      <AbsolutePoint location="1330,2012" />
+      <AbsolutePoint location="1304,2012" />
+      <AbsolutePoint location="1304,2062" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalCaseInitiationMaker.jsp,null,/legalCaseInitiationMakerDispatch.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2699,3134" />
+      <AbsolutePoint location="2699,3084" />
+      <AbsolutePoint location="2685,3084" />
+      <AbsolutePoint location="2685,3034" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalReopenClosedCaseDispatchAction.do,authorScreen,/JSP/LEGALJSP/legalReopenClosedCaseAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="751,3034" />
+      <AbsolutePoint location="751,3099" />
+      <AbsolutePoint location="865,3099" />
+      <AbsolutePoint location="865,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/advocateMasterBehind.do,success,/JSP/LEGALJSP/advocateMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2956,639" />
+      <AbsolutePoint location="2956,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/poaMasterBehind.do,success,/JSP/LEGALJSP/poaMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="648,1474" />
+      <AbsolutePoint location="648,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtTypeMasterAdd.do,searchPage,/courtTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1554,443" />
+      <AbsolutePoint location="1554,493" />
+      <AbsolutePoint location="1571,493" />
+      <AbsolutePoint location="1571,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/courtNameMasterAdd.jsp,null,/courtNameMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="662,247" />
+      <AbsolutePoint location="662,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerDispatchAction.do,noticeCheckerSearch,/JSP/LEGALJSP/noticeChecker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="622,2254" />
+      <AbsolutePoint location="622,2289" />
+      <AbsolutePoint location="996,2289" />
+      <AbsolutePoint location="996,2500" />
+      <AbsolutePoint location="955,2500" />
+      <AbsolutePoint location="955,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stageTypeMaster.do,search,/stageTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2157,96" />
+      <AbsolutePoint location="2157,146" />
+      <AbsolutePoint location="2178,146" />
+      <AbsolutePoint location="2178,493" />
+      <AbsolutePoint location="2160,493" />
+      <AbsolutePoint location="2160,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseDispatchAction.do,noticeCheckerSearch,/JSP/LEGALJSP/assignRejectCase.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2065,1766" />
+      <AbsolutePoint location="2065,1801" />
+      <AbsolutePoint location="2452,1801" />
+      <AbsolutePoint location="2452,2012" />
+      <AbsolutePoint location="2412,2012" />
+      <AbsolutePoint location="2412,2062" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/stageTypeMasterAdd.jsp,null,/stageTypeMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1994,247" />
+      <AbsolutePoint location="1994,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtNameMasterAdd.do,searchPage,/courtNameMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="662,443" />
+      <AbsolutePoint location="662,493" />
+      <AbsolutePoint location="679,493" />
+      <AbsolutePoint location="679,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingAuthorDispatch.do,saved,/JSP/LEGALJSP/legalCourtProcessingMakerDataForAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2033,2742" />
+      <AbsolutePoint location="2033,2777" />
+      <AbsolutePoint location="1446,2777" />
+      <AbsolutePoint location="1446,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/lawFirmMaster.do,openAdd,/JSP/LEGALJSP/lawFirmMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="107,931" />
+      <AbsolutePoint location="107,981" />
+      <AbsolutePoint location="90,981" />
+      <AbsolutePoint location="90,1031" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtNameMaster.do,editCourtName,/JSP/LEGALJSP/courtNameMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="724,96" />
+      <AbsolutePoint location="724,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeTypeMaster.do,search,/noticeTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1276,96" />
+      <AbsolutePoint location="1276,146" />
+      <AbsolutePoint location="1296,146" />
+      <AbsolutePoint location="1296,493" />
+      <AbsolutePoint location="1279,493" />
+      <AbsolutePoint location="1279,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseAction.do,success,/reassignCaseBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="875,1766" />
+      <AbsolutePoint location="875,1831" />
+      <AbsolutePoint location="1161,1831" />
+      <AbsolutePoint location="1161,1866" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseFileAuthorDispatch.do,authorScreen,/JSP/LEGALJSP/caseFileAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1802,3034" />
+      <AbsolutePoint location="1802,3099" />
+      <AbsolutePoint location="1906,3099" />
+      <AbsolutePoint location="1906,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/caseTypeMaster.do,editCaseType,/JSP/LEGALJSP/caseTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2390,96" />
+      <AbsolutePoint location="2390,146" />
+      <AbsolutePoint location="2372,146" />
+      <AbsolutePoint location="2372,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtNameMaster.do,openAdd,/JSP/LEGALJSP/courtNameMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="619,96" />
+      <AbsolutePoint location="619,146" />
+      <AbsolutePoint location="599,146" />
+      <AbsolutePoint location="599,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/lawFirmMaster.do,editLawFirm,/JSP/LEGALJSP/lawFirmMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="206,931" />
+      <AbsolutePoint location="206,1031" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalNoticeInitiationMaker.do,openAdd,/JSP/LEGALJSP/legalNoticeInitiationMakerAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="252,96" />
+      <AbsolutePoint location="252,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/noticeCheckerAuthor.jsp,null,/noticeCheckerDispatchAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="540,2376" />
+      <AbsolutePoint location="540,2289" />
+      <AbsolutePoint location="524,2289" />
+      <AbsolutePoint location="524,2254" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stageTypeMasterBehind.do,success,/JSP/LEGALJSP/stageTypeMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2086,639" />
+      <AbsolutePoint location="2086,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtNameMasterBehind.do,success,/JSP/LEGALJSP/courtNameMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="755,639" />
+      <AbsolutePoint location="755,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingMakerDispatch.do,edit,/JSP/LEGALJSP/legalCourtProcessingMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="874,2742" />
+      <AbsolutePoint location="874,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/poaMaster.do,openAdd,/JSP/LEGALJSP/poaMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="616,931" />
+      <AbsolutePoint location="616,1031" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalNoticeInitiationMaker.do,search,/legalNoticeInitiationMakerBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="372,96" />
+      <AbsolutePoint location="372,146" />
+      <AbsolutePoint location="389,146" />
+      <AbsolutePoint location="389,493" />
+      <AbsolutePoint location="372,493" />
+      <AbsolutePoint location="372,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtTypeMasterBehind.do,success,/JSP/LEGALJSP/courtTypeMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1646,639" />
+      <AbsolutePoint location="1646,739" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/advocateMaster.do,search,/advocateMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3025,96" />
+      <AbsolutePoint location="3025,146" />
+      <AbsolutePoint location="3047,146" />
+      <AbsolutePoint location="3047,493" />
+      <AbsolutePoint location="3029,493" />
+      <AbsolutePoint location="3029,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/poaMaster.do,openEditPOA,/JSP/LEGALJSP/poaMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="524,931" />
+      <AbsolutePoint location="524,981" />
+      <AbsolutePoint location="512,981" />
+      <AbsolutePoint location="512,1031" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerDispatchAction.do,success,/noticeCheckerBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="573,2254" />
+      <AbsolutePoint location="573,2319" />
+      <AbsolutePoint location="823,2319" />
+      <AbsolutePoint location="823,2354" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseDispatchAction.do,success,/assignRejectCaseBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2013,1766" />
+      <AbsolutePoint location="2013,1831" />
+      <AbsolutePoint location="2272,1831" />
+      <AbsolutePoint location="2272,1866" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtNameMaster.do,search,/courtNameMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="829,96" />
+      <AbsolutePoint location="829,146" />
+      <AbsolutePoint location="849,146" />
+      <AbsolutePoint location="849,493" />
+      <AbsolutePoint location="832,493" />
+      <AbsolutePoint location="832,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseBehind.do,success,/JSP/LEGALJSP/reassignCaseSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1161,1962" />
+      <AbsolutePoint location="1161,2012" />
+      <AbsolutePoint location="1187,2012" />
+      <AbsolutePoint location="1187,2062" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalReopenClosedCaseDispatchAction.do,search,/JSP/LEGALJSP/legalReopenClosedCaseSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="660,3034" />
+      <AbsolutePoint location="660,3099" />
+      <AbsolutePoint location="546,3099" />
+      <AbsolutePoint location="546,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/assignRejectCaseDispatchAction.do,authorScreen,/JSP/LEGALJSP/assignRejectCaseAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1911,1766" />
+      <AbsolutePoint location="1911,1801" />
+      <AbsolutePoint location="1893,1801" />
+      <AbsolutePoint location="1893,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalCourtProcessingMaker.jsp,null,/legalCourtProcessingMakerDispatch.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1012,2842" />
+      <AbsolutePoint location="1012,2777" />
+      <AbsolutePoint location="946,2777" />
+      <AbsolutePoint location="946,2742" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalReopenClosedCaseDispatchAction.do,detail,/JSP/LEGALJSP/legal_frames_reopenClosedCase.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="569,3034" />
+      <AbsolutePoint location="569,3069" />
+      <AbsolutePoint location="150,3069" />
+      <AbsolutePoint location="150,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalCourtProcessingAuthor.jsp,null,/legalCourtProcessingAuthorDispatch.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2647,2842" />
+      <AbsolutePoint location="2647,2777" />
+      <AbsolutePoint location="2325,2777" />
+      <AbsolutePoint location="2325,2742" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtTypeMaster.do,openAdd,/JSP/LEGALJSP/courtTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1512,96" />
+      <AbsolutePoint location="1512,146" />
+      <AbsolutePoint location="1493,146" />
+      <AbsolutePoint location="1493,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeTypeMaster.do,editNoticeType,/JSP/LEGALJSP/noticeTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1171,96" />
+      <AbsolutePoint location="1171,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerDispatchAction.do,authorScreen,/JSP/LEGALJSP/noticeCheckerAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="475,2254" />
+      <AbsolutePoint location="475,2289" />
+      <AbsolutePoint location="459,2289" />
+      <AbsolutePoint location="459,2376" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeTypeMaster.do,openAdd,/JSP/LEGALJSP/noticeTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1067,96" />
+      <AbsolutePoint location="1067,146" />
+      <AbsolutePoint location="1047,146" />
+      <AbsolutePoint location="1047,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/lawFirmMaster.do,search,/lawFirmMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="305,931" />
+      <AbsolutePoint location="305,981" />
+      <AbsolutePoint location="327,981" />
+      <AbsolutePoint location="327,1328" />
+      <AbsolutePoint location="309,1328" />
+      <AbsolutePoint location="309,1378" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingMakerDispatch.do,openAddStage,/JSP/LEGALJSP/legalCourtProcessingAddStage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="728,2742" />
+      <AbsolutePoint location="728,2777" />
+      <AbsolutePoint location="147,2777" />
+      <AbsolutePoint location="147,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCourtProcessingAuthorDispatch.do,search,/JSP/LEGALJSP/legalCourtProcessingAuthorSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2179,2742" />
+      <AbsolutePoint location="2179,2842" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/advocateMaster.do,editAdvocate,/JSP/LEGALJSP/advocateMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2924,96" />
+      <AbsolutePoint location="2924,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/courtTypeMaster.do,search,/courtTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1717,96" />
+      <AbsolutePoint location="1717,146" />
+      <AbsolutePoint location="1738,146" />
+      <AbsolutePoint location="1738,493" />
+      <AbsolutePoint location="1721,493" />
+      <AbsolutePoint location="1721,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/Legal_decline_author.jsp,null,/legalDeclineDispatchNoticeAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1303,1053" />
+      <AbsolutePoint location="1303,966" />
+      <AbsolutePoint location="1272,966" />
+      <AbsolutePoint location="1272,931" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/advocateMasterAdd.jsp,null,/advocateMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2865,247" />
+      <AbsolutePoint location="2865,347" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/legalAdvocateCaseMis.jsp,null,/legalAdvocateCaseMisDispatchAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="875,3426" />
+      <AbsolutePoint location="875,3376" />
+      <AbsolutePoint location="897,3376" />
+      <AbsolutePoint location="897,3326" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/lawFirmMasterAdd.jsp,null,/lawFirmMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="148,1082" />
+      <AbsolutePoint location="148,1182" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeTypeMasterAdd.do,searchPage,/noticeTypeMasterBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1109,443" />
+      <AbsolutePoint location="1109,493" />
+      <AbsolutePoint location="1127,493" />
+      <AbsolutePoint location="1127,543" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/reassignCaseAuthor.jsp,null,/reassignCaseAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="863,1888" />
+      <AbsolutePoint location="863,1801" />
+      <AbsolutePoint location="827,1801" />
+      <AbsolutePoint location="827,1766" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/LEGALJSP/poaMasterAdd.jsp,null,/poaMasterAdd.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="564,1082" />
+      <AbsolutePoint location="564,1182" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalCaseInitiationMakerDispatch.do,search,/JSP/LEGALJSP/legalCaseInitiationMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2452,3034" />
+      <AbsolutePoint location="2452,3084" />
+      <AbsolutePoint location="2256,3084" />
+      <AbsolutePoint location="2256,3134" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/legalDeclineDispatchNoticeAction.do,success,/legalDeclineDispatchNoticeBehind.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1394,931" />
+      <AbsolutePoint location="1394,966" />
+      <AbsolutePoint location="2014,966" />
+      <AbsolutePoint location="2014,1031" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/noticeCheckerDispatchAction.do,noticeCheckerAuthor,/JSP/LEGALJSP/noticeCheckerAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="426,2254" />
+      <AbsolutePoint location="426,2319" />
+      <AbsolutePoint location="377,2319" />
+      <AbsolutePoint location="377,2376" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stageTypeMaster.do,openAdd,/JSP/LEGALJSP/stageTypeMasterAdd.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1952,96" />
+      <AbsolutePoint location="1952,146" />
+      <AbsolutePoint location="1933,146" />
+      <AbsolutePoint location="1933,196" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseAction.do,authorScreen,/JSP/LEGALJSP/reassignCaseAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="780,1766" />
+      <AbsolutePoint location="780,1801" />
+      <AbsolutePoint location="745,1801" />
+      <AbsolutePoint location="745,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reassignCaseAction.do,maker,/JSP/LEGALJSP/reassign_Case_view.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="732,1766" />
+      <AbsolutePoint location="732,1831" />
+      <AbsolutePoint location="469,1831" />
+      <AbsolutePoint location="469,1888" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

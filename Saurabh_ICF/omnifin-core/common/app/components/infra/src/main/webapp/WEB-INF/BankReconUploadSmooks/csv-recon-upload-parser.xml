@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd" xmlns:csv="http://www.milyn.org/xsd/smooks/csv-1.5.xsd">
+
+    <!--
+    Configure the CSV to parse the message into a stream of SAX events.
+    -->
+	<csv:reader fields="serial_no,voucher_bank,voucher_no,sequence_no,voucher_dr_amt,voucher_cr_amt,bank_transaction_id,bank_dr_amt,bank_cr_amt,
+	bank_ledger_id,recon_type,recon_date" rootElementName="objs" recordElementName="obj" skipLines="1" />
+ 
+</smooks-resource-list>

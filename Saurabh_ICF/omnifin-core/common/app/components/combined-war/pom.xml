@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2004/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.a3s.omnifin.prod</groupId>
+		<artifactId>omnifin-indostar-components</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<name>Combined-War</name>
+	<artifactId>LMS-indostar</artifactId>
+	<packaging>war</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.commonjava.maven.plugins</groupId>
+				<artifactId>directory-maven-plugin</artifactId>
+				<version>0.1</version>
+				<executions>
+					<execution>
+						<id>directories</id>
+						<goals>
+							<goal>highest-basedir</goal>
+						</goals>
+						<phase>initialize</phase>
+						<configuration>
+							<property>main.basedir</property>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<excludes>
+						<exclude>${project.basedir}/../infra/src/main/webapp/webapp/WEB-INF/lib/*.*</exclude>
+						<exclude>${project.basedir}/../infra/src/main/webapp/webapp/WEB-INF/payout_lib/*.*</exclude>
+					</excludes>
+					<packagingExcludes>WEB-INF/lib/*.*</packagingExcludes>
+					<packagingExcludes>WEB-INF/payout_lib/*.*</packagingExcludes>
+					<warSourceExcludes>**/*.java</warSourceExcludes>
+					<warSourceExcludes>WEB-INF/lib/*.*</warSourceExcludes>
+					<warSourceExcludes>WEB-INF/payout_lib/*.*</warSourceExcludes>
+					
+					
+					<!-- <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory> 
+					<attachClasses>true</attachClasses>
+					<archive>
+						<manifest>
+						</manifest>
+					</archive>
+					-->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/src/main/webapp/</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+				       <!-- <executions>
+						  <execution>
+							<id>auto-clean.install</id>
+							<phase>install</phase>
+							<goals>
+							  <goal>clean</goal>
+							</goals>
+						  </execution>
+						  <execution>
+							<id>auto-clean.deploy</id>
+							<phase>deploy</phase>
+							<goals>
+							  <goal>clean</goal>
+							</goals>
+						  </execution>
+						</executions>  -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>		
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/src/main/webapp</outputDirectory>  
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<!-- <excludeTransitive>true</excludeTransitive>  -->
+							<resources>
+								<resource>
+									<directory>${project.basedir}/../addons/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../cms/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../cps/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../dms/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../gcd/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../generic/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../infra/src/main/webapp</directory>
+									<excludes>
+										<exclude>${project.basedir}\..\src\main\webapp\WEB-INF\lib\*.*</exclude>
+										<exclude>${project.basedir}\..\src\main\webapp\WEB-INF\payout_lib\*.*</exclude>
+									</excludes>
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../legal/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../LMSUploadsEJB/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../masters/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../payout/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../reports/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../reposession/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../securitization/src/main/webapp</directory>
+
+								</resource>
+								<resource>
+									<directory>${project.basedir}/../../../../../../../branches/GL_COMMON/omnifin-core/common/app/components/gl/src/main/webapp</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.commonjava.maven.plugins
+										</groupId>
+										<artifactId>
+											directory-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.1,)
+										</versionRange>
+										<goals>
+											<goal>highest-basedir</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

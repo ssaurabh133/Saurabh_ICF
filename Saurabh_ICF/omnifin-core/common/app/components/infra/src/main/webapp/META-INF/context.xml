@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+ 
+ 	<Resource name="jdbc/FinCraftDB1" 
+              auth="Container"
+              type="javax.sql.DataSource" 
+              username="root" 
+              password="a3spl"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://192.168.1.200:3306/lms_uat"
+              validationQuery="select 1"
+              removeAbandoned="true"
+              removeAbandonedTimeout="300"
+              logAbandoned="true"
+              defaultAutoCommit="false"
+
+              maxWait="-1"
+              maxActive="100" 
+              maxIdle="20">
+
+     </Resource>
+     
+     <Resource name="jdbc/FinCraftDB2" 
+              auth="Container"
+              type="javax.sql.DataSource" 
+              username="root" 
+              password="a3spl"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://192.168.1.5:3306/uat_phase2"
+              validationQuery="select 1"
+              removeAbandoned="true"
+              removeAbandonedTimeout="300"
+              logAbandoned="true"
+              defaultAutoCommit="false"
+
+              maxWait="-1"
+              maxActive="100" 
+              maxIdle="20">
+
+     </Resource>
+      
+</Context>
+

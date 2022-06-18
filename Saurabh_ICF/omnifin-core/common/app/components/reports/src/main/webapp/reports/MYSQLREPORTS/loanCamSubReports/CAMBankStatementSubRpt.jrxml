@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CAMBankStatementSubRpt" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="deal_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[(SELECT CBAD.DEAL_ID,CONCAT(CBAD.BANK_NAME,'-',CBAD.BANK_BRANCH,'-',ACCOUNT_NO) AS AccGroup,CONCAT(CDCM.CUSTOMER_NAME,' ') AS NameOfAccHolder,CONCAT(CBM.BANK_NAME,' ') AS NameOfBank,CONCAT(CBBRM.BANK_BRANCH_NAME,' ') AS NameOfBranch,
+CONCAT(CONCAT('Last Month-',STATEMENT_MONTH),' ') AS DetailOfSixMonth,STATEMENT_YEAR,STATEMENT_MONTH,CBAD.BANK_NAME,CBAD.BANK_BRANCH,ACCOUNT_NO,SUM(BALANCE_AMOUNT) AS BalanceOfEvrMth,
+SUM(TOTAL_DR) AS Debit,SUM(TOTAL_CR) AS CR,(TOTAL_CR_TXN+TOTAL_DR_TXN) AS TotalNoTxnInCRDR ,CONCAT(REMARKS,' ') AS Remarks,CONCAT(VERIFICATION_METHOD,' ') AS VerificationMethod
+FROM cr_bank_analysis_dtl CBAD
+JOIN CR_DEAL_DTL CDD ON (CDD.DEAL_ID=CBAD.DEAL_ID)
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDD.DEAL_CUSTOMER_ID)
+left join com_bank_m CBM ON (CBM.BANK_ID=CBAD.BANK_NAME)
+left JOIN com_bankbranch_m CBBRM ON (CBBRM.BANK_BRANCH_CODE=CBAD.BANK_BRANCH AND CBBRM.BANK_ID=CBAD.BANK_NAME)
+WHERE CBAD.DEAL_ID=$P{deal_id} AND CBAD.REC_STATUS = 'A'
+GROUP BY DEAL_ID,BANK_NAME,BANK_BRANCH,ACCOUNT_NO,ACCOUNT_TYPE,STATEMENT_YEAR ,STATEMENT_MONTH
+ORDER BY DEAL_ID,BANK_NAME,BANK_BRANCH,ACCOUNT_NO,STATEMENT_YEAR DESC,STATEMENT_MONTH DESC)
+
+UNION ALL
+
+(SELECT DISTINCT 0 AS DEAL_ID,CONCAT(0,'-',0,'-',0) AS AccGroup,' ' AS NameOfAccHolder,' ' AS NameOfBank,' ' AS NameOfBranch,
+' ' AS DetailOfSixMonth,NULL AS STATEMENT_YEAR,NULL AS STATEMENT_MONTH,0  AS BANK_NAME,0 AS BANK_BRANCH,NULL AS ACCOUNT_NO,0 AS BalanceOfEvrMth,
+0 AS Debit,0 AS CR,0 AS TotalNoTxnInCRDR ,' ' AS Remarks,' ' AS VerificationMethod FROM cr_bank_analysis_dtl WHERE IF((SELECT COUNT(1) FROM cr_bank_analysis_dtl CBAD
+JOIN CR_DEAL_DTL CDD ON (CDD.DEAL_ID=CBAD.DEAL_ID)
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDD.DEAL_CUSTOMER_ID)
+left join com_bank_m CBM ON (CBM.BANK_ID=CBAD.BANK_NAME)
+left JOIN com_bankbranch_m CBBRM ON (CBBRM.BANK_BRANCH_CODE=CBAD.BANK_BRANCH AND CBBRM.BANK_ID=CBAD.BANK_NAME)
+WHERE CBAD.REC_STATUS = 'A'  AND  CBAD.DEAL_ID=$P{deal_id})=0,TRUE,FALSE))]]>
+	</queryString>
+	<field name="DEAL_ID" class="java.lang.Long"/>
+	<field name="AccGroup" class="java.lang.String"/>
+	<field name="NameOfAccHolder" class="java.lang.String"/>
+	<field name="NameOfBank" class="java.lang.String"/>
+	<field name="NameOfBranch" class="java.lang.String"/>
+	<field name="DetailOfSixMonth" class="java.lang.String"/>
+	<field name="STATEMENT_YEAR" class="java.lang.Integer"/>
+	<field name="STATEMENT_MONTH" class="java.lang.Integer"/>
+	<field name="BANK_NAME" class="java.lang.String"/>
+	<field name="BANK_BRANCH" class="java.lang.String"/>
+	<field name="ACCOUNT_NO" class="java.lang.String"/>
+	<field name="BalanceOfEvrMth" class="java.math.BigDecimal"/>
+	<field name="Debit" class="java.math.BigDecimal"/>
+	<field name="CR" class="java.math.BigDecimal"/>
+	<field name="TotalNoTxnInCRDR" class="java.math.BigDecimal"/>
+	<field name="Remarks" class="java.lang.String"/>
+	<field name="VerificationMethod" class="java.lang.String"/>
+	<variable name="AverageBalance" class="java.lang.Double" resetType="Group" resetGroup="AccGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{BalanceOfEvrMth}]]></variableExpression>
+	</variable>
+	<variable name="AverageTxn" class="java.lang.Integer" resetType="Group" resetGroup="AccGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalNoTxnInCRDR}]]></variableExpression>
+	</variable>
+	<variable name="monthCount" class="java.lang.String" resetType="Group" resetGroup="AccGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{DEAL_ID}]]></variableExpression>
+	</variable>
+	<variable name="srNumber" class="java.lang.Integer" resetType="Group" resetGroup="AccGroup" calculation="Count">
+		<variableExpression><![CDATA[$V{srNumber}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<group name="AccGroup">
+		<groupExpression><![CDATA[$F{AccGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="81">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="134" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name of A/c Holder ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="20" width="134" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name of Bank ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="434" y="0" width="100" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Account No. ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="434" y="20" width="100" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name of Branch ]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="134" y="0" width="300" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{NameOfAccHolder}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="134" y="20" width="300" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{NameOfBank}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="534" y="0" width="268" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ACCOUNT_NO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="534" y="20" width="268" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{NameOfBranch}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="678" y="40" width="124" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Verification Method/Dox.  ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="534" y="40" width="144" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Remarks   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="434" y="40" width="100" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total No. of Transactions Debit + Credit   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="334" y="40" width="100" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Credit (Amt.in Rs.)   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="234" y="40" width="100" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Debit (Amt.in Rs.)   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="134" y="40" width="100" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Balance of Every Month (Amt.in Rs.)   ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="40" width="134" height="41" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Details of Last 6 month  ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="134" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Average Balance]]></text>
+				</staticText>
+				<textField pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="134" y="0" width="100" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{AverageBalance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="234" y="0" width="200" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Average Transactions]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="434" y="0" width="100" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{AverageTxn}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="534" y="0" width="268" height="20" backcolor="#CCCCFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#FFCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank Statement/Passbook Verification & Details  ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="134" y="0" width="100" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{BalanceOfEvrMth}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="234" y="0" width="100" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Debit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="334" y="0" width="100" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="534" y="0" width="144" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Remarks}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="678" y="0" width="124" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VerificationMethod}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="434" y="0" width="100" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{TotalNoTxnInCRDR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="134" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Last Month- "+$V{srNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

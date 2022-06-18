@@ -1,0 +1,1548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LOAN_APPLICATION_FORM" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<parameter name="p_deal_id" class="java.lang.String"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<parameter name="p_type" class="java.lang.String"/>
+	<parameter name="p_company_short_code" class="java.lang.String"/>
+	<parameter name="p_checkbox_path" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_show_insurance_form" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT IFNULL(DL.DEAL_NO,'NA')DEAL_NO,IFNULL(DL.DEAL_APPLICATION_FORM_NO,'NA')DEAL_APPLICATION_FORM_NO,
+IFNULL(LON.ELIGIBLE_NHB_SCHEME,'NA')ELIGIBLE_NHB_SCHEME,IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),'')PRODUCT,
+(CASE LON.PROPERTY_CURRENT_STATUS WHEN 'BU' THEN 'BUILT UP ' WHEN 'UC' THEN 'UNDER CONSTRUCTION ' ELSE '' END)PROPERTY_CURRENT_STATUS_DESC,
+CASE WHEN TYP.TYPE='HOME_PURCHASE' THEN CONCAT(IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),''),if(ifnull(PROPERTY_CURRENT_STATUS,'')!='',' (',''),
+(CASE PROPERTY_CURRENT_STATUS WHEN 'BU' THEN 'BUILT UP ' WHEN 'UC' THEN 'UNDER CONSTRUCTION ' ELSE '' END),
+if(ifnull(PROPERTY_CURRENT_STATUS,'')!='',' )','')) ELSE IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),'NA') END PRODUCT_DESC,
+IFNULL(LIFE_INSURANCE,'N')LIFE_INSURANCE,IFNULL(PROPERTY_INSURANCE,'N')PROPERTY_INSURANCE,IFNULL(LOAN_PRODUCTS_INSURANCE ,'N')LOAN_PRODUCTS_INSURANCE,
+IN_CAMEL_CASE(GM.DESCRIPTION)LOAN_TYPE,IN_CAMEL_CASE(GM1.DESCRIPTION)LOAN_SUB_TYPE,
+IFNULL(CON_LOAN.DEAL_LOAN_AMOUNT,0.00)DEAL_LOAN_AMOUNT,IFNULL(LON.DEAL_TENURE,0)DEAL_TENURE,IFNULL(PROP.CT,0) ASSET_COUNT,
+IFNULL(PROP.TOTAL_PURCHASE_PRICE,0.00)TOTAL_PURCHASE_PRICE,IFNULL(PROP.CONSTRUCTION_COST,0.00)CONSTRUCTION_COST,
+IFNULL(PROP.AMOUNT_ALREADY_SPENT,0.00)AMOUNT_ALREADY_SPENT,IFNULL(PROP.BANK_SAVING,0.00)BANK_SAVING,IFNULL(PROP.OTHER_COST,0.00)OTHER_COST,
+(IFNULL(PROP.TOTAL_PURCHASE_PRICE,0)+IFNULL(PROP.CONSTRUCTION_COST,0))REQUIRED_AMOUNT,
+(IFNULL(CON_LOAN.DEAL_LOAN_AMOUNT,0)+IFNULL(AMOUNT_ALREADY_SPENT,0)+IFNULL(BANK_SAVING,0))SOURCE_AMOUNT,
+IN_CAMEL_CASE(IFNULL(REG.REGION_DESC,''))REGION_DESC,IN_CAMEL_CASE(IFNULL(BR.BRANCH_DESC,''))BRANCH_DESC,
+IN_CAMEL_CASE(IFNULL(DEAL_SOURCE_TYPE,''))DEAL_SOURCE_TYPE,IN_CAMEL_CASE(IFNULL(DEAL_SOURCE_NAME,''))DEAL_SOURCE_NAME,
+IN_CAMEL_CASE(concat(IFNULL(RO.USER_NAME,''),'(',RO.USER_ID,')'))RO_NAME,
+IN_CAMEL_CASE(concat(IFNULL(RM.USER_NAME,''),'(',RM.USER_ID,')'))RM_NAME,DATE_FORMAT(DEAL_INITIATION_DATE,'%d-%m-%y')DEAL_INITIATION_DATE,
+IN_CAMEL_CASE(IFNULL(GCD.CUSTOMER_NAME,''))APPLICANT_NAME,IFNULL(COP.CO_APPLICANT_NAME,'')CO_APPLICANT_NAME,IFNULL(DL.LIFE_INSURANCE,'N')LIFE_INSURANCE
+FROM CR_DEAL_DTL DL
+LEFT JOIN GCD_CUSTOMER_M GCD ON(GCD.CUSTOMER_ID=DL.DEAL_CUSTOMER_ID)
+LEFT JOIN(
+	SELECT DEAL_ID,GROUP_CONCAT(IN_CAMEL_CASE(GCD.CUSTOMER_NAME) SEPARATOR '|')CO_APPLICANT_NAME
+	FROM CR_DEAL_CUSTOMER_ROLE RL
+	JOIN GCD_CUSTOMER_M GCD ON(RL.DEAL_CUSTOMER_ID=GCD.CUSTOMER_ID AND RL.DEAL_CUSTOMER_ROLE_TYPE='COAPPL')
+	WHERE RL.DEAL_ID=$P{p_deal_id}
+	GROUP BY RL.DEAL_ID
+)COP ON(COP.DEAL_ID=DL.DEAL_ID)
+JOIN CR_DEAL_LOAN_DTL LON ON(DL.DEAL_ID=LON.DEAL_ID AND LON.DEAL_LOAN_ID=(SELECT MIN(DEAL_LOAN_ID) FROM CR_DEAL_LOAN_DTL WHERE DEAL_ID=DL.DEAL_ID))
+JOIN(
+	SELECT T.DEAL_ID,SUM(T.DEAL_LOAN_AMOUNT)DEAL_LOAN_AMOUNT
+	FROM CR_DEAL_LOAN_DTL T
+	WHERE T.DEAL_ID=$P{p_deal_id}
+	GROUP BY T.DEAL_ID
+)CON_LOAN ON(DL.DEAL_ID=CON_LOAN.DEAL_ID)
+LEFT JOIN GENERIC_MASTER GM ON(GM.GENERIC_KEY='LOAN_TYPE' AND GM.VALUE=LON.LOAN_TYPE)
+LEFT JOIN GENERIC_MASTER GM1 ON(GM1.GENERIC_KEY='LOAN_SUB_TYPE' AND GM1.VALUE=LON.LOAN_SUB_TYPE)
+LEFT JOIN stage_product_scheme_type TYP ON(TYP.PRODUCT_ID=LON.DEAL_PRODUCT)
+JOIN CR_PRODUCT_M CPM ON(LON.DEAL_PRODUCT=CPM.PRODUCT_ID)
+LEFT JOIN COM_BRANCH_M BR ON(BR.BRANCH_ID=DL.DEAL_BRANCH)
+LEFT JOIN COM_REGION_M REG ON(REG.REGION_ID=BR.REGION_ID)
+LEFT JOIN SEC_USER_M RO ON(RO.USER_ID=DL.DEAL_RO)
+LEFT JOIN SEC_USER_M RM ON(RM.USER_ID=DL.DEAL_PM)
+LEFT JOIN(
+	SELECT COL.DEAL_ID,SUM(IFNULL(ASSET.TOTAL_PURCHASE_PRICE,0.00))TOTAL_PURCHASE_PRICE,
+	SUM(IFNULL(ASSET.AMOUNT_ALREADY_SPENT,0.00))AMOUNT_ALREADY_SPENT,SUM(IFNULL(ASSET.CONSTRUCTION_COST,0.00))CONSTRUCTION_COST,
+	SUM(IFNULL(ASSET.BANK_SAVING,0.00))BANK_SAVING,0.00 OTHER_COST,COUNT(1)CT
+	FROM CR_DEAL_COLLATERAL_M  COL
+	JOIN CR_ASSET_COLLATERAL_M ASSET ON(COL.ASSETID=ASSET.ASSET_ID)
+	WHERE COL.DEAL_ID=$P{p_deal_id}
+	GROUP BY COL.DEAL_ID
+)PROP ON(PROP.DEAL_ID=DL.DEAL_ID)
+WHERE DL.DEAL_ID=$P{p_deal_id} AND 'DEAL'=$P{p_stage}
+
+UNION ALL
+
+SELECT IFNULL(DL.LEAD_ID,'NA')DEAL_NO,IFNULL(DL.SALES_ID,'NA')DEAL_APPLICATION_FORM_NO,
+IFNULL(DL.ELIGIBLE_NHB_SCHEME,'')ELIGIBLE_NHB_SCHEME,IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),'')PRODUCT,
+(CASE DL.PROPERTY_CURRENT_STATUS WHEN 'BU' THEN 'BUILT UP ' WHEN 'UC' THEN 'UNDER CONSTRUCTION ' ELSE '' END)PROPERTY_CURRENT_STATUS_DESC,
+CASE WHEN TYP.TYPE='HOME_PURCHASE' THEN CONCAT(IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),''),if(ifnull(PROPERTY_CURRENT_STATUS,'')!='',' (',''),
+(CASE PROPERTY_CURRENT_STATUS WHEN 'BU' THEN 'BUILT UP ' WHEN 'UC' THEN 'UNDER CONSTRUCTION ' ELSE '' END),
+if(ifnull(PROPERTY_CURRENT_STATUS,'')!='',' )','')) ELSE IFNULL(IN_CAMEL_CASE(CPM.PRODUCT_DESC),'NA') END PRODUCT_DESC,
+IFNULL(LIFE_INSURANCE,'N')LIFE_INSURANCE,IFNULL(PROPERTY_INSURANCE,'N')PROPERTY_INSURANCE,IFNULL(LOAN_PRODUCTS_INSURANCE ,'N')LOAN_PRODUCTS_INSURANCE,
+IN_CAMEL_CASE(GM.DESCRIPTION)LOAN_TYPE,IN_CAMEL_CASE(GM1.DESCRIPTION)LOAN_SUB_TYPE,
+IFNULL(DL.AMOUNT_REQUIRED,0.00)DEAL_LOAN_AMOUNT,IFNULL(DL.LOAN_TENURE,0)DEAL_TENURE,IFNULL(PROP.CT,0) ASSET_COUNT,
+IFNULL(PROP.TOTAL_PURCHASE_PRICE,0.00)TOTAL_PURCHASE_PRICE,IFNULL(PROP.CONSTRUCTION_COST,0.00)CONSTRUCTION_COST,
+IFNULL(PROP.AMOUNT_ALREADY_SPENT,0.00)AMOUNT_ALREADY_SPENT,IFNULL(PROP.BANK_SAVING,0.00)BANK_SAVING,IFNULL(PROP.OTHER_COST,0.00)OTHER_COST,
+(IFNULL(PROP.TOTAL_PURCHASE_PRICE,0)+IFNULL(PROP.CONSTRUCTION_COST,0))REQUIRED_AMOUNT,
+(IFNULL(DL.AMOUNT_REQUIRED,0)+IFNULL(AMOUNT_ALREADY_SPENT,0)+IFNULL(BANK_SAVING,0))SOURCE_AMOUNT,
+IN_CAMEL_CASE(IFNULL(REG.REGION_DESC,''))REGION_DESC,IN_CAMEL_CASE(IFNULL(BR.BRANCH_DESC,''))BRANCH_DESC,
+IN_CAMEL_CASE(IFNULL(DEAL_SOURCE_TYPE,''))DEAL_SOURCE_TYPE,IN_CAMEL_CASE(IFNULL(DEAL_SOURCE_NAME,''))DEAL_SOURCE_NAME,
+IN_CAMEL_CASE(CONCAT(IFNULL(RO.USER_NAME,''),'(',RO.USER_ID,')'))RO_NAME,
+IN_CAMEL_CASE(CONCAT(IFNULL(RM.USER_NAME,''),'(',RM.USER_ID,')'))RM_NAME,DATE_FORMAT(DL.LEAD_GENERATION_DATE,'%d-%m-%y')DEAL_INITIATION_DATE,
+IN_CAMEL_CASE(CONCAT(IFNULL(GCD.FIRST_NAME,''),' ',IFNULL(GCD.MIDDLE_NAME,''),' ',IFNULL(GCD.LAST_NAME,'')))APPLICANT_NAME,
+IFNULL(COP.CO_APPLICANT_NAME,'')CO_APPLICANT_NAME,IFNULL(DL.LIFE_INSURANCE,'N')LIFE_INSURANCE
+FROM STAGE_LEAD_DTL DL
+LEFT JOIN STAGE_CUSTOMER_ROLE RL ON(DL.LEAD_ID=RL.SALES_LEAD_ID AND RL.CUSTOMER_ROLE='PRAPPL')
+LEFT JOIN STAGE_CUSTOMER_DTL GCD ON (RL.CUSTOMER_ID=GCD.ID)
+LEFT JOIN(
+	SELECT RL.SALES_LEAD_ID,GROUP_CONCAT(IN_CAMEL_CASE(CONCAT(IFNULL(FIRST_NAME,''),' ',IFNULL(MIDDLE_NAME,''),' ',IFNULL(LAST_NAME,''))) SEPARATOR '|')CO_APPLICANT_NAME
+	FROM STAGE_CUSTOMER_ROLE RL
+	JOIN STAGE_CUSTOMER_DTL GCD ON (RL.CUSTOMER_ID=GCD.ID AND RL.CUSTOMER_ROLE='COAPPL')
+	WHERE RL.SALES_LEAD_ID=$P{p_deal_id}
+	GROUP BY RL.SALES_LEAD_ID
+)COP ON(COP.SALES_LEAD_ID=DL.LEAD_ID)
+JOIN CR_PRODUCT_M CPM ON(DL.PRODUCT=CPM.PRODUCT_ID)
+LEFT JOIN stage_product_scheme_type TYP ON(TYP.PRODUCT_ID=DL.PRODUCT)
+LEFT JOIN COM_BRANCH_M BR ON(BR.BRANCH_ID=DL.BRANCH_ID)
+LEFT JOIN COM_REGION_M REG ON(REG.REGION_ID=BR.REGION_ID)
+LEFT JOIN SEC_USER_M RO ON(RO.USER_ID=DL.RO_ID)
+LEFT JOIN SEC_USER_M RM ON(RM.USER_ID=DL.LEAD_GENERATED_RM)
+LEFT JOIN GENERIC_MASTER GM ON(GM.GENERIC_KEY='LOAN_TYPE' AND GM.VALUE=DL.LOAN_TYPE)
+LEFT JOIN GENERIC_MASTER GM1 ON(GM1.GENERIC_KEY='LOAN_SUB_TYPE' AND GM1.VALUE=DL.LOAN_SUB_TYPE)
+LEFT JOIN(
+	SELECT ASSET.SALES_LEAD_ID DEAL_ID,SUM(IFNULL(ASSET.TOTAL_PURCHASE_PRICE,0.00))TOTAL_PURCHASE_PRICE,
+	SUM(IFNULL(ASSET.AMOUNT_ALREADY_SPENT,0.00))AMOUNT_ALREADY_SPENT,SUM(IFNULL(ASSET.CONSTRUCTION_COST,0.00))CONSTRUCTION_COST,
+	SUM(IFNULL(ASSET.BANK_SAVING,0.00))BANK_SAVING,0.00 OTHER_COST,COUNT(1)CT
+	FROM STAGE_ASSET_COLLATERAL_DTL ASSET
+	WHERE ASSET.SALES_LEAD_ID=$P{p_deal_id}
+	GROUP BY ASSET.SALES_LEAD_ID
+)PROP ON(PROP.DEAL_ID=DL.LEAD_ID)
+WHERE DL.LEAD_ID=$P{p_deal_id} AND 'STAGE'=$P{p_stage}]]>
+	</queryString>
+	<field name="DEAL_NO" class="java.lang.String"/>
+	<field name="DEAL_APPLICATION_FORM_NO" class="java.lang.String"/>
+	<field name="ELIGIBLE_NHB_SCHEME" class="java.lang.String"/>
+	<field name="PRODUCT" class="java.lang.String"/>
+	<field name="PROPERTY_CURRENT_STATUS_DESC" class="java.lang.String"/>
+	<field name="PRODUCT_DESC" class="java.lang.String"/>
+	<field name="LIFE_INSURANCE" class="java.lang.String"/>
+	<field name="PROPERTY_INSURANCE" class="java.lang.String"/>
+	<field name="LOAN_PRODUCTS_INSURANCE" class="java.lang.String"/>
+	<field name="LOAN_TYPE" class="java.lang.String"/>
+	<field name="LOAN_SUB_TYPE" class="java.lang.String"/>
+	<field name="DEAL_LOAN_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="DEAL_TENURE" class="java.lang.Long"/>
+	<field name="ASSET_COUNT" class="java.lang.Long"/>
+	<field name="TOTAL_PURCHASE_PRICE" class="java.math.BigDecimal"/>
+	<field name="CONSTRUCTION_COST" class="java.math.BigDecimal"/>
+	<field name="AMOUNT_ALREADY_SPENT" class="java.math.BigDecimal"/>
+	<field name="BANK_SAVING" class="java.math.BigDecimal"/>
+	<field name="OTHER_COST" class="java.math.BigDecimal"/>
+	<field name="REQUIRED_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="SOURCE_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="REGION_DESC" class="java.lang.String"/>
+	<field name="BRANCH_DESC" class="java.lang.String"/>
+	<field name="DEAL_SOURCE_TYPE" class="java.lang.String"/>
+	<field name="DEAL_SOURCE_NAME" class="java.lang.String"/>
+	<field name="RO_NAME" class="java.lang.String"/>
+	<field name="RM_NAME" class="java.lang.String"/>
+	<field name="DEAL_INITIATION_DATE" class="java.lang.String"/>
+	<field name="APPLICANT_NAME" class="java.lang.String"/>
+	<field name="CO_APPLICANT_NAME" class="java.lang.String"/>
+	<background>
+		<band height="842">
+			<rectangle>
+				<reportElement x="0" y="0" width="595" height="842" forecolor="#5B6694"/>
+				<graphicElement>
+					<pen lineWidth="10.0"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="8" y="7" width="464" height="43" forecolor="#003399"/>
+				<textElement verticalAlignment="Middle">
+					<font size="17" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}+" "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="58" width="575" height="1"/>
+			</line>
+			<image>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="472" y="7" width="113" height="43"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10">
+			<staticText>
+				<reportElement x="10" y="0" width="575" height="10"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="0" width="220" height="19"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" LOAN APPLICATION FORM"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="81" y="22" width="149" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ELIGIBLE_NHB_SCHEME}+" "]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="411" y="7" width="161" height="32"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="418" y="0" width="150" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["  "+"APPLICATION NUMBER"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="407" y="16" width="17" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="558" y="16" width="17" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="418" y="36" width="150" height="4"/>
+				<textElement verticalAlignment="Top">
+					<font isPdfEmbedded="true"/>
+				</textElement>
+			</textField>
+			<textField>
+				<reportElement x="424" y="17" width="134" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_APPLICATION_FORM_NO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="24" width="73" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["NHB Scheme "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="80" y="35" width="150" height="1"/>
+			</line>
+		</band>
+		<band height="65">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="414" y="32" width="165" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_TENURE}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="0" width="575" height="15" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["About your requirement"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="146" y="32" width="130" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DEAL_LOAN_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="146" y="17" width="433" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRODUCT_DESC}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="17" width="16" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["1. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="26" y="17" width="105" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Purpose of Loan "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="133" y="18" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="32" width="16" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["2. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="26" y="32" width="106" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan Amount "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="133" y="33" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="32" width="106" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Tenure in months "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="32" width="16" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["3. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="32" width="16" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="26" y="47" width="106" height="14" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan Type"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="133" y="48" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="46" width="16" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["4. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="146" y="47" width="130" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_TYPE}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="48" width="106" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan Sub Type"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="398" y="47" width="13" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="411" y="48" width="168" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOAN_SUB_TYPE}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="47" width="16" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["5. "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<subreport>
+				<reportElement x="10" y="-1" width="575" height="15"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_asset_count">
+					<subreportParameterExpression><![CDATA[$F{ASSET_COUNT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_ASSET_DTL_WRAPPER.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="15"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_DEAL_ID">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_PERSONAL_DTL_WRAPPER.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="17" splitType="Immediate">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="17"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_DEAL_ID">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_BANK_WRAPPER.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="7" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Existing Loan Details (Applicant/Co-Applicant)  "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="22">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="18"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_EXISTING_LOAN_DTL.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="25">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="10" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cash Credit / OD Limit with Bank (Applicant/Co-Applicant)  "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="13"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_CASH_CEDIT_OD_LIMIT.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="22">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="7" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Existing relationship with "+$P{p_company_name}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="15"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_EXISTING_RELATIONSHIP.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="21">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="6" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Non-Refundable Processing Fee Details "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="14"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_NON_REFUNDABLE_PROCESSING_FEE.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="5" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["References : Local Area/City "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="13">
+			<subreport>
+				<reportElement x="10" y="0" width="575" height="13"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_REFERANCE_DTL_WRAPPER.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="90">
+			<printWhenExpression><![CDATA[$P{p_type}.equalsIgnoreCase( "HL" )]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="7" width="287" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Requirement of Funds "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="297" y="7" width="288" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single" leftIndent="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Source of Funds               "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="37" width="122" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Construction Cost  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="22" width="122" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total Purchase Price  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="52" width="122" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Other Cost  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="67" width="122" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="67" width="124" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="52" width="124" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Bank Saving/Investment "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="37" width="124" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Amount already spent "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="300" y="22" width="124" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="false" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan required from "+$P{p_company_short_code}+" "]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="132" y="22" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{TOTAL_PURCHASE_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="132" y="37" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CONSTRUCTION_COST}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="132" y="52" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OTHER_COST}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="132" y="67" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{REQUIRED_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="424" y="22" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{DEAL_LOAN_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="424" y="37" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{AMOUNT_ALREADY_SPENT}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="424" y="52" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{BANK_SAVING}]]></textFieldExpression>
+			</textField>
+			<textField pattern=" #,##0.00">
+				<reportElement x="424" y="67" width="112" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SOURCE_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="131" y="36" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="131" y="51" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="132" y="66" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="132" y="81" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="424" y="36" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="424" y="52" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="424" y="67" width="112" height="1"/>
+			</line>
+			<line>
+				<reportElement x="424" y="82" width="112" height="1"/>
+			</line>
+		</band>
+		<band height="71">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="1" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Other Requirements "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="20" width="268" height="17" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Are you interested for Life Insurance? "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="20" width="16" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["1. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="37" width="268" height="17" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Are you interested for Property Insurance? "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="37" width="16" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["2. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="54" width="16" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["3. "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="54" width="268" height="17" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Are you interested in other Loan Products? "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="328" y="20" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Yes "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="421" y="20" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["No "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="328" y="37" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Yes "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="421" y="37" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["No "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="328" y="54" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Yes "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="421" y="54" width="19" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["No "]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="348" y="20" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{LIFE_INSURANCE}.equals("Y")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="348" y="37" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{PROPERTY_INSURANCE}.equals("Y")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="348" y="54" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{LOAN_PRODUCTS_INSURANCE}.equals("Y")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="440" y="20" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{LIFE_INSURANCE}.equals("N")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="440" y="37" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{PROPERTY_INSURANCE}.equals("N")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="440" y="54" width="16" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{LOAN_PRODUCTS_INSURANCE}.equals("N")?$P{p_checkbox_path}+"imageCheckbox.bmp":$P{p_checkbox_path}+"imageBox.bmp"]]></imageExpression>
+			</image>
+		</band>
+		<band height="37" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="24" width="575" height="13" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="SansSerif" size="8" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["1. I/We declare that all the particulars and information and details given/filled in this application form are true, correct, complete and up-to-date in all respects and that I/We have not withheld any information whatsoever. I/We understand that certain particulars given by me/us are required by the operational guidelines governing housing finance companies. \n"
++"2. I/We confirm that no insolvency proceedings or suits for recovery of outstanding dues or monies whatsoever or for attachment of my/our assets or properties and/or any criminal proceedings have been initiated and/or are pending against me/us and that I/we have never been adjudicated insolvent by any court or other authority. \n"
++"3. No action nor other steps have been taken or legal proceedings started by or against me/us in any court of law/other authorities for winding up, dissolution, administration or re-organisation or for the appointment of a receiver, administrator, administrative receiver, trustees or similar officer or for my/our assets. \n"
++"4. I/We authorize "+$P{p_company_name}+" ("+$P{p_company_short_code}+") and all its group companies and their agents to exchange, share or part with all the information  and  details  relating to my/our existing  loans and/or repayment  history to other "+$P{p_company_short_code}+" group companies,  banks, financial institutions, credit bureaus, agencies, statutory bodies etc. as may be required or as they may deem fit and shall not hold "+$P{p_company_short_code}+" (or any of its group companies or its/their agents/representatives)  liable for use/sharing  of this information. \n"
++"5. I/We understand and acknowledge that "+$P{p_company_short_code}+" shall have the absolute discretion, without assigning any reasons (unless required by applicable law), to reject  my/our application and that "+$P{p_company_short_code}+" shall not be responsible/liable in any manner whatsoever to me/us for such  rejection  or any delay in  notifying  me/us of such rejection and any costs, losses, damages  or expenses, or other consequences, caused by reason of such  rejection, or any delay in  notifying  me/us of such  rejection, of my / our application. \n"
++"6. I/We understand and agree that the payment of processing fees and application fees are non-refundable and on my/our application being declined by "+$P{p_company_short_code}+" for any reason whatsoever, or the same being withdrawn by me/us, I/We shall not be entitled for refund of the same either in part or in full. \n"
++"7. I/We hereby confirm and duly undertake that the loan is being taken for the purpose as stated in the application form. I/We also confirm that the loan shall not be used for investments in Stock & Shares, speculative activities or any purpose linked to capital market or any illegal purpose. \n"
++"8. "+$P{p_company_short_code}+"/its Group Companies reserve the right to retain the photographs and documents submitted with the application and will not return the same to the applicant. \n"
++"9. I/We have understood the terms & conditions. \n"
++"10.I/We consent/do not consent to receive information or service etc. for marketing purposes through Telephone/Mobile/SMS/Email by "+$P{p_company_short_code}+"/Service provider. \n"
++"11.I/We undertake and declare that all documents submitted by me/us with the application form are true and correct and "+$P{p_company_short_code}+" is within its right to take any action against me/us in case any information furnished by me/us is found to be false or misleading in any manner.  \n"
++"12.I/We understand that merely by applying for the facility I/We do not become eligible for the same. \n"
++"13.I/We understand that all documents have been provided by me/us on our own will towards our loan application and "+$P{p_company_short_code}+" reserves the right to retain all documents without any obligation to return the same to me/us at any stage in any circumstances. \n"
++"14.I/We hereby undertake that I/we have carefully read, understood and am/are agree to the terms and conditions of the Application Form and declare hereby that the information provided by me/us to the Company’s Representative is correct. \n"
++"15.I/We hereby undertake that by giving One Time Password received by me/us for validating my/our Aadhar number(s), I/We am/are consciously signing this Application Form in electronic mode in order to verifying my/our identity."]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="8" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Declaration "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band splitType="Prevent"/>
+		<band height="64" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="13" y="49" width="148" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Signature of the Applicant"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="323" y="49" width="256" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Signature of the Co-Applicant"+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="323" y="0" width="37" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Name:"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="13" y="0" width="36" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Name:"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="49" y="0" width="227" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{APPLICANT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="360" y="0" width="219" height="15" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CO_APPLICANT_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="214" y="0" width="345" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="13" y="0" width="201" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["In case of Organisation: For and on behalf of"+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="13" y="0" width="174" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Name of the Authorised Signatory:"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="318" y="0" width="172" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(Affix Organization's Stamp)"+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="40">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="13" y="18" width="35" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date:"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="317" y="18" width="56" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Signature:"+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="48" y="18" width="86" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_INITIATION_DATE}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="373" y="18" width="186" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="134" y="18" width="52" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Place:"+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="18" width="130" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BRANCH_DESC}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band splitType="Prevent"/>
+		<band height="66" splitType="Prevent">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Opaque" x="13" y="0" width="575" height="15" forecolor="#000000" backcolor="#B7CFFB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Sourcing Details "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="13" y="19" width="94" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Region "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="19" width="129" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{REGION_DESC}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="19" width="166" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{BRANCH_DESC}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="268" y="19" width="134" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Branch "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="13" y="34" width="94" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Source Type  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="268" y="34" width="134" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Source Type Description "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="34" width="129" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_SOURCE_TYPE}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="34" width="166" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_SOURCE_NAME}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="13" y="49" width="94" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["RO Name  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="268" y="49" width="134" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["RM Name  "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="49" width="128" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RO_NAME}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="49" width="166" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RM_NAME}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="107" y="19" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="107" y="34" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="107" y="49" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="19" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="34" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="49" width="12" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true" isPdfEmbedded="true"/>
+					<paragraph leftIndent="1" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[":"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="36">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="11" y="1" width="569" height="23"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["The name of the company has changed from ‘ART Affordable Housing Finance (I) Ltd’ to ‘ART Housing Finance (I) Ltd’ w.e.f. 20th September, 2018"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="3">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="1" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "insurance_application_form.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="0" width="100" height="1"/>
+			</break>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_Personal_Details.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "current_mailing_address_insurance_form.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Nominee_dtl_insurance_form.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_Appointee_Detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "coverage_information_insurance_form.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_Collection_dtl.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_Bank_dtl.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="2">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="2"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "master_policy_holder_insurance_form.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="12"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_checkbox_path">
+					<subreportParameterExpression><![CDATA[$P{p_checkbox_path}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_medical_Questionnair.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="12">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<subreport>
+				<reportElement x="13" y="0" width="568" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Insurance_Form_Declaration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band>
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+		</band>
+		<band>
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+		</band>
+		<band height="80">
+			<printWhenExpression><![CDATA[$P{p_show_insurance_form}.equals("1")&& $F{LIFE_INSURANCE}.equals("Y")?true:false]]></printWhenExpression>
+			<textField>
+				<reportElement x="13" y="0" width="263" height="12"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_stage}+"( "+$P{p_deal_id}+") "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+</jasperReport>

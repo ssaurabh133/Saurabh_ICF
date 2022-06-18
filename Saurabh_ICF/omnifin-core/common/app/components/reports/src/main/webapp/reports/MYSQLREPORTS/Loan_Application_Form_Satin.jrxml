@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="913" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="528"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<parameter name="p_deal_id" class="java.lang.String"/>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<parameter name="p_imageCheckbox" class="java.lang.String"/>
+	<parameter name="p_imageBox" class="java.lang.String"/>
+	<parameter name="p_satin_hindi_declaration" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT CCM.ADDRESS_LINE1 AS OFFICE_ADDRESS_LINE1,
+ifnull(CCM.ADDRESS_LINE2,'')AS OFFICE_ADDRESS_LINE2,
+ifnull(CCM.ADDRESS_LINE3,'')AS OFFICE_ADDRESS_LINE3,
+ifnull(CCM.CIN_NO,'')CIN_NO ,ifnull(CCM.EMAIL_ID,'')EMAIL_ID, ifnull(CDD.DEAL_APPLICATION_FORM_NO,'')APPLICATION_NO,
+DATE_FORMAT(CDD.DEAL_INITIATION_DATE,'%d-%m-%y')DEAL_INITIATION_DATE,CDD.DEAL_CUSTOMER_ID
+FROM CR_DEAL_DTL CDD
+JOIN COM_COMPANY_M CCM ON(CCM.COMPANY_ID=1)
+WHERE CDD.DEAL_ID=$P{p_deal_id} AND 'DEAL'=$P{p_stage}
+
+
+UNION ALL
+
+SELECT CCM.ADDRESS_LINE1 AS OFFICE_ADDRESS_LINE1,
+ifnull(CCM.ADDRESS_LINE2,'')AS OFFICE_ADDRESS_LINE2,
+ifnull(CCM.ADDRESS_LINE3,'')AS OFFICE_ADDRESS_LINE3,
+ifnull(CCM.CIN_NO,'')CIN_NO ,ifnull(CCM.EMAIL_ID,'')EMAIL_ID, ifnull(SLD.SALES_ID,'')APPLICATION_NO,
+DATE_FORMAT(SLD.LEAD_GENERATION_DATE,'%d-%m-%y')DEAL_INITIATION_DATE,CUSTOMER_ID AS DEAL_CUSTOMER_ID
+FROM STAGE_LEAD_DTL SLD
+LEFT JOIN STAGE_CUSTOMER_ROLE RL ON(SLD.LEAD_ID=RL.SALES_LEAD_ID AND RL.CUSTOMER_ROLE='PRAPPL')
+LEFT JOIN STAGE_CUSTOMER_DTL GCD ON (RL.CUSTOMER_ID=GCD.ID)
+JOIN COM_COMPANY_M CCM ON(CCM.COMPANY_ID=1)
+WHERE SLD.LEAD_ID=$P{p_deal_id} AND 'STAGE'=$P{p_stage}]]>
+	</queryString>
+	<field name="OFFICE_ADDRESS_LINE1" class="java.lang.String"/>
+	<field name="OFFICE_ADDRESS_LINE2" class="java.lang.String"/>
+	<field name="OFFICE_ADDRESS_LINE3" class="java.lang.String"/>
+	<field name="CIN_NO" class="java.lang.String"/>
+	<field name="EMAIL_ID" class="java.lang.String"/>
+	<field name="APPLICATION_NO" class="java.lang.String"/>
+	<field name="DEAL_INITIATION_DATE" class="java.lang.String"/>
+	<field name="DEAL_CUSTOMER_ID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="131" height="79" isPrintInFirstWholeBand="true"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="141" y="1" width="201" height="14"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Registered Office: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="15" width="201" height="14"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OFFICE_ADDRESS_LINE1}+","]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="143" y="29" width="201" height="14"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OFFICE_ADDRESS_LINE2}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="57" width="201" height="14"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["CIN: "+ $F{CIN_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="71" width="201" height="17"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["E-mail: "+$F{EMAIL_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="351" y="0" width="204" height="47" forecolor="#FFFFFF" backcolor="#CC0033"/>
+				<textElement markup="none">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan Application \n"+
+"Cum CERSAI KYC FORM & \n"+
+"PMAY-CLSS undertaking "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="351" y="48" width="88" height="14"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Application No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="48" width="116" height="14"/>
+				<textElement markup="none">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{APPLICATION_NO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="351" y="62" width="88" height="17"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="441" y="62" width="114" height="17"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DEAL_INITIATION_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="143" y="43" width="201" height="14"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{OFFICE_ADDRESS_LINE3}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="12"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_OfficeUse.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+			</frame>
+		</band>
+		<band height="32">
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_PersonalDetails_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="12" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Personal Details  "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="52">
+			<subreport>
+				<reportElement positionType="Float" x="15" y="25" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_type">
+					<subreportParameterExpression><![CDATA["PERMANENT"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_AddressDetails_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_type">
+					<subreportParameterExpression><![CDATA["REI"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_AddressDetails_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="30" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Contact/Address Details  "]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="41">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Native Address  "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_address_type">
+					<subreportParameterExpression><![CDATA["NATIVE"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_AddressDetails_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Proof of Identity "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Proof_Of_Identity_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="44">
+			<subreport>
+				<reportElement x="13" y="13" width="541" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Proof_Of_Address.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Proof of Address  "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="22" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="29">
+			<subreport>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="541" height="12"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_FamilyDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="22" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="38">
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Occupation Details "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="15" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_OccupationlDetails_Wrapper.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="17" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_BankDetails.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="38">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Cash Flow Assessment "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_income.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="44">
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_FixedAssets.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fixed Assets  "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band/>
+		<band height="36">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Lifestyle Assets  "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LifeStyle.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="15" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Liquid Assets "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<subreport>
+				<reportElement x="15" y="14" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LiquidAssets.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="42">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Insurance Details "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="13" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_InsuranceDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="39">
+			<subreport>
+				<reportElement x="15" y="14" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Liabilities.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Liabilities Details "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="14" width="555" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="76" splitType="Prevent">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="60" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Loan Assessment"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="18" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LoanAssessmentFirst.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="30" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LoanAssessmentSecond.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="42" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LoanAssessmentThird.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="54" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_LoanAssessmentLastPart.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="75" splitType="Prevent">
+			<textField isBlankWhenNull="false">
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Property/Seller/Construction Status "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="15" y="18" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_PropertyStatus.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="30" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_PropertyOwnershipDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="42" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_ConstructionStatus.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="60" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<subreport>
+				<reportElement positionType="Float" x="15" y="54" width="535" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_UsageOfProperty.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["General Information "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="13" width="540" height="12" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_GeneralInformation.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="14" width="555" height="26" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="50">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["References Details "]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="false">
+				<reportElement x="15" y="18" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_customer_id">
+					<subreportParameterExpression><![CDATA[$F{DEAL_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_relationship_type">
+					<subreportParameterExpression><![CDATA["C"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_ReferenceDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="15" y="32" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_customer_id">
+					<subreportParameterExpression><![CDATA[$F{DEAL_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_relationship_type">
+					<subreportParameterExpression><![CDATA["N"]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_NativeReferenceDetails.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="37" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band/>
+		<band height="36">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["VERNACULAR DECLARATION "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="22" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<subreport>
+				<reportElement x="14" y="15" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_VernacularDeclaration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Declaration  "]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="22" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+			<subreport>
+				<reportElement x="14" y="19" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Declaration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["KYC Registration  "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="18" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_KYCRegistration.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="14" width="555" height="25" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="38">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PM Awas Yojna  "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="18" width="540" height="12" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_PMYojna.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="25" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="39">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Instructions for Application Form "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="18" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_InstructionFor.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="25" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="41">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="13" forecolor="#FFFFFF" backcolor="#CC0000"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0033"/>
+					<topPen lineWidth="1.5" lineColor="#CC0033"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0033"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0033"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["For Office Only "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="18" width="540" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_ProcessingAndLogin.jasper"]]></subreportExpression>
+			</subreport>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="13" width="555" height="25" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.5" lineColor="#CC0000"/>
+					<topPen lineWidth="1.5" lineColor="#CC0000"/>
+					<leftPen lineWidth="1.5" lineColor="#CC0000"/>
+					<bottomPen lineWidth="1.5" lineColor="#CC0000"/>
+					<rightPen lineWidth="1.5" lineColor="#CC0000"/>
+				</box>
+			</frame>
+		</band>
+		<band height="18">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageBox">
+					<subreportParameterExpression><![CDATA[$P{p_imageBox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_imageCheckbox">
+					<subreportParameterExpression><![CDATA[$P{p_imageCheckbox}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Acknowledgement.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_company_logo">
+					<subreportParameterExpression><![CDATA[$P{p_company_logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Employee_Undertaking.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Form60.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="13">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Customer_Undertaking.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_satin_hindi_declaration">
+					<subreportParameterExpression><![CDATA[$P{p_satin_hindi_declaration}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_Satin_hindi_Declaration.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="15">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LAFS_NotingPad.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="554" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

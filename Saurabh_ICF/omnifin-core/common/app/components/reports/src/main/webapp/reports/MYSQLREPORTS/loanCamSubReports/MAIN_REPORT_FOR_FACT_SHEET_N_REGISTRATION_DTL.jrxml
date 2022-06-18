@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MAIN_REPORT_FOR_FACT_SHEET_N_REGISTRATION_DTL" language="groovy" pageWidth="842" pageHeight="1080" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_deal_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_loan_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT cdd.deal_id,CDD.DEAL_CUSTOMER_TYPE,cr_deal_loan_dtl.DEAL_LOAN_ID
+FROM CR_DEAL_DTL CDD
+left join cr_deal_loan_dtl on (cdd.deal_id=cr_deal_loan_dtl.deal_id)
+WHERE CDD.DEAL_CUSTOMER_TYPE='C' and cdd.deal_id=$P{p_deal_id}]]>
+	</queryString>
+	<field name="deal_id" class="java.lang.Integer"/>
+	<field name="DEAL_CUSTOMER_TYPE" class="java.lang.String"/>
+	<field name="DEAL_LOAN_ID" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="100">
+					<printWhenExpression><![CDATA[$F{DEAL_CUSTOMER_TYPE}=='C' ?  Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_customer_type"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "customer_details_Management_Details_FACT_SHEET.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="-19" y="0" width="200" height="100"/>
+				<subreportParameter name="p_loan_id">
+					<subreportParameterExpression><![CDATA[$P{p_loan_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="deal_loan_id">
+					<subreportParameterExpression><![CDATA[$F{DEAL_LOAN_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_deal_id">
+					<subreportParameterExpression><![CDATA[$P{p_deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "repayment_Schedule_details.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

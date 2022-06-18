@@ -1,0 +1,1055 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+
+	<form-beans>
+    <form-bean name="com.masters.vo.AutoAllocationDefinitionVo" type="com.masters.vo.AutoAllocationDefinitionVo" />
+
+
+		<!--DynaValidatorForm Start -->
+
+		<!--Master bean-->
+		<!--DynaValidatorForm Start -->
+
+		<!-- Bank Account by Ritu -->
+
+	</form-beans>
+	<global-exceptions >
+	
+			
+	</global-exceptions>
+	<global-forwards>
+		<forward name="sessionOut" path="/pageLoadAction.do"></forward>
+	</global-forwards>
+
+	<action-mappings>
+
+		<action path="/PageLevelAuthorization" type="com.pagelevel.action.PageLevelAuthorization" 
+			scope="request" validate="false">
+            
+			<forward name="firstFrame" path="/corporateFrame.do" />
+			<forward name="individualFrame" path="/individualFrame.do" />
+			<forward name="Maker" path="/updateCustomerMaker.do" />
+			<forward name="Author" path="/updateCustomerAuthor.do" />
+			<forward name="commonDeal" path="/JSP/CPJSP/commonDeal.jsp" />
+			<forward name="creditList" path="/JSP/CMJSP/CreditList.jsp" />
+			<forward name="dealCapturingSearch" path="/commondeal.do?method=searchDealLnik" />
+			<forward name="underWriterSearch" path="/commondeal.do?method=searchListUnderWriter" />
+                         <forward name="GLVendorPayments" path="/GLVendorPayments.do"></forward>    
+
+			
+			<forward name="loanInitMakerSearch" path="/creditListAction.do?method=searchLinkForMaker" />
+<!-- 			sachin work start  -->
+			
+			<forward name="repaymentService" path="/repaymentServiceAction.do?method=openSearchPageForRepaymentService" />
+			<forward name="repaymentServiceAuthor" path="/repaymentServiceAction.do?method=openSearchPageForRepaymentService" />
+<!-- 			sachin work end -->
+			<!-- Sanjay Kushwaha Starts coding for CMS UPLOAD/DOWNLOAD  -->
+			<forward name="creditMgmtExcelSheetUpload" path="/creditMgmtExcelSheetUpload.do" />
+			<!-- Sanjay Kushwaha Starts coding for CMS UPLOAD/DOWNLOAD  -->
+						
+			
+			<!-- shyamakant pandey start coding upload kyc -->
+			<forward name="kycUpload" path="/kycUpload.do?method=openKycUploadFile"/>
+						
+			
+						
+			<forward name="loanInitAuthorSearch" path="/creditListAction.do?method=searchLinkForAuthor" />
+			<forward name="earlyClosureInitiation" path="/closureInitiation.do?method=earlyClosure" />
+			<forward name="maturityClosureInitiation" path="/closureInitiation.do?method=maturityClosure" />
+			<forward name="cancellationClosureInitiation" path="/closureInitiation.do?method=cancellationClosure" />
+			<forward name="earlyClosureAuthor" path="/closureInitiation.do?method=earlyClosureAuthor" />
+			<forward name="maturityClosureAuthor" path="/closureInitiation.do?method=maturityClosureAuthor" />
+			<forward name="cancellationClosureAuthor" path="/closureInitiation.do?method=cancellationClosureAuthor" />
+			<forward name="paymentBehindAction" path="/paymentMakerSearch.do?method=execute" />
+			<forward name="paymentAuthorBehind" path="/paymentAuthorProcessAction.do?method=authorsearchDetail" />
+			<forward name="receiptMakerBehind" path="/receiptMakerSearch.do" />
+			<forward name="receiptAuthorBehind" path="/receiptAuthorProcessAction.do?method=receiptAuthorSearchDetail" />
+			<forward name="imdMakerBehind" path="/imdMakerSearch.do" />
+			<forward name="imdAuthorBehind" path="/imdAuthorProcessAction.do?method=imdAuthorSearchDetail" />
+			<forward name="assetMakerBehindAction" path="/assetMakerSearch.do" />
+			<forward name="assetAuthorBehindAction" path="/assetAuthorProcessAction.do?method=authorSearchDetail" />
+			<forward name="searchCMBehindAction" path="/searchCMBehindAction.do?method=getSearchCMScreen" />
+	        <forward name="searchCPBehindAction" path="/searchCPBehindAction.do?method=getSearchCPScreen" />
+	        <!-- 	Himanshu Verma		Changes for Loan Detail Upload Started -->
+			<forward name="loanDetailUpload" path="/loanDetailUpload.do" />
+			<!-- 	Himanshu Verma		Changes for Loan Detail Upload Ended -->
+	        <!-- Code start by Nishant Rai for RM Change-->
+	        <forward name="rmChange" path="/rmChangeBehindAction.do?method=getRmChange" />
+	        <forward name="rmChangeAuthor" path="/rmChangeBehindAction.do?method=searchRmChangeAuthor" />
+	        <!-- Code start by Nishant Rai for RM Change-->
+	        
+	        <!-- Code start by sanjog -->
+	        <forward name="searchCPBehindActionForLead" path="/searchCPBehindActionForLead.do?method=getSearchScreenForLead" />
+	        <!-- Code start by sanjog -->
+	        <forward name="repaymentServicesReportBehindAction" path="/repaymentServicesReportBehindAction.do" />
+	        <forward name="scoringBehindAction" path="/scoringBehindAction.do" />
+			<forward name="content" path="/logoff.do" />
+            <forward name="DocumentUploadBehindLIMAction" path="/instrumentCapProcessActionforNew.do" />  
+<!--Sarvesh space start for MASTER IRR CALCULATION -->
+   <forward name="irrCalculation" path="/irrCalculation.do?method=irrCalculationSearch" />
+<!--Sarvesh space END for MASTER IRR CALCULATION-->
+			<!--Manas starts from here -->
+			<forward name="instrumentCapBehindAction" path="/instrumentCapProcessActionforNew.do?method=searchInstrument" />
+			<forward name="instrumentCapBehindActionAuthor" path="/instrumentCapProcessActionforNew.do?method=searchInstrumentAuthor" />
+			
+<!--	ravi start		-->
+			<forward name="instrumentUpdateMakerBehindAction" path="/instrumentUpdateMakerActions.do?method=searchInstrumentForUpdate"/>
+			<forward name="instrumentUpdateAuthorBehindAction" path="/instrumentUpdateProcessActionforNew.do?method=searchInstrumentAuthor" />
+			
+			<forward name="autoAllocationDefinitionSearchBehind" path="/autoAllocationDefinitionSearchBehind.do"/>
+			
+<!--	ravi end		-->
+			<forward name="holdInstrumentBankingMaker" path="/holdInstrumentBankingMakerMain.do?method=searchHoldInstrumentMaker" />
+			<forward name="holdInstrumentBankingAuthor" path="/holdInstrumentBankingMakerMain.do?method=searchHoldInstrumentAuthor" />
+			<forward name="releaseInstrumentMaker" path="/holdInstrumentBankingMakerMain.do?method=searchReleaseInstrumentMaker" />
+			<forward name="releaseInstrumentAuthor" path="/holdInstrumentBankingMakerMain.do?method=searchReleaseInstrumentAuthor" />
+			<forward name="chequeStatusBehindAction" path="/chequeStatusBehindAction.do" />
+			<forward name="assetVerificationInitiation" path="/assetVerificationInitSearch.do?method=assetVerificationSearch" />
+			<forward name="assetVerificationReportCapturing" path="/assetVerificationInit.do?method=searchAssetVerRepCap" />
+			<forward name="assetVerificationReportCompletion" path="/assetVerificationInit.do?method=searchAssetVerRepComplete" />
+			<forward name="generateBankingReport" path="/generateBankingReport.do" />
+			<forward name="presentationProcessBehindAction" path="/presentationProcessBehindAction.do" />
+			<forward name="deleteInstrumentMakerBehindAction" path="/instrumentCapProcessActionforNew.do?method=searchDeleteMaker" />
+			<forward name="deleteInstrumentAuthorBehindAction" path="/instrumentCapProcessActionforNew.do?method=searchDeleteAuthor" />
+			<forward name="poolCreationBehindAction" path="/poolCreationBehindAction.do" />
+			<forward name="poolDownloadBehindAction" path="/poolDownloadBehindAction.do" />
+			<forward name="poolReportBehindAction" path="/poolReportBehindAction.do" />
+
+		    <forward name="poolIdBehindMaker" path="/poolIdBehindMaker.do" />
+			<forward name="poolIdBehindAuthor" path="/poolIdBehindAuthor.do" />
+            <forward name="poolIdAddEditBehindAction" path="/poolIdAddEditBehindAction.do" />
+            <forward name="reciptUpload" path="/reciptUploadAction.do" />
+            
+            <forward name="buyerSuppBehindAction" path="/buyerSuppBehindAction.do?method=buyerSuppMaker" />
+			<forward name="buyerSuppAuthorBehindAction" path="/buyerSuppBehindAction.do?method=buyerSuppAuthor" />
+			
+						
+<!-- 			sidharth Starts -->
+			<forward name="poolUploadBehind" path="/poolUploadBehind.do" />
+<!-- 			sidharth END -->
+            
+			<!--Manas ends from here -->
+			<forward name="ProductMaster" path="/JSP/masterspage/ProductMaster.jsp" />
+			<forward name="agencyMasterBehind" path="/agencyMasterBehind.do" />
+			<forward name="bankBranchSearchBehind" path="/bankBranchSearchBehind.do" />
+			<forward name="branchMasterSearch" path="/branchMasterBehind.do" />
+			<forward name="npaStageMasterBehind" path="/npaStageMasterBehind.do" />
+			<forward name="agencyMasterBehind" path="/agencyMasterBehind.do" />
+			<forward name="gcdGroupMasterSearchBehind" path="/gcdGroupMasterSearchBehind.do" />
+			<forward name="bankMasterSearch" path="/bankMasterBehind.do" />
+			<forward name="bankBranchSearchBehind" path="/bankBranchSearchBehind.do" />
+			<forward name="chargeCodeSearchBehind" path="/chargeCodeSearchBehind.do" />
+			<forward name="bankAccountMasterBehind" path="/bankAccountMasterBehind.do" />
+			<forward name="branchMasterSearch" path="/branchMasterBehind.do" />
+			<forward name="industryMasterSearch" path="/industryMasterBehind.do" />
+			<forward name="subIndustryMasterSearch" path="/subIndustryMasterBehind.do" />
+			<forward name="documentMasterSearch" path="/documentMasterBehind.do" />
+			<forward name="baseRateMasterSearch" path="/baseRateMasterBehind.do" />
+			<forward name="chargeMasterSearch" path="/chargeMasterBehind.do" />
+			<forward name="roleMasterSearch" path="/roleMasterBehind.do" />
+			<forward name="roleAccessMasterSearch" path="/roleAccessMasterBehind.do" />
+			<forward name="userMasterSearch" path="/userMasterBehind.do" />
+			<forward name="countryMaster" path="/countryMasterBehind.do"></forward>
+			<forward name="regionMasterSearch" path="/regionMasterBehind.do"></forward>
+			<forward name="districtMasterSearch" path="/districtMasterBehind.do"></forward>
+			<forward name="stateMasterSearch" path="/stateMasterBehind.do"></forward>
+			<forward name="productMasterSearch" path="/productMasterBehind.do"></forward>
+			<forward name="goldOrnamentSearch" path="/goldOrnamentMasterBehind.do"></forward>
+			<forward name="reasonMasterSearch" path="/reasonMasterBehind.do"></forward>
+			<forward name="departmentMasterSearch" path="/departmentMasterBehind.do"></forward>
+			<forward name="dealerMasterSearch" path="/dealerMasterBehind.do"></forward>
+			<forward name="userBranchMasterSearch" path="/userBranchMasterBehind.do"></forward>
+			<forward name="userAccessMasterSearch" path="/userAccessMasterBehind.do"></forward>
+			<forward name="changePasswordSearch" path="/changePasswordMasterBehind.do?method=fromchangePassJSp"></forward>
+			<forward name="genericMasterBehind" path="/genericMasterBehind.do"></forward>
+			<forward name="waiveoffmaker" path="/waiveOffMakerBehindAction.do" />
+			<forward name="waiveoffAuthor" path="/WaiveOffAuthorBehindAction.do" />
+			<forward name="disbursalSearchBehind" path="/disbursalSearch.do?method=searchDisbursalMakerLnik" />
+			<forward name="disbursalInitiationAuthorSearch" path="/disbursalSearch.do?method=searchDisbursalAuthorLnik" />
+			<forward name="uploadDocument" path="/uploadBehindAction.do" />
+			<forward name="documentChildMasterBehind" path="/documentChildMasterBehind.do" />
+			<forward name="documentCheckListSearch" path="/documentChecklistMasterSearchBehind.do" />
+			<forward name="crSchemeSearchBehind" path="/crSchemeSearchBehind.do" />
+			<forward name="endOfDay" path="/endOfDayAction.do" />
+			<forward name="beginingOfDay" path="/beginingOfDayAction.do" />
+			<forward name="postDisbursalDocMakerSearchBehind" path="/postDisbursalDocSearchBehind.do?method=postDisbursalDocMakerSearch" />
+			<forward name="postDisbursalDocAuthorSearchBehind" path="/postDisbursalDocSearchBehind.do?method=postDisbursalDocAuthorSearch" />
+			<forward name="manualAdviceSearchBehind" path="/manualAdviceSearchBehind.do" />
+			<forward name="knockOffMakerSearch" path="/knockOffSearchBehindAction.do?method=knockOffMakerSearch" />
+			<forward name="knockOffAuthorSearch" path="/knockOffSearchBehindAction.do?method=knockOffAuthorSearch" />
+			<forward name="sdLiquidationMakerSearch" path="/sdLiquidationSearch.do?method=sdLiquidationMakerSearch" />
+			<forward name="sdLiquidationAuthorSearch" path="/sdLiquidationSearch.do?method=sdLiquidationAuthorSearch" />
+			<forward name="partPrePaymentMakerSearch" path="/partPrePaymentSearch.do?method=partPrePaymetMakerSearch" />
+			<forward name="partPrePaymentAuthorSearch" path="/partPrePaymentSearch.do?method=partPrePaymetAuthorSearch" />
+			<forward name="deferralMakerSearch" path="/deferralSearch.do?method=deferralMakerSearch" />
+			<forward name="deferralAuthorSearch" path="/deferralSearch.do?method=deferralAuthorSearch" />
+			<forward name="rePricingMaker" path="/rePricingSearch.do?method=rePricingMakerSearch" />
+			<forward name="rePricingAuthor" path="/rePricingSearch.do?method=rePricingAuthorSearch" />
+			
+			<forward name="adminPwdForBDateChange" path="/JSP/adminPwdForBDateChange.jsp" />
+			
+			<!-- Surendra Added Code for Master> Sub Dealer Master -->
+			<!-- <forward name="subDealerBehind" path="/subDealerBehind.do"></forward> -->
+			<forward name="subDealerMasterSearch" path="/subDealerBehind.do"></forward>
+<!--	Surendra MIC code goes here..		-->
+			<forward name="manualInterestCalc" path="/manualInterestCalc.do?method=openPage"></forward>
+			<!-- Surendra Code for Disbursal Cancellation Starts -->
+			
+			<forward name="disbCancellationMakerSearch" path="/disbursalCancellation.do?method=disbCancellationMakerSearch" />
+			<forward name="disbCancellationAuthorSearch" path="/disbursalCancellation.do?method=disbCancellationAuthorSearch" />
+			
+			<!-- Surendra Code for Disbursal Cancellation End -->
+			<!-- Code By Ritesh Starts Here -->
+			<forward name="caseMarkingMakerBehind" path="/caseMarkingMakerBehind.do" />
+			<forward name="caseMarkingAuthorBehind" path="/caseMarkingAuthorBehind.do" />
+			<!-- Code By Ritesh Ends Here -->
+			
+			<!-- Code By Richa Starts Here -->
+			<forward name="repoBillingApprovalMaker" path="/repoBillingApprovalMakerBehind.do" />
+			<forward name="repoBillingApprovalAuthor" path="/repoBillingApprovalAuthorBehind.do" />
+			<!-- Code By Richa Ends Here -->
+			
+			<!--Saddam Code start  -->
+			<forward name="ToDoListUpload" path="/toDoListUpload.do?method=searchtoDoListUpload"></forward>
+			 <!--Saddam Code end  -->
+				
+			<!-- Code By Ritesh Starts Here for Data Upload -->
+			<forward name="dataUploadMaker" path="/dataUploadMaker.do" />
+			<forward name="dataUploadAuthor" path="/dataUploadAuthor.do" />
+			<!-- Code By Ritesh Ends Here for Data Upload-->
+			
+			<!-- Start GL code -->
+			<forward name="glMaster" path="/glMaster.do?actionName=Search" />
+			<forward name="glGroupLedgerMaster" path="/glGroupLedgerMaster.do?actionName=Search" />
+			<forward name="accYear" path="/accYear.do?actionName=Search" />
+			<forward name="glVoucherEntry" path="/glVoucherEntrySearch.do?limitedAccessParm=N" />
+
+			<forward name="glVoucherEntryWithLimtedLedger" path="/glVoucherEntrySearch.do?limitedAccessParm=Y" />
+			<forward name="voucherAuthorization" path="/voucherBehindAuthorization.do" />
+			<forward name="voucherAuthorizationWithLimit" path="/voucherAuthorizationWithLimit.do?limitWitOutReportingTo=Y" />
+			<forward name="accountingPeriodAction" path="/accountingPeriodAction.do" />
+			<forward name="glBudgetDefinition" path="/glBudgetDefinition.do" />
+			<forward name="glLedgerAccountWise" path="/JSP/reports/glLedgerAccountWise.jsp" />
+			<forward name="closingYearAction" path="/closingYearAction.do" />
+			<forward name="templeteCreationAction" path="/templeteCreationAction.do?actionName=Search" />
+			<forward name="glTrialBalance" path="/glTrialBalance.do" />
+			<forward name="glTrialBalanceProductWise" path="/glTrialBalanceProductWise.do" />
+			<forward name="glVoucherView" path="/viewVoucher.do" />
+			<forward name="glRejectVoucher" path="/rejectVoucher.do" />
+			<forward name="budgetLedgerMappingAction" path="/budgetLedgerMappingAction.do" />
+			<forward name="glBudgetMaster" path="/glBudgetMaster.do?actionName=search" />
+			<forward name="fixedAssetCategoryAction" path="/fixedAssetCategoryAction.do" />
+			<forward name="incomeTaxBlockMasterAction" path="/incomeTaxBlockMasterAction.do" />
+			<forward name="fixedAssetAccount" path="/fixedAssetAccount.do" />
+			<forward name="fixedAssetLocation" path="/fixedAssetLocation.do" />
+			<forward name="fixedAssetDepartment" path="/fixedAssetDepartment.do" />
+			<forward name="fixedAssetAdditionSearch" path="/fixedAssetAdditionSearch.do" />
+			<forward name="fixedAssetAdditionAproval" path="/fixedAssetAdditionApproval.do?actionName=SearchApproval" />
+			<forward name="glSubLedgerAction" path="/glSubLedgerAction.do?actionName=Search" />
+			<forward name="fixedAssetSaleAction" path="/fixedAssetSaleSearchAction.do" />
+			<forward name="fixedAssetSaleAuthorAction" path="/fixedAssetSaleAuthorAction.do" />
+			<forward name="glCashBook" path="/glCashBook.do" />
+			<!-- karmveer -->
+			<forward name="standardglCashBook" path="/glCashBook.do?standard=Y" />
+			<!-- karmveer -->
+			<forward name="glBankBook" path="/glBankBook.do" />
+			<!-- karmveer -->
+			<forward name="standardglBankBook" path="/glBankBook.do?standard=Y" />
+			<!-- karmveer -->
+			<forward name="glDayBook" path="/glDayBook.do"/>
+				<!-- karmveer -->
+			<forward name="standardglDayBook" path="/glDayBook.do?standard=Y"/>
+			<!-- karmveer -->
+			<forward name="glDailyCashRegister" path="/glDailyCashRegister.do"/>
+			<forward name="glDailyCashRegisterconsolidated" path="/glDailyCashRegisterconsolidated.do"/>
+			<forward name="glLedgerReport" path="/glLedgerReport.do" />
+				<!-- karmveer -->
+			<forward name="standardglLedgerReport" path="/glLedgerReport.do?standard=Y" />
+			<!-- karmveer -->
+			<forward name="glVoucherPrinting" path="/glVoucherPrinting.do" />
+			<forward name="glBalanceSheet" path="/glBalanceSheet.do" />
+			<forward name="glProfitLoss" path="/glProfitLoss.do" />
+			<forward name="glSubLedgerReport" path="/glSubLedgerReport.do" />
+			<forward name="faDepreciationCalcAction" path="/faDepreciationCalcAction.do" />
+			<!-- gl By Ankit -->
+			<forward name="glbillSettlementMaker" path="/glbillSettelement.do" />
+			<forward name="glpartyCreation" path="/glParyCreationMaster.do?actionName=Search" />
+			<forward name="glrecivPayHead" path="/recivePaySearch.do" />
+			<forward name="billPayableCapture" path="/glBillCapture.do?expnseType=P" />
+			<forward name="billReceivCapture" path="/glBillReceivCapture.do?expnseType=R" />
+			<forward name="billPayableAuthor" path="/glBillPayableAuthor.do?expnseType=P" />
+			<forward name="billReceivAuthor" path="/glBillReceivAuthor.do?expnseType=R" />
+			<forward name="fixedAssetTransferAction" path="/fixedAssetTransferAction.do" />
+			<forward name="fixedAssetTransferAuthorAction" path="/fixedAssetTransferAuthorAction.do" />
+			<forward name="glchequestatusupdate" path="/glchequeStatusUpdateAction.do" />
+			<forward name="fixedAssetTransferInBranch" path="/fixedAssetTransferInBranchAction.do" />
+			<forward name="fixedAssetTranInBranchAuthor" path="/fixedAssetTranInBranchAuthor.do" />
+			<forward name="knockOffMaker" path="/GlknockOffMaker.do" />
+			<forward name="knockOffAuthor" path="/GlknockOffAuthor.do" />
+			<forward name="glbillReceiptMaker" path="/glBillReceiptSearch.do"/>
+			<forward name="glbillReceiptAuthor" path="/glbillReceiptAuthor.do"/>
+			<forward name="fixedAssetCapitalization" path="/glcapitalizationSearch.do"></forward>
+			<forward name="fixedAssetCapitalizationAuthor" path="/glcapitalizationAuthor.do"></forward>
+			<forward name="billCancellation" path="/billCancellation.do"></forward>
+			<forward name="billCancelAuthor" path="/billCancelAuthor.do"></forward>
+			<forward name="ledgerDump" path="/glLedgerDump.do?restrictedDump=N"/>
+			<forward name="restrictedLedgerDump" path="/glLedgerDump.do?restrictedDump=Y"/>
+			<forward name="uploadingReconcile" path="/gluploadingRecon.do"/>
+			<forward name="fixedAssetSplitMaker" path="/fixedAssetSplitMaker.do?actionName=search"/>
+			<forward name="fixedAssetSpiltAuthor" path="/fixedAssetSplitAuthor.do?actionName=SearchAproval"/>
+			<!-- gl end By Ankit -->
+			
+			<!--sidharth space start for TDS Rate Chart  -->
+   			<forward name="glTDSRateChart" path="/TDSRateChart.do"/>
+   			<forward name="billreceivablepayablevoucher" path="/billreceivablepayablevoucher.do"/>
+			<forward name="cenvatReport" path="/cenvatReport.do"/>
+   			<forward name="bankstatement" path="/bankstatement.do"/>
+   			<forward name="hoexpenseallocationratio" path="/hoexpenseallocationratio.do?actionName=search"/>
+   			<forward name="verticalAllocationRatio" path="/verticalAllocationRatio.do?"/>
+   			<!--sidharth space never TDS Rate Chart  -->
+		<!-- sidharth space for subledger trial balance   -->
+   			<forward name="subledgertrialbalance" path="/subledgertrialbalance.do"/>
+   			<forward name="branchBalanceSheet" path="/branchBalanceSheet.do"/>
+   			<!-- sidharth space for subledger trial balance end here  -->
+
+			<!--Change For Bill Genaration Code -->
+			<forward name="glBillGeneration" path="/glBillGeneration.do" />
+			<forward name="glBillGenerationAuthor" path="/glBillGenerationAuthor.do" />
+			<!--Change For Bill Genaration Code ends  -->
+			<forward name="faClassificationAction" path="/faClassificationAction.do"/>
+			<forward name="pdcViewer" path="/pdcViewer.do"></forward>
+			<forward name="customisedReport" path="/customisedReport.do"/>
+			<forward name="templateProductMapping" path="/templateProductMapping.do?actionName=Search"/>
+		    <forward name="verticalProductMapping" path="/verticalProductMapping.do?actionName=Search"/>
+			<forward name="glFASchedule5" path="/glFASchedule5.do" />
+			<forward name="provisionalVoucherReverse" path="/provisionalVoucherReverse.do" />
+			<forward name="voucheReversal" path="/voucheReversal.do" />
+			<forward name="excelVoucheReversal" path="/excelVoucheReversal.do" />
+			<forward name="fixedAssetInsuranceAction" path="/fixedAssetInsuranceAction.do" />
+			<forward name="budgetVarianceReport" path="/budgetVarianceReport.do" />
+			<forward name="exceptionReport" path="/exceptionReport.do" />
+		  <forward name="accountingList" path="/accountingListAction.do?method=openJsp"></forward>
+		  <forward name="loanWiseTrailBalance" path="/loanWiseTrailBalance.do"></forward>
+		  <forward name="GLVendorPayments" path="/GLVendorPayments.do"></forward>
+		  <forward name="partyWiseExpRpt" path="/partyWiseExpRpt.do"></forward>
+			 <!-- saurabh added new link for recon process in gl 	-->  	     	 	  
+				<forward name="reconProcess" path="/reconProcess.do?method=reconProcessDetailPage" />
+				<forward name="reconciliationReport" path="/reconciliationReport.do" />			
+	     <!-- saurabh added new link for recon process	in gl -->
+	     
+	      <!-- saurabh added new link for reassign a deal	-->  	     	 	  
+				<forward name="dealReassign" path="/dealReassign.do?method=search" />
+			
+					 <!-- mradul added new link for stationary masters in gl -->
+	      
+			<forward name="stationaryAdditionMaster" path="/stationaryAdditionMasterAtCM.do"/>
+	      	<forward name="stationaryIssuanceMaster" path="/stationaryIssuanceMasterAtCM.do"/>
+	      	<forward name="hoAllocationSearch" path="/hoAllocationSearchAtCM.do"/>
+	      	<forward name="cancelationReceipt" path="/cancelationReceiptAtCM.do"/>
+	      	<forward name="usedReceipt" path="/usedReceiptAtCM.do"/>
+	      	
+	        <!-- mradul ended new link for stationary masters in gl -->
+	        
+	           <!-- mradul added new link for stationary masters in gl on 11 sept. 2013 -->
+	        
+			<forward name="branchStationaryAcknowledgment" path="/branchAcknowledgmentAtCM.do"/>   
+	        <forward name="branchStationaryReturnHO" path="/branchStationaryReturnHOAtCM.do"/> 
+	        <forward name="hoStationaryAcknowledgment" path="/hoStationaryAcknowledgmentAtCM.do"/>       			
+	        
+	         <!-- mradul ended new link for stationary masters in gl -->
+	         
+	         <!-- mradul added new link for lead Upload -->
+	         <forward name="leadUpload" path="/leadUploadAction.do" />
+	         
+	         <!-- mradul ended new link for  lead Upload -->
+	         
+	        <forward name="glVoucherChequeEdit" path="/glVoucherChequeEdit.do" />	
+			<!-- End GL code -->
+			
+			 <!-- sachin.b started new link for stationary branch change in gl -->
+	        <forward name="stationaryBranchgChange" path="/stationaryBranchgChangeBehindAtCM.do" />	
+			<!-- End GL code -->
+			
+			<forward name="rptchartofaccounts" path="/JSP/rptchartofaccounts.jsp"/>
+			<forward name="fieldVarificationSearch" path="/fieldVarificationBehindAction.do?method=verificationInitCreditProcessing"/>
+			<forward name="varificationSearchAtCM" path="/fieldVarificationBehindAction.do?method=verificationInitCreditManagement"/>
+			<forward name="fieldVarificationCapturingSearch" path="/fieldVarificationCapturingBehindAction.do?method=verificationCapturingCreditProcessing"/>
+			<forward name="varificationCapturingSearchAtCM" path="/fieldVarificationCapturingBehindAction.do?method=verificationCapturingCreditManagement"/>
+			<forward name="fieldVarificationCompletionSearch" path="/fieldVarificationCompletionBehindAction.do?method=verificationCompletionCreditProcessing"/>
+			<forward name="varificationCompletionSearchAtCM" path="/fieldVarificationCompletionBehindAction.do?method=verificationCompletionCreditManagement"/>
+			<forward name="tradeCheckCapturingBehindAction" path="/tradeCheckCapturingBehindAction.do"/>
+			<forward name="tradeCheckCompletionBehindAction" path="/tradeCheckCompletionBehindAction.do"/>
+			<forward name="fundFlowAnalysisSearchBehind" path="/fundFlowAnalysisSearchBehind.do"/>
+			<forward name="collateralVerificationCapture" path="/collateralVerificationCapturingSearch.do?method=initialcollateralVerificationCapturing"></forward>
+			<forward name="financialAnalysisSearchBehindAction" path="/financialAnalysisSearchBehindAction.do"/>
+			
+			<forward name="individualFinancialSearchBehindAction" path="/individualFinancialSearchBehindAction.do"/>
+			
+			<forward name="collateralVerificationCompletion" path="/collateralCompletionBehindAction.do"></forward>
+			
+			<!--vinod space start for forward  -->
+			
+			<forward name="reports" path="/firstReports.do"/>
+   			
+   			<!--vinod space never end  -->
+   			
+   			<!-- aditi space cheque status report -->
+   			<forward name="chequeStatusReport" path="/chequeStatusReportBehindAction.do"/>
+   			<forward name="documentCollection" path="/documentCollection.do"/>
+   			<forward name="userAccessSearch" path="/userAccessSearch.do"/>
+   			<forward name="userFunctionAccessSearch" path="/userFunctionAccessSearch.do"/>
+			<forward name="userAccessReview" path="/userAccessReview.do"/>
+   			<forward name="userDetailSearch" path="/userDetailSearch.do"/>
+   			<forward name="userLoggedInReport" path="/userLoggedInReportBehindAction.do"/>
+   			<forward name="collectionDumpAction" path="/collectionDumpAction.do"/>
+   			<forward name="reportFunctionAccessAction" path="/reportFunctionAccessBehindAction.do"/>
+   			<forward name="reportsBehindAction" path="/reportsBehindAction.do"/>
+   			<forward name="teleCallerScorecardAction" path="/teleCallerScorecardAction.do"/>
+   			<!-- aditi space  cheque status report  end here -->
+   			
+   			<!-- neeraj space Start  -->   			
+
+   			<forward name="cpDashboard" path="/cpDashboard.do"/>
+   			<forward name="dedupe" path="/dedupe.do?method=behindMethod"/>
+   			<forward name="assetDedupe" path="/assetDedupe.do?method=behindMethod"/>
+   			<forward name="paymentmemoreports" path="/paymentMemoReportsBehindAction.do"/>
+   			<forward name="summaryReport" path="/summaryReport.do"/>
+   			<forward name="knockOffCancellationMaker" path="/knockOffCancellationMakerBehindAction.do"/>
+   			<forward name="knockOffCancellationAuthor" path="/knockOffCancellationAuthorBehindAction.do"/>
+   			<forward name="dumpDownLoad" path="/dumpDownLoad.do?restrictedParm=N"/>
+   			<forward name="dumpDownLoadRestricte"  path="/dumpDownLoad.do?restrictedParm=Y"/>
+   			<forward name="generateBatch" path="/generateBatch.do"/>
+   			<forward name="presentationBatchProcess" path="/presentationBatchProcess.do"/>   	
+   			<forward name="cibilReportDownLoad" path="/cibilReportDownLoad.do"/>  
+   			 <!-- Shashank -->
+   			<forward name="neslReportDownLoad" path="/neslReportDownLoad.do"/>
+   			<forward name="nhbReport" path="/nhbReport.do"/>  
+   			<forward name="editLoanDetailMaker" path="/editLoanDetailMaker.do?method=newEditLoan"/>
+			<forward name="editLoanDetailAuthor" path="/editLoanDetailAuthor.do?method=defaultEditLoanAuthor"/>
+			<forward name="rateApprovalMaker" path="/rateApprovalMaker.do?method=defaultRateApproval"/>
+			<forward name="rateApprovalChecker" path="/rateApprovalChecker.do?method=defaultRateChecker"/>
+			<forward name="fileTrackingDashbord" path="/fileTrackingDashbord.do?method=defaultMethod&amp;p_report_format=H&amp;source=D"/>
+   						
+   			<!-- neeraj space End  -->
+   			<!-- Manish work space start  -->
+			<forward name="cibilVerification" path="/cibilVerificationDispatchAction.do?method=cibilVerificationInition" />
+			<forward name="cibilView" path="/viewCibilDispatchAction.do?method=viewCibil" />
+			<!--Manish work space end -->
+			
+			<!-- Manish Rate approval Matrix -->
+			<forward name="rateMatrixMaker" path="/rateMatrixMakerDispatchAction.do?method=rateApprovalMakerSearch" />
+			<forward name="rateMatrixChecker" path="/rateMatrixCheckerDispatchAction.do?method=rateApprovalCheckerSearch" />
+ 			<!-- End of Manish Rate approval -->  			
+   			
+   			<!-- Manish  start for upload -->
+			<forward name="rateReviewUpload" path="/rateReviewUpload.do?method=beahindMethod" />
+			
+			<!--Manish  space end for upload-->
+			<!-- NISHANT  start for upload -->
+			<forward name="stationaryUpload" path="/stationaryUploadAtCM.do?method=beahindMethod" />
+			
+			<!--NISHANT  space end for upload-->
+			<!-- Manish  Space for Follow up Trail Report -->
+			<forward name="followUpTrail" path="/followUpTrailDispatch.do?method=openFollowUpTrailReport" />
+			<!-- Manish  Space  Ends for Follow up Trail Report -->
+			
+   			<!-- sidharth space sub ledger  report -->
+   			
+   			<forward name="subledgerlist" path="/subledgerlistActionBehind.do"/>
+   			<forward name="bankreconcilation" path="/bankreconcilation.do"/>
+			<forward name="bankReconStatement" path="/bankReconStatement.do"/>
+   			<forward name="fixedAssetRegister" path="/fixedAssetRegister.do"/>
+   			<forward name="partyMasterReport" path="/partyMasterReport.do"/>
+   			<!-- sidharth space  cheque status report  end here -->
+   			
+   			<!--  sidharth space for cm -->
+   			<forward name="adhocreports" path="/adhocreports.do"/>
+   			<!--  sidharth space end here -->
+   			
+   			    	<!-- added by Virender -->
+    		<forward name="losUpload" path="/losUpload.do" />
+   			
+   			<!-- Neeraj space start -->
+   			<forward name="userApprovalMatrix" path="/userApprovalMatrixBehindAction.do"/>
+   			<forward name="userApprovalAuthor" path="/userApprovalAuthorBehindAction.do"/>
+   			<forward name="MakeModelMaster" path="/MakeModelMasterBehindAction.do"/>
+			<!-- Neeraj space end -->
+   			<forward name="ratioDefinitionMasterBehind" path="/ratioDefinitionMasterBehindAction.do"/>
+   			
+			<forward name="ruleMasterSearchBehind" path="/ruleMasterSearchBehindAction.do"/>
+			<forward name="deviationApproval" path="/deviationApprovalSearchBehindAction.do"/>
+			<forward name="searchNotePadBehindInCM" path="/searchNotePadBehindInCM.do"/>
+  			<forward name="userProductAccess" path="/userProductAccessBehindAction.do"/>
+  			
+  			<!--  Vishal Holiday Master Start -->
+  			<forward name="holidayMaintenance" path="/holidayMaintenanceBehind.do"></forward>
+  			<!--  Vishal Holiday Master end -->
+  	
+  	<forward name="searchNotePadBehindInCP" path="/searchNotePadBehindInCP.do"/>	
+  	<forward name="searchNotePadBehindInLead" path="/searchNotePadBehindInLead.do"/>	
+<!-- Nishant Rai Deal Cancellation Maker Start -->
+  	<forward name="dealCancellationClosureInitiation" path="/dealClosureMakerBehindAction.do?method=dealCancellationMakerSearch" />
+  	<forward name="dealCancellationAutor" path="/dealClosureMakerBehindAction.do?method=dealAuthorSearch" /> 
+<!-- Nishant Rai Deal Cancellation Maker End -->
+
+   			
+<!--   Sanjog starts -->
+          
+	<forward name="leadCapturingSearchBehind" path="/leadCapturingSearchBehind.do" />
+	<forward name="leadCapturingBehindAction" path="/JSP/CPJSP/leadCapturingDetails.jsp" />
+	
+	<forward name="leadTrackingSearchBehind" path="/leadTrackingSearchBehind.do" />
+	<forward name="ajaxAction1" path="/JSP/CPJSP/leadCapturingAjax.jsp" />
+
+
+  <!-- For Scoring Masters -->
+ 
+ 	<forward name="scoringParameterMasters" path="/scoringSearchMasters.do?method=initialscoringMaster" />
+ 	
+ 	<forward name="scoreCardMasters" path="/scoreCardMasters.do?method=initialCardList" />
+ 
+<!-- End Scoring Masters -->
+
+<!--Rule Masters Starts By Sanjog -->
+ 
+ 	<forward name="rupleParameter" path="/ruleSearchMasters.do?method=initialruleMaster" />
+ 
+<!-- End Rule Masters -->
+
+<!--Policy Checklist Def Masters Starts By Sanjog -->
+ 
+ 	<forward name="policyCheckDef" path="/policyChecklistMasterSearchScreen.do" />
+ 
+<!-- End Policy Checklist Def Masters -->
+
+
+
+           
+<!-- Sanjog ends 	-->
+
+
+   			<!-- Collection Code Starts here-->
+
+   			 <forward name="allocationmastersearch" path="/allocationMasterSearch.do?method=openSearchJsp" />
+   			 <forward name="reallocation" path="/reallocation.do?method=openJsp" />
+		    <forward name="financialPrameterBehind" path="/financialPramBehind.do"/>
+			<forward name="casereports" path="/casereport.do"/>
+<!--			sidharth begin-->
+			<forward name="allocatedCases" path="/allocatedCases.do"/>
+<!--			sidharth end-->
+			<forward name="unallocatedcasereports" path="/unallocatedreport.do"/>
+			<forward name="performancereports" path="/performancereport.do"/>
+		 	<forward name="actionCodeMasterSearch" path="/actionCodeMasterBehind.do" />
+   			<forward name="Classification" path="/queueCodeMasterBehind.do?method=searchQueue" />
+   			<forward name="escalationsMatrix" path="/escalationsMatrixBehind.do?method=openJsp" />
+   			<forward name="resolvedcasereports" path="/resolvedCaseBehind.do"/>
+			<forward name="collectionmis" path="/collectionMISBehind.do"/>
+			<forward name="paymentreports" path="/paymentReportsBehind.do"></forward>
+			<forward name="contactRecordingBehindAction" path="/contactRecordingBehindAction.do" />
+			<forward name="AdhocContactRecordingBehindAction" path="/AdhocContactRecordingBehindAction.do" />  <!-- by  nazia -->
+   			<forward name="supervisorReviwBehindAction" path="/supervisorReviwBehindAction.do" />
+   			<forward name="classificationProcessAction" path="/classificationProcessAction.do?method=openProcessJsp" />
+            <forward name="collUploadData" path="/collUploadData.do?method=openJsp" />
+            <forward name="collectionSummary" path="/collectionSummary.do" />
+             <!-- Collection Code Ends Here -->
+ <!--Anil starts from here -->
+			<forward name="approvalLevelDef" path="/approvalLevelDefSearchBehind.do?method=OpenApprovalLevelMainJsp" />
+            <!--Anil ends from here -->
+            <!--    Abhimanyu         -->
+	   <forward name="reportHeaderLedgerMap" path="/reportHeaderLedgerMap.do" />
+	   <forward name="parameterScoreDef" path="/parameterScoreDef.do" />
+	  <!-- Abhimanyu  -->
+<!-- kanika security unlock master -->
+<forward name="unlockUser" path="/unlockUser.do" />
+<!-- end of unlock master -->
+
+      <forward name="underwritingDocUploadBehind" path="/docUploadBehindSearchAction.do" />
+   
+
+      <!-- prashant , Additional Disbursal  maker/Author start  -->
+	 		<forward name="additionalDisbursalMaker" path="/additionalDisbursalMaker.do?method=searchAdditionalDisbursalMaker" />
+	 		<forward name="additionalDisbursalAuthor" path="/additionalDisbursalAuthor.do?method=searchAdditionalDisbursalAuthor" />
+ 		<!-- prashant , Additional Disbursal maker/Author  end -->
+
+<!-- Ankit Limit Enhansment -->
+ <forward name="limitEnsmentMaker" path="/limitEnhansmentBehind.do?method=limitMakerSearch" />
+<forward name="limitEnsmentAuthor" path="/limitEnhansmentBehind.do?method=limitAuthorSearch" /> 
+ <!-- prashant , Update  RepaySchedule  start  -->
+	 	<forward name="updateRepayschedule" path="/repayscheduleSearchBehind.do"></forward>
+	 	<!-- prashant , Additional Disbursal maker/Author  end -->
+ 		<!-- Amit Ruhela Bank Statement Uploading,Auto Reconcile,Manual Reconcile -->
+			<forward name="bankStatementUploading" path="/bankStatementUploading.do" />
+			<forward name="bankStatementAutoReconcile" path="/bankStatementAutoReconcile.do" />
+			<forward name="bankStatementManualReconcile" path="/bankStatementManualReconcile.do" />
+				<forward name="glbillSettlementAuthor" path="/glbillSettelementAuthor.do" />
+			<forward name="billreceivablepayablereport" path="/billreceivablepayablereport.do"></forward>
+			<forward name="billCapturingView" path="/billCapturingView.do" />
+			<forward name="glDepreciationDetail" path="/glDepreciationDetail.do"/>
+			
+			<!-- Amit Ruhela end  Bank Statement Uploading,Auto Reconcile,Manual Reconcile -->
+		<forward name="manualnpamovementmaker" path="/manualNpaMovementMakerSearch.do?method=searchManualNpa" />
+		<forward name="manualnpamovementauthor" path="/manualNpaMovementAuthorSearch.do?method=searchManualNpaAuthor" />
+ 		<forward name="saleDiscardReport" path="/saleDiscardReport.do"/>
+	 	<forward name="chequeDetail" path="/chequeDetail.do?actionName=Search&amp;source=default"/>
+  		<forward name="chequePrintingReport" path="/chequePrintingReport.do"/>
+  		<forward name="glExcelupload" path="/glExcelSheetUpload.do" />
+  		<forward name="bookToBookReconcile" path="/bookToBookReconcile.do" />
+        <forward name="bankToBankReconcile" path="/bankToBankReconcile.do" />
+  		<!-- Amit Ruhela   end -->
+  		
+	 <!-- prashant , cibil  start  -->
+	 	<forward name="cibilCustomer" path="/cibilCustomer.do?method=cibilReportSearch"></forward>
+	 	
+ 		<!-- prashant , cibil  end --> 		
+		<forward name="budgetVoucherMapping" path="/budgetVoucherMappingSearch.do" />
+		
+		<!-- Mobile PayIn slip -->
+		<forward name="mobliePayInSlipAction" path="/mobliePayInSlipAction.do?method=mobliePayInSlipSearch" />
+		<!-- Mobile PayIn slip -->
+		
+		<!-- Amit Ruhela , BillReceavable Report  start 28 june -->
+		<forward name="billreceivablereport" path="/billreceivablereport.do" />
+		<!-- Amit Ruhela , BillReceavable Report   end --> 	
+
+		
+		
+		
+		<!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->
+				<forward name="manualDeviationMaster" path="/manualDevMasterBehindAction.do" />
+	    <!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->
+
+		
+		
+		
+		 <!-- Anil , Non-EMI Based Loan  start  -->
+	 	<forward name="changeRateMaker" path="/changeRateMaker.do"></forward>
+	 	<forward name="changeRateAuthor" path="/changeRateAuthor.do?method=OpenScreenToAuthor"></forward>
+	 	<!-- Anil , Non-EMI Based Loan maker/Author  end -->
+	 	
+         <!-- Manisha Tomar added new link for manual deviation on 13/08/2012	-->
+				<forward name="manualDeviationMaker" path="/manualDeviationMakerSearchBehindAction.do" />
+	    <!-- Manisha Tomar added new link for manual deviation on 13/08/2012	-->
+	    
+	      <!-- Anil ,New Link for manufaturer-Supplier mapping start  -->
+				<forward name="manufacturerSupplierMapping" path="/mfrSupplMappingBehindAction.do" />
+	     <!-- Anil ,New Link for manufaturer-Supplier mapping  end -->
+	 	
+
+	 	<!-- Code For Payout Starts here By Arun -->
+		
+		<forward name="activityMasterBehind" path="/activityMasterBehind.do" />
+		<forward name="taxMasterBehind" path="/taxMasterBehind.do" />
+		<forward name="bpMasterBehind" path="/bpMasterBehind.do" />
+		<forward name="schemeMasterBehind" path="/schemeMasterBehind.do" />
+		<forward name="schemeBpMapBehind" path="/schemeBpMapBehind.do" />
+		<forward name="scheduleMasterBehind" path="/scheduleMasterBehind.do" />
+		<forward name="paymentReceiptBehind" path="/paymentReceiptBehind.do" />
+		<forward name="paymentReceiptBehindAuthor" path="/paymentReceiptBehindAuthor.do" />
+		<forward name="scheduleMasterBehind" path="/scheduleMasterBehind.do" />
+		<forward name="bpListReport" path="/payReportAction.do?method=openBpListReportJsp" />
+		<forward name="transactionSummaryReport" path="/payReportAction.do?method=opentransactionSummaryReportJsp" />
+		<forward name="paymentSummaryReport" path="/payReportAction.do?method=openPaymentSummaryReportJsp" />
+		
+		<!-- Code for payout Ends here By Arun -->
+
+	 	  <!-- Prashant added new link for query/response on 07/09/2012	-->
+				<forward name="queryViewerResponseSearch" path="/querResponseSearchBehindAction.do" />
+				<forward name="deviationAuthorSearch" path="/creditListAction.do?method=searchLinkForDeviationAuthor" />
+				<forward name="verificationSearch" path="/verificationMappingMasterBehindAction.do" />
+				<forward name="verificationQuestSearch" path="/verificationQuestMasterBehindAction.do" />
+				
+				<forward name="disbursalPlanSearchMaker" path="/disbursalPlanSearchMaker.do?method=disbursalPlanSearchMaker" />
+				<forward name="disbursalPlanSearchAuthor" path="/disbursalPlanSearchAuthor.do?method=disbursalPlanSearchAuthor" />
+				
+	     <!-- Prashant added new link for query/response on 07/09/2012	-->
+	     
+	      <!-- Mradul added new link for Scoring Benchmark on 01/06/2013	-->
+	    
+	      <forward name="scoringBenchmark" path="/scoringBenchmarkSearchBehindAction.do" />
+	      
+	       <!-- Mradul added new link for Scoring Benchmark on 01/06/2013	-->
+	     
+	     <!-- Amit Quality Check Starts -->
+	 	<forward name="qualityCheckBehind" path="/qualityCheckAction.do?method=searchDealForQualityCheck" />
+	 	<!-- Amit Quality Check Ends -->
+     <!-- Scoring MAster Code by Arun Starts Here -->
+		<forward name="scoringMasterBehind" path="/scoringMasterBehind.do" />
+		 <!-- Scoring MAster Code by Arun ends Here -->
+		 
+		 <!-- Anil EMI Calculator Code Starts -->
+	 	<forward name="emiCalculator" path="/emiCalculator.do" />
+	 	<!-- Anil EMI Calculator Code Ends -->
+	 	
+	 	<!-- Asesh Kumar Benchmark Ratios Master Code Starts -->
+	 	<forward name="benchmarkRatio" path="/benchmarkRatioBehind.do" />
+	 	<!-- Asesh Kumar Benchmark Ratios Master Ends -->
+	 	<!-- Asesh Kumar DealMovement Search Master Ends -->
+	 	<forward name="dealMovementSearchBehindAction" path="/dealMovementSearchBehindAction.do" />
+	 	<forward name="closureMarketingBehind" path="/closureMarketingBehindAction.do" />
+	 	<!-- Asesh Kumar DealMovement Search Master Ends -->
+	<!-- Amit Query Starts -->
+		<forward name="querySearchBehind" path="/querySearchBehind.do"></forward>
+	<!-- Amit Query Ends -->
+
+        <!-- Anil File Tracking Code Starts -->
+	 	<forward name="fileTracking" path="/fileTrackingBehindAction.do?method=operationFileTracking" />
+	 	<forward name="fileTrackingViewer" path="/fileTrackingBehindAction.do?method=viewFileTracking" />
+	 	<forward name="branchFileTracking" path="/fileTrackingBehindAction.do?method=branchFileTracking" />
+	 	<forward name="storeFileTracking" path="/fileTrackingBehindAction.do?method=storeFileTracking" />
+	 	<!-- Anil File Tracking Code End -->
+	 	
+	 	<!-- Manish Shukla OPS Bulk File Tracking Code Starts -->
+	 	<forward name="branchBulkFileTracking" path="/fileTrackingBehindAction.do?method=branchBulkFileTracking" />
+	 	
+	 	<!-- Manish Shukla OPS Bulk File Tracking Code End -->
+	 	
+	 	<!-- Nishant Hand Sighting starts -->
+	 	<forward name="handSighting" path="/handSightingBehindAction.do" />
+	 	<forward name="handSightingViewer" path="/handSightingBehindAction.do?method=viewMode" />
+	 	<!-- Nishant Hand Sighting end -->
+	 	
+<!--VINOD work space start-->
+	
+	<!-- Legal Start -->
+
+		<forward name="legalCaseTypeMaster" path="/caseTypeMasterBehind.do"></forward>
+		
+		<forward name="legalLawFirmMaster" path="/lawFirmMasterBehind.do"></forward>
+		
+		<forward name="legalAdvocateMaster" path="/advocateMasterBehind.do"></forward>
+		
+		<forward name="legalNoticeInitiationMaker" path="/legalNoticeInitiationMakerBehind.do"></forward>
+		
+		<forward name="caseInitiationMaker" path="/legalCaseInitiationMakerDispatch.do?method=searchLegalCaseInitiationMaker" />
+		
+		<forward name="caseFileMaker" path="/legalCaseFileMakerDispatch.do?method=searchLegalCaseFileMaker" />
+		
+		<forward name="caseFileAuthor" path="/legalCaseFileAuthorDispatch.do?method=searchLegalCaseFileAuthor" />
+		
+		<forward name="courtProcessingMaker" path="/legalCourtProcessingMakerDispatch.do?method=searchLegalCourtProcessingMaker" />
+		
+		<forward name="courtProcessingAuthor" path="/legalCourtProcessingAuthorDispatch.do?method=searchLegalCourtProcessingAuthor" />
+		
+		<forward name="reopenClosedCase" path="/legalReopenClosedCaseDispatchAction.do?method=searchLegalReopenClosedCase" />
+		
+		<forward name="advocateCaseMIS" path="/legalAdvocateCaseMisDispatchAction.do?method=openAdvocateCaseMisSearchPage" />
+		
+	<!-- Legal End -->
+	<!-- Rohit Changes for legal reason master -->
+	<forward name="legalReasonMasterSearch" path="/legalReasonMasterBehind.do"></forward>
+	<!-- Rohit Changes for legal reason master -->
+	<!-- Repo Start -->
+		
+		<forward name="repoDetailbyAgency" path="/repoDetailbyAgencyDispatchAction.do?method=searchRepoDetailbyAgency" />
+		
+		<forward name="repossessedMIS" path="/repossessedMISDispatchAction.do?method=openRepossessedMISSearchPage" />
+		
+		<forward name="repossessedRejectCaseMIS" path="/repossessedRejectCaseMISDispatchAction.do?method=openRepossessedRejectCaseMISSearchPage" />
+	
+	<!-- Repo End -->
+		
+<!-- VINOD work space end-->
+
+<!-- Richa workspace -->
+
+	<!-- Legal Start-->	 	
+
+	 	<forward name="legalCourtTypeMaster" path="/courtTypeMasterBehind.do"></forward>
+
+	 	<forward name="legalCourtNameMaster" path="/courtNameMasterBehind.do"></forward>
+	
+	 	<forward name="legalPOAMaster" path="/poaMasterBehind.do"></forward>
+	 	
+	 	<forward name="legalNoticeInitiationChecker" path="/noticeCheckerBehind.do" />
+	 	
+	 	<forward name="assignRejectCase" path="/assignRejectCaseBehind.do" />
+	 	
+	<!-- Legal End -->
+	
+	<!-- Repo Start-->
+	
+		<forward name="repoStockyardMaster" path="/repoStockyardMasterDispatch.do?method=searchStockYard" />
+		
+		<forward name="repoMarkingMaker" path="/repoMarkingMakerDispatch.do?method=searchRepoMarkingMaker" />
+		
+		<forward name="repoMarkingAuthor" path="/repoMarkingAuthorDispatch.do?method=searchRepoMarkingAuthor" />
+		
+		<forward name="repoDetailbyStockyard" path="/repoDetailByStockyardDispatch.do?method=searchRepoDetailByStockyard" />
+	
+	<!-- Repo End -->		
+	 	
+<!-- richa workspace ends -->
+
+<!-- Nazia work space start  -->
+	 	
+	<!-- Legal Workspace start -->
+	 	<forward name="legalNoticeTypeMaster" path="/noticeTypeMasterBehind.do"></forward>
+	 		 		 	
+	 	<forward name="legalStageMaster" path="/stageTypeMasterBehind.do"></forward>
+	 	
+	 	<forward name="declineDispatchNotice" path="/legalDeclineDispatchNoticeBehind.do" />
+	 	
+	 	<forward name="reassignCase" path="/reassignCaseBehind.do" />
+	 	
+	<!-- Legal Workspace end -->
+	
+	<!-- Repo Workspace start -->
+	
+		<forward name="repoAssetChecklistMaster" path="/RepoAssetChecklistDispatch.do?method=searchRepoAsset"></forward>
+		
+		<forward name="repoConfirmation" path="/RepoConfirmationDispatch.do?method=searchRepoConfirmation"></forward>
+	
+	<!-- Repo Workspace end -->
+	 	
+	
+<!-- Nazia work space end -->
+
+<!-- Nazia/Richa work space for cheque allocation details starts -->
+
+<forward name="chequeAllocationDetail" path="/chequeAllocationDetail.do"/>
+
+<!-- Nazia/Richa work space for cheque allocation details ends-->
+
+<!-- saurabh work space start  -->
+	<forward name="UWApprovalLevelDefAuthor" path="/UWApprovalLevelDefAuthor.do" />
+	<forward name="linkLoanMakerSearch" path="/linkLoanMakerSearch.do" />
+	<forward name="linkLoanAuthorSearch" path="/linkLoanAuthorSearch.do" />
+	<forward name="manualAdviceUpload" path="/manualAdviceUpload.do" />
+	<forward name="nhbPartPrePaymentUpload" path="/nhbPartPrePaymentUpload.do" />
+<!-- saurabh work space ends  -->
+
+<!--sachin work space for nhb mapping-->
+<forward name="nhbMappingSearch" path="/searchNhbMapping.do?method=searchNhbMapping" />
+<!--sachin work space end	 	-->
+<!--richa work space for update asset-->
+<forward name="updateAssetSearch" path="/updateAssetSearch.do" />
+<forward name="assetInsuranceUpload" path="/assetInsuranceUpload.do" />
+<!--richa work space end	 	-->
+<!--  Manish For Update Asset Author Starts -->
+<forward name="updateAssetAuthor" path="/updateAssetAuthor.do" />
+<!-- Manish For Update Asset Author Ends -->
+<!--sachin balyan work space for nhb mapping-->
+<forward name="receivedAtOps" path="/receivedAtOpsBehindAction.do?method=operationFileTrackingOps" />
+
+<!--sachin balyan work space end	 	-->
+
+<!--sachin balyan work space for nhb mapping-->
+<forward name="sendToStore" path="/SendTOStoreBehindAction.do?method=operationfileTrackingtostore" />
+
+<!--sachin balyan work space end	 	-->
+<!--sachin balyan work sales executive mapping-->
+<forward name="salesExecutiveMaster" path="/salesExecutiveMaster.do" />
+
+<!--sachin balyan work space end	 	-->
+
+<forward name="usedVehiclePricing" path="/usedVehiclePricingBehind.do"></forward>
+
+<!--AMANDEEP  start for Notepad upload -->
+			<forward name="notepadUpload" path="/notepadUpload.do?method=beahindMethod" />
+			
+<!--AMANDEEP  space end for NOTEPAD upload-->
+
+
+<!--AMANDEEP  start for cm Notepad upload -->
+			<forward name="notepadUploadcm" path="/notepadUploadcm.do?method=beahindMethod" />
+			
+<!--AMANDEEP  space end for cm NOTEPAD upload-->
+
+
+  <forward name="verificationModuleCompletionSearch" path="/varificationModuleCompletionBehindAction.do?method=verificationModuleCompletionSearch"/>
+
+  <!--Prashant  space end for cm down load report-->
+    <!-- Manish Baranwal Code Start for link tracking detail  -->
+    <forward name="trackingDetails" path="/trackingDetails.do"></forward>
+    <!-- end Code of Manish for link tracking detail  -->
+
+
+
+  <forward name="cmsDownLoad" path="/cmsDownLoad.do"/>
+  
+<!--AMIT2 KUMAR space start for cm BULK REPORT GENERATION -->
+   <forward name="bulkReportGeneration" path="/bulkReportGeneration.do?method=reportGenerationMethod" />
+<!--AMIT2 KUMAR space END for cm BULK REPORT GENERATION -->
+
+<!-- Manish Baranwal Code Start for link tracking detail  -->
+   <forward name="trackingDetails" path="/trackingDetails.do"></forward>
+<!-- end Code of Manish for link tracking detail  -->
+    <!-- parvez starts  -->
+   
+    <forward name="consortiumPartnerMasterAction" path="/consortiumPartnerMasterBehindAction.do" />
+    
+   <!-- parvez ends -->
+      <!-- Changes Start for allocation Upload -->
+   <forward name="AllocationProcessUpload" path="/AllocationProcessUpload.do"></forward>
+   <!-- Changes End for allocation Upload -->
+   	<!-- <forward name="editDealMaker" path="/editDealSearch.do?method=editDealMakerSearch" />
+	<forward name="editDealAuthor" path="/editDealSearch.do?method=editDealAuthorSearch" /> -->
+	<!-- shreyansh for mobile user mapping starts  -->
+   	 <forward name="MobileUserMapping" path="/MobileUserMappingAction.do" />
+   	   <!-- shreyansh for mobile user mapping ends  -->
+  	<!-- Kamlesh changes starts for mobile download in dms -->
+ <forward name="MobileDownload" path="/MobileDownload.do" />
+  <!-- Kamlesh changes end for mobile download in dms -->
+   <!-- Rohit Starts for generic Upload -->
+ <forward name="genericUploadMaker" path="/genericUploadMaker.do" />
+    <forward name="genericUploadAuthor" path="/genericUploadAuthor.do" />
+    <!-- Rohit end for generic Upload -->
+	 <!-- Karmveer Code Start for maker authos concept in upload  -->   
+    <forward name="uploadMaker" path="/uploadMaker.do" />
+    <forward name="uploadAuthor" path="/uploadAuthor.do" />
+   <!-- Karmveer Code End for maker authos concept in upload  -->
+
+
+
+	<forward name="dealReassignmentMaker" path="/dealReassignmentSearch.do?method=dealReassignmentMakerSearch" />
+	<forward name="dealReassignmentAuthor" path="/dealReassignmentSearch.do?method=dealReassignmentMakerSearch" />
+    <forward name="dealReprocessingBehindAction" path="/dealReprocessingBehindAction.do?method=execute"/>
+   <forward name="dealSendBackSearchBehindAction" path="/dealSendBackSearchBehindAction.do"></forward>
+    <forward name="interestWorkingReport" path="/interestWorkingReport.do"/> <!-- Added by Pranaya -->
+<!--    Abhishek Start For Document Upload Maker and Author on CPS -->
+   <forward name="documentUploadMaker" path="/documentUploadMaker.do"/>     
+   <forward name="documentUploadAuthor" path="/documentUploadAuthor.do"></forward>   
+  <!-- Abhishek End -->
+
+<!--Sanjay Changes Starts...for allocation Upload-->
+   <!-- Changes Start for allocation Upload 
+   <forward name="AllocationProcessUpload" path="/AllocationProcessUpload.do"></forward>
+   <forward name="SecurityledgerDump" path="/glLedgerDump.do?restrictedDump=N&amp;module=SEC"/>
+  Changes End for allocation Upload
+   
+  <forward name="cmsDownLoad" path="/cmsDownLoad.do"/>
+
+
+
+  <forward name="glExceluploadCM" path="/glExcelSheetUploadCM.do" /> -->
+    <!--Rohit Changes Starst for Dedupe-->
+ <forward name="dedupeReferal" path="/dedupeReferal.do"></forward>
+ <!-- Rohit Changes end for dedupe-->
+ <forward name="rcuVerificationCapturing" path="/fieldVarificationCapturingBehindAction.do?method=verificationCapturingCreditProcessing"></forward>
+<forward name="rcuVerificationCompletion" path="/fieldVarificationCompletionBehindAction.do?method=verificationCompletionCreditProcessing"></forward>
+  <forward name="rcuVerificationCapturingAtCM" path="/fieldVarificationCapturingBehindAction.do?method=verificationCapturingCreditManagement"/>
+	<forward name="rcuVerificationCompletionAtCM" path="/fieldVarificationCompletionBehindAction.do?method=verificationCompletionCreditManagement"/>
+	  
+
+	     <!-- Rohit Changes started for ACH -->
+    <forward name="achCapturing" path="/achCapturingAction.do?method=searchACHCapturingRecords" />
+    <!-- Rohit end -->
+     
+
+
+	     <!-- Rohit Changes started for ACH -->
+    <forward name="achCapturing" path="/achCapturingAction.do?method=searchACHCapturingRecords" />
+	<!-- Rohit end -->	
+	<forward name="schemeaction" path="/schemeaction.do?actionName=New" />
+    <forward name="CersaiReport" path="/CersaiReport.do"/><!-- Virender -->
+	
+    
+     <!-- Richa changes for Vehicle Approval Grid -->
+	<forward name="vehicleApprovalGrid" path="/vehicleApprovalGridBehindAction.do"></forward>
+	 <!-- Richa changes ends -->   
+	 
+	 <!-- Jitendra started -->
+	 
+	  <forward name="editLedgerMaker" path="/editLedgerMaker.do?actionName=Search" />
+	  <forward name="editLedgerAuthor" path="/editLedgerAuthor.do?actionName=authorSearch" />
+      <forward name="glLedgerMaker" path="/glLedgerMaker.do?actionName=Search" />
+      <forward name="ledgerAuthor" path="/ledgerAuthor.do?actionName=authorSearch" />
+      <forward name="glpartyCreationMaker" path="/glpartyCreationMaker.do?actionName=Search" />
+      <forward name="glpartyCreationAuthor" path="/glpartyCreationAuthor.do?actionName=authorSearch" />
+      <forward name="glEditpartyCreationMaker" path="/glEditpartyCreationMaker.do?actionName=Search" />
+      <forward name="glEditpartyCreationAuthor" path="/glEditpartyCreationAuthor.do?actionName=authorSearch" />
+
+		<!-- Added by tej -->
+		<forward name="salesDashBoardAction" path="/salesDashBoardAction.do?method=showDefaultView&amp;source=WEB" />
+		<!-- Ended by tej -->
+
+	  <forward name="chartOfAccounts" path="/chartOfAccounts.do" />
+	  <!-- Rohit changes for pre deal  -->
+	  <forward name="preDealCapturingSearchBehind" path="/preDealCapturingSearchBehind.do" />
+		
+	  <!-- pooja code for SBL & GBL Master -->
+	<forward name="SBLGBLMasterSearch" path="/SBLGBLMasterBehind.do"></forward>
+	<!-- pooja code for SBL & GBL Master -->
+	
+	<!-- indrajeet code for SBL & GBL cm -->
+	<forward name="sblGblMaker" path="/sblGblMaker.do"></forward>
+	<forward name="sblGblAuthor" path="/sblGblAuthor.do"></forward>
+	<!-- indrajeet code for SBL & GBL cm -->
+	<!-- Jitendra Changes Start -->
+		<forward name="chequeNoUpdateMaker" path="/chequeNoUpdateMaker.do"/>
+		<forward name="chequeNoUpdateAuthor" path="/chequeNoUpdateAuthor.do"/>
+		<!-- Jitendra Changes End -->
+	 <!-- Wasim Added Securitization Module  Start -->
+    
+    <forward name="scz_poolDownloadBehindAction" path="/scz_poolDownloadBehindAction.do" />
+    <forward name="scz_poolIdMakerBehindAction" path="/scz_poolIdMakerBehindAction.do" />
+    <forward name="scz_poolIdAuthorBehindAction" path="/scz_poolIdAuthorBehindAction.do" />
+    <forward name="scz_poolIdAddEditBehindAction" path="/scz_poolIdAddEditBehindAction.do" />	 
+    <forward name="poolViewerBehindAction" path="/poolViewerBehindAction.do" /> 
+    <forward name="futureFlowBehindAction" path="/futureFlowBehindAction.do"/>
+    <forward name="paymentScheduleBehindAction" path="/paymentScheduleBehindAction.do"/>
+    <forward name="monthlyCollectionReportBehindAction" path="/MonthlyCollectionReportBehindAction.do" />
+    <forward name="monthlyProcessBehindAction" path="/monthlyProcessBehindAction.do" /> 
+    <forward name="paymentAllocationBehindAction" path="/paymentAllocationBehindAction.do" />
+    <forward name="poolIdMakerUploadAction" path="/poolIdMakerUploadAction.do?method=getPoolId" />
+        <!-- Ranjeet Singh for loan Sanction Letter -->
+	  <forward name="dealSanctionLetter" path="/dealSanctionLetterCP.do?method=openLoanSanctionLetter" ></forward>
+	<!-- Ranjeet Singh End -->
+    <!-- Wasim Added Securitization Module  End -->
+    
+      <!--awadhesh code start for dump access -->
+                  <forward name="roleDumpAccess" path="/dumpRemportAccess.do"/>
+                   <!--awadhesh code end for dump access -->
+	
+	<forward name="banktobookauto" path="/banktobookauto.do" />		
+<!-- Karmveer Code Start for UnReconcileVoucherWise  -->   
+ <forward name="unreconcilevoucherwise" path="/unreconcilevoucherwise.do" />
+ <!-- Karmveer Code Start for UnReconcileVoucherWise  -->  		
+				
+    
+     <forward name="glExceluploadCM" path="/glExcelSheetUploadCM.do" />
+  </action>
+  
+  <action path="/smsEmailTrigger"  type="com.communication.engn.servlets.SmsEmailTriggerAction"  parameter="method"></action>
+  <action path="/MISTrigger"  type="com.communication.engn.servlets.MISDataGenerationAction"  parameter="method"></action>
+  <action path="/voucherUplSummEmail"  type="com.communication.engn.servlets.VoucherUploadSummaryEmail"  parameter="method"></action>
+  <action path="/bulkEmail"  type="com.communication.engn.servlets.BulkEmail"  parameter="method"></action>
+  <action path="/MISFTPDataUpload"  type="com.FTPFileUpload.CsvFileWriter"  parameter="method"></action>   
+  <action path="/ExceptionDataDumpOverEmail"  type="com.communication.engn.servlets.ExceptionDataDumpOverEmail"  parameter="method"></action>
+  <action path="/AllAutoReportGenerator"  type="com.FTPFileUpload.AutoReportGenerator"  parameter="method"></action>
+  <action path="/AllSFTPAutoReportGenerator"  type="com.FTPFileUpload.AutoReportGeneratorSftp"  parameter="method"></action>
+    <!-- Shashank Agnihotri changes for Mobile/Email Verification Start-->
+  <action path="/emailVerification"  type="com.gcd.actions.MobileVerificationAction"  parameter="method">
+  <forward name="verification" path="/JSP/gcdJSP/emailMobileVerification.jsp" />
+  </action>
+  <action path="/mobileVerification"  type="com.gcd.actions.MobileVerificationAction"  parameter="method">
+  <forward name="verification" path="/JSP/gcdJSP/emailMobileVerification.jsp" />
+  </action>
+    <!-- Shashank Agnihotri changes for Mobile/Email Verification End-->
+  </action-mappings>
+
+	<!--DynaValidatorForm Action End -->
+	
+	 <controller processorClass="org.apache.struts.action.RequestProcessor" >
+	 <set-property  property="processorClass"  value="com.controller.CustomRequestProcessor"/>
+	 <set-property property="nocache" value="true" />
+	 </controller>
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+	<set-property property="pathnames"
+	value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+	
+	<plug-in className="org.apache.struts.action.SecurePlugIn">
+	<set-property property="httpPort" value="7011"/>
+	<set-property property="httpsPort" value="7012"/>
+	<set-property property="enable" value="true"/>
+	<set-property property="addSession" value="true"/>
+    </plug-in>
+
+</struts-config>
+

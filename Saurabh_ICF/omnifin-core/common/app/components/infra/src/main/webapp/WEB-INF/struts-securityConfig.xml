@@ -1,0 +1,467 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="loginInputForm"	type="com.login.actionForm.LoginActionForm" >
+   </form-bean>
+   <form-bean name="branchInputForm"	type="com.login.actionForm.BranchActionForm" >
+   </form-bean>
+    
+   
+		<form-bean name="AdminPwdDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+
+			<form-property name="adminPwd" type="java.lang.String" />
+			
+		</form-bean>
+   <!--DynaValidatorForm Start --> 
+
+ <!--Master bean-->   
+   <!--DynaValidatorForm Start --> 
+
+<!-- Ritu Master Code Bean Start -->
+<!-- Role Master Start -->
+<form-bean name="RoleMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="roleDesc" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModule" type="java.lang.String" />
+			<form-property name="roleStatus" type="java.lang.String" />
+		</form-bean>
+<!-- Role Master End -->
+
+<!-- Role Access Master Start -->
+<form-bean name="RoleAccessMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="lbxRoleId" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModuleId" type="java.lang.String" />
+		</form-bean>
+<!-- Role Access Master End -->
+
+<!-- User Master Start -->
+<form-bean name="UserMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="userId" type="java.lang.String" />
+			<form-property name="userName" type="java.lang.String" />
+			<form-property name="empId" type="java.lang.String" />
+			<form-property name="userDept" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="userDesg" type="java.lang.String" />
+			<form-property name="lbxDesignationId" type="java.lang.String" />
+			<form-property name="phone1" type="java.lang.String" />
+			<form-property name="phone2" type="java.lang.String" />
+			<form-property name="email" type="java.lang.String" />
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="userStatus" type="java.lang.String" />
+			<form-property name="lbxDepartmentId" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="reportingto" type="java.lang.String" />
+			<form-property name="lbxReportingUser" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+		    <form-property name="remarks" type="java.lang.String" /> 
+			<!--	Abhimanyu		-->
+            <form-property name="allselection" type="java.lang.String[]" />	
+	            		<!--	Kanika		-->
+            <form-property name="selection" type="java.lang.String" />
+			<form-property name="levelButton" type="java.lang.String" />
+			<form-property name="levelIDs" type="java.lang.String" />
+			<form-property name="levelDesc" type="java.lang.String[]" />		
+			<form-property name="validityDate" type="java.lang.String" />	
+
+<!--	Abhimanyu		-->
+			
+		</form-bean>
+		<!-- User Master End -->
+		
+		<!-- aditi code Start -->
+		<form-bean name="UserFunctionAccess"
+			type="org.apache.struts.validator.DynaValidatorForm">
+
+		<form-property name="roleDescription" type="java.lang.String" />
+		<form-property name="lbxRoleId" type="java.lang.Integer" />
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userId" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+		<form-property name="moduleDesc" type="java.lang.String" />
+		<form-property name="lbxModuleId" type="java.lang.String" />
+		
+		</form-bean>
+		<!-- abhishek sharma code Start -->
+		<form-bean name="userAccessReview"
+			type="org.apache.struts.validator.DynaValidatorForm">
+		
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userType" type="java.lang.String" />
+		<form-property name="fromDate" type="java.lang.String" />
+		<form-property name="toDate" type="java.lang.String" />
+		<form-property name="UserDeactivatedStartDate" type="java.lang.String" />
+		<form-property name="UserDeactivatedEndDate" type="java.lang.String" />
+		</form-bean>
+		<!-- abhishek sharma code end -->
+		
+		<form-bean name="UserAccess"
+			type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userId" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+		<form-property name="BusinessDate" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="UserDetailsAccess"
+			type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userId" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="ReportFunctionAccessAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="lbxRoleId" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModuleId" type="java.lang.String" />
+		</form-bean>
+		
+		<!-- aditi code End -->
+		
+		<!-- User access Master Start -->
+		<form-bean name="UserAccessMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="userId" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="lbxRoleId" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModule" type="java.lang.String" />
+			<form-property name="functionId" type="java.lang.String" />
+			<form-property name="lbxFunctionId" type="java.lang.String" />
+			<form-property name="userAccessStatus" type="java.lang.String" />
+			<form-property name="userAccessId" type="java.lang.String" />
+		</form-bean>
+		<!-- User access Master End-->
+		
+
+		<!-- Change Password Master Start -->
+		<form-bean name="ChangePasswordMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<!-- <form-property name="userId" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" /> commented by Rohit For security-->
+			<form-property name="oldPassword" type="java.lang.String" />
+			<form-property name="newPassword" type="java.lang.String" />
+			<form-property name="confirmPassword" type="java.lang.String" />
+			<!-- kanika code-->
+			<form-property name="ques1" type="java.lang.String" />
+			<form-property name="ans1" type="java.lang.String" />
+			<form-property name="ques2" type="java.lang.String" />
+			<form-property name="ans2" type="java.lang.String" />
+		</form-bean>
+		<!-- Code End by kanika -->
+		<!-- Change Password Master End -->
+<!-- Ritu Master Code Bean End -->
+
+
+<!-- awadhesh code dump access Master  Bean start -->
+<form-bean name="DumpAccessAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="lbxRoleId" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModuleId" type="java.lang.String" />
+		</form-bean>
+
+<!-- awadhesh code dump access Master  Bean end -->
+
+  </form-beans>
+  
+
+  <global-exceptions />
+   <global-forwards >
+   
+        <forward name="mainMenuHome"   path="/LoadMenuAction.do" redirect="false" />
+		<forward name="sessionExpired" path="logout.do?reason=timeout" redirect="false" />
+		<forward name="logoff"         path="/logoff.do" redirect="false"/> 
+		<forward name="logout"  path="/JSP/logout.jsp" redirect="false"></forward>
+       <forward name="wip"  path="/JSP/wipJSP.jsp" redirect="false"></forward>
+       		
+  </global-forwards>
+
+    <action-mappings>
+    
+   <!-- Kanika starts here  -->
+     	 <action path="/loadLMS" type="com.login.action.LoadLMSAction">
+         <forward name="success" path="/JSP/Login.jsp" redirect="false" />
+    </action> 
+    
+    
+    <action path="/loginInput"
+			type="com.login.action.LoginAction"
+			input="/JSP/Login.jsp"			
+			name="loginInputForm"
+			scope="request" 
+			validate="true">
+
+			<forward name="relogin" path="/loginInput.do"/>
+			<forward name="success" path="/LoadMenuAction.do"/>
+	<forward name="success1" path="/JSP/Login.jsp" />	
+			<forward name="error" path="/JSP/Login.jsp" />	
+			<forward name="roleselection" path="/JSP/roleselection.jsp" />
+			<forward name="roleerror" path="/JSP/Login.jsp" />	
+			<forward name="logonce" path="/JSP/Loginconfirm.jsp" />			
+			<forward name="forcechangepass" path="/changePasswordMasterBehind.do?method=fromLoginJSp" />		
+		</action>
+		
+		<action path="/forgetLoginAction"
+		validate="false" 
+		name="loginInputForm"
+		 scope="request" 
+		input="/JSP/Login.jsp"	
+		parameter="method"
+			    type="com.login.action.ForgetLoginAction">
+			  <forward name="successlog" path="/JSP/questionpopup.jsp"/>
+			   <forward name="error" path="/JSP/Login.jsp"/>
+		</action>
+		
+		<action path="/logindata"
+		parameter="method"
+		scope="request" 
+		type="com.login.action.LoginDispatchAction">
+		  <forward name="success" path="/JSP/branchpopup.jsp"/>
+		   <forward name="success1" path="/JSP/branchpopup.jsp"/>
+		</action>
+
+		<action path="/LoadMenuAction"
+			    type="com.login.action.LoadMenuAction">
+			   <forward name="success" path="/JSP/home.jsp"/>
+			   <forward name="superintendent" path="/JSP/admin.jsp" />
+		</action>
+
+	     <action path="/LeftMenuLoadAction"
+			    type="com.login.action.LeftSideMenuConfigureAction"
+			    scope="request" 
+			    validate="false">
+			<forward name="success" path="/pageLoadAction.do" redirect="true" />
+			<forward name="error" path="/JSP/Login.jsp" />	
+		</action>
+		
+
+
+		<action path="/logoff"
+			type="com.login.action.LogoutAction">
+			<forward name="login" path="/loginInput.do" />
+	<forward name="manualLogout" path="/JSP/View.jsp"  />
+	<forward name="eodBod" path="/JSP/logout.jsp"  />
+	
+
+		</action>
+
+ <!--DynaValidatorForm Action Start -->   
+   <action path="/sessionExpireAction"
+			type="com.login.action.SessionExpireAction">
+			<forward name="manualLogout" path="/JSP/Login.jsp" redirect="true" />
+		</action>
+ <!--DynaValidatorForm Action Start -->  
+
+	<action path="/pageLoadAction" type="com.login.action.PageLoadAction">
+			<forward name="success" path="/JSP/frames_example.jsp" />
+		</action>
+
+		<action path="/logindetails" type="com.login.action.LoginDispatchAction">
+			<set-property property="cancellable" value="true" />
+		</action>
+ <!-- Kanika end here  -->
+ 
+ <!-- Ritu Master Code Start -->
+ 
+ <!-- Role Master Start -->
+      <action path="/roleMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.RoleMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/roleMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/roleMasterAdd.jsp" path="/roleMasterAdd"
+			parameter="method" scope="request" name="RoleMasterAddDynaValidatorForm"
+			type="com.masters.actions.RoleMasterDispatchAction">
+			<forward name="success" path="/roleMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/roleMasterSearch.jsp" path="/roleMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.RoleMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/roleMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/roleMasterBehind.do"></forward>
+		</action>
+		<!-- Role Master End -->
+		
+		<!--aditi  code Start -->
+		
+		<action path="/userAccessSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userAccess.jsp"></forward>
+		</action>
+		<action  path="/userAccessLogAction" type="com.masters.actions.UserAccessAction" name="UserAccess" scope="request">
+		</action>
+		
+		<action path="/userFunctionAccessSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userFunctionAccess.jsp"></forward>
+		</action>
+		<action  path="/UserFunctionAccessAction" type="com.masters.actions.UserFunctionAccessAction" name="UserFunctionAccess" scope="request">
+		</action>
+<!-- abhishek sharma code start -->
+		<action path="/userAccessReview" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userAccessReview.jsp"></forward>
+		</action>
+		<action  path="/UserAccessReviewAction" type="com.masters.actions.UserAccessReviewAction" name="userAccessReview" 
+		scope="request">
+		<forward name="error" path="/JSP/masterspage/userAccessReview.jsp"></forward>
+		</action>
+		<!-- abhishek sharma code End -->		
+		
+		<action path="/userDetailSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userDetails.jsp"></forward>
+		</action>
+		<action  path="/UserDetailsAction" type="com.masters.actions.UserDetailsAction" name="UserDetailsAccess" scope="request">
+		</action>
+
+	<!-- aditi code End -->
+	
+	<!-- Role Access Master Start -->
+		<action path="/roleAccessMasterBehind" scope="request"
+			validate="false" name="RoleAccessMasterAddDynaValidatorForm"
+			type="com.masters.actions.RoleAccessMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/roleAccessMaster.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/roleAccessMaster.jsp" path="/roleAccessMaster"
+			parameter="method" scope="request" name="RoleAccessMasterAddDynaValidatorForm"
+			type="com.masters.actions.RoleAccessMasterDispatchAction">
+			<forward name="success" path="/roleAccessMasterBehind.do"></forward>
+			<forward name="openAdd" path="/JSP/masterspage/roleAccessMaster.jsp"></forward>
+			<forward name="searchPage" path="/roleAccessMasterBehind.do"></forward>
+		</action>	
+		<!-- Role Access Master End -->
+		
+		<!-- User Master Start -->
+		<action path="/userMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.UserMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/userMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/userMasterAdd.jsp" path="/userMasterAdd"
+			parameter="method" scope="request" name="UserMasterAddDynaValidatorForm"
+			type="com.masters.actions.UserMasterDispatchAction">
+			<forward name="success" path="/userMasterBehind.do"></forward>
+				<forward name="success1" path="/JSP/masterspage/userMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/userMasterSearch.jsp" path="/userMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.UserMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/userMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/userMasterBehind.do"></forward>
+		</action>
+		<!-- User Master End -->
+		
+		<!-- User Access Master Start-->
+		<action path="/userAccessMasterBehind" scope="request"
+			validate="false" name="CommonDynaValidatorForm"
+			type="com.masters.actions.UserAccessMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/userAccessMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/userAccessMasterAdd.jsp" path="/userAccessMasterAdd"
+			parameter="method" scope="request" name="UserAccessMasterAddDynaValidatorForm"
+			type="com.masters.actions.UserAccessMasterDispatchAction">
+			<forward name="success" path="/userAccessMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/userAccessMasterSearch.jsp"
+			path="/userAccessMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.UserAccessMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/userAccessMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/userAccessMasterBehind.do"></forward>
+		</action>
+		<!-- User Access Master End -->
+		
+		<!-- Change Password Master Start -->
+		<action path="/changePasswordMasterBehind" scope="request"
+			parameter="method" type="com.masters.actions.ChangePasswordBehindAction">
+			<forward name="success" path="/JSP/masterspage/changePassword.jsp"></forward>
+			<forward name="success1" path="/loadLMS.do"></forward> 
+       </action>
+
+       <action input="/JSP/masterspage/changePassword.jsp" path="/changePasswordMaster"
+			validate="true" parameter="method" scope="request"
+			name="ChangePasswordMasterAddDynaValidatorForm" type="com.masters.actions.ChangePasswordDispatchAction">
+            <forward name="searchPage" path="/changePasswordMasterBehind.do?method=fromchangePassJSp"></forward>
+			<forward name="searchPageLogiN" path="/changePasswordMasterBehind.do?method=fromchangePassJSpppp"></forward>
+		</action>
+<!-- Change Password Master End -->
+		
+		<!-- Ritu Master Code End -->
+		
+		
+		 <action path="/checkAdminPwd" scope="request" validate="false" name="AdminPwdDynaValidatorForm"
+
+			type="com.login.action.CheckAdminPwd" input="/JSP/adminPwdForBDateChange.jsp">
+			<forward name="success" path="/JSP/businessDateChange.jsp"></forward>
+		</action>
+   
+     <action path="/saveNewBusinessDate" parameter="method" scope="request" validate="false"
+			type="com.login.action.SaveNewBusinessDate" input="/JSP/businessDateChange.jsp">
+			
+	</action>
+	
+		<!-- Aditi Report Function Access Master Code Starts -->
+		<action path="/reportFunctionAccessBehindAction" scope="request"
+			validate="false" name="ReportFunctionAccessAddDynaValidatorForm"
+			type="com.masters.actions.ReportFunctionAccessBehindAction">
+			<forward name="success" path="/JSP/masterspage/ReportFunctionAccess.jsp"></forward>
+		</action>
+			<action input="/JSP/masterspage/ReportFunctionAccess.jsp" path="/reportFunctionAccess"
+			parameter="method" scope="request" name="ReportFunctionAccessAddDynaValidatorForm"
+			type="com.masters.actions.ReportFunctionAccessAction">
+			<forward name="searchPage" path="/JSP/masterspage/ReportFunctionAccess.jsp"></forward>
+					
+			</action>	
+		
+		
+		<!-- Aditi Report Function Access Master Code End -->
+		
+		
+		<!-- awadhesh Started For Dump Report Access -->
+	<action path="/dumpRemportAccess" scope="request"
+			validate="false" name="DumpAccessAddDynaValidatorForm"
+			type="com.masters.actions.DumpAccessBehindAction">
+			<forward name="success" path="/JSP/masterspage/DumpFunctionAccess.jsp"></forward>
+		</action>
+			<action input="/JSP/masterspage/DumpFunctionAccess.jsp" path="/dumpFunctionAccess"
+			parameter="method" scope="request" name="DumpAccessAddDynaValidatorForm"
+			type="com.masters.actions.DumpFunctionAccessAction">
+			<forward name="searchPage" path="/JSP/masterspage/DumpFunctionAccess.jsp"></forward>
+					
+			</action>
+	<!-- awadhesh Started For Dump Report Access -->
+		
+      </action-mappings>
+  
+
+<!--DynaValidatorForm Action End -->   		
+ 
+  <message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" /> 
+	</plug-in>
+  
+</struts-config>
+

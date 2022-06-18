@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.a3s.omnifin.prod</groupId>
+		<artifactId>omnifin-indostar-components</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<name>Securitization</name>
+	<artifactId>04-omnifin-indostar-securitization</artifactId>
+	<packaging>jar</packaging>
+		<dependencies>
+		<dependency>
+			<groupId>com.a3s.omnifin.prod</groupId>
+			<artifactId>omnifin-indostar-combined</artifactId>
+			<scope>provided</scope>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.0.Final</version>
+		</dependency>
+		
+		</dependencies>
+		
+</project>

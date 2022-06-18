@@ -1,0 +1,2046 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptBudgetSummary" language="groovy" pageWidth="2016" pageHeight="842" orientation="Landscape" columnWidth="1976" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_fin_year_id" class="java.lang.Integer"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_company_id" class="java.lang.Integer"/>
+	<parameter name="p_headers" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select a.*, b.* ,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_April_Dr - Actual.Total_April_Cr , Actual.Total_April_Cr - Actual.Total_April_Dr) as April_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_May_Dr - Actual.Total_May_Cr , Actual.Total_May_Cr - Actual.Total_May_Dr) as May_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_June_Dr  - Actual.Total_June_Cr  , Actual.Total_June_Cr  - Actual.Total_June_Dr ) as June_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_July_Dr - Actual.Total_July_Cr , Actual.Total_July_Cr - Actual.Total_July_Dr) as July_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_August_Dr - Actual.Total_August_Cr , Actual.Total_August_Cr - Actual.Total_August_Dr) as August_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_September_Dr - Actual.Total_September_Cr , Actual.Total_September_Cr - Actual.Total_September_Dr) as September_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_October_Dr - Actual.Total_October_Cr , Actual.Total_October_Cr - Actual.Total_October_Dr) as Octobor_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_November_Dr - Actual.Total_November_Cr , Actual.Total_November_Cr - Actual.Total_November_Dr) as November_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_December_Dr - Actual.Total_December_Cr , Actual.Total_December_Cr - Actual.Total_December_Dr) as December_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_January_Dr - Actual.Total_January_Cr , Actual.Total_January_Cr - Actual.Total_January_Dr) as January_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_Feburary_Dr - Actual.Total_Feburary_Cr , Actual.Total_Feburary_Cr - Actual.Total_Feburary_Dr) as Feburary_Actual
+
+,
+if(a.ACC_TYPE = 'I' or a.ACC_TYPE = 'E' , Actual.Total_March_Dr - Actual.Total_March_Cr , Actual.Total_March_Cr - Actual.Total_March_Dr) as March_Actual
+from
+(Select budget_master_id as p_budget_master_id, if(ACC_TYPE = 'I' , 'Income','Expense') as p_ACC_TYPE, parent_budget_master_id,
+budget_code as p_budget_code, Budget_Desc as p_Budget_Desc from listofbudgetheads where parent_budget_master_id = 0 and COMPANY_ID = $P{p_company_id}) b
+
+inner join
+(select budget_master_id, budget_code, if(ACC_TYPE = 'I' , 'Income','Expense') as ACC_TYPE ,listofbudgetheads.Budget_Desc ,
+  sum(if(MONTH = '4',AMOUNT,0)) as April_Planned ,
+  sum(if(MONTH = '5',AMOUNT,0)) as May_Planned,
+    sum(if(MONTH = '6',AMOUNT,0)) as June_Planned,
+    sum(if(MONTH = '7',AMOUNT,0)) as July_Planned,
+    sum(if(MONTH = '8',AMOUNT,0)) as August_Planned,
+    sum(if(MONTH = '9',AMOUNT,0)) as September_Planned,
+    sum(if(MONTH = '10',AMOUNT,0)) as October_Planned,
+    sum(if(MONTH = '11',AMOUNT,0)) as November_Planned,
+    sum(if(MONTH = '12',AMOUNT,0)) as December_Planned,
+    sum(if(MONTH = '1',AMOUNT,0)) as January_Planned,
+    sum(if(MONTH = '2',AMOUNT,0)) as Feburary_Planned,
+    sum(if(MONTH = '3',AMOUNT,0)) as March_Planned,
+
+    listofbudgetheads.parent_budget_master_id
+   from ((listofbudgetheads
+
+left join gl_budget_definition on listofbudgetheads.budget_master_id = BUDGET_GROUP_CODE)
+left join gl_budget_group_ledger_map on listofbudgetheads.budget_code =  gl_budget_group_ledger_map.BUDGET_GROUP_CODE)
+where listofbudgetheads.parent_budget_master_id > 0
+and listofbudgetheads.COMPANY_ID = $P{p_company_id}
+and  (gl_budget_definition.YEAR_ID = $P{p_fin_year_id} or gl_budget_definition.YEAR_ID is null)
+and (gl_budget_definition.COMPANY_ID = $P{p_company_id} or gl_budget_definition.COMPANY_ID is null)
+group by budget_master_id, budget_code, ACC_TYPE ,listofbudgetheads.Budget_Desc) a
+on b.p_budget_master_id = a.parent_budget_master_id
+left join
+(
+select BudgetID ,
+sum(subq.April_TotalDr) as Total_April_Dr , sum(subq.April_TotalCr) as Total_April_Cr,
+sum(subq.May_TotalDr) as Total_May_Dr , sum(subq.May_TotalCr) as Total_May_Cr,
+sum(subq.June_TotalDr) as Total_June_Dr , sum(subq.June_TotalCr) as Total_June_Cr,
+sum(subq.July_TotalDr) as Total_July_Dr , sum(subq.July_TotalCr) as Total_July_Cr,
+sum(subq.August_TotalDr) as Total_August_Dr , sum(subq.August_TotalCr) as Total_August_Cr,
+sum(subq.September_TotalDr) as Total_September_Dr , sum(subq.September_TotalCr) as Total_September_Cr,
+sum(subq.October_TotalDr) as Total_October_Dr , sum(subq.October_TotalCr) as Total_October_Cr,
+sum(subq.November_TotalDr) as Total_November_Dr , sum(subq.November_TotalCr) as Total_November_Cr,
+sum(subq.December_TotalDr) as Total_December_Dr , sum(subq.December_TotalCr) as Total_December_Cr,
+sum(subq.January_TotalDr) as Total_January_Dr , sum(subq.January_TotalCr) as Total_January_Cr,
+sum(subq.Feburary_TotalDr) as Total_Feburary_Dr , sum(subq.Feburary_TotalCr) as Total_Feburary_Cr,
+sum(subq.March_TotalDr) as Total_March_Dr , sum(subq.March_TotalCr) as Total_March_Cr
+from
+(select gl_budget_m.budget_master_id as BudgetID ,
+sum(if(gl_monthly_balance.Month_No = 4 , gl_monthly_balance.Total_DR,0)) as April_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 4 , gl_monthly_balance.Total_CR,0)) as April_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 5 , gl_monthly_balance.Total_DR,0)) as May_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 5 , gl_monthly_balance.Total_CR,0)) as May_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 6 , gl_monthly_balance.Total_DR,0)) as June_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 6 , gl_monthly_balance.Total_CR,0)) as June_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 7 , gl_monthly_balance.Total_DR,0)) as July_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 7 , gl_monthly_balance.Total_CR,0)) as July_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 8 , gl_monthly_balance.Total_DR,0)) as August_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 8 , gl_monthly_balance.Total_CR,0)) as August_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 9 , gl_monthly_balance.Total_DR,0)) as September_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 9 , gl_monthly_balance.Total_CR,0)) as September_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 10 , gl_monthly_balance.Total_DR,0)) as October_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 10 , gl_monthly_balance.Total_CR,0)) as October_TotalCr
+,sum(if(gl_monthly_balance.Month_No = 11 , gl_monthly_balance.Total_DR,0)) as November_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 11 , gl_monthly_balance.Total_CR,0)) as November_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 12 , gl_monthly_balance.Total_DR,0)) as December_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 12 , gl_monthly_balance.Total_CR,0)) as December_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 1 , gl_monthly_balance.Total_DR,0)) as January_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 1 , gl_monthly_balance.Total_CR,0)) as January_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 2 , gl_monthly_balance.Total_DR,0)) as Feburary_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 2 , gl_monthly_balance.Total_CR,0)) as Feburary_TotalCr ,
+sum(if(gl_monthly_balance.Month_No = 3 , gl_monthly_balance.Total_DR,0)) as March_TotalDr ,
+sum(if(gl_monthly_balance.Month_No = 3 , gl_monthly_balance.Total_CR,0)) as March_TotalCr
+
+
+
+from gl_budget_m inner join gl_budget_group_ledger_map on gl_budget_m.budget_master_id = gl_budget_group_ledger_map.BUDGET_GROUP_CODE
+left join gl_monthly_balance on gl_budget_group_ledger_map.LEDGER_ID = gl_monthly_balance.Ledger_ID and gl_budget_group_ledger_map.COMPANY_ID =
+
+gl_monthly_balance.Company_ID
+where gl_monthly_balance.Year_ID = $P{p_fin_year_id}
+group by gl_budget_m.budget_master_id
+
+union all
+select gl_budget_m.budget_master_id as BudgetID,
+
+
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 4 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as April_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 4 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as April_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 5 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as May_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 5 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as May_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 6 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as June_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 6 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as June_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 7 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as July_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 7 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as July_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 8 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as August_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 8 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as August_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 9 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as September_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 9 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as September_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 10 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as October_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 10 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as October_TotalCr
+,sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 11 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as November_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 11 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as November_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 12 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as December_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 12 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as December_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 1 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as January_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 1 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as January_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 2 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as Feburary_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 2 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as Feburary_TotalCr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 3 , gl_voucher_dtl.DR_AMOUNT * -1,0)) as March_TotalDr ,
+sum(if(month(gl_voucher_hdr.VOUCHER_DATE) = 3 , gl_voucher_dtl.CR_AMOUNT * -1,0)) as March_TotalCr
+
+
+from gl_budget_m inner join gl_budget_group_ledger_map on gl_budget_m.budget_master_id = gl_budget_group_ledger_map.BUDGET_GROUP_CODE
+
+left join gl_voucher_dtl on gl_budget_group_ledger_map.LEDGER_ID = gl_voucher_dtl.LEDGER_ID and gl_budget_group_ledger_map.COMPANY_ID = gl_voucher_dtl.COMPANY_ID
+left join gl_voucher_hdr on gl_voucher_dtl.COMPANY_ID = gl_voucher_hdr.COMPANY_ID and gl_voucher_dtl.VOUCHER_NO = gl_voucher_hdr.VOUCHER_NO
+where gl_voucher_hdr.YearClosing_Voucher = 'Y'
+and gl_voucher_hdr.STATUS = 'A'
+group by gl_budget_m.budget_master_id) subq
+group by BudgetID
+) Actual
+on a.budget_master_id = Actual.BudgetID]]>
+	</queryString>
+	<field name="budget_master_id" class="java.lang.Integer"/>
+	<field name="budget_code" class="java.lang.String"/>
+	<field name="ACC_TYPE" class="java.lang.String"/>
+	<field name="Budget_Desc" class="java.lang.String"/>
+	<field name="April_Planned" class="java.math.BigDecimal"/>
+	<field name="May_Planned" class="java.math.BigDecimal"/>
+	<field name="June_Planned" class="java.math.BigDecimal"/>
+	<field name="July_Planned" class="java.math.BigDecimal"/>
+	<field name="August_Planned" class="java.math.BigDecimal"/>
+	<field name="September_Planned" class="java.math.BigDecimal"/>
+	<field name="October_Planned" class="java.math.BigDecimal"/>
+	<field name="November_Planned" class="java.math.BigDecimal"/>
+	<field name="December_Planned" class="java.math.BigDecimal"/>
+	<field name="January_Planned" class="java.math.BigDecimal"/>
+	<field name="Feburary_Planned" class="java.math.BigDecimal"/>
+	<field name="March_Planned" class="java.math.BigDecimal"/>
+	<field name="parent_budget_master_id" class="java.lang.Long"/>
+	<field name="p_budget_master_id" class="java.lang.Integer"/>
+	<field name="p_ACC_TYPE" class="java.lang.String"/>
+	<field name="p_budget_code" class="java.lang.String"/>
+	<field name="p_Budget_Desc" class="java.lang.String"/>
+	<field name="April_Actual" class="java.math.BigDecimal"/>
+	<field name="May_Actual" class="java.math.BigDecimal"/>
+	<field name="June_Actual" class="java.math.BigDecimal"/>
+	<field name="July_Actual" class="java.math.BigDecimal"/>
+	<field name="August_Actual" class="java.math.BigDecimal"/>
+	<field name="September_Actual" class="java.math.BigDecimal"/>
+	<field name="Octobor_Actual" class="java.math.BigDecimal"/>
+	<field name="November_Actual" class="java.math.BigDecimal"/>
+	<field name="December_Actual" class="java.math.BigDecimal"/>
+	<field name="January_Actual" class="java.math.BigDecimal"/>
+	<field name="Feburary_Actual" class="java.math.BigDecimal"/>
+	<field name="March_Actual" class="java.math.BigDecimal"/>
+	<variable name="v_April_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{April_Planned} - $F{April_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_total_april_budgeted" class="java.lang.Double" resetType="Group" resetGroup="AccountType" calculation="Sum">
+		<variableExpression><![CDATA[$F{April_Planned}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_sub_total_april_budgeted" class="java.lang.Double" resetType="Group" resetGroup="parent_budget_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{April_Planned}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_June_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{June_Planned} - $F{June_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_May_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{May_Planned} - $F{May_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_July_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{July_Planned} - $F{July_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_August_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{August_Planned} - $F{August_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_September_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{September_Planned} - $F{September_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_October_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{October_Planned} - $F{Octobor_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_November_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{November_Planned} - $F{June_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_December_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{December_Planned} - $F{December_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_January_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{January_Planned} - $F{January_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_Feburary_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{Feburary_Planned} - $F{Feburary_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_March_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{March_Planned} -$F{March_Actual}]]></variableExpression>
+	</variable>
+	<variable name="v_Total_Difference" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{April_Planned} + $F{May_Planned} + $F{June_Planned} + $F{July_Planned}
++$F{August_Planned} + $F{September_Planned} + $F{October_Planned}
++ $F{November_Planned} + $F{December_Planned} + $F{January_Planned}
++$F{Feburary_Planned} + $F{March_Planned}) -
+($F{April_Actual} + $F{May_Actual} + $F{June_Actual} + $F{July_Actual} +
+$F{August_Actual} + $F{September_Actual} + $F{Octobor_Actual} + $F{November_Actual}
++ $F{December_Actual} + $F{January_Actual} + $F{Feburary_Actual} + $F{March_Actual})]]></variableExpression>
+	</variable>
+	<variable name="v_total_budgeted" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{April_Planned} + $F{May_Planned} + $F{June_Planned} + $F{July_Planned}
++$F{August_Planned} + $F{September_Planned} + $F{October_Planned}
++ $F{November_Planned} + $F{December_Planned} + $F{January_Planned}
++$F{Feburary_Planned} + $F{March_Planned})]]></variableExpression>
+	</variable>
+	<variable name="v_totalactual" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($F{April_Actual} + $F{May_Actual} + $F{June_Actual} + $F{July_Actual} +
+$F{August_Actual} + $F{September_Actual} + $F{Octobor_Actual} + $F{November_Actual}
++ $F{December_Actual} + $F{January_Actual} + $F{Feburary_Actual} + $F{March_Actual})]]></variableExpression>
+	</variable>
+	<variable name="v_sub_total_may_budgeted" class="java.lang.Double" resetType="Group" resetGroup="parent_budget_id" calculation="Sum">
+		<variableExpression><![CDATA[$F{May_Planned}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="AccountType">
+		<groupExpression><![CDATA[$F{ACC_TYPE}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement x="10" y="3" width="90" height="13"/>
+					<textElement>
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ACC_TYPE}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1666" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="16"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="16"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="14"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="126" y="1" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_april_budgeted}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1666" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement x="1" y="13" width="1975" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="2" y="1" width="120" height="13"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="parent_budget_id">
+		<groupExpression><![CDATA[$F{p_budget_master_id}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="parent_parent_decription">
+		<groupExpression><![CDATA[$F{p_Budget_Desc}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="10" y="1" width="113" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{p_Budget_Desc}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1666" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="14"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1666" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="14"/>
+				</line>
+				<staticText>
+					<reportElement mode="Transparent" x="2" y="1" width="120" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[Sub Total]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="13" width="1975" height="1"/>
+				</line>
+				<line>
+					<reportElement x="1" y="0" width="1975" height="1"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="126" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_sub_total_april_budgeted}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="882" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="882" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_headers}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="1976" height="33"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="3" width="120" height="15"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Particulars]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="1" width="135" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[April]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<line>
+				<reportElement x="125" y="0" width="1" height="32"/>
+			</line>
+			<line>
+				<reportElement x="125" y="16" width="1851" height="1"/>
+			</line>
+			<line>
+				<reportElement x="171" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="261" y="0" width="1" height="32"/>
+			</line>
+			<line>
+				<reportElement x="216" y="16" width="1" height="16"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="262" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[May]]></text>
+			</staticText>
+			<line>
+				<reportElement x="397" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="398" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[June]]></text>
+			</staticText>
+			<line>
+				<reportElement x="533" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="534" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[July]]></text>
+			</staticText>
+			<line>
+				<reportElement x="669" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="670" y="0" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[August]]></text>
+			</staticText>
+			<line>
+				<reportElement x="804" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="805" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[September]]></text>
+			</staticText>
+			<line>
+				<reportElement x="940" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="941" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[October]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1076" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1077" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[November]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1212" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1213" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[December]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1348" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1349" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[January]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1484" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1485" y="1" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Feburary]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1620" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1621" y="3" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[March]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1756" y="0" width="1" height="32"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1757" y="3" width="219" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="17" width="44" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="761" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="715" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="896" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="805" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="850" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1031" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="940" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="985" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1168" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1077" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1122" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1305" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1214" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1259" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1440" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1349" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1394" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1576" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1485" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1530" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1712" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1621" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1666" y="18" width="45" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1757" y="18" width="75" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1832" y="18" width="75" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actual]]></text>
+			</staticText>
+			<line>
+				<reportElement x="308" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="353" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="443" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="488" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="580" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="625" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="715" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="760" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="850" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="895" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="985" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1030" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1122" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1167" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1259" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1301" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1394" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1439" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1530" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1575" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1666" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1711" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1830" y="16" width="1" height="16"/>
+			</line>
+			<line>
+				<reportElement x="1907" y="16" width="1" height="16"/>
+			</line>
+			<staticText>
+				<reportElement x="1907" y="18" width="70" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diff]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="1" width="113" height="13"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Budget_Desc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="126" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{April_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{April_Planned}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="14"/>
+			</line>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="177" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{April_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{April_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="216" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_April_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_April_Difference}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1666" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="14"/>
+			</line>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="262" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{May_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{May_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="398" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{June_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{June_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="443" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{June_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{June_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="488" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_June_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_June_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="308" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{May_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{May_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="355" y="0" width="38" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_May_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_May_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="535" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{July_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{July_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="581" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{July_Actual}== 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{July_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="625" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_July_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_July_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="671" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{August_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{August_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="717" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{August_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{August_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="760" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_August_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_August_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="895" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_September_Difference}== 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_September_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1031" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_October_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_October_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1167" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_November_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_November_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1301" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_December_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_December_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1437" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_January_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_January_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1576" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_Feburary_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_Feburary_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1711" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_March_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_March_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1908" y="0" width="66" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_Total_Difference} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_Total_Difference}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="806" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{September_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{September_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="941" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{October_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{October_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1076" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{November_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{November_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1212" y="1" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{December_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{December_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1349" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{January_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{January_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1484" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{Feburary_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Feburary_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1620" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{March_Planned} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{March_Planned}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="851" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{September_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{September_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="986" y="1" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{Octobor_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Octobor_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1122" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{November_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{November_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1259" y="1" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{December_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{December_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1394" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{January_Actual}== 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{January_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1530" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{Feburary_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Feburary_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1666" y="0" width="42" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$F{March_Actual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{March_Actual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1757" y="0" width="66" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_total_budgeted} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_total_budgeted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1832" y="0" width="66" height="13" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_totalactual} == 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_totalactual}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<printWhenExpression><![CDATA[false]]></printWhenExpression>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="125" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="261" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="216" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="308" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="171" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="397" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="353" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="443" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="533" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="580" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="760" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="804" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="895" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="850" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="940" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="985" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1076" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1122" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1212" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1259" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1301" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1348" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1394" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1439" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1484" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1530" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1575" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1620" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1665" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1711" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1756" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1830" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1976" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="1907" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="1975" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="13" width="1975" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,1389 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+   	
+		<!-- Start GL Code -->
+
+		<form-bean name="glMasterFormBean" type="com.GL.actionForm.GlLedgerMForm" />
+		<form-bean name="glGroupLedgerMForm" type="com.GL.actionForm.GlGroupLedgerMForm" />
+		<form-bean name="GLVoucherEntryForm" type="com.GL.actionForm.GLVoucherEntryForm" />
+		<form-bean name="AccountingPeriodForm" type="com.GL.actionForm.AccountingPeriodForm" />
+		<form-bean name="glAccountYearForm" type="com.GL.actionForm.AccountYearForm" />
+		<form-bean name="glLedgerAccountWiseForm" type="com.GL.actionForm.GLLedgerAccountWiseForm" />
+		<form-bean name="glBudgetDefinitionForm" type="com.GL.actionForm.BudgetDefinitionForm" />
+		<form-bean name="glYearClosingForm" type="com.GL.actionForm.YearClosingForm" />
+		<form-bean name="templeteCreationForm" type="com.GL.actionForm.TempleteCreationForm" />
+		<form-bean name="glVoucherAuthorizationForm" type="com.GL.actionForm.VoucherAuthorizationForm" />
+		<form-bean name="GLVoucherViewActionForm" type="com.GL.actionForm.GLVoucherViewActionForm" />
+		<form-bean name="glSubLedgerForm" type="com.GL.actionForm.glSubLedgerForm" />
+		<form-bean name="BudgetLedgerMappingForm" type="com.GL.actionForm.BudgetLedgerMappingForm" />
+		<form-bean name="FixedAssetCategoryForm" type="com.GL.actionForm.FixedAssetCategoryForm" />
+		<form-bean name="IncomeTaxBlockMasterForm" type="com.GL.actionForm.IncomeTaxBlockMasterForm" />
+		<form-bean name="FixedAssetAccountForm" type="com.GL.actionForm.FixedAssetAccountForm" />
+		<form-bean name="FixedAssetLocationForm" type="com.GL.actionForm.FixedAssetLocationForm" />
+		<form-bean name="FixedAssetDepartmentForm" type="com.GL.actionForm.FixedAssetDepartmentForm" />
+		<form-bean name="FixedAssetAdditionForm" type="com.GL.actionForm.FixedAssetAdditionForm" />
+		<form-bean name="FixedAssetSaleForm" type="com.GL.actionForm.FixedAssetSaleForm" />
+		<form-bean name="glTrialBalanceForm" type="com.GL.actionForm.GlTrialBalanceForm" />
+		<form-bean name="glCashBookForm" type="com.GL.actionForm.GlCashBookForm" />
+		<form-bean name="glPartyCreationForm" type="com.GL.actionForm.GlPartyCreationForm" />
+		<form-bean name="receivPayHeadForm" type="com.GL.actionForm.ReceivPayHeadForm" />
+		<form-bean name="FaDepreciationCalcForm" type="com.GL.actionForm.FaDepreciationCalcForm" />
+		<!--Changes For Bill Generation   -->
+		<form-bean name="GlBillGenarationForm" type="com.GL.actionForm.GlBillGenerationForm" />
+		<!--Changes For Bill Generation ends  -->
+		 <form-bean name="FixedAssetClassificationForm" type="com.GL.actionForm.FixedAssetClassificationForm" /> 
+		<!-- End GL Code -->
+       <form-bean name="glFASchedule5Form"	type="com.GL.actionForm.glFASchedule5" />
+       <form-bean name="FixedAssetInsuranceForm" type="com.GL.actionForm.FixedAssetInsuranceForm" />
+		<form-bean name="glLoanWiseTrialBalanceForm" type="com.GL.actionForm.LoanWiseTrialBalanceForm" />
+		<form-bean name="glBankReconcilationForm" type="com.GL.actionForm.BankReconcilationForm" />
+		<form-bean name="glFixedAssetRegisterForm" type="com.GL.actionForm.FixedAssetRegisterForm" />
+		<form-bean name="glBillCaptureForm" type="com.GL.actionForm.BillCapturingForm" />
+		<form-bean name="glBillSettelementForm" type="com.GL.actionForm.BillSettlementForm" />
+			<!--Changes For TDS RateChart sidharth   -->
+		<form-bean name="glTDSRateChartForm" type="com.GL.actionForm.glTDSRateChartForm" />
+		<form-bean name="glHoExpenseAllocForm" type="com.GL.actionForm.glHoExpenseAllocationRatioForm" />
+		<form-bean name="BillCancellationForm" type="com.GL.actionForm.BillCancellationForm" />
+		<form-bean name="PartyWiseExpRptForm" type="com.GL.actionForm.PartyWiseExpRptForm" />
+		        <!--Changes For TDS RateChart sidharth end   -->
+
+<!--Changes For recon process saurabh   -->
+		<form-bean name="ReconProcessForm" type="com.GL.actionForm.ReconProcessForm" />		
+		<!--Changes For recon process saurabh  -->
+	
+     	<!--Amit Ruhela Bank Statement Upload Form   -->
+       		<form-bean name="BankStatementUploadForm" type="com.GL.actionForm.BankStatementUploadForm"  />	
+       		<form-bean name="BankStatementAutoReconcileForm" type="com.GL.actionForm.BankStatementAutoReconcileForm"  />	
+       		<form-bean name="BankStatementManualReconcileForm" type="com.GL.actionForm.BankStatementManualReconcileForm"  />	
+			<form-bean name="glBillReceviableForm" type="com.GL.actionForm.BillReceivablePayableReportForm" />
+			<form-bean name="glBillCaptureViewForm" type="com.GL.actionForm.BillCapturingViewForm" />
+			<form-bean name="glBillReceivablePayableReportForm" type="com.GL.actionForm.BillReceivablePayableReportForm" />
+	<!-- Amit Ruhela Bank Statement Upload end  Form   --> 
+     	<form-bean name="FixedAssetTransferForm" type="com.GL.actionForm.FixedAssetTransferForm" />
+<form-bean name="depreciationDetailForm" type="com.GL.actionForm.DepreciationDetailForm" />
+<form-bean name="saleDetailForm" type="com.GL.actionForm.SaleDetailForm" />
+<form-bean name="chequeDetailForm" type="com.GL.actionForm.ChequeDetailForm" />
+<form-bean name="chequeStatusUpdateForm" type="com.GL.actionForm.GlChequeStatusForm" />
+<form-bean name="FixedAssetTranWithinForm" type="com.GL.actionForm.FixedAssetTranWithInForm" />
+<!-- Amit Ruhela Bill Recevable Report Form 28 june   --> 
+<form-bean name="BillRecevableReportForm" type="com.GL.actionForm.BillRecevableReportForm" />
+<form-bean name="KnockOffForm" type="com.GL.actionForm.KnockOffForm" />
+<!--  end  -->
+<form-bean name="ReceiptMakerForm" type="com.GL.actionForm.BillReceiptForm"></form-bean>
+<form-bean name="CapitalizationForm" type="com.GL.actionForm.FaCapitaliztionForm"></form-bean>
+<form-bean name="ExcelSheetUploadForm" type="com.GL.actionForm.ExcelSheetUploadForm"  />
+<form-bean name="BooktoBookReconcileForm" type="com.GL.actionForm.BooktoBookReconcileForm"  />
+<form-bean name="BanktoBankReconcileForm" type="com.GL.actionForm.BanktoBankReconcileForm"  />
+<!--mradul starts here-->
+<form-bean name="StationaryMasterForm" type="com.GL.actionForm.StationaryMasterForm" />
+<!-- NISHANT SPACE STARTS -->
+<form-bean name="stationaryUploadFormBean"  
+	         type="org.apache.struts.validator.DynaValidatorForm" >
+	    <form-property name="docFile" type="org.apache.struts.upload.FormFile" /> 
+</form-bean>
+<!-- NISHANT SPACE STARTS -->
+<form-bean name="verticalProductForm" type="com.GL.actionForm.VerticalProductForm" />
+	
+	 <!-- Karmveer Code Start for UnReconcileVoucherWise  -->  	
+		<form-bean name="glunreconcile" type="com.GL.actionForm.GlUnreconcileVoucherWiseForm" />
+	 <!-- Karmveer Code Start for UnReconcileVoucherWise  -->
+	 
+	 <!-- Karmveer Code Start for UnReconcileVoucherWise  -->  	
+		<form-bean name="gldataexport" type="com.GL.actionForm.GlVoucherDataExportForm" />
+	 <!-- Karmveer Code Start for UnReconcileVoucherWise  -->
+	 
+	 
+	 
+	 
+	<form-bean name="ChartofaccountForm" type="com.GL.actionForm.ChartofaccountForm" />
+
+	  <!-- Karmveer Code Start for bulk recon  --> 
+	<form-bean name="banktobookform" type="com.GL.actionForm.GlBankToBookAutoReconBulkForm" />
+	<form-bean name="banktobankform" type="com.GL.actionForm.GlBankToBankAutoReconBulkForm" /> 
+	<form-bean name="booktobookform" type="com.GL.actionForm.GlBookToBookAutoReconBulkForm" />  
+	<form-bean name="bankstatementform" type="com.GL.actionForm.GlBankStatementUploadForm" />
+	
+	<form-bean name="glbankrecontemplateform" type="com.GL.actionForm.GlBankReconTemplateForm" />
+	<!-- Karmveer Code Start for bulk recon  --> 
+
+	<form-bean name="PosRecociliationForm" type="com.GL.actionForm.POSReconciliationForm" />
+	<form-bean name="GlLogReportForm" type="com.GL.actionForm.GlLogReportForm" />
+	 
+	 <form-bean name="BookDataUploadForm" type="com.GL.actionForm.BookDataUploadForm"  />
+	 
+	 <!-- Priya Tiwari  -->
+       	<form-bean name="BankToBookReconTemplateForm" type="com.GL.actionForm.BankToBookReconTemplateForm" />
+	  	<form-bean name="BookToBookReconTemplateForm" type="com.GL.actionForm.BookToBookReconTemplateForm" />
+	  	<form-bean name="BankToBankReconTemplateForm" type="com.GL.actionForm.BankToBankReconTemplateForm" />
+	  	<form-bean name="GlUnreconcileDateWiseForm" type="com.GL.actionForm.GlUnreconcileDateWiseForm" />
+	  	<form-bean name="GlBankToBookManyToOneReconForm" type="com.GL.actionForm.GlBankToBookManyToOneReconForm" />
+	<!-- Priya Tiwari -->   
+	   	
+
+  </form-beans>
+
+  <global-exceptions />
+   <global-forwards >
+  
+       		
+  </global-forwards>
+
+    <action-mappings >
+    
+    <!--			sidharth Space Start for Report		-->
+    	 
+    	 <action path="/subledgerlistActionBehind" type="com.Report.SubLedgerListAction" />
+    	 
+    	 
+	<!--			sidharth Space End for Report		-->
+	
+	
+	
+		<!-- saurabh  Start for recon process		-->    	 
+    	 	<action path="/reconProcess" type="com.GL.action.ReconProcessAction" scope="request"   validate="true" parameter="method"
+    	 		name="ReconProcessForm" >  
+    	 	<forward name="success" path="/JSP/glForm/reconProcessDetail.jsp" />  
+    	 	</action> 	
+    	 	
+    	 	 <action path="/reconProcessSave" type="com.GL.action.ReconProcessAction" scope="request"  validate="true" parameter="method"
+    	 		name="ReconProcessForm" >  
+    	 	<forward name="success" path="/JSP/glForm/reconProcessDetail.jsp" />  
+    	 	</action> 
+    	 	
+    	 	<action path="/reconciliationReport"  type="com.GL.action.ReconReportBehindAction"  scope="request"  validate="true" parameter="method"
+    	 	name="glTrialBalanceForm" >
+    	 	<forward name="success" path="/JSP/glForm/reconciliationReport.jsp" />
+    	 	</action>
+    	 	<action path="/reconciliationReportShow" type="com.GL.action.ReconciliationReportAction"
+			scope="request" validate="true" parameter="method"  name="glTrialBalanceForm" >
+			<forward name="success" path="/reconciliationReport.do" />
+			</action>
+    	 	
+    	 	<!--saurabh  Start for recon process		-->
+    	 	
+    	 	 <!--  Mradul added new link for stationary masters in gl -->
+    
+    	 	<action path="/stationaryAdditionMaster" type="com.GL.action.StationaryAdditionMasterBehindAction" 
+	      name="StationaryMasterForm" scope="request" validate="true">
+    	 	<forward name="Success" path="/JSP/glForm/StationaryMasterSearch.jsp" />
+    	 	</action>
+    	 	
+    	 	<action path="/StationaryAdditionMasterDispatchAction" type="com.GL.action.StationaryAdditionMasterDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="newPage" path="/JSP/glForm/StationaryMasterNew.jsp" />
+    	 	<forward name="saveData" path="/JSP/glForm/StationaryMasterNew.jsp" />
+    	 	<forward name="editStationary" path="/JSP/glForm/StationaryMasterNew.jsp" />
+    	 	<forward name="exist" path="/JSP/glForm/StationaryMasterNew.jsp" />
+    	 	<forward name="searchPage" path="/JSP/glForm/StationaryMasterSearch.jsp" />
+    	    	 	
+    	 	
+    	 	</action>
+    	 	
+    	 	
+ <!--       Mradul ended new link for stationary masters in gl -->
+ 
+  <!--       Mradul added new link for stationary Issuance master in gl -->
+   
+          <action path="/stationaryIssuanceMaster" type="com.GL.action.StationaryIssuanceMasterBehindAction" 
+          name="StationaryMasterForm"  scope="request" validate="true">
+          <forward name="Success" path="/JSP/glForm/StationaryIssuanceSearch.jsp" />
+          </action>
+    	 	
+    	  <action path="/hoAllocationSearch" type="com.GL.action.HOAllocationMasterBehindAction" 
+             name="StationaryMasterForm"  scope="request" validate="true">
+            <forward name="Success" path="/JSP/glForm/hoAllocationSearch.jsp" />
+          </action>
+          
+           <action path="/cancelationReceipt" type="com.GL.action.CancelationReceiptBehindAction" 
+             name="StationaryMasterForm"  scope="request" validate="true">
+            <forward name="Success" path="/JSP/glForm/cancelationReceipt.jsp" />
+          </action>
+          
+           <action path="/usedReceipt" type="com.GL.action.UseReceiptBehindAction" 
+             name="StationaryMasterForm"  scope="request" validate="true">
+            <forward name="Success" path="/JSP/glForm/useReceipt.jsp" />
+          </action>
+    	 	
+    	 	<action path="/StationaryIssuanceDispatchAction" type="com.GL.action.StationaryIssuanceDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="newPage" path="/JSP/glForm/StationaryIssuanceNew.jsp" />
+    	 	<forward name="saveData" path="/JSP/glForm/StationaryIssuanceNew.jsp" />
+    	 	<forward name="editMode" path="/JSP/glForm/StationaryIssuanceNew.jsp" />
+    	 	<forward name="Success" path="/JSP/glForm/StationaryIssuanceSearch.jsp" />
+    	 	<forward name="modify" path="/JSP/glForm/BranchStationaryAcknowledgement.jsp" />
+    	 	<forward name="saveAcknow"  path="/JSP/glForm/BranchStationaryAcknowledgement.jsp" />  	
+    	 	<forward name="searchAcknow" path="/JSP/glForm/StationaryAcknowledgementSearch.jsp" /> 	
+    	 	<forward name="modifyHo" path="/JSP/glForm/BranchStationaryHo.jsp" />
+    	 	<forward name="saveAcknowHo"  path="/JSP/glForm/BranchStationaryHo.jsp" />
+    	 	<forward name="searchAcknowHo" path="/JSP/glForm/BranchStationaryReturnHO.jsp" />   
+    	 	<forward name="stationaryHo" path="/JSP/glForm/StationaryAcknowledgementHo.jsp" />
+    	 	<forward name="saveStationryAcknowHo"  path="/JSP/glForm/StationaryAcknowledgementHo.jsp" />
+    	 	<forward name="modifyGetHo" path="/JSP/glForm/StationaryAcknowledgementHo.jsp" />
+    	 	<forward name="searchstationaryAcknowHo" path="/JSP/glForm/BranchHoStationaryAcknowledgment.jsp" /> 
+		<forward name="editModeBranchChange" path="/JSP/glForm/stationarybranchgchangeNew.jsp" />
+    	 	</action>
+    	 	
+    	 	<action path="/hoAllocationDispatchAction" type="com.GL.action.HOAllocationDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="newPage" path="/JSP/glForm/hoAllocationNew.jsp" />
+    	 	<forward name="saveData" path="/JSP/glForm/hoAllocationNew.jsp" />
+    	 	<forward name="editMode" path="/JSP/glForm/hoAllocationNew.jsp" />
+    	 	<forward name="Success" path="/JSP/glForm/hoAllocationSearch.jsp" />
+    	 	</action>
+    	 	
+    	 	<action path="/saveForwardCancelAction" type="com.GL.action.HOAllocationDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="success" path="/JSP/glForm/cancelationReceipt.jsp" />
+    	 	</action>
+    	 	
+    	    <action path="/saveForwardUsedAction" type="com.GL.action.HOAllocationDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="success" path="/JSP/glForm/useReceipt.jsp" />
+    	 	</action>
+    	 	  
+		 <!--        Mradul ended new link for stationary Issuance masters in gl -->
+ 
+ 		 <!-- mradul added new link for stationary masters in gl on 11 sept. 2013 -->
+ 
+		  <action path="/branchAcknowledgment" type="com.GL.action.BranchStationaryAcknowledgementBehindAction" 
+          name="StationaryMasterForm"  scope="request" validate="true">
+          <forward name="success" path="/JSP/glForm/StationaryAcknowledgementSearch.jsp" />         
+          </action>
+			 
+		  <action path="/branchStationaryReturnHO" type="com.GL.action.BranchStationaryReturnHOBehindAction" 
+          name="StationaryMasterForm"  scope="request" validate="true">
+          <forward name="Success" path="/JSP/glForm/BranchStationaryReturnHO.jsp" />
+          </action>  
+          
+          <action path="/hoStationaryAcknowledgment" type="com.GL.action.BranchHoStationaryAcknowledgment" 
+          name="StationaryMasterForm"  scope="request" validate="true">
+          <forward name="Success" path="/JSP/glForm/BranchHoStationaryAcknowledgment.jsp" />
+          </action>  
+		  <!-- mradul ended new link for stationary masters in gl on 11 sept. 2013 -->
+
+<!--     sachin.b code starts for new master stationary branch change starts here-->
+     <action path="/stationaryBranchgChangeBehind" type="com.GL.action.StationaryBranchgChangeBehindAction" 
+             name="StationaryMasterForm"  scope="request" validate="true">
+            <forward name="success" path="/JSP/glForm/stationarybranchSearch.jsp" />
+          </action>
+          
+          	<action path="/StationaryBranchgChangeDispatchAction" type="com.GL.action.StationaryBranchgChangeDispatchAction" 
+    	 	parameter="method" name="StationaryMasterForm" scope="request" validate="true"> 
+    	 	<forward name="editMode" path="/JSP/glForm/stationarybranchgchangeNew.jsp" />
+    	 	<forward name="saved" path="/JSP/glForm/stationarybranchgchangeNew.jsp" />
+    	 	<forward name="Success" path="/JSP/glForm/stationarybranchSearch.jsp" />
+    	 	<forward name="right" path="/JSP/glForm/stationarybranchSearch.jsp" />
+    	 	
+    	 	</action>
+          <!-- sachin.b code starts for new master stationary branch change  ends here-->
+    	 	
+<!--     	   sidharth space for bank statement and bill voucher start-->
+    <action path="/billreceivablepayablevoucher" type="com.GL.action.GlBillRcevablePayableVoucher"
+			name="glBillCaptureForm" scope="request" validate="true">
+			<forward name="authorPage" path="/JSP/glForm/GlBillRcevablePayableVoucher.jsp" />
+	</action>
+	
+	<action path="/reportForBillRecepayVoucher" type="com.GL.action.GlBillRcevablePayableVoucherReport"
+			name="glBillCaptureForm" scope="request" validate="true" parameter="method">
+	</action>
+	
+	<action path="/bankstatement" type="com.GL.action.glBankStatementaction"
+			name="glBankReconcilationForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glBankStatement.jsp" />
+	</action>
+	<action path="/reportForBillStatement" type="com.GL.action.glBankStatementreport"
+			name="glBankReconcilationForm" scope="request" validate="true" parameter="method">
+	</action>
+	
+	<action path="/hoexpenseallocationratio" type="com.GL.action.glHoExpenseAllocationRatioAction"
+			name="glHoExpenseAllocForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glHoExpenseAllocationRatio.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/glHoExpenseAllocationRatioSerch.jsp"/>
+	</action>
+	
+	
+	
+    <!--     	   sidharth space for bank statement and bill voucher END-->
+   	<!--			Start GL Code Action Mapping		-->
+
+		<action path="/accYear" type="com.GL.action.AccountYearAction"
+			name="glAccountYearForm" scope="request" input="/JSP/glForm/accountingYear.jsp">
+			<forward name="success" path="/JSP/glForm/accountingYear.jsp" />
+			<forward name="index" path="/index.jsp" />
+		</action>
+
+		<action path="/glMaster" type="com.GL.action.ComBranchMFormAction"
+			name="glMasterFormBean" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glLedgerMaster.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/glLedgerMasterSearch.jsp" />
+			<forward name="failure" path="/index.jsp" />
+
+		</action>
+
+		<!--  Action mapping for group ledger master -->
+
+		<action path="/glGroupLedgerMaster" type="com.GL.action.GroupLedgerAction"
+			name="glGroupLedgerMForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glGroupLedgerMaster.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/glGroupLedgerMasterSearch.jsp" />
+		</action>
+		<action path="/groupLedgerAjaxAction" type="com.GL.action.GroupLedgerAjaxAction"
+			scope="request" validate="true" input="/JSP/glForm/glGroupLedgerMaster.jsp"
+			name="glGroupLedgerMForm">
+			<forward name="success" path="/JSP/glForm/glGroupLedgerMaster.jsp" />
+			<forward name="gCode" path="/JSP/glForm/groupCode.jsp" />
+		</action>
+
+		<action path="/AvailabilityCheck" type="com.GL.action.AvailabilityCheck"
+			name="glGroupLedgerMForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glGroupLedgerMaster.jsp" />
+			<forward name="reportLAW" path="/JSP/reports/reportLedgerAccountwise.jsp" />
+		</action>
+		
+		
+		<!-- sidharth code start here  -->
+		
+		<action path="/reportforGL" type="com.GL.action.ReportsActionLedger"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="cashPage" path="/glCashBook.do"></forward>	
+			<forward name="bankPage" path="/glBankBook.do"></forward>
+			<forward name="ledgerPage" path="/glLedgerReport.do"></forward>	
+			<forward name="subLedgerPage" path="/glSubLedgerReport.do"></forward>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>	
+		</action>
+		
+		<!-- sidharth code end here -->
+		
+
+		<!-- Action mapping for the Voucher Entry -->
+
+		<action path="/glVoucherEntry" type="com.GL.action.GLVoucherEntryAction"
+			name="GLVoucherEntryForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/GLVoucherEntry.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/GLVoucherEntrySearch.jsp" />
+		</action>
+		
+		<action path="/glVoucherEntrySearch" type="com.GL.action.GLVoucherEntryAction"
+			name="GLVoucherEntryForm" scope="request" validate="true">
+			<forward name="searchPage" path="/glVoucherEntry.do" />
+		</action>
+		
+		<action path="/glVoucherAjaxAction" type="com.GL.action.GLVoucherAjaxAction"
+			name="GLVoucherEntryForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/voucherEntryAjaxSlExist.jsp" />
+			<forward name="new" path="/JSP/glForm/new.jsp" />
+		</action>
+
+		<action path="/viewVoucher" type="com.GL.action.GLVoucherViewAction"
+			name="GLVoucherEntryForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/viewVoucher.jsp" />
+			<forward name="preVoucherView" path="/JSP/glForm/glVoucherView.jsp" />
+			<forward name="reconciledDataView" path="/JSP/glForm/reconciledDataView.jsp" />
+		</action>
+
+		<!--Richa/Nazia code starts for Edit cheque No.  -->
+		<action path="/glVoucherChequeEdit" type="com.GL.action.GLVoucherChequeEditAction"
+			name="GLVoucherEntryForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/viewVoucher.jsp" />
+			<forward name="preVoucherView" path="/JSP/glForm/glVoucherChequeEdit.jsp" />
+		</action>
+		<!--Richa/Nazia code ends for Edit cheque No.  -->
+
+		<action path="/accountingPeriodAction" type="com.GL.action.AccountingPeriodAction"
+			name="AccountingPeriodForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glAccountingPeriod.jsp" />
+			<forward name="index" path="/index.jsp" />
+		</action>
+
+		<action path="/closingYearAction" type="com.GL.action.YearClosingAction"
+			name="glYearClosingForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glYearClosing.jsp" />
+			<forward name="index" path="/index.jsp" />
+		</action>
+
+		<action path="/voucherAuthorization" type="com.GL.action.VoucherAuthorizationAction"
+			name="glVoucherAuthorizationForm" scope="request">
+			<forward name="success" path="/JSP/glForm/voucherAuthorization.jsp" />
+			<forward name="index" path="/index.jsp" />
+		</action>
+
+		<action path="/voucherBehindAuthorization" type="com.GL.action.VoucherApprovalBehindAction"
+			name="glVoucherAuthorizationForm" scope="request">
+			<forward name="success" path="/JSP/glForm/voucherAuthorization.jsp" />
+			
+		</action>
+		
+		<action path="/voucherAuthorizationWithLimit" type="com.GL.action.VoucherApprovalBehindAction"
+			name="glVoucherAuthorizationForm" scope="request">
+			<forward name="success" path="/JSP/glForm/voucherAuthorization.jsp" />
+			
+		</action>
+
+		<action path="/glBudgetDefinition" type="com.GL.action.BudgetDefinitionAction"
+			name="glBudgetDefinitionForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glBudgetDefinition.jsp" />
+			<forward name="SearchPage" path="/JSP/glForm/glBudgetDefinitionSearch.jsp" />
+		</action>
+
+		<!-- code by arun -->
+		<action path="/ledgerMasterAjaxAction" type="com.GL.action.LedgerMasterAjaxAction">
+			<forward name="success" path="/JSP/glLedgerMaster.jsp" />
+		</action>
+		<action path="/templeteCreationAction" name="templeteCreationForm"
+			type="com.GL.action.TempleteCreationAction">
+			<forward name="success" path="/JSP/glForm/glTempleteCreation.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/glTempleteCreationSearch.jsp" />
+		</action>
+		<action path="/chargePopupAction" type="com.GL.action.ChargeDescriptionPopupAction">
+			<forward name="success" path="/JSP/glForm/chargeDiscriptionPopUp.jsp" />
+		</action>
+
+		<action path="/chargePopSaveAction" type="com.GL.action.ChargeDescriptionPopSaveAction">
+			<forward name="success" path="/JSP/glForm/chargeDiscriptionPopUp.jsp" />
+		</action>
+
+		<action path="/glTemplateCreationAjaxAction" type="com.GL.action.GLTemplateCreationAjaxAction"
+			name="templeteCreationForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glTempleteCreation.jsp" />
+			<forward name="ledgerDisplay" path="/JSP/glForm/ledgerDisplayAjex.jsp" />
+			<forward name="templateCteationAjax" path="/JSP/glForm/glTemplateCreationAjax.jsp" />
+			<forward name="new" path="/JSP/glForm/new.jsp" />
+		</action>
+
+		<action path="/templateCreationpopAjaxAction" type="com.GL.action.TemplateCreationPopAjaxAction"
+			scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glTempleteCreation.jsp" />
+			<forward name="chargeDisplay" path="/JSP/glForm/chargeDisplayAjex.jsp" />
+		</action>
+
+		<action path="/BudgetDefinitionAjaxAction" type="com.GL.action.BudgetDefinitionAjaxAction"
+			scope="request" validate="true" input="/JSP/glForm/glBudgetDefinition.jsp"
+			name="glBudgetDefinitionForm">
+			<forward name="success" path="/JSP/glForm/glBudgetDefinition.jsp" />
+
+			<forward name="fiscalAjax" path="/JSP/glForm/glFiscalAjax.jsp" />
+
+		</action>
+		
+		<action attribute="glSubLedgerForm" input="JSP/glForm/glSubLedger.jsp"
+			name="glSubLedgerForm" path="/glSubLedgerAction" scope="request"
+
+			type="com.GL.action.glSubLedgerAction">
+			<forward name="success" path="/JSP/glForm/glSubLedger.jsp" />
+			<forward name="searchPage" path="/JSP/glForm/glSubLedgerSearch.jsp" />
+		</action>
+
+		<action attribute="BudgetLedgerMappingForm" name="BudgetLedgerMappingForm"
+			path="/budgetLedgerMappingAction" scope="request"
+			type="com.GL.action.BudgetLedgerMappingAction">
+			<forward name="success" path="/JSP/glForm/budgetLedgarMapping.jsp" />
+		</action>
+
+		<action path="/budgetLedgerMappingAjaxAction" scope="request"
+			type="com.GL.action.BudgetLedgerMappingAjaxAction">
+			<forward name="sucessAjax" path="/JSP/glForm/budgetLedgarMappingAjax.jsp" />
+		</action>
+		<action path="/glBudgetMaster" attribute="BudgetLedgerMappingForm"
+
+			name="BudgetLedgerMappingForm" scope="request"
+			type="com.GL.action.BudgetMasterAction">
+			<forward name="success" path="/JSP/glForm/glBudgetMaster.jsp" />
+                  <forward name="search" path="/JSP/glForm/glBudgetMasterSearch.jsp" />
+		</action>
+		<action path="/fixedAssetCategoryAction" attribute="FixedAssetCategoryForm"
+			name="FixedAssetCategoryForm" scope="request"
+			type="com.GL.action.FixedAssetCategoryAction">
+			<forward name="success" path="/JSP/glForm/FixedAssetGroup.jsp" />
+			<forward name="SearchPage" path="/JSP/glForm/fixedAssetCategoryMasterSearch.jsp" />
+		</action>
+		<action path="/fixedAssetClassAjaxAction" scope="request"
+			type="com.GL.action.FixedAssetClassAjaxAction">
+			<forward name="FAAjexSuccess" path="/JSP/glForm/fixedAssetAjax.jsp" />
+		</action>
+		<action path="/incomeTaxBlockMasterAction" attribute="IncomeTaxBlockMasterForm"
+			name="IncomeTaxBlockMasterForm" scope="request"
+			type="com.GL.action.IncomeTaxBlockMasterAction">
+			<forward name="success" path="/JSP/glForm/incomeTaxBlockMaster.jsp" />
+			 <forward name="SearchPage" path="/JSP/glForm/incomeTaxBlockMasterSearch.jsp" />
+		</action>
+		<action path="/fixedAssetAccount" attribute="FixedAssetAccountForm"
+			name="FixedAssetAccountForm" scope="request"
+			type="com.GL.action.FixedAssetAccountAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetAccount.jsp" />
+			<forward name="SearchPage" path="/JSP/glForm/fixedAssetAccountMasterSearch.jsp" />
+		</action>
+		<action path="/fixedAssetLocation" attribute="FixedAssetLocationForm"
+			name="FixedAssetLocationForm" scope="request"
+			type="com.GL.action.FixedAssetLocationAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetLocation.jsp" />
+		</action>
+		<action path="/fixedAssetDepartment" attribute="FixedAssetDepartmentForm"
+			name="FixedAssetDepartmentForm" scope="request"
+			type="com.GL.action.FixedAssetDepartmentAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetDepartment.jsp" />
+		</action>
+
+		<action path="/fixedAssetAddition" name="FixedAssetAdditionForm"
+			scope="request" type="com.GL.action.FixedAssetAdditionAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetAddition.jsp" />
+			<forward name="openSearch" path="/fixedAssetAdditionSearch.do" />
+			<forward name="forwardApproval" path="/fixedAssetAdditionApproval.do" />
+		</action>
+
+		<action path="/fixedAssetSaleAction" name="FixedAssetSaleForm"
+			scope="request" type="com.GL.action.FixedAssetSaleAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSale.jsp" />
+		</action>
+		
+		<action path="/fixedAssetSaleSearchAction" name="FixedAssetSaleForm"
+			scope="request" type="com.GL.action.FixedAssetSaleSearchAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSaleSearch.jsp" />
+			<forward name="editPage" path="/JSP/glForm/fixedAssetSale.jsp" />
+		</action>
+		
+		<action path="/fixedAssetSaleAuthorAction" name="FixedAssetSaleForm"
+			scope="request" type="com.GL.action.FixedAssetSaleAuthorAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSaleAuthorSearch.jsp" />
+			<forward name="viewPage" path="/JSP/glForm/fixedAssetSaleAuthor.jsp" />
+		</action>
+		
+		<action path="/fixedAssetSaleAjaxAction" parameter="action"
+			scope="request" type="com.GL.action.FixedAssetSaleAjaxAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSaleAjax.jsp" />
+		</action>
+
+
+
+
+		<action path="/availabilityCheck" type="com.GL.action.AvailabilityCheckAction">
+
+		</action>
+		<action path="/com/GL/action/" type="voucherEntry">
+			<set-property property="cancellable" value="true" />
+		</action>
+		
+		<action path="/LedgerAccountWise" type="com.GL.action.GLLedgerAccountWiseAction"
+			name="glLedgerAccountWiseForm" scope="request" validate="true"
+			input="/JSP/reports/glLedgerAccountWise.jsp">
+			<forward name="success" path="/JSP/reports/glLedgerAccountWise.jsp" />
+			<forward name="reportLAW" path="/JSP/reports/reportLedgerAccountwise.jsp" />
+		</action>
+
+		<action path="/glTrialBalance" type="com.GL.action.GlTrialBalanceAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+			<forward name="glTrialBalanceReport" path="/JSP/FrmTrialBalance.jsp" />
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+
+		<action path="/glCashBook" type="com.GL.action.GlCashBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+<!--			<forward name="glTrialBalanceReport" path="/JSP/FrmCashBankLedgerReport.jsp" />-->
+
+		</action>
+
+
+		<action path="/glLedgerReport" type="com.GL.action.GlLedgerReport"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+
+		</action>
+		<action path="/glBankBook" type="com.GL.action.GLBankBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+<!--			<forward name="glTrialBalanceReport" path="/JSP/DummyReport.jsp" />-->
+
+		</action>
+		<action path="/glDayBook" type="com.GL.action.GLDayBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforDayBook" type="com.GL.action.DayBookReport"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDayBook.do"/>
+			</action>	
+		
+		<action path="/glDailyCashRegister" type="com.GL.action.GlDailyBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforGLDailyCashRegister" type="com.GL.action.ReportsActionForDailyCahRegister"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDailyCashRegister.do"></forward>		
+		</action>
+		
+		<action path="/glLedgerDump" type="com.GL.action.GLLdgerDumpAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glLedgerDump.jsp" />
+			<forward name="ajaxForLedgerDump" path="/JSP/glForm/ajaxForLedgerDump.jsp" />
+		</action>
+		
+		<action path="/glLedgerDumpReport" type="com.GL.action.ReportsActionForLedgerDump"
+			name="glTrialBalanceForm" scope="request" validate="true">
+		</action>
+		
+<!-- 		SIDHARTH(CONSOLIDATED DCR) -->
+		<action path="/glDailyCashRegisterconsolidated" type="com.GL.action.GlDailyBookActionconsolidated"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforGLDailyCashRegisterConsolidated" type="com.GL.action.ReportsActionForDailyCahRegisterConsolidated"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDailyCashRegisterconsolidated.do"></forward>		
+		</action>
+		
+<!-- 		SIDHARTH(CONSOLIDATED DCR) END -->
+		
+		
+              <action path="/glVoucherPrinting" type="com.GL.action.GlVoucherPrintingAction" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glVoucherPrinting.jsp"/>
+			<forward name="glTrialBalanceReport" path="/JSP/FrmVoucherPrintingReport.jsp" />
+			<forward name="glTrialBalanceReportMulti" path="/JSP/FrmVoucherPrintingReport.jsp" />
+			</action>
+		<action path="/glBalanceSheet" type="com.GL.action.GlBalanceSheetAction" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glBalanceSheet.jsp"/>
+			<forward name="profitReport" path="/glProfitLoss.do"/>
+			<forward name="glBalanceSheetReport" path="/JSP/FrmBalanceShhetReport.jsp"/>
+			<forward name="glProfitLossReport" path="/JSP/FrmProffitNLossReport.jsp"/>
+			<forward name="glProfitLossReportcust" path="/JSP/FrmRevenueStatement.jsp"/>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+		
+		<action path="/glProfitLoss" type="com.GL.action.GlProfitLossAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glBalanceSheet.jsp" />
+		</action>
+		
+		<action path="/glProfitLossAjax" type="com.GL.action.GlProfitLossAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/ajaxForProfiandLosReport.jsp" />
+		</action>
+		
+		
+		<action path="/glSubLedgerReport" type="com.GL.action.GLSubLedgerReportAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glSubLedgerReport.jsp" />
+<!--			<forward name="glSubLedgerReport" path="/JSP/FrmCashBankLedgerReport.jsp" />-->
+		</action>
+		
+		<action path="/fixedAssetAdditionAjaxAction" type="com.GL.action.FixedAssetAdditionAjaxAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetAdditionAjax.jsp" />
+
+		</action>
+		<action path="/accountingPeriodAjaxAction" type="com.GL.action.AccountingPeriodAjaxAction">
+
+		</action>
+
+		<action path="/faDepreciationCalcAction" type="com.GL.action.FaDepreciationCalcAction"
+			name="FaDepreciationCalcForm" scope="request">
+			<forward name="success" path="/JSP/glForm/faDepreciationCalc.jsp" />
+
+		</action>
+		<action path="/fixedAssetAdditionSearch" name="FixedAssetAdditionForm"
+			scope="request" type="com.GL.action.FixedAssetAdditionSearchAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetAdditionSearch.jsp" />
+		</action>
+	
+		<action path="/fixedAssetAdditionApproval" name="FixedAssetAdditionForm"
+			scope="request" type="com.GL.action.FixedAssetAdditionSearchApprovalAction">
+			<forward name="successApprov" path="/JSP/glForm/fixedAssetAdditionAproval.jsp" />
+			<forward name="viewPage" path="/JSP/glForm/fixedAssetAdditionView.jsp" />
+			<forward name="viewAssetPage" path="/JSP/glForm/fixedAssetAdditionPopUpView.jsp" />
+		</action>
+		
+		<action path="/fixedAssetAdditionPopUp" name="FixedAssetAdditionForm"
+			scope="request" type="com.GL.action.FixedAssetAdditionPopUpAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetAdditionPopUp.jsp" />
+			<forward name="openParent" path="/JSP/glForm/fixedAssetAddition.jsp" />
+		</action>
+		<!--Changes For Bill Generation	Starts -->
+		<action path="/ledgerMasterAjax" scope="request"
+			type="com.GL.action.GlLedgerMasterAjaxAction">
+			<forward name="success" path="/JSP/glForm/glLedgerMasterAjax.jsp" />
+		</action>
+		<action path="/glBillGeneration" scope="request" name="GlBillGenarationForm"
+			type="com.GL.action.GlBillGenerationAction">
+			<forward name="success" path="/JSP/glForm/glBillGenerationSearch.jsp" />
+			<forward name="new" path="/JSP/glForm/glBillGeneration.jsp" />
+		</action>
+		<action path="/glBillGenerationAjax" scope="request"
+			type="com.GL.action.GlBillGenerationAjaxAction">
+			<forward name="success" path="/JSP/glForm/glBillGenerationAjax.jsp" />
+		</action>
+		<action path="/glBillGenerationAuthor" scope="request"
+			name="GlBillGenarationForm" type="com.GL.action.GlBillGenarationAuthorAction">
+			<forward name="success" path="/JSP/glForm/glBillGenerationSearch.jsp" />
+			<forward name="new" path="/JSP/glForm/glBillGeneration.jsp" />
+		</action>
+		<!--Changes For Bill Generation Ends here	 -->
+        <action  path="/faClassificationAction"
+        scope="request"  name="FixedAssetClassificationForm"    
+        type="com.GL.action.FixedAssetClassificationAction" >
+      <forward name="success" path="/JSP/glForm/faClassificationMaster.jsp" />
+      <forward name="SearchPage" path="/JSP/glForm/faClassificationMasterSearch.jsp" />
+       </action>
+       <action path="/customisedReport" type="com.GL.action.CustomisedReportAction" 
+			name="glTrialBalanceForm" scope="request" >
+		<forward name="success" path="/JSP/glForm/customisedReport.jsp"/>
+		</action>
+		 <action path="/templateProductMapping" type="com.GL.action.TemplateProductMapAction" 
+			name="templeteCreationForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glTemplateProductMapping.jsp"/>
+			<forward name="searchPage" path="/JSP/glForm/glTemplateProductMappingSearch.jsp"/>
+		     <forward name="viewTemplate" path="/JSP/glForm/glTempleteCreation.jsp"/>
+		</action>
+       
+       <action path="/glFASchedule5"
+			type="com.GL.action.glFAScheduleBehindAction"
+			name="glFASchedule5Form" scope="request" validate="true">
+			<forward name="success"
+				path="/JSP/glForm/glFASchedule5.jsp" />
+		</action>		
+		<action path="/glFASchedule"
+			type="com.GL.action.glFASchedule5Action" name="glFASchedule5Form"
+			scope="request" validate="true">
+			<forward name="success"
+				path="/JSP/glForm/glFASchedule5.jsp" />
+			<forward name="glFAScedule5Report"
+				path="/JSP/FrmFASceduleV.jsp" />
+		</action> 
+		<action path="/provisionalVoucherReverse" type="com.GL.action.GlProvisionalVoucherReverseAction" 
+			name="GLVoucherEntryForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glProvisionalVoucherReversal.jsp"/>
+		</action>
+		
+		<action path="/voucheReversal" type="com.GL.action.GlVoucherReversalAction" 
+			name="GLVoucherEntryForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glVoucherReversal.jsp"/>
+		</action> 
+		
+		<action path="/excelVoucheReversal" type="com.GL.action.GlExcelVoucherReversalAction" 
+			name="GLVoucherEntryForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glExcelVoucherReversal.jsp"/>
+		</action> 
+		
+		<action path="/fixedAssetInsuranceAction" type="com.GL.action.FixedAssetInsuranceAction" 
+			name="FixedAssetInsuranceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/fixedAssetInsurance.jsp"/>
+			<forward name="searchPage" path="/JSP/glForm/fixedAssetInsuranceSearch.jsp"/>
+		</action>
+       <action path="/fixedAssetInsuranceActionPopUp" type="com.GL.action.FixedAssetInsuranceActionPopUp" 
+			name="FixedAssetSaleForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/fixedAssetInsurancePopUp.jsp"/>
+			</action>
+		<action path="/budgetVarianceReport" type="com.GL.action.GLBudgetVarianceReportAction" 
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glBudgetVarianceReport.jsp" />		
+		</action>
+		
+		<action path="/exceptionReport" type="com.GL.action.ExceptionReportAction" 
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />		
+		</action>
+		<action path="/accountingListAction" type="com.GL.action.AccountingListAction" 
+			name="glTrialBalanceForm" scope="request" parameter="method">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />	
+			<forward name="accListReport" path="/accountingListAction.do?method=openJsp"/>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+		<action path="/voucherPrintingFromCreation" type="com.GL.action.VoucherPrintingFromCreation" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />		
+		</action>
+		
+		<!--			End GL Code Action Mapping		-->
+     
+	<!-- Party Creation By Ankit -->
+	
+	<action path="/glParyCreationMaster" type="com.GL.action.PartyCreationAction"
+				name="glPartyCreationForm" scope="request" validate="true">
+				<forward name="searchPage" path="/JSP/glForm/glPartyCreationSearch.jsp" />
+				<forward name="sucess" path="/JSP/glForm/glpartyCreation.jsp" />
+	</action>
+		
+		<action path="/partyCreation" type="com.GL.action.PartyCreationAction"
+				name="glPartyCreationForm" scope="request" validate="true">
+				<forward name="sucess" path="/JSP/glForm/glpartyCreation.jsp" />
+				<forward name="gstform" path="/JSP/glForm/GSTDetails.jsp" />
+			</action>	
+
+	<!-- Party Creation End -->
+	
+	<!-- Receive / Pay Head By Ankit -->
+
+		<action path="/recivePaySearch" type="com.GL.action.ReceivPayHeadAction"
+				name="receivPayHeadForm" scope="request" validate="true">
+				<forward name="searchPage" path="/JSP/glForm/recivePayMasterSearch.jsp" />
+				<forward name="openNew" path="/JSP/glForm/recivePayHeadMaster.jsp" />
+				<forward name="saveSucess" path="/JSP/glForm/recivePayHeadMaster.jsp" />
+				<forward name="openModify" path="/JSP/glForm/recivePayHeadMasterModify.jsp" />
+			</action>	
+
+	<action path="/receivPayHeadMasterAjaxAction" type="com.GL.action.ReceivPayHeadMasterAjaxAction"
+				name="receivPayHeadForm" scope="request" validate="true">
+			<forward name="sucess" path="/JSP/glForm/ajaxforReceivPay.jsp" />
+		</action>
+	<!-- Receive / Pay Head End -->
+	
+<action path="/loanWiseTrailBalance" type="com.GL.action.LoanWiseTrailBalanceAction"
+			name="glLoanWiseTrialBalanceForm" scope="request" validate="true">
+		<forward name="success" path="/JSP/glForm/loanWiseTrialBalance.jsp" />
+</action>
+<action path="/reportforLoanWise" type="com.GL.action.LoanWiseTrialBalanceReport"
+			name="glLoanWiseTrialBalanceForm" scope="request" validate="true">
+		<forward name="success" path="/loanWiseTrailBalance.do" />		
+		</action>	
+		
+			<!-- sidharth code start here  -->
+				<action path="/TDSRateChart" type="com.GL.action.TDSRateChartAction"
+					name="glTDSRateChartForm" scope="request" input="/JSP/glForm/glTDSRateChartMasterSearch.jsp">
+					<forward name="searchPage" path="/JSP/glForm/glTDSRateChartMasterSearch.jsp" />
+					<forward name="success" path="/JSP/glForm/glTDSRateChartMasterNew.jsp" />
+		<!--			<forward name="saveSucess" path="/JSP/glForm/glTDSRateChartMasterNew.jsp" />-->
+				</action>
+		<!-- sidharth code end here -->
+		
+		<!-- Bank Reconcilation start -->
+		
+		<action path="/bankreconcilation" type="com.GL.action.BankReconcilationAction"
+			
+			name="glBankReconcilationForm" scope="request" >
+				<forward name="success" path="/JSP/glForm/bankreconcilation.jsp" />
+				</action>
+				<action path="/reportforBankReconcilation" type="com.GL.action.BankReconcilationReport"
+			name="glBankReconcilationForm" scope="request" validate="true">
+				<forward name="success" path="/bankreconcilation.do" />
+		</action>
+		
+		
+		<!-- Bank Reconcilation End -->
+		<!-- fixed Asset - Register start -->
+		
+				<action path="/fixedAssetRegister" type="com.GL.action.FixedAssetRegisterAction"
+						name="glFixedAssetRegisterForm" scope="request">
+					<forward name="success" path="/JSP/glForm/fixedAssetRegiter.jsp" />
+				</action>
+		
+				<action path="/reportforFixedAssetRegister" type="com.GL.action.FixedAssetRegisterReport"
+					name="glFixedAssetRegisterForm" scope="request" >
+					<forward name="success" path="/JSP/glForm/fixedAssetRegiter.jsp" />
+				</action>
+		
+		<!-- fixed Asset - Register End -->
+		
+		<!-- Bill Capturing -->
+			<action path="/glBillCapture" type="com.GL.action.BillCapturingAction" 
+				scope="request"	name="glBillCaptureForm" validate="true">
+					<forward name="searchPage" path="/JSP/glForm/glBillCapturingSearch.jsp" />
+					<forward name="success" path="/JSP/glForm/glBillCapturingMaker.jsp" />
+					<forward name="openModify" path="/JSP/glForm/glBillCapturingMaker.jsp" />
+					<forward name="advPopUp" path="/JSP/glForm/glAdvancePaymentPopup.jsp" />
+			</action>
+			
+			<action path="/glBillCaptureAjax" type="com.GL.action.AjaxActonBillCapturing" scope="request"	name="glBillCaptureForm">
+						<forward name="ajaxPage" path="/JSP/glForm/ajaxforbillCapturing.jsp"></forward>
+			</action>
+			
+			<action path="/glBillReceivCapture" type="com.GL.action.BillCapturingReceivableAction" 
+				scope="request"	name="glBillCaptureForm" validate="true">
+					<forward name="searchPagerece" path="/JSP/glForm/glBillReceivCapturingSearch.jsp" />
+					<forward name="success" path="/JSP/glForm/glBillReceivCapturingMaker.jsp" />
+					<forward name="openModify" path="/JSP/glForm/glBillReceivCapturingMaker.jsp" />
+					<forward name="advPopUp" path="/JSP/glForm/glAdvancePaymentPopup.jsp" />
+			</action>
+			
+			<action path="/glBillPayableAuthor" type="com.GL.action.BillCapturingAuthorAction" 
+				scope="request"	name="glBillCaptureForm" validate="true">
+					<forward name="authorPage" path="/JSP/glForm/glBillPayableCapturingAuthor.jsp" />
+			</action>
+			
+			<action path="/glBillReceivAuthor" type="com.GL.action.BillCapturingAuthorAction" 
+				scope="request"	name="glBillCaptureForm" validate="true">
+					<forward name="authorPage" path="/JSP/glForm/glBillReceivCapturingAuthor.jsp" />
+			</action>
+		<!-- End -->
+		
+		<!-- Bill Settlement -->
+		
+			<action path="/glbillSetlementAjax" type="com.GL.action.BillSettlementAction"
+					name="glBillSettelementForm" scope="request" validate="true">
+						<forward name="ajaxJSp" path="/JSP/glForm/ajaxForBillCancel.jsp" />
+			</action>
+			
+			<action path="/glbillSettelement" type="com.GL.action.BillSettlementAction"
+					name="glBillSettelementForm" scope="request" validate="true">
+						<forward name="searchPage" path="/JSP/glForm/glBillSettlementSearch.jsp" />
+						<forward name="sucess" path="/JSP/glForm/glBillSettlementMaker.jsp" />
+						<forward name="viewPable" path="/JSP/glForm/glViewPayableForSettlement.jsp" />
+						<forward name="viewAllocate" path="/JSP/glForm/glViewpayableForAllocation.jsp" />
+						
+			</action>
+	
+			<action path="/glBillSettlementAjax" type="com.GL.action.BillSettlementAction"
+					name="glBillSettelementForm" scope="request" validate="true">
+						<forward name="ajaxPage" path="/JSP/glForm/ajaxforBillSettlement.jsp" />
+			</action>
+		<!-- End -->
+<!-- Bill Settlement Author -->
+			<action path="/glbillSettelementAuthor" type="com.GL.action.BillSettlementAuthorAction"
+					name="glBillSettelementForm" scope="request" validate="true">
+						<forward name="searchPage" path="/JSP/glForm/glBillSettlementAuthorSearch.jsp" />
+						<forward name="success" path="/JSP/glForm/glBillSettlementViewAuthor.jsp" />
+						<forward name="viewOnAllocate" path="/JSP/glForm/glallocatedPayable.jsp" />
+		    </action>
+		  <!--  < Bill receviable Payable records Amit ruhela>-->
+			<action path="/billreceivablepayablereport" type="com.GL.action.BillReceivablePayableReport"
+					name="glBillReceviableForm" scope="request" validate="true">
+						<forward name="success" path="/JSP/glForm/billReceivablePayableReport.jsp" />
+			   </action>
+	
+	<action path="/reportforbill" type="com.GL.action.BillReceivablePayableReportAction"
+					name="glBillReceivablePayableReportForm" scope="request" validate="true" parameter="method"></action>
+					
+			    <action path="/billCapturingView" type="com.GL.action.BillCapturingViewAction"
+					name="glBillCaptureViewForm" scope="request" validate="true">
+						<forward name="success" path="/JSP/glForm/glBillCaptuirngView.jsp" />
+		    </action>
+
+	<!-- Amit Ruhela code start here  -->
+		
+		
+		<action path="/bankStatementUploading" type="com.GL.action.BankStatementUploadingAction"
+			name="BankStatementUploadForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankStatementUploading.jsp" />
+			<forward name="search" path="/JSP/glForm/bankStatementUploadingSearch.jsp" />
+			<forward name="ajaxPage" path="/JSP/glForm/ajaxforBanktoBanklReconcileList.jsp" />
+		</action>
+		<action path="/bankStatementAutoReconcile" type="com.GL.action.BankStatementAutoReconcileAction"
+			name="BankStatementAutoReconcileForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankStatementAutoReconcile.jsp" />
+			<forward name="successsearch" path="/JSP/glForm/bankStatementAutoReconcile.jsp" />
+		</action>
+		<action path="/bankStatementManualReconcile" type="com.GL.action.BankStatementManualReconcileAction"
+			name="BankStatementManualReconcileForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankStatementManualReconcile.jsp" />
+			</action>
+		
+		<!--  Amit Ruhela Ajax Action For Manual Recon List date 06-07-2012 -->
+			<action path="/bankStatManReconAjax" type="com.GL.action.BankStatementManualReconcileAction"
+				name="BankStatementManualReconcileForm" scope="request" >
+			<forward name="ajaxPage" path="/JSP/glForm/ajaxforManualReconcileList.jsp" />
+			</action>
+		
+		<!--  End -->
+		<!-- End -->
+		
+		<action path="/fixedAssetTransferAction" name="FixedAssetTransferForm"
+			scope="request" type="com.GL.action.FixedAssetTransferAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetTransferSearch.jsp" />
+			<forward name="newPage" path="/JSP/glForm/fixedAssetTransfer.jsp" />
+		</action>
+		
+		<action path="/fixedAssetTransferAuthorAction" name="FixedAssetTransferForm"
+			scope="request" type="com.GL.action.FixedAssetTransferAuthorAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetTransferAprovalSearch.jsp" />
+			<forward name="viewPage" path="/JSP/glForm/fixedAssetTransferViewAproval.jsp" />
+		</action>
+		
+		<action path="/glDepreciationDetail" type="com.GL.action.DepreciationDetailReportAction"
+			name="depreciationDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/depreciationDetail.jsp" />
+		</action>
+
+		<action path="/saleDiscardReport" type="com.GL.action.SaleDetailReportAction"
+			name="saleDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/saleDiscardReport.jsp" />
+		</action>
+
+	<action path="/chequeDetail" type="com.GL.action.ChequeDetailAction"
+			name="chequeDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/chequeDetail.jsp" />
+			<forward name="search" path="/JSP/glForm/chequeDetailSearch.jsp" />
+		</action>
+		<action path="/chequePrintingReport" type="com.GL.action.ChequeDetailReportAction"
+			name="chequeDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/chequeDetailReport.jsp" />
+		</action>
+
+		<action path="/balancestotrial" type="com.GL.action.GroupDetailAction" name="glTrialBalanceForm">
+
+		</action>
+		
+		<action path="/budgetVoucherMappingSearch" type="com.GL.action.BudgetVoucherMappingBehindAction"
+				name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/budgetVoucherMappingSearch.jsp" />
+		</action>
+		
+		<action path="/budgetVoucherMapping" type="com.GL.action.BudgetVoucherMappingDispatchAction"
+				name="glTrialBalanceForm" scope="request"
+				parameter="method">
+			<forward name="search" path="/budgetVoucherMappingSearch.do"></forward>
+			<forward name="update" path="/budgetVoucherMappingSearch.do"></forward>
+		</action>
+		
+		<!-- Amit Ruhela add BillRecevable Report arap 28 june -->
+		 <action path="/billreceivablereport" type="com.GL.action.BillRecevableReportAction"
+				 name="BillRecevableReportForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/billRecevableReport.jsp" />
+		</action>
+		
+		<!-- Amit Ruhela end  -->
+<!-- Ankit Agarwal Cheque printing Status -->
+<action path="/glchequeStatusUpdateAction" name="chequeStatusUpdateForm"
+			scope="request" type="com.GL.action.ChequeStatsUpdateAction">
+			<forward name="searchPage" path="/JSP/glForm/glchequeStatus.jsp" />
+			<forward name="updateInstrumentDetailMain" path="/JSP/glForm/glchequeStatus.jsp" />
+		</action>
+
+<!-- End -->
+
+<!--  Ankit Asset Transfer WithIn Branch -->
+	<action path="/fixedAssetTransferInBranchAction" name="FixedAssetTranWithinForm"
+			scope="request" type="com.GL.action.FixedAssetTranWithInAction">
+		<forward name="success" path="/JSP/glForm/fixedAssetTranInBranchSearch.jsp" />
+		<forward name="newPage" path="/JSP/glForm/FixedAssetTransferWithinBranch.jsp" />
+		</action>
+	
+	<action path="/fixedAssetTranInBranchAuthor" name="FixedAssetTranWithinForm"
+			scope="request" type="com.GL.action.FixedAssetTransferInBranchAuthorAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetTranInBranchAprovSearch.jsp" />
+			<forward name="viewPage" path="/JSP/glForm/fixedAssetTransferViewWithInAproval.jsp" />
+		</action>
+			
+<!-- End -->
+
+<!-- sidharth party master starts -->
+	<action path="/partyMasterReport" name="glPartyCreationForm"
+			scope="request" type="com.GL.action.PartyMasterBehindAction">
+		<forward name="success" path="/JSP/glForm/partyMasterReport.jsp" />
+		</action>
+		
+	<action path="/reportForPartyMaster" type="com.GL.action.GlPartyMasterReportAction"
+			name="glPartyCreationForm" scope="request" validate="true" parameter="method">
+	</action>
+<!-- Sidharth ends -->
+<!-- sidharth space for subledger trial balance   -->
+	<action path="/subledgertrialbalance" name="glTrialBalanceForm"
+			scope="request" type="com.GL.action.SubledgerTrialBalanceBehindAction">
+		<forward name="success" path="/JSP/glForm/subLedgerTrialbalancereport.jsp" />
+		</action>
+	<action path="/reportforSubLedgerTrial" type="com.GL.action.SubledgerTrialBalanceReportAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/subledgertrialbalance.do" />
+     </action>
+
+<action path="/branchBalanceSheet" name="glTrialBalanceForm"
+			scope="request" type="com.GL.action.BranchBalanceSheetBehindAction">
+		<forward name="success" path="/JSP/glForm/branchWiseBalanceSheetReport.jsp" />
+		</action>
+		
+<action path="/reportforBranchBalanceSheet" type="com.GL.action.BranchBalanceSheetReportAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/branchBalanceSheet.do" />
+     </action>
+<!-- sidharth space for subledger trial balance  end here  -->
+
+<action path="/GlknockOffMaker" type="com.GL.action.KnockOffMakerAction"
+			name="KnockOffForm" scope="request" >
+	<forward name="success" path="/JSP/glForm/glKnockOffMaker.jsp" />
+	<forward name="search" path="/JSP/glForm/glKnockOffMakerSearch.jsp" />
+</action>
+		
+<action path="/GlknockOffAuthor" type="com.GL.action.KnockOffAuthorAction"
+			name="KnockOffForm" scope="request" >
+	<forward name="search" path="/JSP/glForm/glKnockOffAuthor.jsp" />
+	<forward name="successView" path="/JSP/glForm/glKnockOffMakerView.jsp" />
+</action>
+
+<action path="/glBillReceiptSearch" type="com.GL.action.BillReceiptMakerAction" name="ReceiptMakerForm" scope="request">
+		<forward name="search" path="/JSP/glForm/glBilReceiptMakerSearch.jsp" />
+		<forward name="new" path="/JSP/glForm/glBillreceiptMaker.jsp" />
+		<forward name="ajaxJsp" path="/JSP/glForm/ajaxForBillReceipt.jsp" />
+		<forward name="viewReceive" path="/JSP/glForm/glViewReceivable.jsp" />
+		<forward name="saveReceive" path="/JSP/glForm/glReceivableForAllocation.jsp" />
+</action>
+
+<action path="/glbillReceiptAuthor" type="com.GL.action.BillReceiptAuthorAction" name="ReceiptMakerForm" scope="request">
+		<forward name="searchPage" path="/JSP/glForm/glBillReceiptAuthorSearch.jsp" />
+		<forward name="viewPage" path="/JSP/glForm/glViewBillReceipt.jsp" />
+		<forward name="viewOnAllocate" path="/JSP/glForm/glallocatedPayable.jsp" />
+</action>
+
+<action path="/glcapitalizationSearch" type="com.GL.action.FaCapitalizationAction" name="CapitalizationForm" scope="request">
+		<forward name="searchPage" path="/JSP/glForm/glCapitalizedSearch.jsp" />
+		<forward name="new" path="/JSP/glForm/glCapitalizedMaker.jsp" />
+		<forward name="ajaxPage" path="/JSP/glForm/ajaxForFaCapitalization.jsp"></forward>
+
+</action>
+
+<action path="/glcapitalizationAuthor" type="com.GL.action.FaCapitalizationAuthorAction" name="CapitalizationForm" scope="request">
+		<forward name="authorPage" path="/JSP/glForm/glCapitalizedAuthor.jsp" />
+		<forward name="viewPage" path="/JSP/glForm/glCapitalizedMaker.jsp" />
+</action>
+<!-- Bank Recon Statement -->
+	<action path="/bankReconStatement" type="com.GL.action.BankReconcilationStatementAction" name="glBankReconcilationForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankReconStatementReport.jsp" />
+	</action>
+	<action path="/reportforBankReconStatement" type="com.GL.action.BankReconStatementReport" 
+			name="glBankReconcilationForm" scope="request" validate="true">
+				<forward name="success" path="/bankReconStatement.do" />
+	</action>
+<!-- End -->
+
+	<action path="/glExcelSheetUpload" type="com.GL.action.ExcelSheetUploadingAction"	name="ExcelSheetUploadForm"
+    		scope="request" validate="true">
+    	<forward name="sucesss" path="/JSP/glForm/glExcelUpload.jsp" />		
+    </action>  
+   
+  <action path="/billCancellation" type="com.GL.action.BillCancellationAction" name="BillCancellationForm"
+  		  scope="request" validate="true">
+  		  <forward name="success" path="/JSP/glForm/glbillCancellationSearch.jsp"></forward>	
+  		  <forward name="newJsp" path="/JSP/glForm/glbillCancellation.jsp"></forward>
+  		  <forward name="ajaxPage" path="/JSP/glForm/ajaxForBillCancel.jsp" ></forward>  
+  </action>
+  
+    <action path="/billCancelAuthor" type="com.GL.action.BillCancellationAuthorAction" name="BillCancellationForm"
+  		  scope="request" validate="true">
+  		  <forward name="authorSuccess" path="/JSP/glForm/glbillCancellationAuthor.jsp"></forward>	
+  	</action>
+  
+  
+  <action path="/partyWiseExpRpt" type="com.GL.action.PartyWiseExpAction" name="PartyWiseExpRptForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glpartyWiseExpReport.jsp" />
+	</action>
+  
+  <action path="/reportForPartyWiseExp" type="com.GL.action.PartyWiseExpReport" 
+			name="PartyWiseExpRptForm" scope="request" validate="true">
+				<forward name="success" path="/partyWiseExpRpt.do" />
+	</action>
+  
+  <!--			saurabh starts for sub ledger report ajax-->
+				<action path="/glBillCaptureAjaxForSubLedgerReport" type="com.GL.action.AjaxActonBillCapturing" scope="request"	name="glBillCaptureForm">
+				<forward name="ajaxPage" path="/JSP/glForm/ajaxforbillCapturing.jsp"></forward>
+				</action>
+<!--			saurabh starts for sub ledger report ajax-->
+
+		<action path="/bookToBookReconcile" type="com.GL.action.BooktoBookReconcileAction"
+			name="BooktoBookReconcileForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glBooktoBookReconcile.jsp" />
+			</action>
+			
+			<action path="/booktobookReconAjax" type="com.GL.action.BooktoBookReconcileAction"
+				name="BooktoBookReconcileForm" scope="request" >
+			<forward name="ajaxPage" path="/JSP/glForm/ajaxforBooktoBooklReconcileList.jsp" />
+			</action>
+			
+			<action path="/bankToBankReconcile" type="com.GL.action.BanktoBankReconcileAction"
+			name="BanktoBankReconcileForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glBankToBankReconcile.jsp" />
+			</action>
+			
+			<action path="/banktobankReconAjax" type="com.GL.action.BanktoBankReconcileAction"
+				name="BanktoBankReconcileForm" scope="request" >
+			<forward name="ajaxPage" path="/JSP/glForm/ajaxforBanktoBanklReconcileList.jsp" />
+			</action>
+       	
+       		<action path="/rejectVoucher" type="com.GL.action.GLVoucherRejectionAction"
+				name="GLVoucherEntryForm" scope="request" validate="true">
+					<forward name="success" path="/JSP/glForm/viewVoucher.jsp" />
+					<forward name="voucherRejection" path="/JSP/glForm/glVoucherRejection.jsp" />
+			</action>
+			
+		<action path="/gluploadingRecon" type="com.GL.action.GLBankUploadingReconAction" name="BanktoBankReconcileForm" 
+			scope="request">
+				<forward name="success" path="/JSP/glForm/bankStatementUploadingReconcile.jsp"/>
+		</action>	
+		
+		<action  path="/GenerateAllGLReports" type="com.GL.action.GenerateAllGLReports" />
+       
+       <action path="/fixedAssetSplitMaker" name="FixedAssetTransferForm"
+			scope="request" type="com.GL.action.FixedAssetSplitAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSplitSearch.jsp" />
+			<forward name="newPage" path="/JSP/glForm/fixedAssetSplit.jsp" />
+		</action>
+       
+       <action path="/fixedAssetSplitAuthor" name="FixedAssetTransferForm"
+			scope="request" type="com.GL.action.FixedAssetSplitAuthorAction">
+			<forward name="success" path="/JSP/glForm/fixedAssetSplitAprovalSearch.jsp" />
+			<forward name="viewPage" path="/JSP/glForm/fixedAssetSplitViewAproval.jsp" />
+		</action>
+		<!-- NISHANT For upload -->
+		<action path="/stationaryUpload" parameter="method" scope="request" 
+			name="stationaryUploadFormBean" type="com.GL.action.StationaryUpload">
+			<forward name="success" path="/JSP/glForm/stationaryUpload.jsp" /> 	
+		</action>
+		<!-- NISHANT For upload -->
+		
+		<!-- Karmveer Code Start for maker authos concept in upload  -->   
+			<action path="/uploadMaker" type="com.GL.action.VoucherUploadMakerAction"	name="ExcelSheetUploadForm"
+				scope="request" validate="true">
+					<forward name="sucesss" path="/JSP/glForm/uploadMaker.jsp" />		
+			</action> 
+    	
+			<action path="/uploadAuthor" type="com.GL.action.VoucherUploadAuthorAction"	name="ExcelSheetUploadForm"
+				scope="request" validate="true" input="/JSP/glForm/uploadAuthor.jsp">
+					<forward name="success" path="/JSP/glForm/uploadAuthor.jsp" />		
+			</action> 
+    	<!-- Karmveer Code End for maker authos concept in upload  -->
+    	
+    	
+    	  <!-- Karmveer Code Start for UnReconcileVoucherWise  -->   
+    			<action path="/unreconcilevoucherwise" type="com.GL.action.GlUnreconcileVoucherWiseAction"	name="glunreconcile"
+						scope="request" validate="true" input="/JSP/glForm/glUnreconcileVoucherWise.jsp">
+					<forward name="success" path="/JSP/glForm/glUnreconcileVoucherWise.jsp" />
+    			</action>
+    	<!-- Karmveer Code Start for UnReconcileVoucherWise  -->  
+    	
+    	
+    	<!-- sachin balyan works starts here-->
+
+			<action path="/verticalProductMapping" type="com.GL.action.VerticalProductMappingAction" 
+			name="verticalProductForm" scope="request" >
+		     <forward name="success" path="/JSP/glForm/verticalProductMapping.jsp" />
+		     <forward name="index" path="/index.jsp" />
+		   
+		</action>
+		
+		<!-- sachin balyan works ends here -->
+		<action path="/smartlov" type="com.GL.action.GLSmartLovAction"
+			parameter="method">
+
+		</action>
+		
+			   	 
+    	 	
+    	 <action path="/chartOfAccounts" type="com.GL.action.ChartofaccountAction" scope="request"   validate="true" parameter="method"
+    	 		name="ChartofaccountForm" >  
+    	 	<forward name="success" path="/JSP/glForm/chartOfAccounts.jsp" />  
+    	 </action> 	
+    	 
+    	 <!-- Karmveer Code Start for bulk recon  --> 
+    	 <action path="/banktobookauto" type="com.GL.action.GlBankToBookAutoReconBulkAction" scope="request"   validate="true"
+    	 		name="banktobookform" >  
+    	 	<forward name="success" path="/JSP/glForm/GlBankToBookAutoReconBulk.jsp" />  
+    	 </action> 	
+    	 
+    	 <action path="/booktobookauto" type="com.GL.action.GlBookToBookAutoReconBulkAction" scope="request"   validate="true"
+    	 		name="booktobookform" >  
+    	 	<forward name="success" path="/JSP/glForm/GlBookToBookAutoReconBulk.jsp" />  
+    	 </action> 	
+    	 
+    	 
+    	 <action path="/banktobankauto" type="com.GL.action.GlBankToBankAutoReconBulkAction" scope="request"   validate="true"
+    	 		name="banktobankform" >  
+    	 	<forward name="success" path="/JSP/glForm/GlBankToBankAutoReconBulk.jsp" />  
+    	 </action> 	
+    	 
+    	 
+    	 <action path="/bnkstmntuploadmaker" type="com.GL.action.GlBankStatementUploadMakerAction" scope="request"   validate="true"
+    	 		name="bankstatementform" >  
+    	 	<forward name="success" path="/JSP/glForm/GlBankStatemntUploadMakerBulk.jsp" />  
+    	 </action>
+    	 
+    	 <action path="/bnkstmntuploadauthor" type="com.GL.action.GlBankStatementUploadAuthorAction" scope="request"   validate="true"
+    	 		name="bankstatementform" >  
+    	 	<forward name="success" path="/JSP/glForm/GlBankStatemntUploadAuthorBulk.jsp" />  
+    	 </action>
+    	 
+    	 
+    	 
+    	 <action path="/recontemplate" type="com.GL.action.GlBankReconTemplateAction" scope="request"   validate="true"
+    	 		name="glbankrecontemplateform" >  
+    	 	<forward name="search" path="/JSP/glForm/GlBankReconTemplateSearch.jsp" /> 
+    	 	<forward name="new" path="/JSP/glForm/GlBankReconTemplateSearch.jsp" /> 
+    	 </action>
+    	 
+ 		<!-- Karmveer Code Start for bulk recon  --> 
+    
+    	<!-- Karmveer Code Start for Multy GL Setup  -->   
+    			<action path="/dataexpo" type="com.GL.action.GlVoucherDataExportAction"	name="gldataexport"
+						scope="request" validate="true" input="/JSP/glForm/GlVoucherDataExport.jsp">
+					<forward name="success" path="/JSP/glForm/GlVoucherDataExport.jsp" />
+    			</action>
+    	<!-- Karmveer Code Start for Multy GL Setup  --> 
+    
+		
+		<action path="/posReconciliationReport" type="com.GL.action.PosReconciliationAction" name="PosRecociliationForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/posReconciliationReport.jsp" />
+		</action>
+		
+		<action path="/glLogReport" type="com.GL.action.GlLogReportAction" name="GlLogReportForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glLogReport.jsp" />
+		</action>
+		
+    	<!-- Karmveer Code Start for book data maker authos for capfirst concept in upload  -->   
+			<action path="/bookdatauploadmaker" type="com.GL.action.BookDataUploadMakerAction"	name="BookDataUploadForm"
+				scope="request" validate="true">
+					<forward name="sucesss" path="/JSP/glForm/bookDataUploadMaker.jsp" />		
+			</action> 
+    	
+			<action path="/bookdatauploadauthor" type="com.GL.action.BookDataUploadAuthorAction"	name="BookDataUploadForm"
+				scope="request" validate="true" input="/JSP/glForm/uploadAuthor.jsp">
+					<forward name="success" path="/JSP/glForm/bookDataUploadAuthor.jsp" />		
+			</action> 
+    	<!-- Karmveer Code end for book data maker authos for capfirst concept in upload  -->
+    
+    	
+    	<!-- Priya Tiwari -->
+		
+		<action path="/banktobooktemplate" type="com.GL.action.BankToBookReconTemplateAction"
+			name="BankToBookReconTemplateForm" scope="request" validate="true">
+			<forward name="sucesss" path="/JSP/glForm/bankToBookReconTemplateSearch.jsp" />
+			 <forward name="newjsp" path="/JSP/glForm/bankToBookReconTemplateNew.jsp" />
+			
+        </action>
+        
+		
+		
+		<action path="/booktobooktemplate" type="com.GL.action.BookToBookReconTemplateAction"
+			name="BookToBookReconTemplateForm" scope="request" validate="true">
+			<forward name="sucesss" path="/JSP/glForm/bookToBookReconTemplateSearch.jsp" />
+		    <forward name="newjsp" path="/JSP/glForm/bookToBookReconTemplateNew.jsp" />
+	   </action>
+     
+    	  <action path="/banktobanktemplate" type="com.GL.action.BankToBankReconTemplateAction"
+			name="BankToBankReconTemplateForm" scope="request" validate="true">
+			<forward name="sucesss" path="/JSP/glForm/bankToBankReconTemplateSearch.jsp" />
+		    <forward name="newjsp" path="/JSP/glForm/bankToBankReconTemplateNew.jsp" />
+		 </action>
+		 
+		 
+		 <action path="/unreconciledatewise" type="com.GL.action.GlUnreconcileDateWiseAction"	
+    			name="GlUnreconcileDateWiseForm" scope="request" validate="true" input="/JSP/glForm/glUnreconcileDateWise.jsp">
+			 <forward name="success" path="/JSP/glForm/glUnreconcileDateWise.jsp" />  
+    	</action>
+    	
+    	<action path="/banktobookmanytoonerecon" type="com.GL.action.GlBankToBookManyToOneReconAction"	
+    			name="GlBankToBookManyToOneReconForm" scope="request" validate="true" input="/JSP/glForm/glBankToBookManyToOneReconJsp.jsp">
+			 <forward name="success" path="/JSP/glForm/glBankToBookManyToOneReconJsp.jsp" />  
+    	</action>
+    	   
+    <!-- Priya Tiwari --> 
+    
+    
+    
+    
+    </action-mappings>
+
+	
+<!--DynaValidatorForm Action End -->   		
+ 
+  <message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" /> 
+	</plug-in>
+  
+</struts-config>
+

@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptDailyCashRegister_Branchwise" language="groovy" pageWidth="1162" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="1122" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_branchHeaders" class="java.lang.String"/>
+	<parameter name="p_headers" class="java.lang.String"/>
+	<parameter name="p_figures_headers" class="java.lang.String"/>
+	<parameter name="p_report_date" class="java.lang.String"/>
+	<parameter name="p_report_format" class="java.lang.String"/>
+	<parameter name="p_as_on_date" class="java.lang.String"/>
+	<parameter name="p_branch_id" class="java.lang.String"/>
+	<parameter name="p_account_No" class="java.lang.String"/>
+	<parameter name="p_branchText" class="java.lang.String"/>
+	<parameter name="p_from_date" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from (select 1 as Sno , '' as Loan_No ,
+'' as CUSTOMER_NAME ,
+STR_TO_DATE($P{p_from_date},'%d-%m-%Y') as VALUE_DATE,
+'' as Reciept_No,
+'' as Maker_Name,
+'' as Author_Name,
+'' as Purpose,
+ 0 as Reciept ,
+0 as Payment,'Opening Balance' as remarks,
+Get_Cash_Balance_Branchwise(1,STR_TO_DATE($P{p_from_date},'%d-%m-%Y'),'O',$P{p_account_No},$P{p_branchHeaders}) as OpeningBalance,'' as voucher_no,
+'Y' as To_Be_Added_In_Branch,
+'' as Reference_No,
+'' as Allocation
+union all
+(
+select SNO , LOAN_NO,CUSTOMER_NAME,VALUE_DATE,Reciept_No,Maker_Name,Author_Name,Purpose,Reciept,Payment,remarks,
+0 as OpeningBalance,voucher_no,'Y' as To_Be_Added_In_Branch,
+Reference_No,
+GROUP_CONCAT(concat(CHARGE_DESC , ' : ' ,Tota_Payment)) as Allocation
+from
+
+(select 2 as SNo,ifnull(cr_loan_dtl.LOAN_NO,'') as LOAN_NO,
+ifnull(concat(gcd_customer_m.CUSTOMER_NAME ,' '),'GL') as CUSTOMER_NAME,
+abc.VALUE_DATE,
+ifnull(ifnull(cr_instrument_dtl.RECIPT_NO,abc.RECIPT_NO),'') as  Reciept_No,
+sec_user_m_maker.USER_NAME as Maker_Name,
+sec_user_m.USER_NAME as Author_Name,
+ifnull(cr_instrument_dtl.RECEIPT_PURPOSE,'') as Purpose ,
+abc.DR_AMount as Reciept ,
+abc.CR_Amount as Payment,
+ifnull(cr_instrument_dtl.MAKER_REMARKS,abc.remarks) as remarks , 0 as OpeningBalance, abc.voucher_no,
+'Y' as To_Be_Added_In_Branch,
+Loan_reference_No as Reference_No,
+com_charge_code_m.CHARGE_DESC , sum(cr_pmnt_dtl.PMNT_AMOUNT) as Tota_Payment
+
+from
+(select 2 as Sno , NARRATION as remarks,
+gl_voucher_dtl.DR_AMOUNT,
+gl_voucher_dtl.CR_AMOUNT, REFERENCE_NO,MODULE_ID,VOUCHER_NO,VALUE_DATE,
+ifnull(AUTHOR_ID,MAKER_ID) as AUTHOR_ID,MAKER_ID,gl_voucher_dtl.RECIPT_NO
+from gl_voucher_dtl where STATUS_ST = 'A' and VOUCHER_DATE >= STR_TO_DATE($P{p_from_date},'%d-%m-%Y %H:%i')
+and VOUCHER_DATE < DATE_ADD(STR_TO_DATE($P{p_as_on_date},'%d-%m-%Y %H:%i'),INTERVAL 1 DAY)
+and gl_voucher_dtl.LEDGER_ID=$P{p_account_No}
+and gl_voucher_dtl.BRANCH_ID=$P{p_branchHeaders} order by  mid(gl_voucher_dtl.VOUCHER_NO,2) ) abc
+left join cr_loan_dtl on cr_loan_dtl.LOAN_ID=abc.reference_no and abc.module_id = 'CMS'
+left join gcd_customer_m on cr_loan_dtl.LOAN_CUSTOMER_ID=gcd_customer_m.CUSTOMER_ID
+left join sec_user_m on sec_user_m.USER_ID=abc.author_id
+left join cr_loan_voucher_dtl use index(Voucher_Index) on cr_loan_voucher_dtl.VOUCHER_NO=abc.voucher_no
+left join cr_instrument_dtl on cr_instrument_dtl.INSTRUMENT_ID= cr_loan_voucher_dtl.TXN_ID
+left join cr_pmnt_dtl on cr_instrument_dtl.instrument_id = cr_pmnt_dtl.instrument_id
+left join cr_txnadvice_dtl on cr_pmnt_dtl.TXNADVICEID = cr_txnadvice_dtl.TXNADVICE_ID
+left join com_charge_code_m on com_charge_code_m.CHARGE_CODE = cr_txnadvice_dtl.CHARGE_CODE_ID
+left join sec_user_m sec_user_m_maker on sec_user_m_maker.USER_ID= ifnull(cr_instrument_dtl.maker_id,abc.maker_id)
+
+group by
+ 2 ,ifnull(cr_loan_dtl.LOAN_NO,''),ifnull(concat(gcd_customer_m.CUSTOMER_NAME ,' '),'GL'),
+abc.VALUE_DATE,ifnull(cr_instrument_dtl.RECIPT_NO,'') ,sec_user_m_maker.USER_NAME ,
+sec_user_m.USER_NAME ,ifnull(cr_instrument_dtl.RECEIPT_PURPOSE,''),
+abc.DR_AMount ,abc.CR_Amount,
+ifnull(cr_instrument_dtl.MAKER_REMARKS,abc.remarks)  , abc.voucher_no,
+'Y' ,
+Loan_reference_No,
+com_charge_code_m.CHARGE_DESC) abc_1
+group by
+SNO , LOAN_NO,CUSTOMER_NAME,VALUE_DATE,Reciept_No,Maker_Name,Author_Name,Purpose,Reciept,Payment,remarks,
+voucher_no,'Y',
+Reference_No
+)
+union all
+(
+select 3 as SNo,cr_loan_dtl.LOAN_NO as LOAN_NO,
+concat(gcd_customer_m.CUSTOMER_NAME ,' ') as CUSTOMER_NAME,
+cr_instrument_dtl.RECEIVED_DATE as VALUE_DATE,
+cr_instrument_dtl.RECIPT_NO as  Reciept_No,
+sec_user_m_maker.USER_NAME as Maker_Name,
+'' as Author_Name,
+ifnull(cr_instrument_dtl.RECEIPT_PURPOSE,'') as Purpose ,
+cr_instrument_dtl.INSTRUMENT_AMOUNT as Reciept ,
+0 as Payment,
+ifnull(cr_instrument_dtl.MAKER_REMARKS,'') as remarks , 0 as OpeningBalance, concat(if(cr_instrument_dtl.REC_STATUS='P','Pending',if(cr_instrument_dtl.REC_STATUS='F','Forwarded','Approved')),' ') as voucher_no,
+if(cr_instrument_dtl.REC_STATUS='P','N','Y') as To_Be_Added_In_Branch,
+Loan_reference_No as Reference_No,
+'' as Allocation
+from
+cr_instrument_dtl use index(INDEX_RECEIVED_DATE)
+inner join cr_loan_dtl on
+cr_instrument_dtl.RECEIVED_DATE >= STR_TO_DATE($P{p_from_date},'%d-%m-%Y')
+and  cr_instrument_dtl.RECEIVED_DATE <= STR_TO_DATE($P{p_as_on_date},'%d-%m-%Y')
+
+
+
+and
+
+ cr_loan_dtl.LOAN_ID=cr_instrument_dtl.TXNID and cr_instrument_dtl.REC_STATUS in ('P','F','A') and cr_instrument_dtl.DEFAULT_BRANCH=$P{p_branchHeaders}
+and cr_instrument_dtl.INSTRUMENT_TYPE= 'R' and cr_instrument_dtl.INSTRUMENT_MODE ='C'
+inner join gcd_customer_m on cr_loan_dtl.LOAN_CUSTOMER_ID=gcd_customer_m.CUSTOMER_ID
+inner join sec_user_m sec_user_m_maker on sec_user_m_maker.USER_ID= cr_instrument_dtl.maker_id
+order by ifnull(cr_instrument_dtl.RECIPT_NO,'')
+)
+
+union all
+(
+select 4 as SNo,'' as LOAN_NO,
+'GL' as CUSTOMER_NAME,
+abc.VALUE_DATE,
+abc.RECIPT_NO as  Reciept_No,
+sec_user_m_maker.USER_NAME as Maker_Name,
+sec_user_m.USER_NAME as Author_Name,
+'' as Purpose ,
+abc.DR_AMount as Reciept ,
+abc.CR_Amount as Payment,
+abc.remarks as remarks , 0 as OpeningBalance, abc.voucher_no,
+if(abc.STATUS_ST='P','N','Y') as To_Be_Added_In_Branch,
+'' as Reference_No,
+'' as Allocation
+from
+(select 4 as Sno , NARRATION as remarks,
+gl_voucher_dtl.DR_AMOUNT,
+gl_voucher_dtl.CR_AMOUNT, REFERENCE_NO,gl_voucher_dtl.MODULE_ID,
+concat(gl_voucher_dtl.VOUCHER_NO,' (' , if(gl_voucher_dtl.status_st = 'P' ,'Pending','Forwarded') , ') ') as voucher_no,
+gl_voucher_dtl.VALUE_DATE,
+ifnull(gl_voucher_dtl.AUTHOR_ID,gl_voucher_dtl.MAKER_ID) as AUTHOR_ID,
+gl_voucher_dtl.MAKER_ID,gl_voucher_dtl.status_st,gl_voucher_dtl.RECIPT_NO
+ 	from gl_voucher_dtl
+	where gl_voucher_dtl.STATUS_ST in ('P','F') and
+	gl_voucher_dtl.VOUCHER_DATE >= STR_TO_DATE($P{p_from_date},'%d-%m-%Y %H:%i') and
+	gl_voucher_dtl.VOUCHER_DATE < DATE_ADD(STR_TO_DATE($P{p_as_on_date},'%d-%m-%Y %H:%i'),INTERVAL 1 DAY) and
+	gl_voucher_dtl.LEDGER_ID=$P{p_account_No} and 	gl_voucher_dtl.BRANCH_ID=$P{p_branchHeaders}
+	order by  mid(gl_voucher_dtl.VOUCHER_NO,2)) abc
+	left join sec_user_m on sec_user_m.USER_ID=abc.author_id
+	left join sec_user_m sec_user_m_maker on sec_user_m_maker.USER_ID= abc.maker_id order by
+	mid(abc.VOUCHER_NO,2))
+
+) xyx order by VALUE_DATE, if(sno=1,1,2),convert(Reciept_No,decimal)]]>
+	</queryString>
+	<field name="Sno" class="java.lang.Long"/>
+	<field name="Loan_No" class="java.lang.String"/>
+	<field name="CUSTOMER_NAME" class="java.lang.String"/>
+	<field name="VALUE_DATE" class="java.sql.Date"/>
+	<field name="Reciept_No" class="java.lang.String"/>
+	<field name="Maker_Name" class="java.lang.String"/>
+	<field name="Author_Name" class="java.lang.String"/>
+	<field name="Purpose" class="java.lang.String"/>
+	<field name="Reciept" class="java.math.BigDecimal"/>
+	<field name="Payment" class="java.math.BigDecimal"/>
+	<field name="remarks" class="java.lang.String"/>
+	<field name="OpeningBalance" class="java.math.BigDecimal"/>
+	<field name="voucher_no" class="java.lang.String"/>
+	<field name="To_Be_Added_In_Branch" class="java.lang.String"/>
+	<field name="Reference_No" class="java.lang.String"/>
+	<field name="Allocation" class="java.lang.String"/>
+	<variable name="RUNNING_TOTAL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{Sno} < 4 ?
+(($F{voucher_no} == "Pending ") ? (0) : ($F{OpeningBalance}+$F{Reciept}-$F{Payment}))
+:
+(($F{To_Be_Added_In_Branch}== "N" ? (0):($F{OpeningBalance}+$F{Reciept}-$F{Payment})))
+)]]></variableExpression>
+	</variable>
+	<variable name="V_SNO" class="java.lang.Number" calculation="Count">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<variable name="RUNNING_TOTAL_GL" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[($F{Sno} < 3 ) ? ($F{OpeningBalance}+$F{Reciept}-$F{Payment}): (0)]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="141" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="0" width="990" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="77" width="1122" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<text><![CDATA[(Figures in Rupees)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="990" y="0" width="132" height="32"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="32" width="990" height="45" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_headers}+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="101" width="81" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cash At Branch ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="101" width="251" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_branchText}+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="101" width="6" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="121" width="81" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="121" width="251" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="false"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_as_on_date}+" "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="121" width="6" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[: ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="42" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sno ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="42" y="0" width="67" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Loan no ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="0" width="74" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="243" y="0" width="50" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Value date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="293" y="0" width="52" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reciept
+No ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="398" y="0" width="52" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Author Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="0" width="45" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Purpose ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="889" y="0" width="53" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reciept ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="942" y="0" width="48" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="495" y="0" width="72" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remarks ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="990" y="0" width="66" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance
+As Per GL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="826" y="0" width="63" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Voucher no ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="53" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maker Name ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1056" y="0" width="66" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance As Per Branch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="109" y="0" width="60" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Refeence
+ no ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="567" y="0" width="259" height="29" backcolor="#999999"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Allocation]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="42" y="0" width="67" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Loan_No}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="169" y="0" width="74" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSTOMER_NAME}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="243" y="0" width="50" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{VALUE_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="293" y="0" width="52" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="1"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Reciept_No}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="398" y="0" width="52" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Author_Name}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="495" y="0" width="72" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{remarks}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="826" y="0" width="63" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{voucher_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="942" y="0" width="48" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+					<paragraph rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Payment}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="450" y="0" width="45" height="20"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Purpose}+" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="1056" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{RUNNING_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="889" y="0" width="53" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Reciept}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="345" y="0" width="53" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Maker_Name}+" "]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="42" height="20"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Number"><![CDATA[$V{V_SNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="990" y="0" width="66" height="20" isPrintInFirstWholeBand="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{RUNNING_TOTAL_GL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="109" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Reference_No}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" mode="Transparent" x="567" y="0" width="259" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Allocation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CAMSubRpt1" language="groovy" pageWidth="842" pageHeight="811" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="deal_id" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Reports\\housing cam\\CAM\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(SELECT
+CDCM.customer_type,CDD.deal_id,CONCAT(CDCM.CUSTOMER_NAME,' ') AS NameOfApplicant,CDLD.DEAL_LOAN_AMOUNT AS LoanAmount,CDLD.DEAL_EFF_RATE AS ROI,CDLD.DEAL_TENURE AS Tenure,
+CDLD.DEAL_SCHEME,CONCAT(CSM.SCHEME_DESC_L,' ') AS EndUseOfTheLoan,CDLD.DEAL_EMI AS ProposedEMI, CONCAT(CDLD.MAKER_ID,' ') AS CaseVisitedBy
+FROM CR_DEAL_DTL CDD
+join cr_deal_loan_dtl CDLD on (CDLD.DEAL_ID=CDD.DEAL_ID)
+join cr_deal_customer_role CDCR on(CDCR.DEAL_ID=CDD.DEAL_ID and CDCR.deal_customer_role_type='PRAPPL' AND CDCR.STATUS <> 'X')
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDCR.DEAL_CUSTOMER_ID)
+left join cr_scheme_m CSM on (CSM.SCHEME_ID=CDLD.DEAL_SCHEME)
+where CDD.deal_id=$P{deal_id})
+
+UNION ALL
+
+(
+(SELECT DISTINCT
+' ' AS customer_type,0 AS deal_id,' ' AS NameOfApplicant,0 AS LoanAmount,0 AS ROI,0 AS Tenure,
+0 AS DEAL_SCHEME,' ' AS EndUseOfTheLoan,0 AS ProposedEMI, ' ' AS CaseVisitedBy
+FROM CR_DEAL_DTL
+WHERE
+IF((SELECT COUNT(1)FROM CR_DEAL_DTL CDD
+join cr_deal_loan_dtl CDLD on (CDLD.DEAL_ID=CDD.DEAL_ID)
+join cr_deal_customer_role CDCR on(CDCR.DEAL_ID=CDD.DEAL_ID and CDCR.deal_customer_role_type='PRAPPL' AND CDCR.STATUS <> 'X')
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDCR.DEAL_CUSTOMER_ID)
+left join cr_scheme_m CSM on (CSM.SCHEME_ID=CDLD.DEAL_SCHEME)
+where CDD.deal_id=$P{deal_id})=0,TRUE,FALSE)))]]>
+	</queryString>
+	<field name="customer_type" class="java.lang.String"/>
+	<field name="deal_id" class="java.lang.Long"/>
+	<field name="NameOfApplicant" class="java.lang.String"/>
+	<field name="LoanAmount" class="java.math.BigDecimal"/>
+	<field name="ROI" class="java.math.BigDecimal"/>
+	<field name="Tenure" class="java.lang.Long"/>
+	<field name="DEAL_SCHEME" class="java.lang.Long"/>
+	<field name="EndUseOfTheLoan" class="java.lang.String"/>
+	<field name="ProposedEMI" class="java.math.BigDecimal"/>
+	<field name="CaseVisitedBy" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="100" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{customer_type}=='I' ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="200" height="100"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="deal_id">
+					<subreportParameterExpression><![CDATA[$P{deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "CAMBusinessModelSubRpt.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

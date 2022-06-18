@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptFAScheduleVI" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="816" leftMargin="13" rightMargin="13" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="i_session_id" class="java.lang.String"/>
+	<parameter name="i_from_date" class="java.lang.String"/>
+	<parameter name="i_to_date" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["H:\\GGLReports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="i_from_date_calc" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select if(asset_nature = 'T',1,2) as TangibleGroupNo ,
+ if(asset_nature = 'T','Tangible Assets','Intangible Assets') as TangibleGroupDescription , temp_schedulevi_fixed_asset.Session_ID , asset_nature ,asset_category ,
+sum(OpeningAmount) , sum(OpeningDepAmt) , sum(AdditionAmount),sum(CurrenDepAmount),
+sum(SaleAmount), sum(DepOnSaleAmt),dat.label2
+
+ from temp_schedulevi_fixed_asset
+left outer join (select DATE_FORMAT(date_add(date($P{i_from_date_calc}) , interval -1 day),'%d-%m-%Y') as label2)dat on(true)
+where session_id = $P{i_session_id}
+and trandate >= $P{i_from_date_calc}
+group by if(asset_nature = 'T',1,2) ,  if(asset_nature = 'T','Tangible Assets','Intangible Assets') , temp_schedulevi_fixed_asset.Session_ID , asset_nature ,asset_category]]>
+	</queryString>
+	<field name="TangibleGroupNo" class="java.lang.Integer"/>
+	<field name="TangibleGroupDescription" class="java.lang.String"/>
+	<field name="Session_ID" class="java.lang.String"/>
+	<field name="asset_nature" class="java.lang.String"/>
+	<field name="asset_category" class="java.lang.String"/>
+	<field name="sum(OpeningAmount)" class="java.lang.Double"/>
+	<field name="sum(OpeningDepAmt)" class="java.lang.Double"/>
+	<field name="sum(AdditionAmount)" class="java.lang.Double"/>
+	<field name="sum(CurrenDepAmount)" class="java.lang.Double"/>
+	<field name="sum(SaleAmount)" class="java.lang.Double"/>
+	<field name="sum(DepOnSaleAmt)" class="java.lang.Double"/>
+	<field name="label2" class="java.lang.String"/>
+	<variable name="v_Total_Opening_GroupWise" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)}]]></variableExpression>
+	</variable>
+	<variable name="v_addition" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(AdditionAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_totalSaleGroup" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(SaleAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_totalGross" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)} +$F{sum(AdditionAmount)} -$F{sum(SaleAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_opening_depereciation" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningDepAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_tptal_curryear_dep" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(CurrenDepAmount)}]]></variableExpression>
+	</variable>
+	<variable name="v_total_dep_adj" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(DepOnSaleAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_total_depereciation" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningDepAmt)}+$F{sum(CurrenDepAmount)}-$F{sum(DepOnSaleAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_net_block_curr_year" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[($F{sum(OpeningAmount)} +$F{sum(AdditionAmount)} -$F{sum(SaleAmount)})
+- ($F{sum(OpeningDepAmt)}+$F{sum(CurrenDepAmount)}-$F{sum(DepOnSaleAmt)})]]></variableExpression>
+	</variable>
+	<variable name="v_net_block_prev_year" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)} - $F{sum(OpeningDepAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_Total_Opening_ReportWise_" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)}]]></variableExpression>
+	</variable>
+	<variable name="v_totaladdition_reportwise" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(AdditionAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_totalSaleReport" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(SaleAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_totalGross_Report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)} +$F{sum(AdditionAmount)} -$F{sum(SaleAmount)}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="v_opening_depereciation_report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningDepAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_tptal_curryear_dep_report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(CurrenDepAmount)}]]></variableExpression>
+	</variable>
+	<variable name="v_total_dep_adj_reportwise" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(DepOnSaleAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_total_depereciation_report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningDepAmt)}+$F{sum(CurrenDepAmount)}-$F{sum(DepOnSaleAmt)}]]></variableExpression>
+	</variable>
+	<variable name="v_net_block_curr_year_report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{sum(OpeningAmount)} +$F{sum(AdditionAmount)} -$F{sum(SaleAmount)})
+- ($F{sum(OpeningDepAmt)}+$F{sum(CurrenDepAmount)}-$F{sum(DepOnSaleAmt)})]]></variableExpression>
+	</variable>
+	<variable name="v_net_block_prev_year_report" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(OpeningAmount)} - $F{sum(OpeningDepAmt)}]]></variableExpression>
+	</variable>
+	<group name="TangibleIntangible">
+		<groupExpression><![CDATA[$F{TangibleGroupNo}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Transparent" x="13" y="5" width="106" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{TangibleGroupDescription}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="140" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="210" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="278" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="347" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="487" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="555" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="622" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="690" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="752" y="0" width="1" height="21"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="814" y="0" width="1" height="21"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Category">
+		<groupExpression><![CDATA[$F{asset_category}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="22">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="13" y="5" width="125" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{asset_category}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="140" y="0" width="1" height="22"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="142" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_Total_Opening_GroupWise} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_Total_Opening_GroupWise}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="210" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="278" y="0" width="1" height="22"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="212" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_addition} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_addition}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="347" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="1" height="22"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="280" y="5" width="65" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_totalSaleGroup} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_totalSaleGroup}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="350" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_totalGross} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_totalGross}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="487" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="555" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="622" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="690" y="0" width="1" height="22"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="420" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_opening_depereciation} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_opening_depereciation}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="488" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_tptal_curryear_dep} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_tptal_curryear_dep}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="556" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_total_dep_adj} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_dep_adj}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="623" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_total_depereciation} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_depereciation}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="752" y="0" width="1" height="22"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="814" y="0" width="1" height="22"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="691" y="5" width="57" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_net_block_curr_year} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_net_block_curr_year}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="754" y="5" width="55" height="15" forecolor="#000000" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$V{v_net_block_prev_year} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_net_block_prev_year}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="681" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["SCHEDULE FORMING PART OF THE BALANCE SHEET AS AT "  + $P{i_from_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="63" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="30" width="814" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="13" width="413" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Block]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="13" width="271" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPRECIATION/ AMORTISATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="35" width="125" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Particulars]]></text>
+			</staticText>
+			<line>
+				<reportElement x="140" y="30" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="142" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As at \n" + $P{i_from_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="210" y="30" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="63"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="813" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="62" width="814" height="1"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="212" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Additions"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="278" y="30" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="280" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Deletion / \n Adjusments"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="347" y="30" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="350" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As at \n" + $P{i_to_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="1" height="63"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="420" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Up to \n" + $P{i_from_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="487" y="30" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="488" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["For the \nYear"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="556" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Deletion / \n Adjusments"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="555" y="30" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement x="622" y="30" width="1" height="33"/>
+			</line>
+			<textField>
+				<reportElement mode="Transparent" x="623" y="35" width="65" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As at / \n " + $P{i_to_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="690" y="30" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="690" y="0" width="1" height="63"/>
+			</line>
+			<staticText>
+				<reportElement x="691" y="13" width="111" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NET BLOCK]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="691" y="35" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As at \n" + $P{i_to_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="754" y="35" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["As at \n" + $F{label2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="814" y="0" width="1" height="63"/>
+			</line>
+			<line>
+				<reportElement x="752" y="30" width="1" height="33"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="43" splitType="Stretch">
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="814" height="1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="814" y="0" width="1" height="22"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="7" width="125" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="210" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="278" y="0" width="1" height="22"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="142" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_Total_Opening_ReportWise_} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_Total_Opening_ReportWise_}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="140" y="0" width="1" height="22"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="212" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_totaladdition_reportwise} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_totaladdition_reportwise}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="347" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="487" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="555" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="622" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="690" y="0" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="752" y="0" width="1" height="22"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="280" y="5" width="65" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_totalSaleReport} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_totalSaleReport}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="350" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_totalGross_Report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_totalGross_Report}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="420" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_opening_depereciation_report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_opening_depereciation_report}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="488" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_tptal_curryear_dep_report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_tptal_curryear_dep_report}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="556" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_total_dep_adj_reportwise} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_dep_adj_reportwise}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="623" y="5" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_total_depereciation_report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_depereciation_report}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="691" y="5" width="57" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_net_block_curr_year_report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_net_block_curr_year_report}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="754" y="5" width="55" height="15" forecolor="#000000" backcolor="#FFFFFF">
+					<printWhenExpression><![CDATA[$V{v_net_block_prev_year_report} <= 0 ? Boolean.FALSE: Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_net_block_prev_year_report}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="22" width="809" height="20"/>
+				<subreportParameter name="i_from_date">
+					<subreportParameterExpression><![CDATA[$P{i_from_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="i_session_id">
+					<subreportParameterExpression><![CDATA[$P{i_session_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="i_from_date_calc">
+					<subreportParameterExpression><![CDATA[$P{i_from_date_calc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA["RptFAScheduleVISubReportPrevYers.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

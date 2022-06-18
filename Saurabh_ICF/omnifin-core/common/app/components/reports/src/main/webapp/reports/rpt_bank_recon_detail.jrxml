@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_bank_recon_detail" language="groovy" pageWidth="781" pageHeight="842" columnWidth="741" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3636363636363642"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_company_logo" class="java.lang.String"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_report_format" class="java.lang.String"/>
+	<parameter name="p_bapbo" class="java.lang.String"/>
+	<parameter name="p_bapba" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_bank_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_ledger_id" class="java.lang.String"/>
+	<parameter name="p_headers" class="java.lang.String"/>
+	<parameter name="p_headers1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM
+(select 2 as SNO , CONCAT('ADD: CHEQUES ISSUED BUT NOT PRESENTED IN BANK',' ') as TranType , DATE_FORMAT(gl_voucher_dtl.VOUCHER_DATE,'%d-%m-%Y') AS VOUCHER_DATE , gl_voucher_dtl.VOUCHER_NO ,gl_voucher_dtl.SEQUENCE_NO,
+replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(gl_voucher_dtl.NARRATION,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')NARRATION , CONCAT(gl_voucher_dtl.cheque_invoice_no,' ') AS cheque_invoice_no , CR_AMOUNT, IFNULL(DATE_FORMAT(RECONCILED_DATE,'%d-%m-%Y'),'- -') AS RECONCILED_DATE,cbm.branch_desc,gl_voucher_dtl.MAKER_ID
+ from  gl_voucher_dtl  join com_branch_m cbm on cbm.BRANCH_ID=gl_voucher_dtl.BRANCH_ID
+where gl_voucher_dtl.voucher_date <=$P{p_ledger_id}
+and status_ST = 'A'
+and ledger_id =$P{p_bank_id}
+and (Reconciled = 'N' or (Reconciled='Y' and reconciled_date > $P{p_ledger_id} ))
+and CR_AMOUNT > 0
+union all
+select 3 as SNO , CONCAT('LESS: CHEQUE DEPOSITED BUT NOT CLEARED IN BANK',' ') as TranType , DATE_FORMAT(gl_voucher_dtl.VOUCHER_DATE,'%d-%m-%Y') AS VOUCHER_DATE, gl_voucher_dtl.VOUCHER_NO ,gl_voucher_dtl.SEQUENCE_NO,
+replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(gl_voucher_dtl.NARRATION,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')NARRATION , CONCAT(gl_voucher_dtl.cheque_invoice_no,' ') AS cheque_invoice_no , DR_AMOUNT, IFNULL(DATE_FORMAT(RECONCILED_DATE,'%d-%m-%Y'),'- -') AS RECONCILED_DATE,cbm.branch_desc,gl_voucher_dtl.MAKER_ID
+ from  gl_voucher_dtl join com_branch_m cbm on cbm.BRANCH_ID=gl_voucher_dtl.BRANCH_ID
+where gl_voucher_dtl.voucher_date <= $P{p_ledger_id}
+and status_st = 'A'
+and ledger_id =$P{p_bank_id}
+and (Reconciled = 'N' or (Reconciled='Y' and reconciled_date > $P{p_ledger_id} ))
+and DR_AMOUNT > 0
+UNION ALL
+SELECT 1 AS SNO , CONCAT('BALANCE AS PER BOOKS',' ') AS TranType,
+'' AS VOUCHER_DATE,'' AS vOUCHER_NO , '' as sEQUENCE_NO, '' AS nARRATION , '' AS cheque_invoice_no ,
+$P{p_bapbo},'- -'as bank_date,'' AS BRANCH_DESC,'' as maker_id FROM com_company_m
+UNION ALL
+SELECT 5 AS SNO, CONCAT('ADD: CREDITED BY BANK BUT NOT RECOREDED IN BOOKS',' ') as TranType,DATE_FORMAT(BANK_DATE,'%d-%m-%Y') AS VOUCHER_DATE,'' AS vOUCHER_NO,'' as sEQUENCE_NO,
+replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(BANK_NARATION,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')NARRATION
+,CONCAT(gl_bank_statement_dtl.CHECK_NO,' ') AS CHECK_NO ,BANK_CR,'- -'as bank_date,'' AS BRANCH_DESC,'' as maker_id
+ FROM gl_bank_statement_dtl
+INNER  JOIN gl_bank_statement_hdr ON gl_bank_statement_dtl.Statement_Upload_ID=gl_bank_statement_hdr.Statement_Upload_ID
+WHERE  gl_bank_statement_dtl.BANK_DATE <= $P{p_ledger_id} AND
+ status = 'A'
+and ledger_id =$P{p_bank_id}
+and (Reconciled = 'N' or (Reconciled='Y' and BANK_RECONCIL_DATE> $P{p_ledger_id} ))
+and BANK_CR > 0
+union all
+SELECT 4 AS SNO, CONCAT('LESS : DEBITED BY BANK BUT NOT RECOREDED IN BOOKS',' ') as TranType,DATE_FORMAT(BANK_DATE,'%d-%m-%Y') AS VOUCHER_DATE,
+'' AS VOUCHER_NO,'' AS SEQUENCE_NO,
+replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(ifnull(BANK_NARATION,''),' '),'!','! '),'%','% '),'(','( '),')',') '),'-','- '),'{','{ '),'[','[ '),'}','} '),']','] '),':',': '),';','; '),'"','" '),'/','/ '),'?','? '),'.','. '),',',', ')NARRATION
+,CONCAT(gl_bank_statement_dtl.CHECK_NO,' ') AS CHECK_NO ,BANK_DR,'- -'as bank_date,'' AS BRANCH_DESC,'' as maker_id
+FROM gl_bank_statement_dtl
+INNER JOIN  gl_bank_statement_hdr ON gl_bank_statement_dtl.Statement_Upload_ID=gl_bank_statement_hdr.Statement_Upload_ID
+WHERE  gl_bank_statement_dtl.BANK_DATE <= $P{p_ledger_id} AND
+ status = 'A'
+and ledger_id =$P{p_bank_id}
+and (Reconciled = 'N' or (Reconciled='Y' and BANK_RECONCIL_DATE> $P{p_ledger_id} ))
+and BANK_DR > 0
+UNION ALL
+SELECT 6 AS SNO , CONCAT('BALANCE AS PER BANK',' ') AS TranType,
+'' AS VOUCHER_DATE,'' AS vOUCHER_NO ,'' as sEQUENCE_NO, '' AS nARRATION , '' AS cheque_invoice_no ,
+$P{p_bapba},'- -'as bank_date,'' AS BRANCH_DESC,'' as maker_id  FROM com_company_m
+
+) ABC ORDER BY SNO]]>
+	</queryString>
+	<field name="SNO" class="java.lang.Long"/>
+	<field name="TranType" class="java.lang.String"/>
+	<field name="VOUCHER_DATE" class="java.lang.String"/>
+	<field name="VOUCHER_NO" class="java.lang.String"/>
+	<field name="SEQUENCE_NO" class="java.lang.String"/>
+	<field name="NARRATION" class="java.lang.String"/>
+	<field name="cheque_invoice_no" class="java.lang.String"/>
+	<field name="CR_AMOUNT" class="java.math.BigDecimal"/>
+	<field name="RECONCILED_DATE" class="java.lang.String"/>
+	<field name="branch_desc" class="java.lang.String"/>
+	<field name="MAKER_ID" class="java.lang.String"/>
+	<variable name="TOTAL_AMOUNT" class="java.math.BigDecimal" resetType="Group" resetGroup="S_no" calculation="Sum">
+		<variableExpression><![CDATA[$F{CR_AMOUNT}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="S_no">
+		<groupExpression><![CDATA[$F{SNO}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="433" y="0" width="171" height="16"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{TranType}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="604" y="0" width="82" height="20"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph leftIndent="1" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{TOTAL_AMOUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="604" height="20" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+						<paragraph rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[ Sub Total: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="686" y="0" width="55" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement/>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="518" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}.trim()+" "]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="518" y="0" width="97" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{p_company_logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="20" width="518" height="60"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_headers} + "\n"+ $P{p_headers1}.trim()+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<printWhenExpression><![CDATA[($V{PAGE_NUMBER} > 1) ? ($P{p_report_format} == "P" ? Boolean.TRUE : Boolean.FALSE): (Boolean.TRUE)]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="57" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ DATE ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="433" y="0" width="171" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NARRATION ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="604" y="0" width="82" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ AMOUNT ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="57" y="0" width="76" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CHEQUE NO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="133" y="0" width="91" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VOUCHER NO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="686" y="0" width="55" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BANK DATE ]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="224" y="0" width="38" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Seq.No "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="262" y="0" width="84" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BRANCH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="346" y="0" width="87" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAKER ID]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="133" y="0" width="91" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VOUCHER_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="433" y="0" width="171" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="7"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NARRATION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="57" y="0" width="76" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cheque_invoice_no}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="604" y="0" width="82" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="7"/>
+					<paragraph leftIndent="1" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CR_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="57" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{VOUCHER_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="686" y="0" width="55" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{RECONCILED_DATE}+" "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="224" y="0" width="38" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SEQUENCE_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="262" y="0" width="84" height="18"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{branch_desc}.trim()+" "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="0" width="87" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MAKER_ID}.trim()+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="557" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="557" y="0" width="47" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

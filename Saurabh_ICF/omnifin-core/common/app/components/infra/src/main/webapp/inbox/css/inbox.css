@@ -1,0 +1,102 @@
+/* CSS Document */
+
+
+.login_text
+{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#545454;
+}
+.login_text_link a:link, .login_text_link a:visited
+{
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#000000;
+text-decoration:none;
+}
+.login_text_link a:hover
+{
+color:#686868;
+text-decoration:none;
+}
+
+
+
+
+.massbutt{background-color:#FFFFFF;
+border:#CCCCCC solid 1px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+font-weight:bold;
+color:#333333;
+}
+
+.borderright{border-right:#CCCCCC solid 1px;}
+
+.borderright2{border-right:#666666 solid 1px;}
+
+.massbutt a:link, .massbutt a:visited{background-color:#FFFFFF;
+text-decoration:none;
+color:#333333;}
+
+
+.massbutt a:hover{background-color:#333333;
+color:#FFFFFF;
+text-decoration:none;
+line-height:25px;
+display:block;
+}
+
+
+
+.newblock{background-image:url(../images/bg_block.gif);
+background-repeat:repeat-x;
+background-color:#FFFFFF;
+border:#CCCCCC 1px solid;
+}
+
+
+.newblkheading{font-family:"Trebuchet MS";
+font-size:14px;
+color:#000000;
+font-weight:bold;}
+.newblkbodytext{font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#000000;
+line-height:18px;
+}
+
+
+.newblkheadibg{background-image:url(../images/blkheadingbg.gif);
+background-repeat:repeat-x;
+border:1px solid #999999;
+font-family:"Trebuchet MS";
+font-size:16px;
+color:#003366;
+padding-left:10px;
+font-weight:bold;}
+
+.borderbottom{border-bottom:1px solid #999999;}
+
+
+.newblkheading02{color:#003366;
+font-family:"Trebuchet MS";
+font-weight:bold;
+font-size:16px;}
+
+
+.newblkheadibg2{background-image:url(../images/blkheadingbg.gif);
+background-repeat:repeat-x;
+border:1px solid #999999;
+font-family:"Trebuchet MS";
+font-size:16px;
+color:#003366;
+font-weight:bold;}
+
+
+.newblkbody{background-color:#FFFFFF;
+border:1px #CCCCCC solid;}
+.textfield{width:580px;}
+
+
+

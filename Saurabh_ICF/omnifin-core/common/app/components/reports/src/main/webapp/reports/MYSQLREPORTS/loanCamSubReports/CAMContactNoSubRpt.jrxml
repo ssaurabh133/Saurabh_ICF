@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CAMContactNoSubRpt" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="deal_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[(SELECT CDD.DEAL_ID,CDD.DEAL_NO,CDCR.DEAL_CUSTOMER_ROLE_TYPE,
+concat(CDCM.CUSTOMER_NAME,'   ')as Name,
+case when CDCR.DEAL_CUSTOMER_ROLE_TYPE='PRAPPL' then 'Applicant '   When CDCR.DEAL_CUSTOMER_ROLE_TYPE='COAPPL' then 'Co-Applicant '   When CDCR.DEAL_CUSTOMER_ROLE_TYPE='GUARANTOR' then 'Guarantor ' end  as CustomerType,
+if(PRIMARY_PHONE is null,if(ALTERNATE_PHONE is not null,' ',concat(ALTERNATE_PHONE,' ')),if(ALTERNATE_PHONE is null,concat(PRIMARY_PHONE,' '),concat(concat(PRIMARY_PHONE,','),concat(ALTERNATE_PHONE,' ')))) as phone
+
+FROM CR_DEAL_DTL CDD
+join cr_deal_customer_role CDCR on(CDCR.DEAL_ID=CDD.DEAL_ID AND CDCR.STATUS <> 'X')
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDCR.DEAL_CUSTOMER_ID)
+
+
+left join cr_deal_address_m CDAM on((CDAM.BPID=CDCM.CUSTOMER_ID)and(CDAM.COMMUNICATION_ADDRESS='Y'))
+
+
+WHERE CDD.DEAL_ID=$P{deal_id})
+
+UNION ALL
+
+(SELECT DISTINCT 0 AS DEAL_ID,' ' AS DEAL_NO,' ' AS DEAL_CUSTOMER_ROLE_TYPE,
+' ' AS Name,
+' '  as CustomerType,
+' ' as phone
+FROM  CR_DEAL_DTL WHERE IF((SELECT COUNT(1) FROM CR_DEAL_DTL CDD
+join cr_deal_customer_role CDCR on(CDCR.DEAL_ID=CDD.DEAL_ID  AND CDCR.STATUS <> 'X')
+join cr_deal_customer_m CDCM  on(CDCM.CUSTOMER_ID=CDCR.DEAL_CUSTOMER_ID)
+left join cr_deal_address_m CDAM on((CDAM.BPID=CDCM.CUSTOMER_ID)and(CDAM.COMMUNICATION_ADDRESS='Y'))
+WHERE CDD.DEAL_ID=$P{deal_id} )=0,TRUE,FALSE))]]>
+	</queryString>
+	<field name="DEAL_ID" class="java.lang.Long"/>
+	<field name="DEAL_NO" class="java.lang.String"/>
+	<field name="DEAL_CUSTOMER_ROLE_TYPE" class="java.lang.String"/>
+	<field name="Name" class="java.lang.String"/>
+	<field name="CustomerType" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="20" backcolor="#FFCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[Contact Numbers]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="207" height="20" backcolor="#CCCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="207" y="0" width="273" height="20" backcolor="#CCCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="150" height="20" backcolor="#CCCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<text><![CDATA[Phone Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="0" width="172" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="207" height="20" backcolor="#CCCCFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CustomerType}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="0" width="273" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="630" y="0" width="172" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="480" y="0" width="150" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,358 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+	
+
+
+	<!-- Vinod work space start for Repo -->
+	
+	
+		<form-bean name="repoDetailDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			<form-property name="repoId" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="customerId" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="productDesc" type="java.lang.String" />
+			<form-property name="schemeDesc" type="java.lang.String" />
+			<form-property name="assetClass" type="java.lang.String" />
+			<form-property name="assetDesc" type="java.lang.String" />
+			<form-property name="assetCost" type="java.lang.String" />
+			<form-property name="repossessedBy" type="java.lang.String" />
+			<form-property name="agencyId" type="java.lang.String" />
+			<form-property name="agencyName" type="java.lang.String" />
+			<form-property name="repoAdd1" type="java.lang.String" />
+			<form-property name="repoAdd2" type="java.lang.String" />
+			<form-property name="lbxState" type="java.lang.String" />
+			<form-property name="stateDesc" type="java.lang.String" />
+			<form-property name="lbxDistrict" type="java.lang.String" />
+			<form-property name="districtDesc" type="java.lang.String" />
+			<form-property name="repoFrom" type="java.lang.String" />
+			<form-property name="relationToCustomer" type="java.lang.String" />
+			<form-property name="repoDate" type="java.lang.String" />
+			<form-property name="repoTime" type="java.lang.String" />
+			<form-property name="lbxStockYard" type="java.lang.String" />
+			<form-property name="stockYardDesc" type="java.lang.String" />
+			<form-property name="agencyRemarks" type="java.lang.String" />
+			<form-property name="checkList" type="java.lang.String" />
+			<form-property name="checkListStatus" type="java.lang.String" />
+			<form-property name="checkListRemarks" type="java.lang.String" />
+			<form-property name="searchRepoId" type="java.lang.String" />
+			<form-property name="searchLoanDesc" type="java.lang.String" />
+			<form-property name="saveForwardFlag" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			
+		</form-bean>
+		
+		<form-bean name="repossessedMISDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="stockYardDesc" type="java.lang.String" />
+			<form-property name="lbxStockYard" type="java.lang.String" />
+			<form-property name="approverName" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="agency" type="java.lang.String" />
+			<form-property name="lbxAgencyId" type="java.lang.String" />
+			<form-property name="repossessionDate" type="java.lang.String" />
+			
+		</form-bean>
+		
+	<!-- Vinod work space start for Repo -->
+	
+	<!-- Richa Work space start  -->
+	
+	<!-- Stockyard master start-->
+	
+	<form-bean name="stockyardMasterAddDyanavalidatiorForm"
+	type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="stockyard" type="java.lang.String" />
+		<form-property name="stockyardDesc" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+	</form-bean>
+	
+	<!-- Stockyard master end -->
+	
+	<!-- Repo Detail By Stockyard start -->
+	
+	<form-bean name="repoDetailStockyardDyanaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="customer" type="java.lang.String" />
+			<form-property name="assetDescription" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="assetCost" type="java.lang.String" />
+			<form-property name="repossesedBy" type="java.lang.String" />
+			<form-property name="agencyName" type="java.lang.String" />
+			<form-property name="repoAddress1" type="java.lang.String" />
+			<form-property name="repoAddress2" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="district" type="java.lang.String" />
+			<form-property name="repoFrom" type="java.lang.String" />
+			<form-property name="relationToCustomer" type="java.lang.String" />
+			<form-property name="repoDate" type="java.lang.String" />
+			<form-property name="repoTime" type="java.lang.String" />
+			<form-property name="stockyard" type="java.lang.String" />
+			<form-property name="stockyardManager" type="java.lang.String" />
+			<form-property name="stockyardEntryDate" type="java.lang.String" />
+			<form-property name="stockyardEntryTime" type="java.lang.String" />
+			<form-property name="updateForwardFlag" type="java.lang.String" />
+			<form-property name="repoId" type="java.lang.String" />
+			<form-property name="assetChecklist" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="remarks" type="java.lang.String" />
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="assetId" type="java.lang.String" />
+			<form-property name="lbxLoanIdSearch" type="java.lang.String" />
+			<form-property name="searchRepoId" type="java.lang.String" />
+			<form-property name="stockyardRemarks" type="java.lang.String" />
+			
+	</form-bean>
+	
+	<!-- Repo Detail By Stockyard end -->
+	
+	<!-- Repo Marking Maker start -->
+	
+	<form-bean name="repoMarkingMakerDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="loanAmount" type="java.lang.String" />
+			<form-property name="lbxLoanId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="balancePrincipal" type="java.lang.String" />
+			<form-property name="overduePrincipal" type="java.lang.String" />
+			<form-property name="overdueAmount" type="java.lang.String" />
+			<form-property name="dpd" type="java.lang.String" />
+			<form-property name="lbxReasonId" type="java.lang.String" />
+			<form-property name="reasonDesc" type="java.lang.String" />
+			<form-property name="remarks" type="java.lang.String" />
+			<form-property name="agency" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="lbxScheme" type="java.lang.String" />
+			<form-property name="lbxProduct" type="java.lang.String" />
+			<form-property name="lbxBranch" type="java.lang.String" />
+			<form-property name="lbxAgencyId" type="java.lang.String" />
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="repoProduct" type="java.lang.String" />
+			
+	</form-bean>
+	
+	<!-- Repo Marking marker end -->
+	
+	
+	
+	<!-- Richa Work space end -->
+	
+	<!-- Check List master start -->
+	
+		<form-bean name="repoAssetChecklistDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="assetClass" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="repoProduct" type="java.lang.String" />
+			<form-property name="docCheckId" type="java.lang.String" />
+			<form-property name="asset" type="java.lang.String" />
+			<form-property name="checkList" type="java.lang.String" />
+			<form-property name="assetClassId" type="java.lang.String" />
+			
+		</form-bean>
+	
+	<!-- Check List master end -->
+	
+	<!--  Repo Confirmation  starts  -->
+	
+		<form-bean name="repoConfirmationDynaValidatorForm"
+				type="org.apache.struts.validator.DynaValidatorForm">
+				<form-property name="loanNo" type="java.lang.String" />
+				<form-property name="product" type="java.lang.String" />
+				<form-property name="assetDesc" type="java.lang.String" />
+				<form-property name="customerName" type="java.lang.String" />
+				<form-property name="scheme" type="java.lang.String" />
+				<form-property name="assetCost" type="java.lang.String" />
+				<form-property name="repossessedBy" type="java.lang.String" />
+				<form-property name="agencyName" type="java.lang.String" />
+				<form-property name="repoAddress1" type="java.lang.String" />
+				<form-property name="repoAddress2" type="java.lang.String" />
+				<form-property name="state" type="java.lang.String" />
+				<form-property name="district" type="java.lang.String" />
+				<form-property name="repoFrom" type="java.lang.String" />
+				<form-property name="repoDate" type="java.lang.String" />
+				<form-property name="relationToCustomer" type="java.lang.String" />
+				<form-property name="stockyard" type="java.lang.String" />
+				<form-property name="stockyardEntryDate" type="java.lang.String" />
+				<form-property name="stockyardManagerName" type="java.lang.String" />
+				<form-property name="stockyardEntryTime" type="java.lang.String" />
+				<form-property name="agencyRemarks" type="java.lang.String" />
+				<form-property name="stockyardRemarks" type="java.lang.String" />
+				<form-property name="repoId" type="java.lang.String" />
+				<form-property name="productDescription" type="java.lang.String" />
+				<form-property name="assetDescription" type="java.lang.String" />
+				<form-property name="comments" type="java.lang.String" />
+				<form-property name="decision" type="java.lang.String" />
+				<form-property name="searchRepoId" type="java.lang.String" />
+				<form-property name="lbxLoanIdSearch" type="java.lang.String" />
+				
+			</form-bean>
+			
+	<!-- Repo Confirmation end -->
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+	
+	
+
+
+	<!-- vinod work space start for Repo -->
+		
+		<!-- Repo Detail By Agency Start-->
+		
+		<action path="/repoDetailbyAgencyDispatchAction" attribute="repoDetailDynaValidatorForm"
+			input="/JSP/REPOJSP/repoDetailbyAgency.jsp" name="repoDetailDynaValidatorForm"
+			scope="request" parameter="method" type="com.repo.actions.RepoDetailbyAgencyDispatchAction">
+			<forward name="search" path="/JSP/REPOJSP/repoDetailbyAgencySearch.jsp" />
+			<forward name="edit" path="/JSP/REPOJSP/repoDetailbyAgency.jsp" />
+		</action>
+	
+		<!-- Repo Detail By Agency end-->
+		
+		<!-- Legal Repossesed Mis Start-->
+		
+		<action path="/repossessedMISDispatchAction" attribute="repossessedMISDynaForm"
+			input="/JSP/REPOJSP/repossessedMis.jsp" name="repossessedMISDynaForm"
+			scope="request" parameter="method" type="com.repo.actions.RepoRepossessedMisDispatchAction">
+			<forward name="success" path="/JSP/REPOJSP/repossessedMis.jsp" />
+		</action>
+	
+		<!-- Legal  Repossesed Mis end-->
+		
+		<!-- Legal Repossessed Reject Mis Start-->
+		
+		<action path="/repossessedRejectCaseMISDispatchAction" attribute="repossessedMISDynaForm"
+			input="/JSP/REPOJSP/repossessedRejectCaseMis.jsp" name="repossessedMISDynaForm"
+			scope="request" parameter="method" type="com.repo.actions.RepoRepossessedRejectMisDispatchAction">
+			<forward name="success" path="/JSP/REPOJSP/repossessedRejectCaseMis.jsp" />
+		</action>
+	
+		<!-- Legal  Repossessed Reject Mis end-->
+	
+	<!-- vinod work space end for Repo  -->
+	
+	<!-- Richa work space start for Repo -->
+		
+		<!-- Stockyard Master Start-->
+		
+		<action input="/JSP/REPOJSP/stockyardMasterAdd.jsp" path="/repoStockyardMasterDispatch" parameter="method" scope="request"
+			name="stockyardMasterAddDyanavalidatiorForm" type="com.repo.actions.RepoStockyardMasterDispatchAction">
+			<forward name="search" path="/JSP/REPOJSP/stockyardMasterSearch.jsp" />
+			<forward name="edit" path="/JSP/REPOJSP/stockyardMasterAdd.jsp" />
+			<forward name="editStockyard" path="/JSP/REPOJSP/stockyardMasterAdd.jsp"></forward>
+		</action>
+		<!-- Stockyard Master  end-->
+		
+		<!-- Repo Detail By Stockyar start -->
+		
+		<action input="/JSP/REPOJSP/repoDetailStockyardAdd.jsp" path="/repoDetailByStockyardDispatch" parameter="method" scope="request"
+			name="repoDetailStockyardDyanaForm" type="com.repo.actions.RepoDetailByStockyardDispatchAction">
+			<forward name="success" path="/JSP/REPOJSP/repoDetailByStockyardSearch.jsp" />
+			<forward name="edit" path="/JSP/REPOJSP/repoDetailStockyardAdd.jsp" />
+			<forward name="editDetail" path="/JSP/REPOJSP/repoDetailStockyardAdd.jsp"></forward>
+		</action>
+		
+		<!--Repo Detail By Stockyar end  -->
+		
+		<!-- Repo Marking Maker start -->
+	
+		<action input="/JSP/REPOJSP/repoMarkingMakerAdd.jsp" path="/repoMarkingMakerDispatch" parameter="method" scope="request"
+				name="repoMarkingMakerDynaValidatorForm" type="com.repo.actions.RepoMarkingMakerDispatchAction">
+				<forward name="search" path="/JSP/REPOJSP/repoMarkingMakerSearch.jsp" />
+				<forward name="edit" path="/JSP/REPOJSP/repoMarkingMakerAdd.jsp" />
+				<forward name="openAdd" path="/JSP/REPOJSP/repoMarkingMakerAdd.jsp" />
+		</action>	
+		
+		
+		<action path="/repoMarkingMakerAjax" parameter="method" scope="request"
+			name="repoMarkingMakerDynaValidatorForm" type="com.repo.actions.RepoMarkingMakerDispatchAction">
+			<forward name="addedit" path="/JSP/REPOJSP/ajaxRepoMarkingMaker.jsp" />
+		</action>
+	
+	<!-- Repo Marking Maker end -->
+	
+	<!-- Repo Marking Author start -->
+	
+		<action input="/JSP/REPOJSP/repoMarkingAuthorCaseAuthor.jsp" path="/repoMarkingAuthorDispatch" parameter="method" scope="request"
+			name="repoMarkingMakerDynaValidatorForm" type="com.repo.actions.RepoMarkingAuthorDispatchAction">
+			<forward name="success" path="/JSP/REPOJSP/repoMarkingAuthorSearch.jsp" />
+			<forward name="openEditRepoMarkingAuthorCase" path="/JSP/REPOJSP/REPO_frames_RepoMarkingAuthor.jsp" />
+			<forward name="noticeCheckerAuthor" path="/JSP/REPOJSP/repoMarkingAuthorCaseAuthor.jsp" />
+			<forward name="authorScreen" path="/JSP/REPOJSP/repoMarkingAuthorCaseAuthor.jsp" />
+			<forward name="success" path="/JSP/REPOJSP/repoMarkingAuthorSearch.jsp" />
+		</action>
+	
+	<!-- Repo Marking Author end -->
+	
+	<!-- Richa work space end for Repo  -->
+	
+	<!-- Nazia Work space start -->
+	
+	<!-- Repo Asset Checklist Master Start-->
+		
+		<action input="/JSP/REPOJSP/repoAssetSearch.jsp" path="/RepoAssetChecklistDispatch" parameter="method" scope="request" 
+		name="repoAssetChecklistDynaValidatorForm" type="com.repo.actions.RepoAssetChecklistDispatchAction">
+			<forward name="search" path="/JSP/REPOJSP/repoAssetSearch.jsp" />
+			<forward name="edit" path="/JSP/REPOJSP/repoAssetAdd.jsp" />
+			<forward name="openAdd" path="/JSP/REPOJSP/repoAssetAdd.jsp" />
+			
+		</action> 
+		
+	<!-- Repo Asset Checklist Master End-->
+	
+	<!-- Repo Confirmation start -->
+	
+		<action path="/RepoConfirmationDispatch" attribute="repoConfirmationDynaValidatorForm"
+				input="/JSP/REPOJSP/repoConfirmationAuthor.jsp" name="repoConfirmationDynaValidatorForm"
+				scope="request" parameter="method" type="com.repo.actions.RepoConfirmationDispatchAction">
+				<forward name="search" path="/JSP/REPOJSP/repoConfirmationSearch.jsp" />
+				<forward name="authorScreen" path="/JSP/REPOJSP/repoConfirmationAuthor.jsp" />
+				<forward name="openEdit" path="/JSP/REPOJSP/repo_frames_repoConfirmationTab.jsp" />
+				
+		</action>
+			
+	<!-- Repo Confirmation end  -->
+	
+	<!--  Nazia Work space end  -->
+
+	</action-mappings>
+
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

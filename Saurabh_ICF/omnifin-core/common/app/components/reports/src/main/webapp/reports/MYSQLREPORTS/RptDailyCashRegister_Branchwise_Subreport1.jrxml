@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptDailyCashRegister_Branchwise_Subreport1" language="groovy" pageWidth="259" pageHeight="842" columnWidth="259" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_voucherNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT gl_voucher_dtl.VOUCHER_NO,
+concat(trim(gl_ledger_m.LEDGER_DESC),if(gl_voucher_dtl.DR_AMOUNT=0,'',concat(': ', cast(gl_voucher_dtl.DR_AMOUNT as decimal(22,2)),' Dr.')),
+if(gl_voucher_dtl.CR_AMOUNT=0,'',concat(': ', cast(gl_voucher_dtl.CR_AMOUNT as decimal(22,2)),' Cr.'))) as Allocation
+FROM gl_voucher_dtl join gl_ledger_m on gl_ledger_m.LEDGER_ID=gl_voucher_dtl.LEDGER_ID
+where gl_voucher_dtl.VOUCHER_NO =$P{p_voucherNo}
+]]>
+	</queryString>
+	<field name="VOUCHER_NO" class="java.lang.String"/>
+	<field name="Allocation" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="259" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Allocation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

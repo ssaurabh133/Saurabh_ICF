@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.a3s.omnifin.prod</groupId>
+		<artifactId>omnifin-indostar-components</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<name>Reports</name>
+	<artifactId>04-omnifin-indostar-reports</artifactId>
+	<packaging>jar</packaging>
+		<dependencies>
+		<dependency>
+			<groupId>com.a3s.omnifin.prod</groupId>
+			<artifactId>omnifin-indostar-combined</artifactId>
+			<scope>provided</scope>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			  <groupId>com.a3s.omnifin.common</groupId>
+			 <artifactId>04-omnifin-gl</artifactId>
+			 <version>1.0.0</version>
+             <scope>provided</scope>
+        </dependency> 
+		</dependencies>
+</project>

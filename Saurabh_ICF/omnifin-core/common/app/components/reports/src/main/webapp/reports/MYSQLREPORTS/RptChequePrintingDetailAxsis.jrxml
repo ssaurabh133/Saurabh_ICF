@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RptChequePrintingDetailAxsis" language="groovy" pageWidth="576" pageHeight="288" whenNoDataType="AllSectionsNoDetail" columnWidth="576" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6500000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_user_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT PAYEE_NAME,AMOUNT  , concat(convert(amount,char),'/-') as T_amount , PAY_DATE ,
+mid(PAY_DATE ,1,1) as Year_Digit_1, mid(PAY_DATE ,2,1) as Year_Digit_2,
+mid(PAY_DATE ,3,1) as Year_Digit_3, mid(PAY_DATE ,4,1) as Year_Digit_4,
+mid(PAY_DATE ,1,1) as Year_Digit_1, mid(PAY_DATE ,2,1) as Year_Digit_2,
+mid(PAY_DATE ,3,1) as Year_Digit_3, mid(PAY_DATE ,4,1) as Year_Digit_4,
+mid(PAY_DATE ,1,1) as Year_Digit_1, mid(PAY_DATE ,2,1) as Year_Digit_2,
+mid(PAY_DATE ,6,1) as Month_Digit_1, mid(PAY_DATE ,7,1) as Month_Digit_2,
+mid(PAY_DATE ,9,1) as Day_Digit_1, mid(PAY_DATE ,10,1) as Day_Digit_2,
+ACCOUNT_PAYEE
+
+  FROM GL_CHEQUE_DETAIL inner join temp_trial_balance on GL_CHEQUE_DETAIL.PAY_ID = temp_trial_balance.COMPANY_ID
+where session_id =$P{p_user_id}]]>
+	</queryString>
+	<field name="PAYEE_NAME" class="java.lang.String"/>
+	<field name="AMOUNT" class="java.lang.Double"/>
+	<field name="T_amount" class="java.lang.String"/>
+	<field name="PAY_DATE" class="java.sql.Date"/>
+	<field name="Year_Digit_1" class="java.lang.String"/>
+	<field name="Year_Digit_2" class="java.lang.String"/>
+	<field name="Year_Digit_3" class="java.lang.String"/>
+	<field name="Year_Digit_4" class="java.lang.String"/>
+	<field name="Month_Digit_1" class="java.lang.String"/>
+	<field name="Month_Digit_2" class="java.lang.String"/>
+	<field name="Day_Digit_1" class="java.lang.String"/>
+	<field name="Day_Digit_2" class="java.lang.String"/>
+	<field name="ACCOUNT_PAYEE" class="java.lang.String"/>
+	<group name="payee_name">
+		<groupExpression><![CDATA[$F{PAYEE_NAME}]]></groupExpression>
+		<groupHeader>
+			<band height="220">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="78" y="59" width="310" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PAYEE_NAME} + " "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="93" y="84" width="311" height="31"/>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[(((new reports.a3spl.Imp_methods().number_to_word($F{AMOUNT})+" " ).replace("AND ZERO PAISA ONLY","")).replace("(","")).replace(")","") + " ONLY" + " "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="461" y="100" width="103" height="20"/>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{T_amount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="243" y="176" width="57" height="14">
+						<printWhenExpression><![CDATA[$F{ACCOUNT_PAYEE} == "Y" ? Boolean.TRUE: Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Justified">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[A/c Payee]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="552" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Year_Digit_3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="537" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Year_Digit_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="465" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Day_Digit_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="493" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Month_Digit_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="479" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Day_Digit_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="566" y="13" width="9" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Year_Digit_4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="522" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Year_Digit_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="507" y="13" width="14" height="20"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Month_Digit_2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

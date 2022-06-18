@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="14400" pageHeight="1152" orientation="Landscape" columnWidth="14360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="p_fin_year_id" class="java.lang.Integer"/>
+	<parameter name="p_company_name" class="java.lang.String"/>
+	<parameter name="p_company_id" class="java.lang.Integer"/>
+	<parameter name="p_headers" class="java.lang.String"/>
+	<parameter name="P_department_id" class="java.lang.String"/>
+	<parameter name="P_branch_id" class="java.lang.String"/>
+	<parameter name="P_region_id" class="java.lang.String"/>
+	<parameter name="P_district_id" class="java.lang.String"/>
+	<parameter name="P_country_id" class="java.lang.String"/>
+	<parameter name="p_state_id" class="java.lang.String"/>
+	<parameter name="p_from_date" class="java.lang.String"/>
+	<parameter name="p_to_date" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[
+
+select a.*, b.* , com_department.DEPARTMENT_DESC ,
+if(isnull(planned.PlannedAmount),0,planned.PlannedAmount) as PlannedAmount   , if(isnull(if(a.ACC_TYPE = 'Income' , Actual.Total_Cr - Actual.Total_Dr ,
+Actual.Total_Dr - Actual.Total_Cr)) , 0 ,if(a.ACC_TYPE = 'Income' , Actual.Total_Cr - Actual.Total_Dr ,
+Actual.Total_Dr - Actual.Total_Cr))   as Actual
+from
+(Select budget_master_id as p_budget_master_id, if(ACC_TYPE = 'I' , 'Income','Expense') as p_ACC_TYPE, parent_budget_master_id,
+budget_code as p_budget_code, Budget_Desc as p_Budget_Desc , COMPANY_ID
+
+from listofbudgetheads where parent_budget_master_id = 0 and COMPANY_ID = $P{p_company_id}) b
+
+inner join
+(select budget_master_id, budget_code, if(ACC_TYPE = 'I' , 'Income','Expense') as ACC_TYPE ,listofbudgetheads.Budget_Desc ,
+
+    listofbudgetheads.parent_budget_master_id
+   from listofbudgetheads
+where listofbudgetheads.parent_budget_master_id > 0
+and listofbudgetheads.COMPANY_ID = $P{p_company_id}
+group by budget_master_id, budget_code, ACC_TYPE ,listofbudgetheads.Budget_Desc) a
+on b.p_budget_master_id = a.parent_budget_master_id
+inner join
+(select DEPARTMENT_ID , DEPARTMENT_DESC , 1 as CompanyID from com_department_m
+union all
+select distinct 0 , '', 1 from com_department_m order by DEPARTMENT_DESC) com_department
+on  b.COMPANY_ID = com_department.CompanyID
+
+
+left join
+(
+select BUDGET_GROUP_CODE , department , sum(AMOUNT) as PlannedAmount from gl_budget_definition
+ where COMPANY_ID = $P{p_company_id} and YEAR_ID =  $P{p_fin_year_id}
+ group by BUDGET_ID , department
+) planned
+on a.budget_master_id = planned.BUDGET_GROUP_CODE and
+  com_department.DEPARTMENT_ID = planned.department
+
+left join
+(
+select BudgetID , DepartmentID,
+sum(subq.TotalDr) as Total_Dr , sum(subq.TotalCr) as Total_Cr
+from
+(select gl_budget_m.budget_master_id as BudgetID , gl_monthly_balance.Department_ID As DepartmentID,
+sum(gl_monthly_balance.Total_DR) as TotalDr ,
+sum(gl_monthly_balance.Total_CR) as TotalCr
+
+
+
+from gl_budget_m inner join gl_budget_group_ledger_map on gl_budget_m.budget_master_id = gl_budget_group_ledger_map.BUDGET_GROUP_CODE
+left join gl_monthly_balance on gl_budget_group_ledger_map.LEDGER_ID = gl_monthly_balance.Ledger_ID and gl_budget_group_ledger_map.COMPANY_ID =
+
+gl_monthly_balance.Company_ID
+where gl_monthly_balance.Year_ID = $P{p_fin_year_id}
+group by gl_budget_m.budget_master_id , gl_monthly_balance.Department_ID
+
+union all
+select gl_budget_m.budget_master_id as BudgetID, gl_voucher_dtl.department As DepartmentID,
+
+
+sum(gl_voucher_dtl.DR_AMOUNT * -1) as TotalDr ,
+sum(gl_voucher_dtl.CR_AMOUNT * -1) as TotalCr
+
+
+from gl_budget_m inner join gl_budget_group_ledger_map on gl_budget_m.budget_master_id = gl_budget_group_ledger_map.BUDGET_GROUP_CODE
+
+left join gl_voucher_dtl on gl_budget_group_ledger_map.LEDGER_ID = gl_voucher_dtl.LEDGER_ID and gl_budget_group_ledger_map.COMPANY_ID = gl_voucher_dtl.COMPANY_ID
+
+where gl_voucher_dtl.YearClosing_Voucher = 'Y'
+and gl_voucher_dtl.STATUS_ST = 'A'
+and gl_voucher_dtl.YEAR_ID_IN = $P{p_fin_year_id}
+group by gl_budget_m.budget_master_id ,gl_voucher_dtl.department  ) subq
+group by BudgetID , DepartmentID
+
+
+) Actual
+on
+a.budget_master_id = Actual.BudgetID and
+  com_department.DEPARTMENT_ID = Actual.DepartmentID]]>
+	</queryString>
+	<field name="budget_master_id" class="java.lang.Integer"/>
+	<field name="budget_code" class="java.lang.String"/>
+	<field name="ACC_TYPE" class="java.lang.String"/>
+	<field name="Budget_Desc" class="java.lang.String"/>
+	<field name="parent_budget_master_id" class="java.lang.Long"/>
+	<field name="p_budget_master_id" class="java.lang.Integer"/>
+	<field name="p_ACC_TYPE" class="java.lang.String"/>
+	<field name="p_budget_code" class="java.lang.String"/>
+	<field name="p_Budget_Desc" class="java.lang.String"/>
+	<field name="COMPANY_ID" class="java.lang.Integer"/>
+	<field name="DEPARTMENT_DESC" class="java.lang.String"/>
+	<field name="PlannedAmount" class="java.math.BigDecimal"/>
+	<field name="Actual" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="510" splitType="Stretch">
+			<crosstab>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="50" width="14360" height="460"/>
+				<rowGroup name="ACC_TYPE" width="70" totalPosition="End">
+					<bucket order="Descending">
+						<bucketExpression class="java.lang.String"><![CDATA[$F{ACC_TYPE}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="50"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{ACC_TYPE}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#005FB3" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="244" height="25" forecolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Proffit  ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="parent_budget_master_id" width="0" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.Long"><![CDATA[$F{parent_budget_master_id}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="174" height="25"/>
+								<textElement/>
+								<textFieldExpression class="java.lang.String"><![CDATA["Total " + $V{ACC_TYPE}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group1" width="71" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{p_Budget_Desc}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="71" height="25"/>
+								<textElement>
+									<font size="9" isBold="false"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{group1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#FFCC33" mode="Opaque"/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="group2" width="103" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{Budget_Desc}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="103" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{group2}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#CCCCFF" mode="Opaque">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="103" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+								<box rightPadding="1">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA["Total " + $V{group1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="p_budget_code" height="30" totalPosition="End">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{DEPARTMENT_DESC}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="183" height="15"/>
+								<box bottomPadding="0" rightPadding="1">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement>
+									<font size="9" isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{p_budget_code} + " "]]></textFieldExpression>
+							</textField>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="0" y="15" width="60" height="15"/>
+								<textElement>
+									<font size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[    Budget        ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="60" y="15" width="60" height="15"/>
+								<textElement>
+									<font size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Actual ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" x="120" y="15" width="63" height="15"/>
+								<textElement>
+									<font size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Difference ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="244" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+								<box bottomPadding="1">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="15" width="60" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<text><![CDATA[    Budget         ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="15" width="60" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<text><![CDATA[Difference ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="15" width="60" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<text><![CDATA[Actual ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="180" y="15" width="64" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single"/>
+								</textElement>
+								<text><![CDATA[Varaince (%) ]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="PlannedAmountMeasure" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{PlannedAmount}]]></measureExpression>
+				</measure>
+				<measure name="v_actual" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{Actual}]]></measureExpression>
+				</measure>
+				<measure name="v_Difference" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[$F{PlannedAmount} - $F{Actual}]]></measureExpression>
+				</measure>
+				<measure name="Total_Planned_Proffit" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[($F{PlannedAmount})
+
+*
+
+(
+$F{ACC_TYPE} == "Income" ? 1 : -1)]]></measureExpression>
+				</measure>
+				<measure name="TotalActualProffitMeasure" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[($F{Actual})
+
+*
+
+(
+$F{ACC_TYPE} == "Income" ? 1 : -1)]]></measureExpression>
+				</measure>
+				<measure name="TotalDidderenceProffitMeasure" class="java.lang.Double" calculation="Sum">
+					<measureExpression><![CDATA[($F{PlannedAmount} - $F{Actual})
+
+*
+
+(
+$F{ACC_TYPE} == "Income" ? 1 : -1)]]></measureExpression>
+				</measure>
+				<crosstabCell width="183" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00">
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="60" height="25"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right">
+								<font size="7"/>
+								<paragraph rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="63" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="0">
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_Difference}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="183" height="25" rowTotalGroup="ACC_TYPE">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression class="java.lang.String"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="63" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_Difference}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="244" height="25" columnTotalGroup="p_budget_code">
+					<cellContents backcolor="#FF9933" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{PlannedAmountMeasure} - $V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="180" y="0" width="64" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[((($V{PlannedAmountMeasure} - $V{v_actual}) * 100) / ($V{PlannedAmountMeasure} == 0 ? 1 : $V{PlannedAmountMeasure}))]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="244" height="25" rowTotalGroup="ACC_TYPE" columnTotalGroup="p_budget_code">
+					<cellContents backcolor="#005FB3" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Total_Planned_Proffit}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{TotalDidderenceProffitMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{TotalActualProffitMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="183" height="26" rowTotalGroup="parent_budget_master_id">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.String"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="63" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.String"><![CDATA[$V{v_Difference} == 0 ? " " : $V{v_Difference}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="244" height="26" rowTotalGroup="parent_budget_master_id" columnTotalGroup="p_budget_code">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="60" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PlannedAmountMeasure} - $V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="180" y="0" width="64" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Integer"><![CDATA[((($V{PlannedAmountMeasure} - $V{v_actual}) * 100) / ($V{PlannedAmountMeasure} == 0 ? 1 : $V{PlannedAmountMeasure}))]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="183" height="0" rowTotalGroup="group1">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="244" height="0" rowTotalGroup="group1" columnTotalGroup="p_budget_code">
+					<cellContents/>
+				</crosstabCell>
+				<crosstabCell width="183" height="27" rowTotalGroup="group2">
+					<cellContents backcolor="#CCCCFF" mode="Opaque">
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="63" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box topPadding="1" rightPadding="0">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_Difference}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="244" height="27" rowTotalGroup="group2" columnTotalGroup="p_budget_code">
+					<cellContents backcolor="#CCCCFF" mode="Opaque">
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="60" y="0" width="60" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="60" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box rightPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{PlannedAmountMeasure}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="120" y="0" width="60" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box topPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[$V{PlannedAmountMeasure} - $V{v_actual}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="180" y="0" width="64" height="27" forecolor="#000000" backcolor="#FFFFFF"/>
+							<box topPadding="1">
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+								<font fontName="SansSerif" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" rightIndent="3"/>
+							</textElement>
+							<textFieldExpression class="java.lang.Double"><![CDATA[((($V{PlannedAmountMeasure} - $V{v_actual}) * 100) / ($V{PlannedAmountMeasure} == 0 ? 1 : $V{PlannedAmountMeasure}))]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+			<textField>
+				<reportElement x="0" y="0" width="882" height="25"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_company_name}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="882" height="25"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_headers}+" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

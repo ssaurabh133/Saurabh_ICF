@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="camCustomerDetailReport" language="groovy" pageWidth="801" pageHeight="1296" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="801" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.1000000000000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="deal_id" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="role" class="java.lang.String"/>
+	<parameter name="p_loan_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select  concat(d.DEAL_CUSTOMER_ID,'')DEAL_CUSTOMER_ID,case deal_customer_role_type when 'PRAPPL' then 'Applicant' when 'COAPPL' then 'Co-Applicant' else 'Guarantor' end deal_customer_role_type
+from cr_deal_customer_role d
+where d.deal_id=$P{deal_id} and deal_customer_role_type=$P{role}
+union
+select '' DEAL_CUSTOMER_ID,case $P{role} when 'PRAPPL' then 'Applicant' when 'COAPPL' then 'Co-Applicant' else 'Guarantor' end deal_customer_role_type
+from (select 'a'a)a
+where (((select count(1) from   cr_deal_customer_role d where d.deal_id=$P{deal_id} and deal_customer_role_type=$P{role})=0 and 1=1)or((select count(1) from   cr_deal_customer_role d where d.deal_id=$P{deal_id} and deal_customer_role_type=$P{role})<>0 and 2=1))]]>
+	</queryString>
+	<field name="DEAL_CUSTOMER_ID" class="java.lang.String"/>
+	<field name="deal_customer_role_type" class="java.lang.String"/>
+	<variable name="srNo" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{srNo}+1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="0" width="801" height="35"/>
+				<subreportParameter name="customer_id">
+					<subreportParameterExpression><![CDATA[$F{DEAL_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>				
+				<subreportParameter name="deal_id">
+					<subreportParameterExpression><![CDATA[$P{deal_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="customer_role">
+					<subreportParameterExpression><![CDATA[$F{deal_customer_role_type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_loan_id">
+					<subreportParameterExpression><![CDATA[$P{p_loan_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "camCustomerDataReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.a3s.omnifin.prod</groupId>
+		<artifactId>omnifin-indostar</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<name>Common</name>
+	<artifactId>omnifin-indostar-common</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>app</module>
+		<module>archives</module>
+		<!-- TODO:
+		<module>config</module>
+		<module>db</module>
+		<module>util</module>
+		-->
+	</modules>
+
+	<dependencies> 
+	</dependencies>
+	
+</project>

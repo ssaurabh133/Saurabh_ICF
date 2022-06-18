@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="575" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_deal_id" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Users\\neeraj.tripathi\\Desktop\\RAAS\\Report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_stage" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT @SQ:=@SQ+1 AS SQN,DL.DEAL_CUSTOMER_ID,REF.REF_ID
+FROM CR_DEAL_DTL DL
+JOIN CR_DEAL_REFERENCE_M REF ON(DL.DEAL_ID=REF.DEAL_ID AND DL.DEAL_CUSTOMER_ID=REF.BPID AND REF.BPTYPE='CS')
+JOIN (SELECT @SQ:=0) AS SQ_TAB ON TRUE
+WHERE DL.DEAL_ID=$P{p_deal_id} AND 'DEAL'=$P{p_stage}
+UNION ALL
+SELECT @SQ:=@SQ+1 AS SQN,REF.CUSTOMER_ID DEAL_CUSTOMER_ID,REF.ID REF_ID
+FROM STAGE_LEAD_DTL DL
+JOIN stage_customer_role RL ON(DL.LEAD_ID=RL.SALES_LEAD_ID AND RL.CUSTOMER_ROLE='PRAPPL')
+JOIN stage_reference_dtl REF ON(REF.CUSTOMER_ID=RL.CUSTOMER_ID)
+JOIN (SELECT @SQ:=0) AS SQ_TAB ON TRUE
+WHERE DL.LEAD_ID=$P{p_deal_id}  AND 'STAGE'=$P{p_stage}
+ORDER BY SQN]]>
+	</queryString>
+	<field name="SQN" class="java.lang.Integer"/>
+	<field name="DEAL_CUSTOMER_ID" class="java.lang.Integer"/>
+	<field name="REF_ID" class="java.lang.Integer"/>
+	<detail>
+		<band height="14">
+			<subreport>
+				<reportElement x="0" y="0" width="575" height="14"/>
+				<subreportParameter name="p_stage">
+					<subreportParameterExpression><![CDATA[$P{p_stage}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_ref_id">
+					<subreportParameterExpression><![CDATA[$F{REF_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="P_CUSTOMER_ID">
+					<subreportParameterExpression><![CDATA[$F{DEAL_CUSTOMER_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sqn">
+					<subreportParameterExpression><![CDATA[$F{SQN}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "LOAN_APPLICATION_FORM_REFERANCE_DTL.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

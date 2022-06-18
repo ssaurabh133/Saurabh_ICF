@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smooks-resource-list 
+	xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd" 
+	xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.2.xsd">
+
+    <jb:bean beanId="obj" class="com.genericUpload.beans.ReconUploadBean" createOnElement="objs">
+        
+        <jb:value property="serial_no"         		data="objs/obj/serial_no"              		decoder="Integer" />
+        <jb:value property="voucher_bank"           data="objs/obj/voucher_bank"              	decoder="String" />
+		<jb:value property="voucher_no" 		    data="objs/obj/voucher_no"       			decoder="String" />
+		<jb:value property="sequence_no"            data="objs/obj/sequence_no"     			decoder="Integer" />
+		<jb:value property="voucher_dr_amt"    		data="objs/obj/voucher_dr_amt"    			decoder="BigDecimal" />
+		<jb:value property="voucher_cr_amt"         data="objs/obj/voucher_cr_amt"              decoder="BigDecimal" />
+        <jb:value property="bank_transaction_id"    data="objs/obj/bank_transaction_id"         decoder="Long" />
+		<jb:value property="bank_dr_amt" 			data="objs/obj/bank_dr_amt"       			decoder="BigDecimal" />
+		<jb:value property="bank_cr_amt"      		data="objs/obj/bank_cr_amt"     			decoder="BigDecimal" />
+		<jb:value property="bank_ledger_id"    		data="objs/obj/bank_ledger_id"    			decoder="Long" />
+		<jb:value property="recon_type"      		data="objs/obj/recon_type"     				decoder="String" />
+		<jb:value property="recon_date"    			data="objs/obj/recon_date"    				decoder="String" />
+		
+		
+    </jb:bean>
+
+</smooks-resource-list>

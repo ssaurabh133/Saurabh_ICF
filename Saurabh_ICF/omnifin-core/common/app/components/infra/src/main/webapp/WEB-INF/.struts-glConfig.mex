@@ -1,0 +1,2555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/subledgerlistActionBehind.do" location="3050,50" dimension="196,88" />
+  <StrutsActivity path="/reconProcess.do" location="4850,50" dimension="227,96" />
+  <StrutsActivity path="/reconProcessSave.do" location="5150,50" dimension="227,96" />
+  <StrutsActivity path="/reconciliationReport.do" location="4550,250" dimension="259,96" />
+  <StrutsActivity path="/reconciliationReportShow.do" location="5150,250" dimension="264,96" />
+  <StrutsActivity path="/stationaryAdditionMaster.do" location="3650,450" dimension="326,96" />
+  <StrutsActivity path="/StationaryAdditionMasterDispatchAction.do" location="4850,450" dimension="335,96" />
+  <StrutsActivity path="/stationaryIssuanceMaster.do" location="4850,650" dimension="325,96" />
+  <StrutsActivity path="/StationaryIssuanceDispatchAction.do" location="4850,850" dimension="298,96" />
+  <StrutsActivity path="/billreceivablepayablevoucher.do" location="3350,50" dimension="253,88" />
+  <StrutsActivity path="/reportForBillRecepayVoucher.do" location="3950,50" dimension="286,88" />
+  <StrutsActivity path="/bankstatement.do" location="4550,50" dimension="221,88" />
+  <StrutsActivity path="/reportForBillStatement.do" location="3350,250" dimension="222,88" />
+  <StrutsActivity path="/hoexpenseallocationratio.do" location="3650,250" dimension="274,88" />
+  <StrutsActivity path="/accYear.do" location="50,50" dimension="202,88" />
+  <StrutsActivity path="/glMaster.do" location="350,50" dimension="227,88" />
+  <StrutsActivity path="/glGroupLedgerMaster.do" location="650,50" dimension="203,88" />
+  <StrutsActivity path="/groupLedgerAjaxAction.do" location="950,50" dimension="225,88" />
+  <StrutsActivity path="/AvailabilityCheck.do" location="1250,50" dimension="191,88" />
+  <StrutsActivity path="/reportforGL.do" location="4250,350" dimension="212,88" />
+  <StrutsActivity path="/glVoucherEntry.do" location="1550,50" dimension="218,88" />
+  <StrutsActivity path="/glVoucherEntrySearch.do" location="4850,1050" dimension="239,96" />
+  <StrutsActivity path="/glVoucherAjaxAction.do" location="1850,50" dimension="214,88" />
+  <StrutsActivity path="/viewVoucher.do" location="2150,50" dimension="214,88" />
+  <StrutsActivity path="/accountingPeriodAction.do" location="2450,50" dimension="224,88" />
+  <StrutsActivity path="/closingYearAction.do" location="2750,50" dimension="197,88" />
+  <StrutsActivity path="/voucherAuthorization.do" location="50,250" dimension="244,88" />
+  <StrutsActivity path="/voucherBehindAuthorization.do" location="3050,450" dimension="255,88" />
+  <StrutsActivity path="/voucherAuthorizationWithLimit.do" location="5150,1150" dimension="283,96" />
+  <StrutsActivity path="/glBudgetDefinition.do" location="650,250" dimension="220,88" />
+  <StrutsActivity path="/ledgerMasterAjaxAction.do" location="950,250" dimension="229,88" />
+  <StrutsActivity path="/templeteCreationAction.do" location="1250,250" dimension="226,88" />
+  <StrutsActivity path="/chargePopupAction.do" location="1550,250" dimension="259,88" />
+  <StrutsActivity path="/chargePopSaveAction.do" location="2150,250" dimension="271,88" />
+  <StrutsActivity path="/glTemplateCreationAjaxAction.do" location="2750,250" dimension="260,88" />
+  <StrutsActivity path="/templateCreationpopAjaxAction.do" location="50,450" dimension="266,88" />
+  <StrutsActivity path="/BudgetDefinitionAjaxAction.do" location="650,450" dimension="242,88" />
+  <StrutsActivity path="/glSubLedgerAction.do" location="950,450" dimension="200,88" />
+  <StrutsActivity path="/budgetLedgerMappingAction.do" location="1250,450" dimension="248,88" />
+  <StrutsActivity path="/budgetLedgerMappingAjaxAction.do" location="1550,450" dimension="270,88" />
+  <StrutsActivity path="/glBudgetMaster.do" location="2150,450" dimension="208,88" />
+  <StrutsActivity path="/fixedAssetCategoryAction.do" location="2450,450" dimension="239,88" />
+  <StrutsActivity path="/fixedAssetClassAjaxAction.do" location="2750,450" dimension="241,88" />
+  <StrutsActivity path="/incomeTaxBlockMasterAction.do" location="50,650" dimension="251,88" />
+  <StrutsActivity path="/fixedAssetAccount.do" location="650,650" dimension="233,88" />
+  <StrutsActivity path="/fixedAssetLocation.do" location="950,650" dimension="234,88" />
+  <StrutsActivity path="/fixedAssetDepartment.do" location="1250,650" dimension="251,88" />
+  <StrutsActivity path="/fixedAssetAddition.do" location="1850,650" dimension="233,88" />
+  <StrutsActivity path="/fixedAssetSaleAction.do" location="2150,650" dimension="214,88" />
+  <StrutsActivity path="/fixedAssetSaleSearchAction.do" location="4550,550" dimension="247,88" />
+  <StrutsActivity path="/fixedAssetSaleAuthorAction.do" location="3350,650" dimension="247,88" />
+  <StrutsActivity path="/fixedAssetSaleAjaxAction.do" location="2450,650" dimension="236,88" />
+  <StrutsActivity path="/availabilityCheck.do" location="2750,650" dimension="221,88" />
+  <StrutsActivity path="/com/GL/action/.do" location="4850,1350" dimension="126,96" />
+  <StrutsActivity path="/LedgerAccountWise.do" location="350,250" dimension="248,88" />
+  <StrutsActivity path="/glTrialBalance.do" location="350,850" dimension="207,88" />
+  <StrutsActivity path="/glCashBook.do" location="650,850" dimension="197,88" />
+  <StrutsActivity path="/glLedgerReport.do" location="950,850" dimension="186,88" />
+  <StrutsActivity path="/glBankBook.do" location="1250,850" dimension="199,88" />
+  <StrutsActivity path="/glDayBook.do" location="3650,750" dimension="195,88" />
+  <StrutsActivity path="/reportforDayBook.do" location="3950,750" dimension="186,88" />
+  <StrutsActivity path="/glDailyCashRegister.do" location="5150,1450" dimension="218,96" />
+  <StrutsActivity path="/reportforGLDailyCashRegister.do" location="4850,1650" dimension="300,96" />
+  <StrutsActivity path="/glDailyCashRegisterconsolidated.do" location="4850,1850" dimension="286,96" />
+  <StrutsActivity path="/reportforGLDailyCashRegisterConsolidated.do" location="4850,2050" dimension="370,96" />
+  <StrutsActivity path="/glVoucherPrinting.do" location="1550,850" dimension="225,88" />
+  <StrutsActivity path="/glBalanceSheet.do" location="1850,850" dimension="215,88" />
+  <StrutsActivity path="/glProfitLoss.do" location="2150,850" dimension="197,88" />
+  <StrutsActivity path="/glProfitLossAjax.do" location="2750,2250" dimension="217,96" />
+  <StrutsActivity path="/glSubLedgerReport.do" location="2450,850" dimension="237,88" />
+  <StrutsActivity path="/fixedAssetAdditionAjaxAction.do" location="2750,850" dimension="255,88" />
+  <StrutsActivity path="/accountingPeriodAjaxAction.do" location="50,1050" dimension="246,88" />
+  <StrutsActivity path="/faDepreciationCalcAction.do" location="350,1050" dimension="233,88" />
+  <StrutsActivity path="/fixedAssetAdditionSearch.do" location="650,1050" dimension="266,88" />
+  <StrutsActivity path="/fixedAssetAdditionApproval.do" location="4250,850" dimension="309,88" />
+  <StrutsActivity path="/fixedAssetAdditionPopUp.do" location="1250,1050" dimension="264,88" />
+  <StrutsActivity path="/ledgerMasterAjax.do" location="1850,1050" dimension="238,88" />
+  <StrutsActivity path="/glBillGeneration.do" location="2150,1050" dimension="215,88" />
+  <StrutsActivity path="/glBillGenerationAjax.do" location="2450,1050" dimension="237,88" />
+  <StrutsActivity path="/glBillGenerationAuthor.do" location="2750,1050" dimension="248,88" />
+  <StrutsActivity path="/faClassificationAction.do" location="350,1950" dimension="256,88" />
+  <StrutsActivity path="/customisedReport.do" location="3050,650" dimension="229,88" />
+  <StrutsActivity path="/templateProductMapping.do" location="3050,1050" dimension="242,88" />
+  <StrutsActivity path="/glFASchedule5.do" location="3050,1250" dimension="237,88" />
+  <StrutsActivity path="/glFASchedule.do" location="3050,1450" dimension="211,88" />
+  <StrutsActivity path="/provisionalVoucherReverse.do" location="3050,1650" dimension="280,88" />
+  <StrutsActivity path="/voucheReversal.do" location="950,1750" dimension="231,88" />
+  <StrutsActivity path="/fixedAssetInsuranceAction.do" location="2750,1750" dimension="242,88" />
+  <StrutsActivity path="/fixedAssetInsuranceActionPopUp.do" location="2150,1850" dimension="273,88" />
+  <StrutsActivity path="/budgetVarianceReport.do" location="3050,1850" dimension="261,88" />
+  <StrutsActivity path="/exceptionReport.do" location="50,1950" dimension="221,88" />
+  <StrutsActivity path="/accountingListAction.do" location="3350,1050" dimension="210,88" />
+  <StrutsActivity path="/voucherPrintingFromCreation.do" location="3650,1050" dimension="251,88" />
+  <StrutsActivity path="/glParyCreationMaster.do" location="4250,1050" dimension="208,88" />
+  <StrutsActivity path="/partyCreation.do" location="4550,1050" dimension="208,88" />
+  <StrutsActivity path="/recivePaySearch.do" location="3350,1250" dimension="216,88" />
+  <StrutsActivity path="/receivPayHeadMasterAjaxAction.do" location="3650,1250" dimension="271,88" />
+  <StrutsActivity path="/loanWiseTrailBalance.do" location="4250,1250" dimension="244,88" />
+  <StrutsActivity path="/reportforLoanWise.do" location="4550,1250" dimension="247,88" />
+  <StrutsActivity path="/TDSRateChart.do" location="3350,1450" dimension="210,88" />
+  <StrutsActivity path="/bankreconcilation.do" location="3650,1450" dimension="227,88" />
+  <StrutsActivity path="/reportforBankReconcilation.do" location="3950,1450" dimension="230,88" />
+  <StrutsActivity path="/fixedAssetRegister.do" location="4250,1450" dimension="234,88" />
+  <StrutsActivity path="/reportforFixedAssetRegister.do" location="4550,1450" dimension="237,88" />
+  <StrutsActivity path="/glBillCapture.do" location="3650,1650" dimension="200,88" />
+  <StrutsActivity path="/glBillCaptureAjax.do" location="3950,1650" dimension="220,88" />
+  <StrutsActivity path="/glBillReceivCapture.do" location="4250,1650" dimension="200,88" />
+  <StrutsActivity path="/glBillPayableAuthor.do" location="4550,1650" dimension="233,88" />
+  <StrutsActivity path="/glBillReceivAuthor.do" location="1550,1850" dimension="233,88" />
+  <StrutsActivity path="/glbillSetlementAjax.do" location="4850,2450" dimension="227,96" />
+  <StrutsActivity path="/glbillSettelement.do" location="3650,1850" dimension="205,88" />
+  <StrutsActivity path="/glBillSettlementAjax.do" location="3950,1850" dimension="205,88" />
+  <StrutsActivity path="/glbillSettelementAuthor.do" location="4250,1850" dimension="238,88" />
+  <StrutsActivity path="/billreceivablepayablereport.do" location="4550,1850" dimension="246,88" />
+  <StrutsActivity path="/reportforbill.do" location="950,2050" dimension="276,88" />
+  <StrutsActivity path="/billCapturingView.do" location="1550,2050" dimension="222,88" />
+  <StrutsActivity path="/bankStatementUploading.do" location="2150,2050" dimension="261,88" />
+  <StrutsActivity path="/bankStatementAutoReconcile.do" location="2750,2050" dimension="282,88" />
+  <StrutsActivity path="/bankStatementManualReconcile.do" location="3350,2050" dimension="293,88" />
+  <StrutsActivity path="/bankStatManReconAjax.do" location="3950,2050" dimension="293,88" />
+  <StrutsActivity path="/fixedAssetTransferAction.do" location="4550,2050" dimension="235,88" />
+  <StrutsActivity path="/fixedAssetTransferAuthorAction.do" location="350,2250" dimension="268,88" />
+  <StrutsActivity path="/glDepreciationDetail.do" location="950,2250" dimension="261,88" />
+  <StrutsActivity path="/saleDiscardReport.do" location="1550,2250" dimension="221,88" />
+  <StrutsActivity path="/chequeDetail.do" location="1850,2250" dimension="205,88" />
+  <StrutsActivity path="/chequePrintingReport.do" location="2150,2250" dimension="238,88" />
+  <StrutsActivity path="/balancestotrial.do" location="2450,2250" dimension="197,88" />
+  <StrutsActivity path="/budgetVoucherMappingSearch.do" location="3350,2250" dimension="286,88" />
+  <StrutsActivity path="/budgetVoucherMapping.do" location="3950,2250" dimension="295,88" />
+  <StrutsActivity path="/billreceivablereport.do" location="4550,2250" dimension="236,88" />
+  <StrutsActivity path="/glchequeStatusUpdateAction.do" location="3350,2450" dimension="238,88" />
+  <StrutsActivity path="/fixedAssetTransferInBranchAction.do" location="3650,2450" dimension="248,88" />
+  <StrutsActivity path="/fixedAssetTranInBranchAuthor.do" location="3950,2450" dimension="311,88" />
+  <StrutsActivity path="/partyMasterReport.do" location="1250,2650" dimension="254,96" />
+  <StrutsActivity path="/reportForPartyMaster.do" location="1850,2650" dimension="263,96" />
+  <StrutsActivity path="/subledgertrialbalance.do" location="2450,2650" dimension="308,96" />
+  <StrutsActivity path="/reportforSubLedgerTrial.do" location="3050,2650" dimension="306,96" />
+  <StrutsActivity path="/branchBalanceSheet.do" location="3950,2650" dimension="298,96" />
+  <StrutsActivity path="/reportforBranchBalanceSheet.do" location="4550,2650" dimension="296,96" />
+  <StrutsActivity path="/GlknockOffMaker.do" location="5150,2650" dimension="237,96" />
+  <StrutsActivity path="/GlknockOffAuthor.do" location="50,2750" dimension="241,96" />
+  <StrutsActivity path="/glBillReceiptSearch.do" location="350,2750" dimension="242,96" />
+  <StrutsActivity path="/glbillReceiptAuthor.do" location="950,2850" dimension="246,96" />
+  <StrutsActivity path="/glcapitalizationSearch.do" location="1850,2850" dimension="238,96" />
+  <StrutsActivity path="/glcapitalizationAuthor.do" location="3350,2850" dimension="275,96" />
+  <StrutsActivity path="/bankReconStatement.do" location="3950,2850" dimension="306,96" />
+  <StrutsActivity path="/reportforBankReconStatement.do" location="4850,2850" dimension="267,96" />
+  <StrutsActivity path="/glExcelSheetUpload.do" location="1250,2950" dimension="264,96" />
+  <StrutsActivity path="/billCancellation.do" location="2150,2950" dimension="236,96" />
+  <StrutsActivity path="/billCancelAuthor.do" location="2750,2950" dimension="273,96" />
+  <StrutsActivity path="/partyWiseExpRpt.do" location="4550,2950" dimension="224,96" />
+  <StrutsActivity path="/reportForPartyWiseExp.do" location="4850,3050" dimension="224,96" />
+  <StrutsActivity path="/glBillCaptureAjaxForSubLedgerReport.do" location="5150,3050" dimension="242,96" />
+  <StrutsActivity path="/bookToBookReconcile.do" location="4850,3250" dimension="270,96" />
+  <StrutsActivity path="/booktobookReconAjax.do" location="4850,3450" dimension="270,96" />
+  <StrutsActivity path="/bankToBankReconcile.do" location="650,3550" dimension="268,96" />
+  <StrutsActivity path="/banktobankReconAjax.do" location="1250,3550" dimension="268,96" />
+  <StrutsActivity path="/rejectVoucher.do" location="1850,3550" dimension="261,96" />
+  <StrutsActivity path="/GenerateAllGLReports.do" location="2450,3550" dimension="234,96" />
+  <StrutsActivity path="/JSP/glForm/reconProcessDetail.jsp" location="2750,3550" dimension="218,51" />
+  <StrutsActivity path="/JSP/glForm/reconciliationReport.jsp" location="3050,3550" dimension="225,51" />
+  <StrutsActivity path="/JSP/glForm/StationaryMasterSearch.jsp" location="3350,3550" dimension="242,51" />
+  <StrutsActivity path="/JSP/glForm/StationaryMasterNew.jsp" location="3650,3550" dimension="231,51" />
+  <StrutsActivity path="/JSP/glForm/StationaryIssuanceSearch.jsp" location="3950,3550" dimension="251,51" />
+  <StrutsActivity path="/JSP/glForm/StationaryIssuanceNew.jsp" location="4550,3550" dimension="240,51" />
+  <StrutsActivity path="/JSP/glForm/GlBillRcevablePayableVoucher.jsp" location="3050,2550" dimension="250,49" />
+  <StrutsActivity path="/JSP/glForm/glBankStatement.jsp" location="50,2650" dimension="189,49" />
+  <StrutsActivity path="/JSP/glForm/glHoExpenseAllocationRatioSerch.jsp" location="50,3650" dimension="296,51" />
+  <StrutsActivity path="/JSP/glForm/glHoExpenseAllocationRatio.jsp" location="350,2650" dimension="241,49" />
+  <StrutsActivity path="/index.jsp" location="50,1250" dimension="77,49" />
+  <StrutsActivity path="/JSP/glForm/accountingYear.jsp" location="350,1250" dimension="182,49" />
+  <StrutsActivity path="/JSP/glForm/glLedgerMasterSearch.jsp" location="1250,1950" dimension="215,49" />
+  <StrutsActivity path="/JSP/glForm/glLedgerMaster.jsp" location="650,1250" dimension="182,49" />
+  <StrutsActivity path="/JSP/glForm/glGroupLedgerMasterSearch.jsp" location="1850,1950" dimension="244,49" />
+  <StrutsActivity path="/JSP/glForm/glGroupLedgerMaster.jsp" location="950,1250" dimension="211,49" />
+  <StrutsActivity path="/JSP/glForm/groupCode.jsp" location="1250,1250" dimension="161,49" />
+  <StrutsActivity path="/JSP/reports/reportLedgerAccountwise.jsp" location="1550,1250" dimension="234,49" />
+  <StrutsActivity path="/JSP/glForm/GLVoucherEntrySearch.jsp" location="1250,1750" dimension="218,49" />
+  <StrutsActivity path="/JSP/glForm/GLVoucherEntry.jsp" location="1850,1250" dimension="185,49" />
+  <StrutsActivity path="/JSP/glForm/new.jsp" location="2150,1250" dimension="128,49" />
+  <StrutsActivity path="/JSP/glForm/voucherEntryAjaxSlExist.jsp" location="2450,1250" dimension="226,49" />
+  <StrutsActivity path="/JSP/glForm/viewVoucher.jsp" location="2750,1250" dimension="169,49" />
+  <StrutsActivity path="/JSP/glForm/glVoucherView.jsp" location="50,1350" dimension="177,49" />
+  <StrutsActivity path="/JSP/glForm/glAccountingPeriod.jsp" location="350,1350" dimension="199,49" />
+  <StrutsActivity path="/JSP/glForm/glYearClosing.jsp" location="650,1350" dimension="172,49" />
+  <StrutsActivity path="/JSP/glForm/voucherAuthorization.jsp" location="950,1350" dimension="211,49" />
+  <StrutsActivity path="/JSP/glForm/glBudgetDefinitionSearch.jsp" location="950,2750" dimension="228,49" />
+  <StrutsActivity path="/JSP/glForm/glBudgetDefinition.jsp" location="1550,1350" dimension="195,49" />
+  <StrutsActivity path="/JSP/glLedgerMaster.jsp" location="1850,1350" dimension="146,49" />
+  <StrutsActivity path="/JSP/glForm/glTempleteCreationSearch.jsp" location="350,2150" dimension="234,49" />
+  <StrutsActivity path="/JSP/glForm/glTempleteCreation.jsp" location="2150,1350" dimension="201,49" />
+  <StrutsActivity path="/JSP/glForm/chargeDiscriptionPopUp.jsp" location="2450,1350" dimension="221,49" />
+  <StrutsActivity path="/JSP/glForm/glTemplateCreationAjax.jsp" location="2750,1350" dimension="223,49" />
+  <StrutsActivity path="/JSP/glForm/ledgerDisplayAjex.jsp" location="50,1450" dimension="194,49" />
+  <StrutsActivity path="/JSP/glForm/chargeDisplayAjex.jsp" location="350,1450" dimension="197,49" />
+  <StrutsActivity path="/JSP/glForm/glFiscalAjax.jsp" location="3650,2750" dimension="164,49" />
+  <StrutsActivity path="/JSP/glForm/glSubLedgerSearch.jsp" location="1850,2150" dimension="200,49" />
+  <StrutsActivity path="/JSP/glForm/glSubLedger.jsp" location="650,1450" dimension="167,49" />
+  <StrutsActivity path="JSP/glForm/glSubLedger.jsp" location="950,1450" dimension="163,49" />
+  <StrutsActivity path="/JSP/glForm/budgetLedgarMapping.jsp" location="1250,1450" dimension="215,49" />
+  <StrutsActivity path="/JSP/glForm/budgetLedgarMappingAjax.jsp" location="1550,1450" dimension="237,49" />
+  <StrutsActivity path="/JSP/glForm/glBudgetMasterSearch.jsp" location="650,2850" dimension="216,49" />
+  <StrutsActivity path="/JSP/glForm/glBudgetMaster.jsp" location="1850,1450" dimension="183,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetCategoryMasterSearch.jsp" location="1250,2850" dimension="270,49" />
+  <StrutsActivity path="/JSP/glForm/FixedAssetGroup.jsp" location="2150,1450" dimension="190,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAjax.jsp" location="2450,1450" dimension="181,49" />
+  <StrutsActivity path="/JSP/glForm/incomeTaxBlockMasterSearch.jsp" location="2150,2850" dimension="249,49" />
+  <StrutsActivity path="/JSP/glForm/incomeTaxBlockMaster.jsp" location="2750,1450" dimension="216,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAccountMasterSearch.jsp" location="2750,2850" dimension="264,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAccount.jsp" location="50,1550" dimension="198,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetLocation.jsp" location="350,1550" dimension="199,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetDepartment.jsp" location="650,1550" dimension="216,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAddition.jsp" location="950,1550" dimension="198,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetSale.jsp" location="1250,1550" dimension="179,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetSaleSearch.jsp" location="4550,2850" dimension="212,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetSaleAuthor.jsp" location="50,2950" dimension="212,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetSaleAuthorSearch.jsp" location="350,2950" dimension="245,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetSaleAjax.jsp" location="1550,1550" dimension="201,49" />
+  <StrutsActivity path="/JSP/reports/glLedgerAccountWise.jsp" location="1250,1350" dimension="214,49" />
+  <StrutsActivity path="/JSP/glForm/glTrialBalance.jsp" location="1850,1550" dimension="173,49" />
+  <StrutsActivity path="/JSP/FrmTrialBalance.jsp" location="3050,2250" dimension="147,49" />
+  <StrutsActivity path="/JSP/FrmVoucherPrintingReport.jsp" location="1550,1750" dimension="198,49" />
+  <StrutsActivity path="/JSP/glForm/glVoucherPrinting.jsp" location="50,1650" dimension="191,49" />
+  <StrutsActivity path="/JSP/FrmProffitNLossReport.jsp" location="1850,1750" dimension="181,49" />
+  <StrutsActivity path="/JSP/FrmBalanceShhetReport.jsp" location="2150,1750" dimension="188,49" />
+  <StrutsActivity path="/JSP/glForm/glBalanceSheet.jsp" location="950,1650" dimension="181,49" />
+  <StrutsActivity path="/JSP/FrmRevenueStatement.jsp" location="2450,1750" dimension="183,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxForProfiandLosReport.jsp" location="1850,3950" dimension="253,51" />
+  <StrutsActivity path="/JSP/glForm/glSubLedgerReport.jsp" location="1250,1650" dimension="200,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionAjax.jsp" location="1550,1650" dimension="220,49" />
+  <StrutsActivity path="/JSP/glForm/faDepreciationCalc.jsp" location="1850,1650" dimension="198,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionSearch.jsp" location="2150,1650" dimension="231,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionView.jsp" location="50,3050" dimension="220,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionAproval.jsp" location="350,3050" dimension="235,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionPopUpView.jsp" location="650,3050" dimension="251,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetAdditionPopUp.jsp" location="2450,1650" dimension="229,49" />
+  <StrutsActivity path="/JSP/glForm/glLedgerMasterAjax.jsp" location="2750,1650" dimension="204,49" />
+  <StrutsActivity path="/JSP/glForm/glBillGeneration.jsp" location="50,1750" dimension="181,49" />
+  <StrutsActivity path="/JSP/glForm/glBillGenerationSearch.jsp" location="350,1750" dimension="214,49" />
+  <StrutsActivity path="/JSP/glForm/glBillGenerationAjax.jsp" location="650,1750" dimension="203,49" />
+  <StrutsActivity path="/JSP/glForm/faClassificationMasterSearch.jsp" location="2450,3050" dimension="246,49" />
+  <StrutsActivity path="/JSP/glForm/faClassificationMaster.jsp" location="2450,2450" dimension="213,49" />
+  <StrutsActivity path="/JSP/glForm/customisedReport.jsp" location="2150,2450" dimension="194,49" />
+  <StrutsActivity path="/JSP/glForm/glTemplateProductMappingSearch.jsp" location="2750,2450" dimension="270,49" />
+  <StrutsActivity path="/JSP/glForm/glTemplateProductMapping.jsp" location="50,2550" dimension="237,49" />
+  <StrutsActivity path="/JSP/glForm/glFASchedule5.jsp" location="350,2550" dimension="178,49" />
+  <StrutsActivity path="/JSP/FrmFASceduleV.jsp" location="650,2550" dimension="146,49" />
+  <StrutsActivity path="/JSP/glForm/glProvisionalVoucherReversal.jsp" location="950,2550" dimension="248,49" />
+  <StrutsActivity path="/JSP/glForm/glVoucherReversal.jsp" location="1250,2550" dimension="197,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetInsuranceSearch.jsp" location="1550,2550" dimension="240,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetInsurance.jsp" location="1850,2550" dimension="207,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetInsurancePopUp.jsp" location="2150,2550" dimension="238,49" />
+  <StrutsActivity path="/JSP/glForm/glBudgetVarianceReport.jsp" location="2450,2550" dimension="224,49" />
+  <StrutsActivity path="/JSP/glForm/glpartyCreation.jsp" location="1550,3150" dimension="183,49" />
+  <StrutsActivity path="/JSP/glForm/glPartyCreationSearch.jsp" location="1850,3150" dimension="216,49" />
+  <StrutsActivity path="/JSP/glForm/recivePayHeadMaster.jsp" location="2150,3150" dimension="213,49" />
+  <StrutsActivity path="/JSP/glForm/recivePayMasterSearch.jsp" location="2450,3150" dimension="221,49" />
+  <StrutsActivity path="/JSP/glForm/recivePayHeadMasterModify.jsp" location="2750,3150" dimension="245,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxforReceivPay.jsp" location="3050,3150" dimension="193,49" />
+  <StrutsActivity path="/JSP/glForm/loanWiseTrialBalance.jsp" location="3350,3150" dimension="208,49" />
+  <StrutsActivity path="/JSP/glForm/glTDSRateChartMasterSearch.jsp" location="3650,3150" dimension="251,49" />
+  <StrutsActivity path="/JSP/glForm/glTDSRateChartMasterNew.jsp" location="4250,3150" dimension="239,49" />
+  <StrutsActivity path="/JSP/glForm/bankreconcilation.jsp" location="4550,3150" dimension="191,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetRegiter.jsp" location="50,3250" dimension="194,49" />
+  <StrutsActivity path="/JSP/glForm/glBillCapturingSearch.jsp" location="350,3250" dimension="208,49" />
+  <StrutsActivity path="/JSP/glForm/glAdvancePaymentPopup.jsp" location="2450,4150" dimension="256,51" />
+  <StrutsActivity path="/JSP/glForm/glBillCapturingMaker.jsp" location="650,3250" dimension="204,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxforbillCapturing.jsp" location="950,3250" dimension="202,49" />
+  <StrutsActivity path="/JSP/glForm/glBillReceivCapturingMaker.jsp" location="1550,3250" dimension="236,49" />
+  <StrutsActivity path="/JSP/glForm/glBillReceivCapturingSearch.jsp" location="1250,3250" dimension="240,49" />
+  <StrutsActivity path="/JSP/glForm/glBillPayableCapturingAuthor.jsp" location="1850,3250" dimension="246,49" />
+  <StrutsActivity path="/JSP/glForm/glBillReceivCapturingAuthor.jsp" location="2150,3250" dimension="240,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxForBillCancel.jsp" location="4550,4150" dimension="207,51" />
+  <StrutsActivity path="/JSP/glForm/glViewpayableForAllocation.jsp" location="2450,3250" dimension="238,49" />
+  <StrutsActivity path="/JSP/glForm/glBillSettlementMaker.jsp" location="2750,3250" dimension="209,49" />
+  <StrutsActivity path="/JSP/glForm/glViewPayableForSettlement.jsp" location="3050,3250" dimension="244,49" />
+  <StrutsActivity path="/JSP/glForm/glBillSettlementSearch.jsp" location="3350,3250" dimension="213,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxforBillSettlement.jsp" location="3650,3250" dimension="207,49" />
+  <StrutsActivity path="/JSP/glForm/glallocatedPayable.jsp" location="950,4250" dimension="217,51" />
+  <StrutsActivity path="/JSP/glForm/glBillSettlementAuthorSearch.jsp" location="3950,3250" dimension="246,49" />
+  <StrutsActivity path="/JSP/glForm/glBillSettlementViewAuthor.jsp" location="4250,3250" dimension="235,49" />
+  <StrutsActivity path="/JSP/glForm/billReceivablePayableReport.jsp" location="4550,3250" dimension="243,49" />
+  <StrutsActivity path="/JSP/glForm/glBillCaptuirngView.jsp" location="50,3350" dimension="197,49" />
+  <StrutsActivity path="/JSP/glForm/bankStatementUploadingSearch.jsp" location="350,3350" dimension="261,49" />
+  <StrutsActivity path="/JSP/glForm/bankStatementUploading.jsp" location="950,3350" dimension="228,49" />
+  <StrutsActivity path="/JSP/glForm/bankStatementAutoReconcile.jsp" location="1250,3350" dimension="249,49" />
+  <StrutsActivity path="/JSP/glForm/bankStatementManualReconcile.jsp" location="1550,3350" dimension="260,49" />
+  <StrutsActivity path="/JSP/glForm/ajaxforManualReconcileList.jsp" location="2150,3350" dimension="238,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTransfer.jsp" location="2450,3350" dimension="200,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTransferSearch.jsp" location="2750,3350" dimension="233,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTransferViewAproval.jsp" location="3050,3350" dimension="259,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTransferAprovalSearch.jsp" location="3650,3350" dimension="270,49" />
+  <StrutsActivity path="/JSP/glForm/depreciationDetail.jsp" location="4250,3350" dimension="194,49" />
+  <StrutsActivity path="/JSP/glForm/saleDiscardReport.jsp" location="4550,3350" dimension="195,49" />
+  <StrutsActivity path="/JSP/glForm/chequeDetailSearch.jsp" location="50,3450" dimension="203,49" />
+  <StrutsActivity path="/JSP/glForm/chequeDetail.jsp" location="350,3450" dimension="170,49" />
+  <StrutsActivity path="/JSP/glForm/chequeDetailReport.jsp" location="650,3450" dimension="203,49" />
+  <StrutsActivity path="/JSP/glForm/budgetVoucherMappingSearch.jsp" location="950,3450" dimension="254,49" />
+  <StrutsActivity path="/JSP/glForm/billRecevableReport.jsp" location="1550,3450" dimension="203,49" />
+  <StrutsActivity path="/JSP/glForm/glchequeStatus.jsp" location="1850,3450" dimension="182,49" />
+  <StrutsActivity path="/JSP/glForm/FixedAssetTransferWithinBranch.jsp" location="2150,3450" dimension="265,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTranInBranchSearch.jsp" location="2750,3450" dimension="257,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTransferViewWithInAproval.jsp" location="3350,3450" dimension="291,49" />
+  <StrutsActivity path="/JSP/glForm/fixedAssetTranInBranchAprovSearch.jsp" location="3950,3450" dimension="286,49" />
+  <StrutsActivity path="/JSP/glForm/partyMasterReport.jsp" location="3350,4350" dimension="216,51" />
+  <StrutsActivity path="/JSP/glForm/subLedgerTrialbalancereport.jsp" location="3650,4350" dimension="269,51" />
+  <StrutsActivity path="/JSP/glForm/branchWiseBalanceSheetReport.jsp" location="4250,4350" dimension="285,51" />
+  <StrutsActivity path="/JSP/glForm/glKnockOffMakerSearch.jsp" location="4550,3450" dimension="222,49" />
+  <StrutsActivity path="/JSP/glForm/glKnockOffMaker.jsp" location="50,3550" dimension="189,49" />
+  <StrutsActivity path="/JSP/glForm/glKnockOffMakerView.jsp" location="5150,4350" dimension="236,51" />
+  <StrutsActivity path="/JSP/glForm/glKnockOffAuthor.jsp" location="350,3550" dimension="193,49" />
+  <StrutsActivity path="/JSP/glForm/glBillreceiptMaker.jsp" location="350,4450" dimension="213,51" />
+  <StrutsActivity path="/JSP/glForm/glBilReceiptMakerSearch.jsp" location="650,4450" dimension="248,51" />
+  <StrutsActivity path="/JSP/glForm/glReceivableForAllocation.jsp" location="950,4450" dimension="255,51" />
+  <StrutsActivity path="/JSP/glForm/ajaxForBillReceipt.jsp" location="1550,4450" dimension="210,51" />
+  <StrutsActivity path="/JSP/glForm/glViewReceivable.jsp" location="1850,4450" dimension="209,51" />
+  <StrutsActivity path="/JSP/glForm/glViewBillReceipt.jsp" location="2150,4450" dimension="208,51" />
+  <StrutsActivity path="/JSP/glForm/glBillReceiptAuthorSearch.jsp" location="2450,4450" dimension="255,51" />
+  <StrutsActivity path="/JSP/glForm/glCapitalizedMaker.jsp" location="3050,4450" dimension="219,51" />
+  <StrutsActivity path="/JSP/glForm/glCapitalizedSearch.jsp" location="4850,4450" dimension="221,51" />
+  <StrutsActivity path="/JSP/glForm/ajaxForFaCapitalization.jsp" location="50,4550" dimension="239,51" />
+  <StrutsActivity path="/JSP/glForm/glCapitalizedAuthor.jsp" location="3350,4550" dimension="223,51" />
+  <StrutsActivity path="/JSP/glForm/bankReconStatementReport.jsp" location="3650,4550" dimension="266,51" />
+  <StrutsActivity path="/JSP/glForm/glExcelUpload.jsp" location="4250,4550" dimension="192,51" />
+  <StrutsActivity path="/JSP/glForm/glbillCancellation.jsp" location="4550,4550" dimension="210,51" />
+  <StrutsActivity path="/JSP/glForm/glbillCancellationSearch.jsp" location="5150,4550" dimension="245,51" />
+  <StrutsActivity path="/JSP/glForm/glbillCancellationAuthor.jsp" location="350,4650" dimension="247,51" />
+  <StrutsActivity path="/JSP/glForm/glpartyWiseExpReport.jsp" location="650,4650" dimension="233,51" />
+  <StrutsActivity path="/JSP/glForm/glBooktoBookReconcile.jsp" location="950,4650" dimension="244,51" />
+  <StrutsActivity path="/JSP/glForm/ajaxforBooktoBooklReconcileList.jsp" location="1250,4650" dimension="290,51" />
+  <StrutsActivity path="/JSP/glForm/glBankToBankReconcile.jsp" location="1850,4650" dimension="245,51" />
+  <StrutsActivity path="/JSP/glForm/ajaxforBanktoBanklReconcileList.jsp" location="2150,4650" dimension="288,51" />
+  <StrutsActivity path="/JSP/glForm/glVoucherRejection.jsp" location="2750,4650" dimension="221,51" />
+  <StrutsActivity path="/com/GL/action.do" location="50,850" dimension="111,88" />
+  <StrutsActivity path="/knockOffMaker.do" location="4550,2450" dimension="214,88" />
+  <StrutsActivity path="/JSP/FrmCashBankLedgerReport.jsp" location="50,2350" dimension="203,49" />
+  <StrutsActivity path="/JSP/DummyReport.jsp" location="2450,1550" dimension="140,49" />
+  <StrutsActivity path="/JSP/trialBalance.jsp" location="2150,1550" dimension="127,49" />
+  <StrutsActivity path="/JSP/VoucherPrinting.jsp" location="2750,1550" dimension="147,49" />
+  <StrutsActivity path="/JSP/profitNloss.jsp" location="350,1650" dimension="123,49" />
+  <StrutsActivity path="/JSP/BalanceSheet.jsp" location="650,1650" dimension="137,49" />
+  <StrutsActivity path="/knockOffAuthorForGL.do" location="50,4750" dimension="179,81" />
+  <StrutsTransition id="/reportforGLDailyCashRegisterConsolidated.do,success,/glDailyCashRegisterconsolidated.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5035,2098" />
+      <AbsolutePoint location="4993,1898" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetVoucherMappingSearch.do,success,/JSP/glForm/budgetVoucherMappingSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3493,2338" />
+      <AbsolutePoint location="3493,2386" />
+      <AbsolutePoint location="1200,2386" />
+      <AbsolutePoint location="1200,3450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/partyWiseExpRpt.do,success,/JSP/glForm/glpartyWiseExpReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,2995" />
+      <AbsolutePoint location="4243,2995" />
+      <AbsolutePoint location="4243,4528" />
+      <AbsolutePoint location="766,4528" />
+      <AbsolutePoint location="766,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSetlementAjax.do,ajaxJSp,/JSP/glForm/ajaxForBillCancel.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4963,2546" />
+      <AbsolutePoint location="4963,2765" />
+      <AbsolutePoint location="4808,2765" />
+      <AbsolutePoint location="4808,4175" />
+      <AbsolutePoint location="4757,4175" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glFASchedule5.do,success,/JSP/glForm/glFASchedule5.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3168,1338" />
+      <AbsolutePoint location="3168,1448" />
+      <AbsolutePoint location="293,1448" />
+      <AbsolutePoint location="293,2574" />
+      <AbsolutePoint location="350,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetLocation.do,success,/JSP/glForm/fixedAssetLocation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1177,738" />
+      <AbsolutePoint location="1177,1528" />
+      <AbsolutePoint location="449,1528" />
+      <AbsolutePoint location="449,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/incomeTaxBlockMasterAction.do,SearchPage,/JSP/glForm/incomeTaxBlockMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,694" />
+      <AbsolutePoint location="43,694" />
+      <AbsolutePoint location="43,2909" />
+      <AbsolutePoint location="2274,2909" />
+      <AbsolutePoint location="2274,2899" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stationaryAdditionMaster.do,Success,/JSP/glForm/StationaryMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3813,546" />
+      <AbsolutePoint location="3813,595" />
+      <AbsolutePoint location="2128,595" />
+      <AbsolutePoint location="2128,3514" />
+      <AbsolutePoint location="3471,3514" />
+      <AbsolutePoint location="3471,3550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforSubLedgerTrial.do,success,/subledgertrialbalance.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,2698" />
+      <AbsolutePoint location="2758,2698" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatementManualReconcile.do,success,/JSP/glForm/bankStatementManualReconcile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3496,2138" />
+      <AbsolutePoint location="3496,2242" />
+      <AbsolutePoint location="1805,2242" />
+      <AbsolutePoint location="1805,3350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGL.do,bankPage,/glBankBook.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,425" />
+      <AbsolutePoint location="515,425" />
+      <AbsolutePoint location="515,825" />
+      <AbsolutePoint location="1349,825" />
+      <AbsolutePoint location="1349,850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceiptSearch.do,ajaxJsp,/JSP/glForm/ajaxForBillReceipt.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="471,2750" />
+      <AbsolutePoint location="471,2740" />
+      <AbsolutePoint location="606,2740" />
+      <AbsolutePoint location="606,4511" />
+      <AbsolutePoint location="1655,4511" />
+      <AbsolutePoint location="1655,4501" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/faClassificationAction.do,success,/JSP/glForm/faClassificationMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="606,2017" />
+      <AbsolutePoint location="695,2017" />
+      <AbsolutePoint location="695,2365" />
+      <AbsolutePoint location="2556,2365" />
+      <AbsolutePoint location="2556,2450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBalanceSheet.do,glProfitLossReportcust,/JSP/FrmRevenueStatement.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1957,850" />
+      <AbsolutePoint location="1957,802" />
+      <AbsolutePoint location="3582,802" />
+      <AbsolutePoint location="3582,2017" />
+      <AbsolutePoint location="2541,2017" />
+      <AbsolutePoint location="2541,1799" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glDailyCashRegisterconsolidated.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4850,1941" />
+      <AbsolutePoint location="2057,1941" />
+      <AbsolutePoint location="2057,1580" />
+      <AbsolutePoint location="2023,1580" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/faDepreciationCalcAction.do,success,/JSP/glForm/faDepreciationCalc.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="552,1138" />
+      <AbsolutePoint location="552,1730" />
+      <AbsolutePoint location="1949,1730" />
+      <AbsolutePoint location="1949,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleAction.do,success,/JSP/glForm/fixedAssetSale.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2349,738" />
+      <AbsolutePoint location="2349,944" />
+      <AbsolutePoint location="1168,944" />
+      <AbsolutePoint location="1168,1574" />
+      <AbsolutePoint location="1250,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceivCapture.do,success,/JSP/glForm/glBillReceivCapturingMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4350,1738" />
+      <AbsolutePoint location="4350,1816" />
+      <AbsolutePoint location="3939,1816" />
+      <AbsolutePoint location="3939,3321" />
+      <AbsolutePoint location="1668,3321" />
+      <AbsolutePoint location="1668,3299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferAction.do,success,/JSP/glForm/fixedAssetTransferSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,2103" />
+      <AbsolutePoint location="4464,2103" />
+      <AbsolutePoint location="4464,3096" />
+      <AbsolutePoint location="3014,3096" />
+      <AbsolutePoint location="3014,3374" />
+      <AbsolutePoint location="2983,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherPrinting.do,glTrialBalanceReportMulti,/JSP/FrmVoucherPrintingReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1550,894" />
+      <AbsolutePoint location="1540,894" />
+      <AbsolutePoint location="1540,1774" />
+      <AbsolutePoint location="1550,1774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glExcelSheetUpload.do,sucesss,/JSP/glForm/glExcelUpload.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1514,2998" />
+      <AbsolutePoint location="1524,2998" />
+      <AbsolutePoint location="1524,4611" />
+      <AbsolutePoint location="4346,4611" />
+      <AbsolutePoint location="4346,4601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billCancellation.do,success,/JSP/glForm/glbillCancellationSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2386,2998" />
+      <AbsolutePoint location="2721,2998" />
+      <AbsolutePoint location="2721,4858" />
+      <AbsolutePoint location="5272,4858" />
+      <AbsolutePoint location="5272,4601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTranInBranchAuthor.do,viewPage,/JSP/glForm/fixedAssetTransferViewWithInAproval.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4259,2538" />
+      <AbsolutePoint location="4259,3031" />
+      <AbsolutePoint location="3566,3031" />
+      <AbsolutePoint location="3566,3450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billCancellation.do,newJsp,/JSP/glForm/glbillCancellation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2386,3007" />
+      <AbsolutePoint location="2716,3007" />
+      <AbsolutePoint location="2716,4792" />
+      <AbsolutePoint location="4655,4792" />
+      <AbsolutePoint location="4655,4601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetInsuranceAction.do,success,/JSP/glForm/fixedAssetInsurance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2750,1820" />
+      <AbsolutePoint location="2101,1820" />
+      <AbsolutePoint location="2101,2574" />
+      <AbsolutePoint location="2057,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glchequeStatusUpdateAction.do,searchPage,/JSP/glForm/glchequeStatus.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3469,2538" />
+      <AbsolutePoint location="3469,2759" />
+      <AbsolutePoint location="2107,2759" />
+      <AbsolutePoint location="2107,3479" />
+      <AbsolutePoint location="2032,3479" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillGeneration.do,success,/JSP/glForm/glBillGenerationSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2354,1138" />
+      <AbsolutePoint location="2354,1402" />
+      <AbsolutePoint location="558,1402" />
+      <AbsolutePoint location="558,1750" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/glForm/glTDSRateChartMasterSearch.jsp,null,/TDSRateChart.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3901,3169" />
+      <AbsolutePoint location="3918,3169" />
+      <AbsolutePoint location="3918,1444" />
+      <AbsolutePoint location="3511,1444" />
+      <AbsolutePoint location="3511,1450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reconProcessSave.do,success,/JSP/glForm/reconProcessDetail.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5377,98" />
+      <AbsolutePoint location="5448,98" />
+      <AbsolutePoint location="5448,4076" />
+      <AbsolutePoint location="2889,4076" />
+      <AbsolutePoint location="2889,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleAjaxAction.do,success,/JSP/glForm/fixedAssetSaleAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2686,694" />
+      <AbsolutePoint location="2709,694" />
+      <AbsolutePoint location="2709,1548" />
+      <AbsolutePoint location="1650,1548" />
+      <AbsolutePoint location="1650,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetInsuranceActionPopUp.do,success,/JSP/glForm/fixedAssetInsurancePopUp.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2423,1894" />
+      <AbsolutePoint location="2430,1894" />
+      <AbsolutePoint location="2430,2574" />
+      <AbsolutePoint location="2388,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryAdditionMasterDispatchAction.do,editStationary,/JSP/glForm/StationaryMasterNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5092,450" />
+      <AbsolutePoint location="5092,5" />
+      <AbsolutePoint location="1535,5" />
+      <AbsolutePoint location="1535,3665" />
+      <AbsolutePoint location="3735,3665" />
+      <AbsolutePoint location="3735,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetInsuranceAction.do,searchPage,/JSP/glForm/fixedAssetInsuranceSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2750,1806" />
+      <AbsolutePoint location="1476,1806" />
+      <AbsolutePoint location="1476,2574" />
+      <AbsolutePoint location="1550,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/hoexpenseallocationratio.do,searchPage,/JSP/glForm/glHoExpenseAllocationRatioSerch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3787,338" />
+      <AbsolutePoint location="3787,395" />
+      <AbsolutePoint location="331,395" />
+      <AbsolutePoint location="331,3650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBalanceSheet.do,glBalanceSheetReport,/JSP/FrmBalanceShhetReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2065,911" />
+      <AbsolutePoint location="2142,911" />
+      <AbsolutePoint location="2142,1774" />
+      <AbsolutePoint location="2150,1774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glParyCreationMaster.do,sucess,/JSP/glForm/glpartyCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,1099" />
+      <AbsolutePoint location="3943,1099" />
+      <AbsolutePoint location="3943,3209" />
+      <AbsolutePoint location="1641,3209" />
+      <AbsolutePoint location="1641,3199" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportForPartyWiseExp.do,success,/partyWiseExpRpt.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4850,3074" />
+      <AbsolutePoint location="4662,3074" />
+      <AbsolutePoint location="4662,3046" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionApproval.do,viewPage,/JSP/glForm/fixedAssetAdditionView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4527,938" />
+      <AbsolutePoint location="4527,3226" />
+      <AbsolutePoint location="160,3226" />
+      <AbsolutePoint location="160,3099" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGL.do,cashPage,/glCashBook.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4356,438" />
+      <AbsolutePoint location="4356,565" />
+      <AbsolutePoint location="572,565" />
+      <AbsolutePoint location="572,894" />
+      <AbsolutePoint location="650,894" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glDayBook.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3650,794" />
+      <AbsolutePoint location="3302,794" />
+      <AbsolutePoint location="3302,1540" />
+      <AbsolutePoint location="1940,1540" />
+      <AbsolutePoint location="1940,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforDayBook.do,success,/glDayBook.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,794" />
+      <AbsolutePoint location="3845,794" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTemplateCreationAjaxAction.do,ledgerDisplay,/JSP/glForm/ledgerDisplayAjex.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2994,338" />
+      <AbsolutePoint location="2994,843" />
+      <AbsolutePoint location="310,843" />
+      <AbsolutePoint location="310,1474" />
+      <AbsolutePoint location="244,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforBankReconcilation.do,success,/bankreconcilation.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,1494" />
+      <AbsolutePoint location="3877,1494" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryAdditionMasterDispatchAction.do,saveData,/JSP/glForm/StationaryMasterNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5185,498" />
+      <AbsolutePoint location="5568,498" />
+      <AbsolutePoint location="5568,3896" />
+      <AbsolutePoint location="3795,3896" />
+      <AbsolutePoint location="3795,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/faClassificationAction.do,SearchPage,/JSP/glForm/faClassificationMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="606,2034" />
+      <AbsolutePoint location="4366,2034" />
+      <AbsolutePoint location="4366,3074" />
+      <AbsolutePoint location="2696,3074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ledgerMasterAjax.do,success,/JSP/glForm/glLedgerMasterAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2063,1138" />
+      <AbsolutePoint location="2063,1730" />
+      <AbsolutePoint location="2852,1730" />
+      <AbsolutePoint location="2852,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryIssuanceDispatchAction.do,Success,/JSP/glForm/StationaryIssuanceSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4850,898" />
+      <AbsolutePoint location="4824,898" />
+      <AbsolutePoint location="4824,2295" />
+      <AbsolutePoint location="5135,2295" />
+      <AbsolutePoint location="5135,4906" />
+      <AbsolutePoint location="4075,4906" />
+      <AbsolutePoint location="4075,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/partyCreation.do,sucess,/JSP/glForm/glpartyCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4758,1094" />
+      <AbsolutePoint location="4800,1094" />
+      <AbsolutePoint location="4800,2636" />
+      <AbsolutePoint location="1641,2636" />
+      <AbsolutePoint location="1641,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetRegister.do,success,/JSP/glForm/fixedAssetRegiter.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4484,1494" />
+      <AbsolutePoint location="4494,1494" />
+      <AbsolutePoint location="4494,3328" />
+      <AbsolutePoint location="147,3328" />
+      <AbsolutePoint location="147,3299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCapture.do,success,/JSP/glForm/glBillCapturingMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3750,1650" />
+      <AbsolutePoint location="3750,1544" />
+      <AbsolutePoint location="913,1544" />
+      <AbsolutePoint location="913,3274" />
+      <AbsolutePoint location="854,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleAuthorAction.do,success,/JSP/glForm/fixedAssetSaleAuthorSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3473,650" />
+      <AbsolutePoint location="3473,633" />
+      <AbsolutePoint location="340,633" />
+      <AbsolutePoint location="340,2974" />
+      <AbsolutePoint location="350,2974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatManReconAjax.do,ajaxPage,/JSP/glForm/ajaxforManualReconcileList.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,2094" />
+      <AbsolutePoint location="3948,2094" />
+      <AbsolutePoint location="3948,3409" />
+      <AbsolutePoint location="2269,3409" />
+      <AbsolutePoint location="2269,3399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glCashBook.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="770,850" />
+      <AbsolutePoint location="770,744" />
+      <AbsolutePoint location="1183,744" />
+      <AbsolutePoint location="1183,1509" />
+      <AbsolutePoint location="1932,1509" />
+      <AbsolutePoint location="1932,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billCapturingView.do,success,/JSP/glForm/glBillCaptuirngView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1661,2138" />
+      <AbsolutePoint location="1661,2237" />
+      <AbsolutePoint location="-86,2237" />
+      <AbsolutePoint location="-86,3374" />
+      <AbsolutePoint location="50,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glGroupLedgerMaster.do,searchPage,/JSP/glForm/glGroupLedgerMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="751,50" />
+      <AbsolutePoint location="751,35" />
+      <AbsolutePoint location="3025,35" />
+      <AbsolutePoint location="3025,1974" />
+      <AbsolutePoint location="2094,1974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatementUploading.do,search,/JSP/glForm/bankStatementUploadingSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2391,2138" />
+      <AbsolutePoint location="2391,2832" />
+      <AbsolutePoint location="598,2832" />
+      <AbsolutePoint location="598,3350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceiptSearch.do,new,/JSP/glForm/glBillreceiptMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,2803" />
+      <AbsolutePoint location="304,2803" />
+      <AbsolutePoint location="304,3620" />
+      <AbsolutePoint location="456,3620" />
+      <AbsolutePoint location="456,4450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/viewVoucher.do,preVoucherView,/JSP/glForm/glVoucherView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2364,94" />
+      <AbsolutePoint location="2441,94" />
+      <AbsolutePoint location="2441,1420" />
+      <AbsolutePoint location="138,1420" />
+      <AbsolutePoint location="138,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billreceivablepayablereport.do,success,/JSP/glForm/billReceivablePayableReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,1894" />
+      <AbsolutePoint location="4547,1894" />
+      <AbsolutePoint location="4547,3240" />
+      <AbsolutePoint location="4671,3240" />
+      <AbsolutePoint location="4671,3250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryAdditionMasterDispatchAction.do,searchPage,/JSP/glForm/StationaryMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5185,528" />
+      <AbsolutePoint location="5478,528" />
+      <AbsolutePoint location="5478,3746" />
+      <AbsolutePoint location="3471,3746" />
+      <AbsolutePoint location="3471,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucheReversal.do,success,/JSP/glForm/glVoucherReversal.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1065,1838" />
+      <AbsolutePoint location="1065,2006" />
+      <AbsolutePoint location="1348,2006" />
+      <AbsolutePoint location="1348,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glcapitalizationSearch.do,searchPage,/JSP/glForm/glCapitalizedSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2088,2914" />
+      <AbsolutePoint location="3342,2914" />
+      <AbsolutePoint location="3342,4475" />
+      <AbsolutePoint location="4850,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherPrinting.do,glTrialBalanceReport,/JSP/FrmVoucherPrintingReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1662,850" />
+      <AbsolutePoint location="1662,824" />
+      <AbsolutePoint location="3590,824" />
+      <AbsolutePoint location="3590,1740" />
+      <AbsolutePoint location="1649,1740" />
+      <AbsolutePoint location="1649,1750" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bookToBookReconcile.do,success,/JSP/glForm/glBooktoBookReconcile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4985,3346" />
+      <AbsolutePoint location="4985,3436" />
+      <AbsolutePoint location="1218,3436" />
+      <AbsolutePoint location="1218,4675" />
+      <AbsolutePoint location="1194,4675" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetVoucherMapping.do,search,/budgetVoucherMappingSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,2313" />
+      <AbsolutePoint location="3636,2313" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionPopUp.do,success,/JSP/glForm/fixedAssetAdditionPopUp.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1493,1138" />
+      <AbsolutePoint location="1493,2220" />
+      <AbsolutePoint location="2640,2220" />
+      <AbsolutePoint location="2640,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accYear.do,index,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,64" />
+      <AbsolutePoint location="-85,64" />
+      <AbsolutePoint location="-85,1274" />
+      <AbsolutePoint location="50,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillGenerationAjax.do,success,/JSP/glForm/glBillGenerationAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2682,1138" />
+      <AbsolutePoint location="2682,2426" />
+      <AbsolutePoint location="751,2426" />
+      <AbsolutePoint location="751,1799" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reconProcess.do,success,/JSP/glForm/reconProcessDetail.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4963,146" />
+      <AbsolutePoint location="4963,191" />
+      <AbsolutePoint location="5508,191" />
+      <AbsolutePoint location="5508,3836" />
+      <AbsolutePoint location="2859,3836" />
+      <AbsolutePoint location="2859,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glSubLedgerAction.do,success,/JSP/glForm/glSubLedger.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1050,538" />
+      <AbsolutePoint location="1050,540" />
+      <AbsolutePoint location="2379,540" />
+      <AbsolutePoint location="2379,1517" />
+      <AbsolutePoint location="733,1517" />
+      <AbsolutePoint location="733,1499" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBudgetDefinition.do,SearchPage,/JSP/glForm/glBudgetDefinitionSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,294" />
+      <AbsolutePoint location="644,294" />
+      <AbsolutePoint location="644,2774" />
+      <AbsolutePoint location="950,2774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/glForm/glBudgetDefinition.jsp,null,/BudgetDefinitionAjaxAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1651,1350" />
+      <AbsolutePoint location="1651,1330" />
+      <AbsolutePoint location="2110,1330" />
+      <AbsolutePoint location="2110,594" />
+      <AbsolutePoint location="775,594" />
+      <AbsolutePoint location="775,538" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceivCapture.do,openModify,/JSP/glForm/glBillReceivCapturingMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4450,1694" />
+      <AbsolutePoint location="4460,1694" />
+      <AbsolutePoint location="4460,3240" />
+      <AbsolutePoint location="1668,3240" />
+      <AbsolutePoint location="1668,3250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accountingPeriodAction.do,success,/JSP/glForm/glAccountingPeriod.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2562,138" />
+      <AbsolutePoint location="2562,443" />
+      <AbsolutePoint location="609,443" />
+      <AbsolutePoint location="609,1374" />
+      <AbsolutePoint location="549,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillSettlementAjax.do,ajaxPage,/JSP/glForm/ajaxforBillSettlement.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,1894" />
+      <AbsolutePoint location="3946,1894" />
+      <AbsolutePoint location="3946,3274" />
+      <AbsolutePoint location="3857,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelementAuthor.do,searchPage,/JSP/glForm/glBillSettlementAuthorSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4400,1938" />
+      <AbsolutePoint location="4400,2965" />
+      <AbsolutePoint location="4073,2965" />
+      <AbsolutePoint location="4073,3250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCapture.do,openModify,/JSP/glForm/glBillCapturingMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3850,1694" />
+      <AbsolutePoint location="3860,1694" />
+      <AbsolutePoint location="3860,1747" />
+      <AbsolutePoint location="636,1747" />
+      <AbsolutePoint location="636,3274" />
+      <AbsolutePoint location="650,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/subledgertrialbalance.do,success,/JSP/glForm/subLedgerTrialbalancereport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2732,2746" />
+      <AbsolutePoint location="2732,4327" />
+      <AbsolutePoint location="3784,4327" />
+      <AbsolutePoint location="3784,4350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chargePopSaveAction.do,success,/JSP/glForm/chargeDiscriptionPopUp.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2368,338" />
+      <AbsolutePoint location="2368,1380" />
+      <AbsolutePoint location="2450,1380" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAddition.do,forwardApproval,/fixedAssetAdditionApproval.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1966,650" />
+      <AbsolutePoint location="1966,641" />
+      <AbsolutePoint location="4404,641" />
+      <AbsolutePoint location="4404,850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glcapitalizationSearch.do,ajaxPage,/JSP/glForm/ajaxForFaCapitalization.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2088,2938" />
+      <AbsolutePoint location="2426,2938" />
+      <AbsolutePoint location="2426,4575" />
+      <AbsolutePoint location="289,4575" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templeteCreationAction.do,success,/JSP/glForm/glTempleteCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1363,338" />
+      <AbsolutePoint location="1363,341" />
+      <AbsolutePoint location="2374,341" />
+      <AbsolutePoint location="2374,1374" />
+      <AbsolutePoint location="2351,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/booktobookReconAjax.do,ajaxPage,/JSP/glForm/ajaxforBooktoBooklReconcileList.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4985,3546" />
+      <AbsolutePoint location="4985,4046" />
+      <AbsolutePoint location="1395,4046" />
+      <AbsolutePoint location="1395,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryIssuanceDispatchAction.do,newPage,/JSP/glForm/StationaryIssuanceNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4999,946" />
+      <AbsolutePoint location="4999,1021" />
+      <AbsolutePoint location="933,1021" />
+      <AbsolutePoint location="933,4106" />
+      <AbsolutePoint location="4700,4106" />
+      <AbsolutePoint location="4700,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billreceivablereport.do,success,/JSP/glForm/billRecevableReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,2294" />
+      <AbsolutePoint location="4544,2294" />
+      <AbsolutePoint location="4544,3509" />
+      <AbsolutePoint location="1651,3509" />
+      <AbsolutePoint location="1651,3499" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatementAutoReconcile.do,successsearch,/JSP/glForm/bankStatementAutoReconcile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2891,2050" />
+      <AbsolutePoint location="2891,2040" />
+      <AbsolutePoint location="1234,2040" />
+      <AbsolutePoint location="1234,3374" />
+      <AbsolutePoint location="1250,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/groupLedgerAjaxAction.do,gCode,/JSP/glForm/groupCode.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1092,50" />
+      <AbsolutePoint location="1092,-55" />
+      <AbsolutePoint location="3320,-55" />
+      <AbsolutePoint location="3320,1165" />
+      <AbsolutePoint location="1330,1165" />
+      <AbsolutePoint location="1330,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherEntry.do,searchPage,/JSP/glForm/GLVoucherEntrySearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1659,138" />
+      <AbsolutePoint location="1659,243" />
+      <AbsolutePoint location="2101,243" />
+      <AbsolutePoint location="2101,1720" />
+      <AbsolutePoint location="1359,1720" />
+      <AbsolutePoint location="1359,1750" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBudgetDefinition.do,success,/JSP/glForm/glBudgetDefinition.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="760,338" />
+      <AbsolutePoint location="760,364" />
+      <AbsolutePoint location="595,364" />
+      <AbsolutePoint location="595,1346" />
+      <AbsolutePoint location="1647,1346" />
+      <AbsolutePoint location="1647,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferInBranchAction.do,success,/JSP/glForm/fixedAssetTranInBranchSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3817,2538" />
+      <AbsolutePoint location="3817,3053" />
+      <AbsolutePoint location="2998,3053" />
+      <AbsolutePoint location="2998,3450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetLedgerMappingAction.do,success,/JSP/glForm/budgetLedgarMapping.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1498,494" />
+      <AbsolutePoint location="1507,494" />
+      <AbsolutePoint location="1507,940" />
+      <AbsolutePoint location="1172,940" />
+      <AbsolutePoint location="1172,1474" />
+      <AbsolutePoint location="1250,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceiptSearch.do,saveReceive,/JSP/glForm/glReceivableForAllocation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,2798" />
+      <AbsolutePoint location="298,2798" />
+      <AbsolutePoint location="298,3513" />
+      <AbsolutePoint location="1169,3513" />
+      <AbsolutePoint location="1169,4450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetVarianceReport.do,success,/JSP/glForm/glBudgetVarianceReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,1894" />
+      <AbsolutePoint location="2670,1894" />
+      <AbsolutePoint location="2670,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stationaryIssuanceMaster.do,Success,/JSP/glForm/StationaryIssuanceSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5165,746" />
+      <AbsolutePoint location="5165,991" />
+      <AbsolutePoint location="4509,991" />
+      <AbsolutePoint location="4509,3575" />
+      <AbsolutePoint location="4201,3575" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferInBranchAction.do,newPage,/JSP/glForm/FixedAssetTransferWithinBranch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3823,2538" />
+      <AbsolutePoint location="3823,3140" />
+      <AbsolutePoint location="2393,3140" />
+      <AbsolutePoint location="2393,3450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/reports/glLedgerAccountWise.jsp,null,/LedgerAccountWise.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,1374" />
+      <AbsolutePoint location="1244,1374" />
+      <AbsolutePoint location="1244,240" />
+      <AbsolutePoint location="474,240" />
+      <AbsolutePoint location="474,250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillPayableAuthor.do,authorPage,/JSP/glForm/glBillPayableCapturingAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4783,1694" />
+      <AbsolutePoint location="4841,1694" />
+      <AbsolutePoint location="4841,2439" />
+      <AbsolutePoint location="1800,2439" />
+      <AbsolutePoint location="1800,3274" />
+      <AbsolutePoint location="1850,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glSubLedgerReport.do,success,/JSP/glForm/glSubLedgerReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2687,894" />
+      <AbsolutePoint location="2719,894" />
+      <AbsolutePoint location="2719,1640" />
+      <AbsolutePoint location="1350,1640" />
+      <AbsolutePoint location="1350,1650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelement.do,viewAllocate,/JSP/glForm/glViewpayableForAllocation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3742,1938" />
+      <AbsolutePoint location="3742,2171" />
+      <AbsolutePoint location="2406,2171" />
+      <AbsolutePoint location="2406,3274" />
+      <AbsolutePoint location="2450,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelement.do,searchPage,/JSP/glForm/glBillSettlementSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3768,1938" />
+      <AbsolutePoint location="3768,2408" />
+      <AbsolutePoint location="3628,2408" />
+      <AbsolutePoint location="3628,3274" />
+      <AbsolutePoint location="3563,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/GlknockOffMaker.do,search,/JSP/glForm/glKnockOffMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5268,2746" />
+      <AbsolutePoint location="5268,2999" />
+      <AbsolutePoint location="4830,2999" />
+      <AbsolutePoint location="4830,3474" />
+      <AbsolutePoint location="4772,3474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/customisedReport.do,success,/JSP/glForm/customisedReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,694" />
+      <AbsolutePoint location="3045,694" />
+      <AbsolutePoint location="3045,2509" />
+      <AbsolutePoint location="2247,2509" />
+      <AbsolutePoint location="2247,2499" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatementUploading.do,success,/JSP/glForm/bankStatementUploading.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2280,2138" />
+      <AbsolutePoint location="2280,2206" />
+      <AbsolutePoint location="1218,2206" />
+      <AbsolutePoint location="1218,3374" />
+      <AbsolutePoint location="1178,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTemplateCreationAjaxAction.do,templateCteationAjax,/JSP/glForm/glTemplateCreationAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3007,338" />
+      <AbsolutePoint location="3007,375" />
+      <AbsolutePoint location="3640,375" />
+      <AbsolutePoint location="3640,1374" />
+      <AbsolutePoint location="2973,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glLedgerReport.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1085,938" />
+      <AbsolutePoint location="1085,1243" />
+      <AbsolutePoint location="2069,1243" />
+      <AbsolutePoint location="2069,1568" />
+      <AbsolutePoint location="2023,1568" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherAjaxAction.do,new,/JSP/glForm/new.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2064,94" />
+      <AbsolutePoint location="2146,94" />
+      <AbsolutePoint location="2146,1274" />
+      <AbsolutePoint location="2150,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBudgetMaster.do,success,/JSP/glForm/glBudgetMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2150,494" />
+      <AbsolutePoint location="1847,494" />
+      <AbsolutePoint location="1847,1474" />
+      <AbsolutePoint location="1850,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelementAuthor.do,success,/JSP/glForm/glBillSettlementViewAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4422,1938" />
+      <AbsolutePoint location="4422,2920" />
+      <AbsolutePoint location="4542,2920" />
+      <AbsolutePoint location="4542,3274" />
+      <AbsolutePoint location="4485,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetLedgerMappingAjaxAction.do,sucessAjax,/JSP/glForm/budgetLedgarMappingAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1778,538" />
+      <AbsolutePoint location="1778,1149" />
+      <AbsolutePoint location="1483,1149" />
+      <AbsolutePoint location="1483,1474" />
+      <AbsolutePoint location="1550,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glMaster.do,searchPage,/JSP/glForm/glLedgerMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="577,94" />
+      <AbsolutePoint location="633,94" />
+      <AbsolutePoint location="633,795" />
+      <AbsolutePoint location="1805,795" />
+      <AbsolutePoint location="1805,1974" />
+      <AbsolutePoint location="1465,1974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillGeneration.do,new,/JSP/glForm/glBillGeneration.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2360,1138" />
+      <AbsolutePoint location="2360,1440" />
+      <AbsolutePoint location="257,1440" />
+      <AbsolutePoint location="257,1774" />
+      <AbsolutePoint location="231,1774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chequeDetail.do,success,/JSP/glForm/chequeDetail.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1962,2338" />
+      <AbsolutePoint location="1962,2487" />
+      <AbsolutePoint location="310,2487" />
+      <AbsolutePoint location="310,3474" />
+      <AbsolutePoint location="350,3474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAddition.do,success,/JSP/glForm/fixedAssetAddition.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1850,694" />
+      <AbsolutePoint location="1838,694" />
+      <AbsolutePoint location="1838,1609" />
+      <AbsolutePoint location="1049,1609" />
+      <AbsolutePoint location="1049,1599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBudgetMaster.do,search,/JSP/glForm/glBudgetMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2254,450" />
+      <AbsolutePoint location="2254,440" />
+      <AbsolutePoint location="640,440" />
+      <AbsolutePoint location="640,2874" />
+      <AbsolutePoint location="650,2874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/branchBalanceSheet.do,success,/JSP/glForm/branchWiseBalanceSheetReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4099,2746" />
+      <AbsolutePoint location="4099,2756" />
+      <AbsolutePoint location="4545,2756" />
+      <AbsolutePoint location="4545,4375" />
+      <AbsolutePoint location="4535,4375" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/glForm/glGroupLedgerMaster.jsp,null,/groupLedgerAjaxAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1151,1250" />
+      <AbsolutePoint location="1151,765" />
+      <AbsolutePoint location="455,765" />
+      <AbsolutePoint location="455,365" />
+      <AbsolutePoint location="331,365" />
+      <AbsolutePoint location="331,5" />
+      <AbsolutePoint location="1062,5" />
+      <AbsolutePoint location="1062,50" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templateProductMapping.do,viewTemplate,/JSP/glForm/glTempleteCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3290,1138" />
+      <AbsolutePoint location="3290,1347" />
+      <AbsolutePoint location="2250,1347" />
+      <AbsolutePoint location="2250,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billCancelAuthor.do,authorSuccess,/JSP/glForm/glbillCancellationAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3004,3046" />
+      <AbsolutePoint location="3004,3414" />
+      <AbsolutePoint location="566,3414" />
+      <AbsolutePoint location="566,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/recivePaySearch.do,openNew,/JSP/glForm/recivePayHeadMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3452,1338" />
+      <AbsolutePoint location="3452,1440" />
+      <AbsolutePoint location="2447,1440" />
+      <AbsolutePoint location="2447,3180" />
+      <AbsolutePoint location="2363,3180" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleSearchAction.do,success,/JSP/glForm/fixedAssetSaleSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4765,638" />
+      <AbsolutePoint location="4765,1231" />
+      <AbsolutePoint location="4542,1231" />
+      <AbsolutePoint location="4542,2874" />
+      <AbsolutePoint location="4550,2874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glSubLedgerAction.do,searchPage,/JSP/glForm/glSubLedgerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,489" />
+      <AbsolutePoint location="937,489" />
+      <AbsolutePoint location="937,2174" />
+      <AbsolutePoint location="1850,2174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCapture.do,searchPage,/JSP/glForm/glBillCapturingSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3750,1738" />
+      <AbsolutePoint location="3750,1746" />
+      <AbsolutePoint location="335,1746" />
+      <AbsolutePoint location="335,3274" />
+      <AbsolutePoint location="350,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glMaster.do,failure,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="463,138" />
+      <AbsolutePoint location="463,191" />
+      <AbsolutePoint location="1199,191" />
+      <AbsolutePoint location="1199,1165" />
+      <AbsolutePoint location="88,1165" />
+      <AbsolutePoint location="88,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBalanceSheet.do,success,/JSP/glForm/glBalanceSheet.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1850,889" />
+      <AbsolutePoint location="1841,889" />
+      <AbsolutePoint location="1841,1715" />
+      <AbsolutePoint location="1045,1715" />
+      <AbsolutePoint location="1045,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/LedgerAccountWise.do,reportLAW,/JSP/reports/reportLedgerAccountwise.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="474,338" />
+      <AbsolutePoint location="474,586" />
+      <AbsolutePoint location="1783,586" />
+      <AbsolutePoint location="1783,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucherAuthorizationWithLimit.do,success,/JSP/glForm/voucherAuthorization.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5375,1246" />
+      <AbsolutePoint location="5375,1620" />
+      <AbsolutePoint location="1155,1620" />
+      <AbsolutePoint location="1155,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTrialBalance.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="453,938" />
+      <AbsolutePoint location="453,1042" />
+      <AbsolutePoint location="585,1042" />
+      <AbsolutePoint location="585,1505" />
+      <AbsolutePoint location="1936,1505" />
+      <AbsolutePoint location="1936,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/budgetVoucherMapping.do,update,/budgetVoucherMappingSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,2277" />
+      <AbsolutePoint location="3636,2277" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAccount.do,success,/JSP/glForm/fixedAssetAccount.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="766,738" />
+      <AbsolutePoint location="766,744" />
+      <AbsolutePoint location="298,744" />
+      <AbsolutePoint location="298,1574" />
+      <AbsolutePoint location="248,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelementAuthor.do,viewOnAllocate,/JSP/glForm/glallocatedPayable.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4369,1850" />
+      <AbsolutePoint location="4369,1768" />
+      <AbsolutePoint location="5427,1768" />
+      <AbsolutePoint location="5427,4275" />
+      <AbsolutePoint location="1167,4275" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryIssuanceDispatchAction.do,saveData,/JSP/glForm/StationaryIssuanceNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5104,946" />
+      <AbsolutePoint location="5104,1395" />
+      <AbsolutePoint location="5410,1395" />
+      <AbsolutePoint location="5410,3575" />
+      <AbsolutePoint location="4790,3575" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforFixedAssetRegister.do,success,/JSP/glForm/fixedAssetRegiter.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4785,1538" />
+      <AbsolutePoint location="4785,1846" />
+      <AbsolutePoint location="-56,1846" />
+      <AbsolutePoint location="-56,3274" />
+      <AbsolutePoint location="50,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glDailyCashRegister.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5259,1546" />
+      <AbsolutePoint location="5259,1644" />
+      <AbsolutePoint location="1936,1644" />
+      <AbsolutePoint location="1936,1599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankReconStatement.do,success,/JSP/glForm/bankReconStatementReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4238,2946" />
+      <AbsolutePoint location="4238,4575" />
+      <AbsolutePoint location="3916,4575" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceiptSearch.do,search,/JSP/glForm/glBilReceiptMakerSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="592,2798" />
+      <AbsolutePoint location="602,2798" />
+      <AbsolutePoint location="602,4475" />
+      <AbsolutePoint location="650,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionApproval.do,successApprov,/JSP/glForm/fixedAssetAdditionAproval.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,913" />
+      <AbsolutePoint location="3924,913" />
+      <AbsolutePoint location="3924,3120" />
+      <AbsolutePoint location="467,3120" />
+      <AbsolutePoint location="467,3099" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetCategoryAction.do,SearchPage,/JSP/glForm/fixedAssetCategoryMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2569,538" />
+      <AbsolutePoint location="2569,548" />
+      <AbsolutePoint location="3935,548" />
+      <AbsolutePoint location="3935,2821" />
+      <AbsolutePoint location="1385,2821" />
+      <AbsolutePoint location="1385,2850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glGroupLedgerMaster.do,success,/JSP/glForm/glGroupLedgerMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="853,94" />
+      <AbsolutePoint location="933,94" />
+      <AbsolutePoint location="933,991" />
+      <AbsolutePoint location="1055,991" />
+      <AbsolutePoint location="1055,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherPrinting.do,success,/JSP/glForm/glVoucherPrinting.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1662,850" />
+      <AbsolutePoint location="1662,840" />
+      <AbsolutePoint location="45,840" />
+      <AbsolutePoint location="45,1674" />
+      <AbsolutePoint location="50,1674" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glcapitalizationSearch.do,new,/JSP/glForm/glCapitalizedMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2088,2932" />
+      <AbsolutePoint location="3324,2932" />
+      <AbsolutePoint location="3324,4475" />
+      <AbsolutePoint location="3269,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/closingYearAction.do,success,/JSP/glForm/glYearClosing.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2848,138" />
+      <AbsolutePoint location="2848,142" />
+      <AbsolutePoint location="615,142" />
+      <AbsolutePoint location="615,1374" />
+      <AbsolutePoint location="650,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceivAuthor.do,authorPage,/JSP/glForm/glBillReceivCapturingAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1783,1894" />
+      <AbsolutePoint location="2146,1894" />
+      <AbsolutePoint location="2146,3274" />
+      <AbsolutePoint location="2150,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/rejectVoucher.do,success,/JSP/glForm/viewVoucher.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1980,3646" />
+      <AbsolutePoint location="1980,3656" />
+      <AbsolutePoint location="2745,3656" />
+      <AbsolutePoint location="2745,1274" />
+      <AbsolutePoint location="2750,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/LedgerAccountWise.do,success,/JSP/reports/glLedgerAccountWise.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="598,294" />
+      <AbsolutePoint location="608,294" />
+      <AbsolutePoint location="608,1412" />
+      <AbsolutePoint location="1357,1412" />
+      <AbsolutePoint location="1357,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucherBehindAuthorization.do,success,/JSP/glForm/voucherAuthorization.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3305,494" />
+      <AbsolutePoint location="3342,494" />
+      <AbsolutePoint location="3342,1430" />
+      <AbsolutePoint location="1055,1430" />
+      <AbsolutePoint location="1055,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankToBankReconcile.do,success,/JSP/glForm/glBankToBankReconcile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="784,3646" />
+      <AbsolutePoint location="784,4076" />
+      <AbsolutePoint location="2074,4076" />
+      <AbsolutePoint location="2074,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAccount.do,SearchPage,/JSP/glForm/fixedAssetAccountMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,694" />
+      <AbsolutePoint location="642,694" />
+      <AbsolutePoint location="642,2840" />
+      <AbsolutePoint location="2882,2840" />
+      <AbsolutePoint location="2882,2850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceiptSearch.do,viewReceive,/JSP/glForm/glViewReceivable.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="592,2809" />
+      <AbsolutePoint location="2429,2809" />
+      <AbsolutePoint location="2429,4376" />
+      <AbsolutePoint location="1954,4376" />
+      <AbsolutePoint location="1954,4450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforBranchBalanceSheet.do,success,/branchBalanceSheet.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,2698" />
+      <AbsolutePoint location="4248,2698" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chargePopupAction.do,success,/JSP/glForm/chargeDiscriptionPopUp.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1679,338" />
+      <AbsolutePoint location="1679,349" />
+      <AbsolutePoint location="2414,349" />
+      <AbsolutePoint location="2414,1374" />
+      <AbsolutePoint location="2450,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templateCreationpopAjaxAction.do,chargeDisplay,/JSP/glForm/chargeDisplayAjex.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="303,538" />
+      <AbsolutePoint location="303,1469" />
+      <AbsolutePoint location="350,1469" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/TDSRateChart.do,success,/JSP/glForm/glTDSRateChartMasterNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3455,1538" />
+      <AbsolutePoint location="3455,1973" />
+      <AbsolutePoint location="4383,1973" />
+      <AbsolutePoint location="4383,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillGenerationAuthor.do,new,/JSP/glForm/glBillGeneration.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2976,1138" />
+      <AbsolutePoint location="2976,1745" />
+      <AbsolutePoint location="140,1745" />
+      <AbsolutePoint location="140,1750" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loanWiseTrailBalance.do,success,/JSP/glForm/loanWiseTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4492,1338" />
+      <AbsolutePoint location="4492,3019" />
+      <AbsolutePoint location="3454,3019" />
+      <AbsolutePoint location="3454,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillReceiptAuthor.do,searchPage,/JSP/glForm/glBillReceiptAuthorSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1073,2946" />
+      <AbsolutePoint location="1073,3247" />
+      <AbsolutePoint location="2446,3247" />
+      <AbsolutePoint location="2446,4475" />
+      <AbsolutePoint location="2450,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/BudgetDefinitionAjaxAction.do,fiscalAjax,/JSP/glForm/glFiscalAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="771,538" />
+      <AbsolutePoint location="771,646" />
+      <AbsolutePoint location="3048,646" />
+      <AbsolutePoint location="3048,2774" />
+      <AbsolutePoint location="3650,2774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetDepartment.do,success,/JSP/glForm/fixedAssetDepartment.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1375,738" />
+      <AbsolutePoint location="1375,748" />
+      <AbsolutePoint location="646,748" />
+      <AbsolutePoint location="646,1574" />
+      <AbsolutePoint location="650,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glParyCreationMaster.do,searchPage,/JSP/glForm/glPartyCreationSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,1094" />
+      <AbsolutePoint location="3930,1094" />
+      <AbsolutePoint location="3930,3238" />
+      <AbsolutePoint location="1958,3238" />
+      <AbsolutePoint location="1958,3199" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/GlknockOffAuthor.do,successView,/JSP/glForm/glKnockOffMakerView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,2798" />
+      <AbsolutePoint location="5,2798" />
+      <AbsolutePoint location="5,4416" />
+      <AbsolutePoint location="5268,4416" />
+      <AbsolutePoint location="5268,4401" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/saleDiscardReport.do,success,/JSP/glForm/saleDiscardReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1771,2294" />
+      <AbsolutePoint location="1793,2294" />
+      <AbsolutePoint location="1793,3340" />
+      <AbsolutePoint location="4647,3340" />
+      <AbsolutePoint location="4647,3350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templeteCreationAction.do,searchPage,/JSP/glForm/glTempleteCreationSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1363,250" />
+      <AbsolutePoint location="1363,238" />
+      <AbsolutePoint location="348,238" />
+      <AbsolutePoint location="348,2174" />
+      <AbsolutePoint location="350,2174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accYear.do,success,/JSP/glForm/accountingYear.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,124" />
+      <AbsolutePoint location="35,124" />
+      <AbsolutePoint location="35,1225" />
+      <AbsolutePoint location="441,1225" />
+      <AbsolutePoint location="441,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="JSP/glForm/glSubLedger.jsp,null,/glSubLedgerAction.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,1474" />
+      <AbsolutePoint location="941,1474" />
+      <AbsolutePoint location="941,499" />
+      <AbsolutePoint location="950,499" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glMaster.do,success,/JSP/glForm/glLedgerMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="463,50" />
+      <AbsolutePoint location="463,-85" />
+      <AbsolutePoint location="2704,-85" />
+      <AbsolutePoint location="2704,1225" />
+      <AbsolutePoint location="741,1225" />
+      <AbsolutePoint location="741,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templateProductMapping.do,searchPage,/JSP/glForm/glTemplateProductMappingSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3171,1138" />
+      <AbsolutePoint location="3171,1242" />
+      <AbsolutePoint location="2703,1242" />
+      <AbsolutePoint location="2703,2474" />
+      <AbsolutePoint location="2750,2474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTrialBalance.do,glTrialBalanceReport,/JSP/FrmTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,894" />
+      <AbsolutePoint location="345,894" />
+      <AbsolutePoint location="345,2241" />
+      <AbsolutePoint location="3123,2241" />
+      <AbsolutePoint location="3123,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryIssuanceDispatchAction.do,editMode,/JSP/glForm/StationaryIssuanceNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4969,946" />
+      <AbsolutePoint location="4969,961" />
+      <AbsolutePoint location="633,961" />
+      <AbsolutePoint location="633,3926" />
+      <AbsolutePoint location="4670,3926" />
+      <AbsolutePoint location="4670,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetClassAjaxAction.do,FAAjexSuccess,/JSP/glForm/fixedAssetAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2870,538" />
+      <AbsolutePoint location="2870,540" />
+      <AbsolutePoint location="3298,540" />
+      <AbsolutePoint location="3298,1413" />
+      <AbsolutePoint location="2540,1413" />
+      <AbsolutePoint location="2540,1450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelement.do,viewPable,/JSP/glForm/glViewPayableForSettlement.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3762,1938" />
+      <AbsolutePoint location="3762,2365" />
+      <AbsolutePoint location="3035,2365" />
+      <AbsolutePoint location="3035,3274" />
+      <AbsolutePoint location="3050,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accountingListAction.do,accListReport,/accountingListAction.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3461,1138" />
+      <AbsolutePoint location="3461,1165" />
+      <AbsolutePoint location="3563,1165" />
+      <AbsolutePoint location="3563,1094" />
+      <AbsolutePoint location="3560,1094" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionApproval.do,viewAssetPage,/JSP/glForm/fixedAssetAdditionPopUpView.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4404,938" />
+      <AbsolutePoint location="4404,948" />
+      <AbsolutePoint location="638,948" />
+      <AbsolutePoint location="638,3074" />
+      <AbsolutePoint location="650,3074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferAction.do,newPage,/JSP/glForm/fixedAssetTransfer.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,2094" />
+      <AbsolutePoint location="4307,2094" />
+      <AbsolutePoint location="4307,2809" />
+      <AbsolutePoint location="2728,2809" />
+      <AbsolutePoint location="2728,3374" />
+      <AbsolutePoint location="2650,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleAuthorAction.do,viewPage,/JSP/glForm/fixedAssetSaleAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3573,738" />
+      <AbsolutePoint location="3573,1606" />
+      <AbsolutePoint location="41,1606" />
+      <AbsolutePoint location="41,2974" />
+      <AbsolutePoint location="50,2974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucherAuthorization.do,success,/JSP/glForm/voucherAuthorization.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="172,250" />
+      <AbsolutePoint location="172,245" />
+      <AbsolutePoint location="1217,245" />
+      <AbsolutePoint location="1217,1374" />
+      <AbsolutePoint location="1161,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTemplateCreationAjaxAction.do,new,/JSP/glForm/new.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2880,338" />
+      <AbsolutePoint location="2880,365" />
+      <AbsolutePoint location="2420,365" />
+      <AbsolutePoint location="2420,1274" />
+      <AbsolutePoint location="2278,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/hoexpenseallocationratio.do,success,/JSP/glForm/glHoExpenseAllocationRatio.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3650,294" />
+      <AbsolutePoint location="3618,294" />
+      <AbsolutePoint location="3618,1195" />
+      <AbsolutePoint location="881,1195" />
+      <AbsolutePoint location="881,2674" />
+      <AbsolutePoint location="591,2674" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGLDailyCashRegisterConsolidated.do,success,/glDailyCashRegister.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5205,2050" />
+      <AbsolutePoint location="5205,1546" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glTemplateCreationAjaxAction.do,success,/JSP/glForm/glTempleteCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2750,294" />
+      <AbsolutePoint location="2739,294" />
+      <AbsolutePoint location="2739,1409" />
+      <AbsolutePoint location="2255,1409" />
+      <AbsolutePoint location="2255,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTranInBranchAuthor.do,success,/JSP/glForm/fixedAssetTranInBranchAprovSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4261,2494" />
+      <AbsolutePoint location="4283,2494" />
+      <AbsolutePoint location="4283,3005" />
+      <AbsolutePoint location="4203,3005" />
+      <AbsolutePoint location="4203,3450" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGLDailyCashRegister.do,success,/glDailyCashRegister.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5150,1698" />
+      <AbsolutePoint location="5269,1698" />
+      <AbsolutePoint location="5269,1546" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/recivePaySearch.do,searchPage,/JSP/glForm/recivePayMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3458,1338" />
+      <AbsolutePoint location="3458,1388" />
+      <AbsolutePoint location="3908,1388" />
+      <AbsolutePoint location="3908,3130" />
+      <AbsolutePoint location="2560,3130" />
+      <AbsolutePoint location="2560,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherEntry.do,success,/JSP/glForm/GLVoucherEntry.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1550,94" />
+      <AbsolutePoint location="1517,94" />
+      <AbsolutePoint location="1517,1141" />
+      <AbsolutePoint location="1942,1141" />
+      <AbsolutePoint location="1942,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetSaleSearchAction.do,editPage,/JSP/glForm/fixedAssetSale.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,594" />
+      <AbsolutePoint location="4217,594" />
+      <AbsolutePoint location="4217,1634" />
+      <AbsolutePoint location="1339,1634" />
+      <AbsolutePoint location="1339,1599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferAuthorAction.do,viewPage,/JSP/glForm/fixedAssetTransferViewAproval.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="608,2338" />
+      <AbsolutePoint location="608,3330" />
+      <AbsolutePoint location="3179,3330" />
+      <AbsolutePoint location="3179,3350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glFASchedule.do,success,/JSP/glForm/glFASchedule5.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,1494" />
+      <AbsolutePoint location="3043,1494" />
+      <AbsolutePoint location="3043,2520" />
+      <AbsolutePoint location="439,2520" />
+      <AbsolutePoint location="439,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankStatementAutoReconcile.do,success,/JSP/glForm/bankStatementAutoReconcile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3022,2138" />
+      <AbsolutePoint location="3022,2948" />
+      <AbsolutePoint location="1516,2948" />
+      <AbsolutePoint location="1516,3374" />
+      <AbsolutePoint location="1499,3374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glDepreciationDetail.do,success,/JSP/glForm/depreciationDetail.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1208,2338" />
+      <AbsolutePoint location="1208,4228" />
+      <AbsolutePoint location="4347,4228" />
+      <AbsolutePoint location="4347,3399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/viewVoucher.do,success,/JSP/glForm/viewVoucher.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2364,104" />
+      <AbsolutePoint location="2430,104" />
+      <AbsolutePoint location="2430,1320" />
+      <AbsolutePoint location="2834,1320" />
+      <AbsolutePoint location="2834,1299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryAdditionMasterDispatchAction.do,newPage,/JSP/glForm/StationaryMasterNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5017,450" />
+      <AbsolutePoint location="5017,161" />
+      <AbsolutePoint location="-25,161" />
+      <AbsolutePoint location="-25,3776" />
+      <AbsolutePoint location="3765,3776" />
+      <AbsolutePoint location="3765,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceivCapture.do,searchPagerece,/JSP/glForm/glBillReceivCapturingSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4350,1738" />
+      <AbsolutePoint location="4350,1748" />
+      <AbsolutePoint location="1242,1748" />
+      <AbsolutePoint location="1242,3274" />
+      <AbsolutePoint location="1250,3274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCapture.do,advPopUp,/JSP/glForm/glAdvancePaymentPopup.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3750,1738" />
+      <AbsolutePoint location="3750,1792" />
+      <AbsolutePoint location="4532,1792" />
+      <AbsolutePoint location="4532,4175" />
+      <AbsolutePoint location="2706,4175" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillReceiptAuthor.do,viewPage,/JSP/glForm/glViewBillReceipt.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1078,2946" />
+      <AbsolutePoint location="1078,3077" />
+      <AbsolutePoint location="2434,3077" />
+      <AbsolutePoint location="2434,4475" />
+      <AbsolutePoint location="2358,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforBankReconStatement.do,success,/bankReconStatement.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4850,2934" />
+      <AbsolutePoint location="4256,2934" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGL.do,subLedgerPage,/glSubLedgerReport.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4250,395" />
+      <AbsolutePoint location="4151,395" />
+      <AbsolutePoint location="4151,895" />
+      <AbsolutePoint location="3455,895" />
+      <AbsolutePoint location="3455,765" />
+      <AbsolutePoint location="2568,765" />
+      <AbsolutePoint location="2568,850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBankBook.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,894" />
+      <AbsolutePoint location="1247,894" />
+      <AbsolutePoint location="1247,1546" />
+      <AbsolutePoint location="1936,1546" />
+      <AbsolutePoint location="1936,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ledgerMasterAjaxAction.do,success,/JSP/glLedgerMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,294" />
+      <AbsolutePoint location="945,294" />
+      <AbsolutePoint location="945,1344" />
+      <AbsolutePoint location="1923,1344" />
+      <AbsolutePoint location="1923,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankreconcilation.do,success,/JSP/glForm/bankreconcilation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3763,1538" />
+      <AbsolutePoint location="3763,1576" />
+      <AbsolutePoint location="4848,1576" />
+      <AbsolutePoint location="4848,3174" />
+      <AbsolutePoint location="4741,3174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templateCreationpopAjaxAction.do,success,/JSP/glForm/glTempleteCreation.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,494" />
+      <AbsolutePoint location="47,494" />
+      <AbsolutePoint location="47,1422" />
+      <AbsolutePoint location="2245,1422" />
+      <AbsolutePoint location="2245,1399" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billreceivablepayablevoucher.do,authorPage,/JSP/glForm/GlBillRcevablePayableVoucher.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3476,50" />
+      <AbsolutePoint location="3476,-85" />
+      <AbsolutePoint location="2734,-85" />
+      <AbsolutePoint location="2734,2574" />
+      <AbsolutePoint location="3050,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherEntrySearch.do,searchPage,/glVoucherEntry.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4969,1050" />
+      <AbsolutePoint location="4969,1043" />
+      <AbsolutePoint location="907,1043" />
+      <AbsolutePoint location="907,-19" />
+      <AbsolutePoint location="1659,-19" />
+      <AbsolutePoint location="1659,50" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/TDSRateChart.do,searchPage,/JSP/glForm/glTDSRateChartMasterSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3501,1450" />
+      <AbsolutePoint location="3501,1438" />
+      <AbsolutePoint location="3928,1438" />
+      <AbsolutePoint location="3928,3179" />
+      <AbsolutePoint location="3901,3179" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucherAuthorization.do,index,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="172,338" />
+      <AbsolutePoint location="172,341" />
+      <AbsolutePoint location="590,341" />
+      <AbsolutePoint location="590,1195" />
+      <AbsolutePoint location="106,1195" />
+      <AbsolutePoint location="106,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillGenerationAuthor.do,success,/JSP/glForm/glBillGenerationSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2995,1138" />
+      <AbsolutePoint location="2995,1841" />
+      <AbsolutePoint location="457,1841" />
+      <AbsolutePoint location="457,1799" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionAjaxAction.do,success,/JSP/glForm/fixedAssetAdditionAjax.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3000,938" />
+      <AbsolutePoint location="3000,1705" />
+      <AbsolutePoint location="1660,1705" />
+      <AbsolutePoint location="1660,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glcapitalizationAuthor.do,authorPage,/JSP/glForm/glCapitalizedAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3350,2898" />
+      <AbsolutePoint location="3340,2898" />
+      <AbsolutePoint location="3340,4575" />
+      <AbsolutePoint location="3350,4575" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillReceiptAuthor.do,viewOnAllocate,/JSP/glForm/glallocatedPayable.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,2898" />
+      <AbsolutePoint location="940,2898" />
+      <AbsolutePoint location="940,4275" />
+      <AbsolutePoint location="950,4275" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reconciliationReport.do,success,/JSP/glForm/reconciliationReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4679,250" />
+      <AbsolutePoint location="4679,221" />
+      <AbsolutePoint location="5538,221" />
+      <AbsolutePoint location="5538,3414" />
+      <AbsolutePoint location="3162,3414" />
+      <AbsolutePoint location="3162,3550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/StationaryAdditionMasterDispatchAction.do,exist,/JSP/glForm/StationaryMasterNew.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5122,450" />
+      <AbsolutePoint location="5122,-25" />
+      <AbsolutePoint location="1835,-25" />
+      <AbsolutePoint location="1835,4016" />
+      <AbsolutePoint location="3784,4016" />
+      <AbsolutePoint location="3784,3601" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforLoanWise.do,success,/loanWiseTrailBalance.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4550,1294" />
+      <AbsolutePoint location="4494,1294" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/AvailabilityCheck.do,success,/JSP/glForm/glGroupLedgerMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,94" />
+      <AbsolutePoint location="1241,94" />
+      <AbsolutePoint location="1241,1274" />
+      <AbsolutePoint location="1161,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glchequeStatusUpdateAction.do,updateInstrumentDetailMain,/JSP/glForm/glchequeStatus.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3474,2538" />
+      <AbsolutePoint location="3474,2786" />
+      <AbsolutePoint location="2102,2786" />
+      <AbsolutePoint location="2102,3474" />
+      <AbsolutePoint location="2032,3474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAddition.do,openSearch,/fixedAssetAdditionSearch.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1966,650" />
+      <AbsolutePoint location="1966,602" />
+      <AbsolutePoint location="885,602" />
+      <AbsolutePoint location="885,1050" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accountingPeriodAction.do,index,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2450,84" />
+      <AbsolutePoint location="2447,84" />
+      <AbsolutePoint location="2447,1341" />
+      <AbsolutePoint location="88,1341" />
+      <AbsolutePoint location="88,1299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chequeDetail.do,search,/JSP/glForm/chequeDetailSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1952,2338" />
+      <AbsolutePoint location="1952,2471" />
+      <AbsolutePoint location="27,2471" />
+      <AbsolutePoint location="27,3474" />
+      <AbsolutePoint location="50,3474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/bankstatement.do,success,/JSP/glForm/glBankStatement.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4649,138" />
+      <AbsolutePoint location="4649,221" />
+      <AbsolutePoint location="5,221" />
+      <AbsolutePoint location="5,2674" />
+      <AbsolutePoint location="50,2674" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/chequePrintingReport.do,success,/JSP/glForm/chequeDetailReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2269,2250" />
+      <AbsolutePoint location="2269,2245" />
+      <AbsolutePoint location="634,2245" />
+      <AbsolutePoint location="634,3474" />
+      <AbsolutePoint location="650,3474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glbillSettelement.do,sucess,/JSP/glForm/glBillSettlementMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3752,1938" />
+      <AbsolutePoint location="3752,2295" />
+      <AbsolutePoint location="3639,2295" />
+      <AbsolutePoint location="3639,3214" />
+      <AbsolutePoint location="2854,3214" />
+      <AbsolutePoint location="2854,3250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/banktobankReconAjax.do,ajaxPage,/JSP/glForm/ajaxforBanktoBanklReconcileList.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1425,3646" />
+      <AbsolutePoint location="1425,4616" />
+      <AbsolutePoint location="2294,4616" />
+      <AbsolutePoint location="2294,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/receivPayHeadMasterAjaxAction.do,sucess,/JSP/glForm/ajaxforReceivPay.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3785,1338" />
+      <AbsolutePoint location="3785,1432" />
+      <AbsolutePoint location="3646,1432" />
+      <AbsolutePoint location="3646,2995" />
+      <AbsolutePoint location="3146,2995" />
+      <AbsolutePoint location="3146,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/incomeTaxBlockMasterAction.do,success,/JSP/glForm/incomeTaxBlockMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="175,738" />
+      <AbsolutePoint location="175,740" />
+      <AbsolutePoint location="3007,740" />
+      <AbsolutePoint location="3007,1474" />
+      <AbsolutePoint location="2966,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/AvailabilityCheck.do,reportLAW,/JSP/reports/reportLedgerAccountwise.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1345,138" />
+      <AbsolutePoint location="1345,191" />
+      <AbsolutePoint location="4195,191" />
+      <AbsolutePoint location="4195,991" />
+      <AbsolutePoint location="1667,991" />
+      <AbsolutePoint location="1667,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reportforGL.do,ledgerPage,/glLedgerReport.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4386,438" />
+      <AbsolutePoint location="4386,625" />
+      <AbsolutePoint location="1655,625" />
+      <AbsolutePoint location="1655,765" />
+      <AbsolutePoint location="1464,765" />
+      <AbsolutePoint location="1464,991" />
+      <AbsolutePoint location="1103,991" />
+      <AbsolutePoint location="1103,938" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/recivePaySearch.do,openModify,/JSP/glForm/recivePayHeadMasterModify.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3468,1338" />
+      <AbsolutePoint location="3468,1359" />
+      <AbsolutePoint location="3918,1359" />
+      <AbsolutePoint location="3918,3108" />
+      <AbsolutePoint location="2872,3108" />
+      <AbsolutePoint location="2872,3150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glProfitLossAjax.do,success,/JSP/glForm/ajaxForProfiandLosReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2967,2297" />
+      <AbsolutePoint location="3029,2297" />
+      <AbsolutePoint location="3029,3975" />
+      <AbsolutePoint location="2103,3975" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/GlknockOffAuthor.do,search,/JSP/glForm/glKnockOffAuthor.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="277,2846" />
+      <AbsolutePoint location="277,3574" />
+      <AbsolutePoint location="350,3574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCaptureAjax.do,ajaxPage,/JSP/glForm/ajaxforbillCapturing.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3950,1694" />
+      <AbsolutePoint location="3944,1694" />
+      <AbsolutePoint location="3944,3318" />
+      <AbsolutePoint location="1051,3318" />
+      <AbsolutePoint location="1051,3299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/closingYearAction.do,index,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2947,94" />
+      <AbsolutePoint location="3043,94" />
+      <AbsolutePoint location="3043,1332" />
+      <AbsolutePoint location="94,1332" />
+      <AbsolutePoint location="94,1299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/accountingListAction.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3455,1138" />
+      <AbsolutePoint location="3455,1149" />
+      <AbsolutePoint location="2081,1149" />
+      <AbsolutePoint location="2081,1574" />
+      <AbsolutePoint location="2023,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glProfitLoss.do,success,/JSP/glForm/glBalanceSheet.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2150,921" />
+      <AbsolutePoint location="2135,921" />
+      <AbsolutePoint location="2135,1725" />
+      <AbsolutePoint location="1035,1725" />
+      <AbsolutePoint location="1035,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glVoucherAjaxAction.do,success,/JSP/glForm/voucherEntryAjaxSlExist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2064,100" />
+      <AbsolutePoint location="2091,100" />
+      <AbsolutePoint location="2091,1141" />
+      <AbsolutePoint location="2563,1141" />
+      <AbsolutePoint location="2563,1250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/templateProductMapping.do,success,/JSP/glForm/glTemplateProductMapping.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,1094" />
+      <AbsolutePoint location="3047,1094" />
+      <AbsolutePoint location="3047,2609" />
+      <AbsolutePoint location="168,2609" />
+      <AbsolutePoint location="168,2599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/reconciliationReportShow.do,success,/reconciliationReport.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5150,298" />
+      <AbsolutePoint location="4809,298" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/partyMasterReport.do,success,/JSP/glForm/partyMasterReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,2698" />
+      <AbsolutePoint location="1226,2698" />
+      <AbsolutePoint location="1226,4375" />
+      <AbsolutePoint location="3350,4375" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glFASchedule.do,glFAScedule5Report,/JSP/FrmFASceduleV.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3261,1494" />
+      <AbsolutePoint location="3342,1494" />
+      <AbsolutePoint location="3342,2620" />
+      <AbsolutePoint location="723,2620" />
+      <AbsolutePoint location="723,2599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionPopUp.do,openParent,/JSP/glForm/fixedAssetAddition.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1467,1138" />
+      <AbsolutePoint location="1467,1521" />
+      <AbsolutePoint location="1049,1521" />
+      <AbsolutePoint location="1049,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/provisionalVoucherReverse.do,success,/JSP/glForm/glProvisionalVoucherReversal.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3318,1738" />
+      <AbsolutePoint location="3318,2406" />
+      <AbsolutePoint location="1074,2406" />
+      <AbsolutePoint location="1074,2550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/billCancellation.do,ajaxPage,/JSP/glForm/ajaxForBillCancel.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2386,2993" />
+      <AbsolutePoint location="2741,2993" />
+      <AbsolutePoint location="2741,4184" />
+      <AbsolutePoint location="4550,4184" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/voucherPrintingFromCreation.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3650,1094" />
+      <AbsolutePoint location="3640,1094" />
+      <AbsolutePoint location="3640,1609" />
+      <AbsolutePoint location="1936,1609" />
+      <AbsolutePoint location="1936,1599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/rejectVoucher.do,voucherRejection,/JSP/glForm/glVoucherRejection.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1980,3646" />
+      <AbsolutePoint location="1980,3896" />
+      <AbsolutePoint location="2859,3896" />
+      <AbsolutePoint location="2859,4650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetTransferAuthorAction.do,success,/JSP/glForm/fixedAssetTransferAprovalSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="618,2294" />
+      <AbsolutePoint location="904,2294" />
+      <AbsolutePoint location="904,3308" />
+      <AbsolutePoint location="3785,3308" />
+      <AbsolutePoint location="3785,3350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillReceivCapture.do,advPopUp,/JSP/glForm/glAdvancePaymentPopup.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="4350,1650" />
+      <AbsolutePoint location="4350,1548" />
+      <AbsolutePoint location="2440,1548" />
+      <AbsolutePoint location="2440,4175" />
+      <AbsolutePoint location="2450,4175" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/JSP/glForm/accountingYear.jsp,null,/accYear.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="441,1299" />
+      <AbsolutePoint location="441,1314" />
+      <AbsolutePoint location="-55,1314" />
+      <AbsolutePoint location="-55,94" />
+      <AbsolutePoint location="50,94" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBalanceSheet.do,glProfitLossReport,/JSP/FrmProffitNLossReport.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1850,899" />
+      <AbsolutePoint location="1844,899" />
+      <AbsolutePoint location="1844,1774" />
+      <AbsolutePoint location="1850,1774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/recivePaySearch.do,saveSucess,/JSP/glForm/recivePayHeadMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3563,1338" />
+      <AbsolutePoint location="3563,2008" />
+      <AbsolutePoint location="2418,2008" />
+      <AbsolutePoint location="2418,3174" />
+      <AbsolutePoint location="2363,3174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBillCaptureAjaxForSubLedgerReport.do,ajaxPage,/JSP/glForm/ajaxforbillCapturing.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5271,3146" />
+      <AbsolutePoint location="5271,3202" />
+      <AbsolutePoint location="1051,3202" />
+      <AbsolutePoint location="1051,3250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glBalanceSheet.do,profitReport,/glProfitLoss.do,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2065,894" />
+      <AbsolutePoint location="2150,894" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/exceptionReport.do,success,/JSP/glForm/glTrialBalance.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="263,1950" />
+      <AbsolutePoint location="263,1644" />
+      <AbsolutePoint location="1930,1644" />
+      <AbsolutePoint location="1930,1599" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetAdditionSearch.do,success,/JSP/glForm/fixedAssetAdditionSearch.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="904,1138" />
+      <AbsolutePoint location="904,1710" />
+      <AbsolutePoint location="2265,1710" />
+      <AbsolutePoint location="2265,1699" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/glcapitalizationAuthor.do,viewPage,/JSP/glForm/glCapitalizedMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3350,2896" />
+      <AbsolutePoint location="3043,2896" />
+      <AbsolutePoint location="3043,4475" />
+      <AbsolutePoint location="3050,4475" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/fixedAssetCategoryAction.do,success,/JSP/glForm/FixedAssetGroup.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2689,494" />
+      <AbsolutePoint location="2699,494" />
+      <AbsolutePoint location="2699,1509" />
+      <AbsolutePoint location="2245,1509" />
+      <AbsolutePoint location="2245,1499" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/BudgetDefinitionAjaxAction.do,success,/JSP/glForm/glBudgetDefinition.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,494" />
+      <AbsolutePoint location="648,494" />
+      <AbsolutePoint location="648,1347" />
+      <AbsolutePoint location="1647,1347" />
+      <AbsolutePoint location="1647,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/GlknockOffMaker.do,success,/JSP/glForm/glKnockOffMaker.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="5269,2650" />
+      <AbsolutePoint location="5269,2606" />
+      <AbsolutePoint location="-47,2606" />
+      <AbsolutePoint location="-47,3574" />
+      <AbsolutePoint location="50,3574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/groupLedgerAjaxAction.do,success,/JSP/glForm/glGroupLedgerMaster.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,124" />
+      <AbsolutePoint location="885,124" />
+      <AbsolutePoint location="885,365" />
+      <AbsolutePoint location="2396,365" />
+      <AbsolutePoint location="2396,1314" />
+      <AbsolutePoint location="1055,1314" />
+      <AbsolutePoint location="1055,1299" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

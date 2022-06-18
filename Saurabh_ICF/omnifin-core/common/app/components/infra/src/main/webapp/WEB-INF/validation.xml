@@ -1,0 +1,4618 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation> 
+
+<!--
+     This is a minimal Validator form file with a couple of examples.
+-->
+
+    <global>
+
+        <!-- An example global constant
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^\d{5}\d*$</constant-value>
+        </constant>
+        end example-->
+
+    </global>
+
+    <formset >
+
+        <!-- An example form 
+        
+         <form name="ChargeCodeDynaValidatorForm">
+         
+          <field 
+                property="chargeCode"
+                depends="required,mask">
+                    <arg key="msg.chargeCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z ']*$</var-value>
+                    </var>
+            </field>
+         
+         <field  property="chargeDescription" depends="required,mask">
+                    <arg key="msg.chargeDescription"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z '-]*$</var-value>
+                    </var>
+                
+            </field>
+       
+          </form>-->
+         
+
+  <!--     <form name="CustomerAddressValidatorForm">
+        	<field property="addr_type" depends="required">
+                   <arg key="msg.addr.type"/>
+           </field>
+            
+            <field  property="addr1" depends="required">
+                    <arg key="msg.addr.one"/>
+               
+            </field>
+           
+           
+            
+            <field  property="txtCountryCode" depends="required">
+                    <arg key="msg.country"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((addr1 == null) or (*this* != null))</var-value>
+                </var>
+           </field>
+         
+         <field  property="txtStateCode" depends="required">
+                    <arg key="msg.state"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((country == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+             <field  property="txtDistCode" depends="required">
+                    <arg key="msg.dist"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((state == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+            
+             <field
+                property="pincode"
+                depends="required,long,minlength,maxlength,mask">
+                <arg key="msg.pincode"/>
+                
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>6</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>6</var-value></var>
+			  
+             </field>
+            
+         
+            
+            <field
+                property="primaryPhoneNo"
+                depends="required,minlength,maxlength">
+                    <arg key="msg.mobile"/>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+                    
+            </field>
+             
+             
+         <field
+                property="tollfreeNo"
+                depends="long">
+                    <arg key="CustomerAddressValidatorForm.tollFreeNo"/>
+                   
+             </field>
+             
+             <field
+                property="faxNo"
+                depends="long">
+                    <arg key="CustomerAddressValidatorForm.faxNo"/>
+                   
+             </field>
+            
+            
+            
+            <field
+                property="noYears"
+                depends="required">
+                    <arg key="msg.years"/>
+                   
+             </field>
+           
+           <field  property="landMark"    depends="mask">
+                    <arg key="CustomerAddressValidatorForm.landMark"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            
+           
+        </form> -->
+        
+        
+ <!--       <form name="StackHolderDynaValidatorForm">
+          <field property="sex" depends="required">
+                    <arg key="msg.Salutation"/>
+                   
+           </field>
+            
+            
+            <field  property="holderName" depends="required,mask">
+                    <arg key="msg.stakeHolderName"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((sex == null) or (*this* != null))</var-value>
+                </var>
+
+            </field>
+            
+             <field
+                property="dinNo"
+                depends="mask">
+                    <arg key="StackHolderDynaValidatorForm.dinNo"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            
+             <field
+                property="idNo"
+                depends="mask">
+                    <arg key="StackHolderDynaValidatorForm.idNo"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            
+            <field  property="holderType" depends="required">
+                    <arg key="msg.stakeHolderType"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((holderName == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+         	 <field  property="holdingPerc" depends="required">
+                    <arg key="msg.holdingPerc"/>
+                   
+                   </field>
+           
+         
+             <field  property="dob" depends="required">
+                    <arg key="msg.incorporationDate"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((holderType == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+            
+            <field  property="totalExp" depends="required">
+                    <arg key="msg.totalExperince"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((dob == null) or (*this* != null))</var-value>
+                </var>
+
+            </field>
+            
+          <field
+                property="totalExp"
+                depends="long">
+                    <arg key="msg.totalExperince"/>
+                   
+             </field>
+            
+                  
+                         
+              <field
+                property="primaryPhone"
+                depends="minlength,maxlength">
+                    <arg key="msg.mobile"/>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+                    
+             </field>
+             
+              <field
+                property="alternatePhone"
+                depends="long,minlength,maxlength">
+                    <arg key="StackHolderDynaValidatorForm.alternatePhone"/>
+                   <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+             </field>
+                       
+                <field
+                property="primaryEmail"
+                depends="email">
+                    <arg key="msg.primaryEmail"/>
+                   
+           </field>
+                      
+            <field
+                property="alternateEmail"
+                depends="email">
+                    <arg key="msg.alternateEmail"/>
+                   
+           </field>
+           
+           <field  property="position" depends="required">
+                    <arg key="msg.position"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((doj == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+
+            <field  property="doj" depends="required">
+                    <arg key="msg.joiningDate"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((primaryEmail == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+            
+          
+        </form>-->
+        
+  <!--         <form name="CreditRatingPageDynaValidatorActionForm">
+        	 <field
+                property="institute"
+                depends="required">
+                    <arg key="msg.institutionName"/>
+                   
+           </field>
+            <field  property="rating" depends="required">
+                    <arg key="msg.rating"/>
+                  
+                   </field>
+            
+            <field  property="creditDate" depends="required">
+                    <arg key="msg.date"/>
+                 
+            </field>
+
+       </form>-->
+
+        
+        
+ <!--       <form name="CorporateDetailsDynaValidatorForm">
+         
+        
+       	<field  property="corporateName" depends="required">
+                    <arg key="msg.corporateName"/>
+                                       
+            </field>
+            
+             <field  property="incorporationDate"  depends="required">
+                   <arg key="msg.incorporationDate"/>
+                 
+           </field>
+             <field  property="constitution"    depends="required">
+                    <arg key="msg.constitution"/>
+                  
+            </field>
+            <field  property="registrationNo"    depends="required">
+                    <arg key="msg.registrationNo"/>
+                  
+            </field>
+             
+           
+             <field
+                property="pan"
+                depends="required,mask,minlength,maxlength">
+                    <arg key="msg.pan"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+                    
+            </field>
+            <field property="vatRegNo"
+                depends="mask">
+                    <arg key="msg.vatRegNo"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            
+              <field  property="businessSegment"    depends="required">
+                    <arg key="msg.businessSegment"/>
+                      
+            </field>
+            
+            <field  property="lbxIndustry"  depends="required">
+                    <arg key="msg.industry"/>
+                      
+            </field>
+            <field  property="lbxSubIndustry" depends="required">
+                    <arg key="msg.subIndustry"/>
+                     
+            </field>
+            
+              <field  property="institutionEmail"   depends="email">
+                    <arg key="msg.mail"/>
+                   
+            </field>
+                       
+             <field  property="hGroupId"  depends="required">
+                    <arg key="msg.hGroupId"/>
+                  
+            </field>
+                
+        </form>-->
+
+ 
+      
+        
+      <!--    <form name="IdividualDetailDynaValidatorForm">
+         
+          <field  property="firstName"  depends="required,mask">
+                    <arg key="msg.name"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            <field  property="lastName"   depends="required,mask">
+
+                    <arg key="msg.last"/>
+                      <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            <field property="middleName" depends="mask">
+                    <arg key="msg.middleName"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+            <field  property="constitution"    depends="required">
+                    <arg key="msg.constitution"/>
+                  
+            	</field>
+             <field  property="incorporationDate"  depends="required">
+                    <arg key="msg.birthdate"/>
+                
+            </field>
+             <field
+                property="pan"
+                depends="required,mask,minlength,maxlength">
+                    <arg key="msg.pan"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+                    
+            </field>
+           
+            
+             <field  property="institutionEmail"    depends="email">
+                    <arg key="IdividualDetailDynaValidatorForm.institutionEmail"/>
+                   
+            </field> 
+            <field  property="referredBy"    depends="mask">
+                  
+                    <arg key="msg.referredBy"/>
+                      <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            
+           
+         </form>-->
+        
+     <form name="ApplicantDynavalidatorForm">
+         
+          <field
+                property="applicantType"
+                depends="required">
+                    <arg key="msg.applicantType"/>
+                   
+            </field>
+         
+          
+            
+           
+           
+        </form>
+        
+
+<!-- Ravindra.   Lead Entry Validtaion -->  
+	<!--        
+		<form name="LeadEntryProcessDynaValidator">
+         
+      
+      
+                  			         	
+         	<field property="applicationFormNo" depends="required,mask" >
+  				<arg key="msg.applicationFormNo"/>
+  					<arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+  			</field>
+         	
+         	<field property="leadDate" depends="required">
+                  <arg key="msg.leadDate"/>
+            </field>
+            
+            <field property="leadTime" depends="required">
+                  <arg key="msg.leadTime"/>
+            </field>
+                    	
+  		
+         	
+         	<field property="industry" depends="required">
+                  <arg key="msg.lead.industry"/>
+                  
+         	</field>
+         	
+         	<field property="subIndustry" depends="required">
+                  <arg key="msg.lead.subIndustry"/>
+                  
+         	</field>
+         	
+         	<field property="branch" depends="required">
+                  <arg key="msg.branch"/>
+                  
+         	</field>
+         	
+         	<field property="relationshipManager" depends="required">
+                  <arg key="msg.relationshipManager"/>
+                  
+         	</field>
+             
+           <field property="source" depends="required" >
+                  <arg key="msg.source"/>
+          	</field>
+         	
+         	<field property="sourcedesc" depends="required">
+                  <arg key="msg.sourcedesc"/>
+                  
+         	</field>
+         	
+		</form>
+ -->
+     
+<!--        Pawan Kumar Singh Buyer Supplier Validation
+         
+         <form name="BuyerSupplierDynaValidatorForm">     
+         
+         <field  property="businessPartnerName" depends="required">
+                    <arg key="msg.businessPartnerName"/>
+                 
+         </field> 
+         
+         
+          <field property="email" depends="email">
+				<arg key="msg.email" />
+				
+				
+		 </field>
+         
+         <field property="mobile" depends="mask,minlength,maxlength">
+				<arg0 key="msg.mobile" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>		
+         
+		
+		  <field  property="averagePurchaseSales"   depends="required">
+                <arg key="msg.averagePurchaseSales"/>                   
+        </field>
+          <field  property="paymentTerms"   depends="required">
+                <arg key="msg.paymentTerms"/>                   
+        </field>
+          <field  property="productType"   depends="required">
+                <arg position="0" key="msg.productType"/>   
+                
+        </field>
+          <field  property="vintageOfRelationship"   depends="required">
+                <arg key="msg.vintageOfRelationship"/>                   
+        </field>
+		
+			      
+        
+              
+        
+        
+        <field  property="pincode"   depends="minlength,maxlength">
+                <arg key="msg.pincode"/> 
+          		
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>6</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>6</var-value></var>
+			
+        </field>
+     
+     </form>     -->
+<!--        Pawan Kumar Singh End of Buyer Supplier Validation        
+          
+
+        <form name="NotepadDynaValidatorForm">
+         
+          <field
+                property="noteCode"
+                depends="required">
+                    <arg key="msg.noteCode"/>
+                   
+          </field>
+          <field
+                property="meetingDate"
+                depends="required">
+                    <arg key="msg.meetingDate"/>
+                   
+          </field>
+          
+          <field
+                property="meetingTime"
+                depends="required">
+                    <arg key="msg.meetingTime"/>
+                   
+          </field>
+          
+          <field
+                property="personMet"
+                depends="required,mask">
+                  
+                   <arg position="0" key="msg.personMet"/> 
+                   <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z0-9/_'. - ]*$</var-value>
+                    </var>
+                   
+          </field>
+          
+          <field
+                property="meetingLocation"
+                depends="required">
+                
+                 <arg key="msg.meetinLoc"/>
+                
+          </field>
+          
+          <field
+                property="meetingRemarks"
+                depends="required">
+                    <arg key="msg.notes"/>
+                   
+          </field>
+          
+          <field
+                property="followUp"
+                depends="required">
+                    <arg key="msg.followUp"/>
+                   
+          </field>
+         
+          
+        </form> 
+        
+        <form name="QueryDynaValidatorForm">
+         
+          <field
+                property="queryDate"
+                depends="required">
+                    <arg key="msg.queryDate"/>
+                   
+          </field>
+         
+          
+          <field
+                property="queryRemarks"
+                depends="required">
+                    <arg key="msg.queryRemarks"/>
+                   
+          </field>
+          
+          <field
+                property="resolutionStatus"
+                depends="required">
+                    <arg key="msg.resolutionStatus"/>
+                   
+          </field>
+          
+        </form>-->
+       
+         <!-- Manas Statrs here        
+         <form name="LoanDetailsDynaValidatorForm">         
+          <field
+                property="product"
+                depends="required">
+                <arg key="msg.product"/>
+                    
+            </field>
+         
+            <field  property="scheme" depends="required">
+                    <arg key="msg.scheme"/>
+             
+            </field>
+           
+            <field  property="requestedLoanAmount" depends="required">
+                    <arg key="msg.requestedLoanAmount"/>
+                  
+            </field>
+            
+            
+            <field
+                property="requestedLoanTenure"
+                depends="required">
+                    <arg key="msg.requestedLoanTenure"/>
+                    
+            </field>
+         
+     <field  property="disbursalDate" depends="required">
+                  <arg key="msg.disbursalDate"/>
+                 
+           </field>
+           
+            <field  property="rateType" depends="required">
+                    <arg key="msg.rateType"/>
+                  
+            </field>
+          
+                    
+         <field  property="effectiveRate" depends="required">
+                    <arg key="msg.finalRate"/>
+                  
+            </field>
+           
+            
+            <field
+                property="sectorType"
+                depends="required">
+                <arg key="msg.sectorType"/>
+                    
+            </field>
+                       
+            <field  property="loanPurpose" depends="required">
+                    <arg key="msg.loanPurpose"/>
+                  
+            </field>
+            
+            
+           
+        </form>
+                     
+<form name="BankBranchDynaValidatorForm">
+         
+          <field
+                property="bankBranchCode"
+                depends="required,mask">
+                    <arg position="0" key="msg.bankBranchCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z_'0-9]*$</var-value>
+                    </var>
+            </field>
+            
+                  <field
+                property="bankBranchName"
+                depends="required">
+                    <arg position="0" key="msg.branchName"/>
+                 
+            </field>
+            
+                  <field
+                property="branchMICRCode"
+                depends="required,mask">
+                    <arg position="0" key="msg.branchMicrCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z '0-9]*$</var-value>
+                    </var>
+            </field>
+            
+                  <field
+                property="branchIFCSCode"
+                depends="required,mask">
+                    <arg position="0" key="msg.branchIFCSCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z '0-9]*$</var-value>
+                    </var>
+            </field>
+            
+             
+            
+             <field property="email" depends="email">
+				<arg key="msg.email" />	
+	   </field>
+        </form>-->
+
+        
+ <!-- Manas Statrs here -->
+      
+        
+        
+         <form name="InstrumentCapturingMakerValidatorForm">
+         
+          <field  property="loanAccNo" depends="required">
+                    <arg key="msg.loanAccNo"/>
+                  
+            </field>
+         
+          <field  property="instrumentType" depends="required">
+                    <arg key="msg.instrumentType"/>
+                  
+            </field>
+            
+                        
+         
+          <field  property="bank" depends="required">
+                    <arg key="msg.bank"/>
+                  
+            </field>
+         
+          <field  property="branch" depends="required">
+                    <arg key="msg.branch"/>
+                  
+            </field>
+         
+         <field  property="micr" depends="required">
+                    <arg key="msg.micr"/>
+                  
+            </field>
+            
+             
+             <field  property="bankAccount" depends="required">
+                    <arg key="msg.bankAccount"/>
+                  
+            </field>	
+            
+            <field property="location" depends="required">
+				<arg key="msg.location" />
+
+			</field>
+<!--            <field  property="remarks" depends="required">-->
+<!--                    <arg key="msg.remarks"/>-->
+<!--                  -->
+<!--            </field> -->
+                    
+         
+        </form>
+        
+        <form name="InstrumentCapturingAuthorValidatorForm">
+        <field  property="decision" depends="required">
+                    <arg key="msg.decision"/>
+                  
+            </field> 
+            </form>
+            
+<form name="AssetVerificationInitiationMainDynaValidatorForm">
+             
+        <field  property="assetLocation" depends="required">
+                    <arg key="msg.assetLocation"/>
+                  
+            </field> 
+                <field  property="visitDate" depends="required">
+                    <arg key="msg.visitDate"/>
+                  
+            </field> 
+                <field  property="assetCondition" depends="required">
+                    <arg key="msg.assetCondition"/>
+                  
+            </field> 
+                <field  property="comments" depends="required">
+                    <arg key="msg.visitRemark"/>
+                  
+            </field> 
+            
+        
+
+        </form>
+             
+              
+ <form name="PresentationProcessDynaValidatorForm">
+             
+        <field  property="presentationDate" depends="required">
+                    <arg key="msg.presentationDate"/>
+                  
+            </field> 
+                <field  property="bank" depends="required">
+                    <arg key="msg.bank"/>
+                  
+            </field> 
+                <field  property="branch" depends="required">
+                    <arg key="msg.branch"/>
+                  
+            </field> 
+                <field  property="bankAccount" depends="required">
+                    <arg key="msg.bankAccount"/>
+                  </field>
+
+        </form>
+        
+   
+  
+     
+ <!-- Manas Ends here 
+        
+         <form name="SecurityDepositDynaValidatorForm">
+         
+          <field
+                property="securityAmount"
+                depends="required">
+                    <arg key="msg.securityAmount"/>
+                    
+            </field>
+         
+         <field  property="interestType" depends="required">
+                    <arg key="msg.interestType"/>
+                  
+            </field>
+           
+            <field  property="interestRate" depends="required">
+                    <arg key="msg.interestRate"/>
+                  
+            </field>
+            
+            
+                     
+         <field  property="tenure" depends="required">
+                    <arg key="msg.tenure"/>
+                  
+            </field>
+           
+            <field  property="relatedInterest" depends="required">
+                    <arg key="msg.interest"/>
+                  
+            </field>
+            
+            </form> -->
+        
+  <!--          <form name="CollateralPropertyDynaValidatorForm">
+        	    <field property="assetsCollateralDesc" depends="required">
+                <arg key="msg.assetsCollateralDescP"/>                   
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueP"/> 
+                    </field>
+                    
+                     <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginP"/> 
+                    </field>
+                    
+                                     
+                     <field  property="propertyAddress" depends="required">                    
+                     <arg key="msg.propertyAddressP"/>                 
+                   
+                    </field>
+                    
+                      <field  property="propertyOwner" depends="required">                   
+                     <arg key="msg.propertyOwnerP"/>                
+                    </field>     
+                    
+                    <field  property="propertyConstruct" depends="required">
+                    <arg key="msg.propertyConstructP"/> 
+                    </field>
+                    
+                     <field  property="propertyArea" depends="required">                   
+                     <arg key="msg.propertyAreaP"/>              
+                    </field>
+                    
+                   
+            
+        </form> -->
+        
+          <form name="CollateralBGDynaValidatorForm">
+          
+        	                       
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.bankGValue"/> 
+                    </field>
+                    
+                     <field  property="bgInDate" depends="required">                    
+                     <arg key="msg.bgInDate"/>                 
+                   
+                    </field>
+                    
+                    <field  property="bgValidity" depends="required">
+                    <arg key="msg.bgValidity"/> 
+                    </field>
+                    
+                     <field  property="bgIssuing" depends="required">                   
+                     <arg key="msg.bgIssuing"/>              
+                    </field>
+                    
+        </form>
+        
+        
+        <!--    <form name="CollateralMachineryDynaValidatorForm">
+          
+        	    <field property="assetsCollateralDesc" depends="required">
+                <arg key="msg.assetsCollateralDescM"/>                   
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueM"/> 
+                    </field>
+                    
+                     <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginM"/> 
+                    </field>
+                    
+                    <field  property="machineMake" depends="required">
+                    <arg key="msg.machineMake"/> 
+                    </field>
+                    
+                     <field  property="machineModel" depends="required">                    
+                     <arg key="msg.machineModel"/>                 
+                   
+                    </field>
+                    
+                    <field  property="machineType" depends="required">
+                    <arg key="msg.machineType"/> 
+                    </field>
+                    
+                  
+                 
+        </form> -->
+                
+      <!--    <form name="CollateralVehicleDynaValidatorForm">
+          <field
+                property="assetsCollateralDesc"
+                depends="required">
+                <arg  key="msg.assetsCollateralDescV"/>
+               
+                 </field>  
+                 
+                  <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueV"/> 
+                  </field>
+                  
+                   <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginV"/> 
+                  </field>
+                   <field  property="vehicleMake" depends="required">
+                    <arg key="msg.vehicleMakeV"/> 
+                  </field>
+                  
+                  <field  property="vehicleModel" depends="required">
+                    <arg key="msg.vehicleModelV"/> 
+                  </field>
+                  
+                                                  
+                  <field  property="vehicleYearOfManufact" depends="required">
+                    <arg key="msg.vehicleYearOfManufactV"/> 
+                  </field>
+                  
+                  <field  property="vehicleRegDate" depends="required">
+                    <arg key="msg.vehicleRegDateV"/> 
+                  </field>
+                    
+                      
+        </form>
+        
+          <form name="CollateralAssetOtherDynaValidatorForm">
+        	    <field
+                property="assetsCollateralDesc"
+                depends="required,mask">
+                <arg position ="0" key="msg.assetsCollateralDescAO"/>
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueAO"/> 
+                    </field>
+              </form> -->
+   
+   
+             <form name="CollateralFixedDepositDynaValidatorForm">
+        	    <field
+                property="assetsCollateralDesc"
+                depends="required,mask">
+                <arg position ="0" key="msg.assetsCollateralDescFD"/>
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueFD"/> 
+                    </field>
+                    
+                    <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginFD"/> 
+                    </field>
+                    
+                    <field  property="fdAmount" depends="required">
+                    <arg key="msg.fdAmountFD"/> 
+                    </field>
+                    
+                     <field  property="fdTenure" depends="required">
+                    <arg key="msg.fdTenureFD"/> 
+                    </field>
+                    
+                     <field  property="fdRate" depends="required">
+                    <arg key="msg.fdRateFD"/> 
+                    </field>
+                    
+                     <field  property="fdBookDate" depends="required">
+                    <arg key="msg.fdBookDateFD"/> 
+                    </field>
+                    
+                     <field  property="fdMatureDate" depends="required">
+                    <arg key="msg.fdMatureDateFD"/> 
+                    </field>
+                    
+               
+                     <field  property="fdApplicants" depends="required">
+                      <arg position ="0" key="msg.fdApplicantsFD"/>
+                     <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                      <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                  <field  property="bank" depends="required">
+                    <arg key="msg.bankName"/> 
+                    </field>
+                    <field  property="branch" depends="required">
+                    <arg key="msg.branchName"/> 
+                    </field>                  
+                    </form>
+   
+   
+   
+     		   <form name="CollateralSBLCDynaValidatorForm">
+        	    <field
+                property="assetsCollateralDesc"
+                depends="required,mask">
+                <arg position ="0" key="msg.assetsCollateralDescSBLC"/>
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueSBLC"/> 
+                    </field>
+                    
+                    <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginSBLC"/> 
+                    </field>
+                    
+                    <field  property="sblcAmount" depends="required">
+                    <arg key="msg.sblcAmountSBLC"/> 
+                    </field>
+                                      
+                     <field  property="sblcValidity" depends="required">
+                    <arg key="msg.sblcValiditySBLC"/> 
+                    </field>
+                    
+                     <field  property="sblcIssuingDate" depends="required">
+                    <arg key="msg.sblcIssuingDateSBLC"/> 
+                    </field>
+                    
+                     <field  property="sblcParentCompany" depends="required">
+                    <arg key="msg.sblcParentCompanySBLC"/> 
+                    </field>
+                                  
+                    </form>
+   
+   
+   
+      			 <form name="CollateralSecurityDynaValidatorForm">
+        	    <field property="assetsCollateralDesc" depends="required,mask">
+                <arg position ="0" key="msg.assetsCollateralDescSE"/>
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueSE"/> 
+                    </field>
+                    
+                    <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginSE"/> 
+                    </field>
+                    
+                    <field  property="securityType" depends="required">
+                    <arg key="msg.securityTypeSE"/> 
+                    </field>
+                                      
+                     <field  property="securityCategory" depends="required">
+                    <arg key="msg.securityCategorySE"/> 
+                    </field>
+                    
+                     <field  property="securityMarketValue" depends="required">
+                    <arg key="msg.securityMarketValueSE"/> 
+                    </field>                          
+                    </form>  
+   
+   
+   				<form name="CollateralStockDynaValidatorForm">
+        	    <field property="assetsCollateralDesc" depends="required,mask">
+                <arg position ="0" key="msg.assetsCollateralDescST"/>
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                      <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>             
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueST"/> 
+                    </field>
+                    
+                    <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginST"/> 
+                    </field>
+                    
+                    <field  property="stockType" depends="required">
+                    <arg key="msg.stockTypeST"/> 
+                    </field>
+                                      
+                     <field  property="stockNature" depends="required">
+                    <arg key="msg.stockNatureST"/> 
+                    </field>
+                    
+                     <field  property="stockAddress" depends="required">
+                    <arg key="msg.stockAddressST"/> 
+                    </field>    
+                     <field  property="stockCycle" depends="required">
+                    <arg key="msg.stockCycleST"/> 
+                    </field>                                           
+                    </form>
+   
+   
+   				<form name="CollateralDebtorDynaValidatorForm">
+   				
+        	    <field property="assetsCollateralDesc" depends="required">
+                <arg  key="msg.assetsCollateralDescDE"/>
+                           
+                 </field>  
+                 
+                    <field  property="assetsCollateralValue" depends="required">
+                    <arg key="msg.assetsCollateralValueDE"/> 
+                    </field>
+                    
+                    <field  property="collateralSecurityMargin" depends="required">
+                    <arg key="msg.collateralSecurityMarginDE"/> 
+                    </field>
+                    
+                                                        
+                     <field  property="debtorTotal" depends="required">
+                    <arg key="msg.debtorTotalDE"/> 
+                    </field>                    
+                                                
+                    </form>
+   
+   
+ <!-- Manisha Validations Starts
+      
+    <form name="PaymentCMDynaValidatorForm">
+     
+     <field property="loanAccountNumber" depends="required">
+				<arg0 key="msg.lan" />
+			
+			</field>	
+			 
+      <field  property="businessPartnerType" depends="required">
+                    <arg key="msg.businessPartnerType"/> 
+                    </field> 
+                    
+        <field  property="businessPartnerName" depends="required">
+                    <arg key="msg.businessPartnerName"/> 
+                    </field> 
+                    
+		<field  property="paymentMode" depends="required">
+                    <arg key="msg.paymentMode"/> 
+                    </field>	 
+      <field  property="paymentDate" depends="required">
+                    <arg key="msg.paymentDate"/> 
+                    </field>
+       
+     <field property="paymentAmount" depends="required">
+				<arg position="0" key="msg.paymentAmount" />
+				</field>
+				
+			<field property="instrumentNumber" depends="required">
+				<arg position="0" key="msg.instrumentNumber" />		
+							</field> 
+			<field  property="instrumentDate" depends="required">
+                    <arg key="msg.instrumentDate"/> 
+                    </field>
+                    
+                     <field property="bankAccount" depends="required,mask,maxlength">
+				<arg0 key="msg.bankAccount" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>20</var-value></var>
+			</field>	
+                    
+       <field  property="bank" depends="required">
+                    <arg key="msg.bank"/> 
+                    </field> 
+        <field  property="branch" depends="required">
+                   <arg key="msg.branch"/> 
+                    </field> 
+                    
+          <field  property="remarks" depends="required">
+                   <arg key="msg.remarks"/> 
+                    </field> 
+                                                 
+                    
+    </form>-->
+     
+    <form name="ReceiptMakerDynaValidatorForm">
+     
+     <field property="loanAccountNumber" depends="required">
+				<arg0 key="msg.lan" />
+				
+	</field>	
+			 
+      <field  property="businessPartnerType" depends="required">
+                    <arg key="msg.businessPartnerType"/> 
+                    </field> 
+        <field  property="businessPartnerName" depends="required">
+                    <arg key="msg.businessPartnerName"/> 
+                    </field> 
+                    
+		<field  property="receiptMode" depends="required">
+                    <arg key="msg.receiptMode"/> 
+                    </field>	 
+			 
+      <field  property="receiptDate" depends="required">
+                    <arg key="msg.receiptDate"/> 
+                    </field>
+       
+     <field property="receiptAmount" depends="required">
+				<arg position="0" key="msg.receiptAmount" />
+				</field>
+				
+                    
+    </form>
+    <form name="ImdMakerDynaValidatorForm">
+    			 
+<!--      <field  property="businessPartnerType" depends="required">-->
+<!--                    <arg key="msg.businessPartnerType"/> -->
+<!--                    </field> -->
+<!--        <field  property="businessPartnerName" depends="required">-->
+<!--                    <arg key="msg.businessPartnerName"/> -->
+<!--                    </field> -->
+                    
+		<field  property="receiptMode" depends="required">
+                    <arg key="lbl.imdMode"/> 
+                    </field>	 
+			 
+      <field  property="receiptDate" depends="required">
+                    <arg key="lbl.imdDate"/> 
+                    </field>
+       
+     <field property="receiptAmount" depends="required">
+				<arg position="0" key="lbl.imdAmount" />
+				</field>
+                    
+    </form>   
+  <form name="AssetMakerDynaValidatorForm">
+  <field  property="loanAccountNumber" depends="required">
+                    <arg key="msg.loanAccountNumber"/> 
+                    </field>
+                  
+			 <field  property="insuranceAgency" depends="required">
+                    <arg key="msg.insuranceAgency"/> 
+                    </field>
+                    	
+              <field  property="insuranceDoneBy" depends="required">
+                    <arg key="msg.insuranceDoneBy"/> 
+              </field>	                   
+            
+			<field property="sumAssured" depends="required">
+				<arg key="msg.sumAssured" />
+			</field> 
+			<field property="premiumAmnt" depends="required">
+				<arg key="msg.premiumAmnt" />
+			</field> 
+		
+             <field  property="startDate" depends="required">
+                    <arg key="msg.startDate"/> 
+                    </field>
+             <field  property="endDate" depends="required">
+                    <arg key="msg.endDate"/> 
+                    </field>
+			<field property="entity" depends="required">
+				<arg key="msg.entity" />
+			</field>
+			
+			<field property="yearNo" depends="required">
+				<arg key="msg.yearNo" />
+			</field>
+<!--            <field  property="remarks" depends="required">-->
+<!--                    <arg key="msg.remarks"/> -->
+<!--                    </field>Commented by Nishant-->
+            
+      </form>
+
+
+
+       
+     <!--  <form name="PersonalDiscussionDynaValidatorForm">
+         
+         
+          <field
+                property="pdDate"
+                depends="required">
+                    <arg key="msg.pdDate"/>
+                   
+          </field>
+          
+         
+          
+          <field
+                property="personMet"
+                depends="required">
+                  
+                   <arg key="msg.personMet"/> 
+                   
+          </field>
+          
+          <field
+                property="pdMeetingLocation"
+                depends="required">
+                
+                 <arg key="msg.pdMeetingLocation"/>
+                
+          </field>
+          
+          <field
+                property="pdRemark"
+                depends="required">
+                    <arg key="msg.pdRemarks"/>
+                   
+          </field>
+          
+          <field
+                property="followUp"
+                depends="required">
+                    <arg key="msg.followUp"/>
+                   
+          </field>
+         
+          
+        </form> 
+                            
+          Manisha Validations ends-->
+ 
+  
+ 
+        
+<!-- Code by Amit Starts Here -->
+	<!-- Closure Validations -->
+      <form name="ClosureDynaValidatorForm">
+         
+          <field
+                property="loanAc"
+                depends="required">
+                    <arg key="msg.loanAc"/>
+                   
+          </field>
+          
+          <field
+                property="reasonForClosure"
+                depends="required">
+                    <arg key="msg.reasonForClosure"/>
+                   
+          </field>
+          
+          <field
+                property="effectiveDate"
+                depends="required">
+                    <arg key="msg.effectiveDate"/>
+                   
+          </field>
+          
+        </form>
+        
+        <!-- Cancellation Validations -->
+        <form name="CancellationMakerDynaValidatorForm">
+         
+          <field
+                property="loanAc"
+                depends="required">
+                    <arg key="msg.loanAc"/>
+          </field>
+          
+          <field
+                property="reasonForClosure"
+                depends="required">
+                    <arg key="msg.reasonForClosure"/>
+          </field>
+          
+        </form>
+        
+        <!-- Disbursal Validations -->
+        <form name="DisbursedInitiationMakerDynaValidatorForm">
+         
+          <field
+                property="loanNo"
+                depends="required">
+                    <arg key="msg.loanNo"/>
+                   
+          </field>
+          <field
+                property="disbursalDate"
+                depends="required">
+                    <arg key="msg.disbursal"/>
+                   
+          </field>
+          
+          <field
+                property="disbursalAmount"
+                depends="required">
+                    <arg key="msg.currentDisbursalAmount"/>
+          </field>
+          
+          <field
+                property="shortPayAmount"
+                depends="required">
+                    <arg key="msg.currentShortPayAmount"/>
+          </field>
+          
+<!--          <field-->
+<!--                property="disbursalDescription"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.disbursalDescription"/>-->
+<!--                   -->
+<!--          </field>          -->
+        </form>
+        
+        <!-- SD Liquidation Validations -->
+         <form name="SDLiquidationMakerDynaValidatorForm">
+         
+          <field
+                property="loanNo"
+                depends="required">
+                    <arg key="msg.loanNo"/>
+                   
+          </field>
+          <field
+                property="sdNo"
+                depends="required">
+                    <arg key="msg.sdNo"/>
+                   
+          </field>
+<!--          <field-->
+<!--                property="remarks"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.remarks"/>-->
+<!--                   -->
+<!--          </field>-->
+        </form>
+        
+        <!-- This form will be used by all other Collateral capturing forms -->
+        <!-- Collateral Capturing Machine Validations -->
+        <form name="CollateralCapturingMachineDynaValidatorForm">
+         
+          <field
+                property="appraiser"
+                depends="required">
+                    <arg key="msg.appraiser"/>     
+          </field>
+          <field
+                property="appraisalDate"
+                depends="required">
+                    <arg key="msg.appraisalDate"/>               
+          </field>
+          <field
+                property="personMet"
+                depends="required">
+                    <arg key="msg.personMet"/>                   
+          </field>
+          <field
+                property="relation"
+                depends="required">
+                    <arg key="msg.relation"/>                  
+          </field>
+          <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.phone1" />
+                
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+        		<arg position="0" key="msg.phone2" />
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field>
+          <field property="email" depends="email">
+				
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>
+				
+	   </field>
+	   <field
+                property="machineMake"
+                depends="required">
+                    <arg key="msg.machineMake"/>        
+          </field>
+           <field
+                property="machineModel"
+                depends="required">
+                    <arg key="msg.machineModel"/>        
+          </field>
+          <field
+                property="machineOwner"
+                depends="required">
+                    <arg key="msg.machineOwner"/>        
+          </field>
+          <field
+                property="machineYearOfManufact"
+                depends="required">
+                    <arg key="msg.machineYearOfManufact"/>        
+          </field>
+          <field
+                property="machineIdNo"
+                depends="required">
+                    <arg key="msg.machineIdNo"/>        
+          </field>
+          <field
+                property="machinePrice"
+                depends="required">
+                    <arg key="msg.machinePrice"/>        
+          </field>
+			
+        </form>
+      
+      <!-- Collateral Capturing Property Validations -->
+      <form name="CollateralCapturingPropertyDynaValidatorForm">
+         
+          <field
+                property="appraiser"
+                depends="required">
+                    <arg key="msg.appraiser"/>                  
+          </field>
+          <field
+                property="appraisalDate"
+                depends="required">
+                    <arg key="msg.appraisalDate"/>                  
+          </field>
+          <field
+                property="personMet"
+                depends="required">
+                    <arg key="msg.personMet"/>                  
+          </field>
+          <field
+                property="relation"
+                depends="required">
+                    <arg key="msg.relation"/>                  
+          </field>
+          <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.phone1" />
+                
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+        		<arg position="0" key="msg.phone2" />
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field>
+          <field property="email" depends="email">
+				
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>				
+	   </field>
+	   <field
+                property="propertyAddress"
+                depends="required">
+                    <arg key="msg.propertyAddress"/>                  
+       </field>
+       <field
+                property="propertyArea"
+                depends="required">
+                    <arg key="msg.propertyArea"/>                  
+       </field>  
+       <field
+                property="propertyAccessibility"
+                depends="required">
+                    <arg key="msg.propertyAccessibility"/>                  
+       </field>
+       <field
+                property="propertyAreaType"
+                depends="required">
+                    <arg key="msg.propertyAreaType"/>                  
+       </field>
+       <field
+                property="propertyPopulation"
+                depends="required">
+                    <arg key="msg.propertyPopulation"/>                  
+       </field>
+       <field
+                property="propertyMarketValue"
+                depends="required">
+                    <arg key="msg.propertyMarketValue"/>                  
+       </field>	   
+	   
+        </form>  
+        
+        <!-- Collateral Capturing Vehicle Validations -->
+        <form name="CollateralCapturingVehicleDynaValidatorForm">
+
+          <field
+                property="appraiser"
+                depends="required">
+                    <arg key="msg.appraiser"/>                  
+          </field>
+          <field
+                property="appraisalDate"
+                depends="required">
+                    <arg key="msg.appraisalDate"/>                   
+          </field>
+          <field
+                property="personMet"
+                depends="required">
+                    <arg key="msg.personMet"/>                   
+          </field>
+          <field
+                property="relation"
+                depends="required">
+                    <arg key="msg.relation"/>                   
+          </field>
+          <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.phone1" />
+                
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+        		<arg position="0" key="msg.phone2" />
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field>
+          <field property="email" depends="email">
+				
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>				
+	   </field>
+	   <field
+                property="vehicleMake"
+                depends="required">
+                    <arg key="msg.vehicleMake"/>                  
+       </field>
+       <field
+                property="vehicleModel"
+                depends="required">
+                    <arg key="msg.vehicleModel"/>                  
+       </field>
+       <field
+                property="vehicleOwner"
+                depends="required">
+                    <arg key="msg.vehicleOwner"/>                  
+       </field>
+       <field
+                property="vehicleYearOfManufact"
+                depends="required">
+                    <arg key="msg.vehicleYearOfManufact"/>                  
+       </field>
+       <field
+                property="vehicleRegNo"
+                depends="required">
+                    <arg key="msg.vehicleRegNo"/>                  
+       </field>
+       <field
+                property="vehicleRegDate"
+                depends="required">
+                    <arg key="msg.vehicleRegDate"/>                  
+       </field>
+       <field
+                property="vehicleChesisNo"
+                depends="required">
+                    <arg key="msg.vehicleChesisNo"/>                  
+       </field>
+       <field
+                property="vehicleMarketPrice"
+                depends="required">
+                    <arg key="msg.vehicleMarketPrice"/>                  
+       </field>
+       <field
+                property="vehicleCondition"
+                depends="required">
+                    <arg key="msg.vehicleCondition"/>                  
+       </field>
+          
+        </form>  
+        
+        <!-- Collateral Capturing Other Validations -->
+         <form name="CollateralCapturingOtherDynaValidatorForm">
+         
+          <field
+                property="appraiser"
+                depends="required">
+                    <arg key="msg.appraiser"/>                   
+          </field>
+          <field
+                property="appraisalDate"
+                depends="required">
+                    <arg key="msg.appraisalDate"/>                   
+          </field>
+          <field
+                property="personMet"
+                depends="required">
+                    <arg key="msg.personMet"/>                   
+          </field>
+          <field
+                property="relation"
+                depends="required">
+                    <arg key="msg.relation"/>                   
+          </field>
+          <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.phone1" />
+                
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+        		<arg position="0" key="msg.phone2" />
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field>
+          <field property="email" depends="email">
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>
+	   </field>
+	   <field
+                property="otherCollateralDesc"
+                depends="required">
+                    <arg key="msg.otherCollateralDesc"/>                   
+       </field>
+       
+        </form>  
+        
+        <!-- Collateral Capturing Stock Validations -->
+        <form name="CollateralCapturingStockDynaValidatorForm">
+         
+          <field
+                property="appraiser"
+                depends="required">
+                    <arg key="msg.appraiser"/>                  
+          </field>
+          <field
+                property="appraisalDate"
+                depends="required">
+                    <arg key="msg.appraisalDate"/>                   
+          </field>
+          <field
+                property="personMet"
+                depends="required">
+                    <arg key="msg.personMet"/>                   
+          </field>
+          <field
+                property="relation"
+                depends="required">
+                    <arg key="msg.relation"/>                  
+          </field>
+          <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.phone1" />
+                
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+        		<arg position="0" key="msg.phone2" />
+                <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field>
+          <field property="email" depends="email">				
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>
+				
+	   </field>
+	   <field
+                property="stockAddress"
+                depends="required">
+                    <arg key="msg.stockAddress"/>                   
+       </field>
+       <field
+                property="stockCycle"
+                depends="required">
+                    <arg key="msg.stockCycle"/>                   
+       </field>
+       <field
+                property="stockValue"
+                depends="required">
+                    <arg key="msg.stockValue"/>                   
+       </field>
+        </form>  
+        
+        <!-- Part PrePayment Validations -->
+        <form name="PartPrePaymentMakerDynaValidatorForm">
+         
+          <field
+                property="loanNo"
+                depends="required">
+                    <arg key="msg.loanNo"/>
+          </field>
+          <field
+                property="partPaymentDate"
+                depends="required">
+                    <arg key="msg.partPaymentDate"/>
+          </field>
+          <field
+                property="partPaymentAmount"
+                depends="required">
+                    <arg key="msg.partPaymentAmount"/>
+          </field>
+          <field
+                property="reschReason"
+                depends="required">
+                    <arg key="msg.reschReason"/>
+          </field>
+          
+          <field
+                property="partPaymentParameter"
+                depends="required">
+                    <arg key="msg.rescheduleParameter"/>
+          </field>
+          
+        </form>
+        
+        <!-- Deferral Validations -->
+        <form name="DeferralMakerDynaValidatorForm">
+         
+          <field
+                property="loanNo"
+                depends="required">
+                    <arg key="msg.loanNo"/>
+          </field>
+          <field
+                property="deferredInstallmentNo"
+                depends="required">
+                    <arg key="msg.deferredInstallmentNo"/>
+          </field>
+          <field
+                property="deferralFromInstallment"
+                depends="required">
+                    <arg key="msg.deferralFromInstallment"/>
+          </field>
+          <field property="reschCharges"
+          		depends="required">
+          			<arg key="msg.reschCharges"/>	
+          </field>
+          <field
+                property="deferralReason"
+                depends="required">
+                    <arg key="msg.deferralReason"/>
+          </field>
+           
+        </form>
+        
+        <!-- Repricing Validations -->
+        
+        <form name="RePricingMakerDynaValidatorForm">
+         
+          <field
+                property="loanNo"
+                depends="required">
+                    <arg key="msg.loanNo"/>
+          </field>
+          
+           <field
+                property="rePricingFromInstallment"
+                depends="required">
+                    <arg key="msg.rePricingFromInstallment"/>
+          </field>
+          
+           <field
+                property="reschCharges"
+                depends="required">
+                    <arg key="msg.reschCharges"/>
+          </field>
+           <field
+                property="rePricingReason"
+                depends="required">
+                    <arg key="msg.rePricingReason"/>
+          </field>
+          
+          
+        </form>
+
+<!-- Code by Amit Ends Here -->
+
+
+<!-- validation for Masters -->
+
+<!--  <form name="ProductMasterAddDyanavalidatiorForm">
+         
+          <field
+                property="productId"
+                depends="required,mask">
+                    <arg key="msg.productId"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z']*$</var-value>
+                    </var>
+            </field>
+         
+         	<field  property="productDes" depends="required">
+                    <arg key="msg.productdes"/>
+                    
+            </field>
+           
+            <field  property="productCategory" depends="required,mask">
+                    <arg key="msg.productCategor"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z ']*$</var-value>
+                    </var>
+            </field>
+ 
+         </form>  -->
+
+
+
+<!-- Validation for Doc Child Code Master -->
+
+ <form name="DocChildMasterAddDyanavalidatiorForm">
+         
+          	<field  property="docId" depends="required">
+                    <arg key="msg.docCode"/>
+                
+            </field>
+            
+            <field  property="docChildDes" depends="required">
+                    <arg key="msg.docChildDes"/>    
+            </field>
+          </form>
+
+
+ <!--   <form name="AgencyMasterAddDynaValidatorForm">
+        
+        <field  property="agencyCode" depends="required,mask">
+                    <arg position="0" key="msg.agencyCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+         </field> 
+        <field  property="agencyDesc" depends="required">
+         		<arg position="0" key="msg.agencyDesc"/>
+        </field> 
+        
+        <field  property="agencyType" depends="required">
+         		<arg position="0" key="msg.agencyType"/>
+        </field> 
+   </form>
+   -->
+
+ 
+           
+        <form name="SchemeMasterDyanaValidatorForm">
+         
+          <field
+                property="productName"
+                depends="required">
+                    <arg key="SchemeMasterDyanaValidatorForm.productName"/>
+                    
+            </field>
+         
+          <field  property="schemeCode" depends="validwhen,mask">
+                    <arg key="SchemeMasterDyanaValidatorForm.schemeCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((productName == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>      
+       
+            <field  property="schemeDesc" depends="validwhen">
+                    <arg key="SchemeMasterDyanaValidatorForm.schemeDesc"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((schemeCode == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>      
+           
+           
+        </form> 
+        
+       <!--  <form name="ChargeCodeDynaValidatorForm">
+         
+          <field  property="chargeDescription" depends="required">
+                    <arg key="msg.chargeDescription"/>
+                    
+            </field>
+       
+          </form>
+         
+          <form name="BankMasterAddDyanavalidatiorForm">
+         
+          <field
+                property="bankCode"
+                depends="required,mask">
+                    <arg key="msg.bankCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z']*$</var-value>
+                    </var>
+            </field>
+         
+         <field  property="bankName" depends="required">
+                    <arg key="msg.bankName"/>
+                    
+                
+            </field>
+          
+         </form> -->
+
+
+
+        <!-- Ritu starts here -->
+    <form name="BranchMasterAddDynaValidatorForm">
+<!--        <field  property="branchShortCode" depends="required,minlength,maxlength">-->
+<!--                 <arg key="msg.branchShortCode"/>-->
+<!--               -->
+<!--                 <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>-->
+<!--					<var><var-name>minlength</var-name><var-value>3</var-value></var>-->
+<!--        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>-->
+<!--        			<var><var-name>maxlength</var-name><var-value>3</var-value></var>-->
+<!--         </field>-->
+          
+         <field  property="branchDesc" depends="required">
+                 <arg  key="msg.branName"/>
+                  <arg position="1" name="required" key="${var:required}" resource="false"/>
+         </field>
+                
+         <field  property="companyId" depends="required">
+                 <arg key="msg.companyId"/>
+                 <arg position="1" name="required" key="${var:required}" resource="false"/>
+          </field>
+         
+          <field  property="regionId" depends="required">
+                 <arg key="msg.regionId"/>
+                  <arg position="1" name="required" key="${var:required}" resource="false"/>
+                 
+         </field>
+           <field  property="branchAccount" depends="mask">
+                    <arg key="msg.branchGl" />
+                  <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+         </field> 
+        
+    </form>
+        
+ <!--    <form name="SubIndustryMasterAddDynaValidatorForm">
+        
+        <field  property="subIndustryDesc" 
+                 depends="required">
+                 <arg position="0" key="msg.subIndustryDesc"/>
+              
+        </field>  
+        
+        <field  property="industryId" 
+                 depends="required">
+                 <arg key="msg.industryId"/>
+        </field> 
+    
+   </form>  -->
+   
+   <!-- <form name="IndustryMasterAddDynaValidatorForm">
+        
+        <field  property="industryDesc" 
+                 depends="required">
+                 <arg key="msg.industryDesc"/>
+        </field> 
+   </form>  
+   
+      
+   <form name="DocumentMasterAddDynaValidatorForm">
+        
+        <field  property="documentDesc" depends="required">
+                 <arg position="0" key="msg.documentDesc"/>
+        
+        </field>  
+        
+       
+   </form> -->
+   
+  <!--   <form name="BaseRateMasterAddDynaValidatorForm">
+
+
+			<field property="baseRateType" depends="required,mask">
+				
+				<arg position="0" key="msg.baseRateType" />
+				<arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_a-zA-Z]*$</var-value>
+				</var>
+			</field>
+
+			<field property="effectiveFromDate" depends="required">
+				<arg key="msg.effectiveFromDate" />
+			</field>
+
+			<field property="baseRate" depends="required">
+				
+				<arg position="0" key="msg.baseRate" />
+		</field>
+
+			<field property="baseRateDesc" depends="required">
+				<arg key="msg.baseRateDesc" />
+			</field>
+		</form> 
+		
+		<form name="ChargeMasterAddDynaValidatorForm">
+
+			<field property="productId" depends="required">
+				<arg key="msg.product" />
+			</field>
+			
+			<field property="chargeCode" depends="required">
+				<arg key="msg.chargeCode" />
+			</field>
+			
+			<field property="chargeBPType" depends="required">
+				<arg key="msg.chargeBPType" />
+			</field>
+			
+			<field property="chargeType" depends="required">
+				<arg key="msg.chargeType" />
+			</field>
+			
+			<field property="chargeMethod" depends="required">
+				<arg key="msg.chargeMethod" />
+			</field>
+			
+			<field property="chargeAmount" depends="required">
+			<arg position="0" key="msg.chargeAmount" />
+			</field>
+
+		</form>-->
+		
+		<form name="RoleMasterAddDynaValidatorForm">
+        
+        <field  property="roleDesc" 
+                 depends="required">
+                 <arg position="0" key="msg.roleDesc" />
+				<arg position="1" name="required" key="${required}" resource="false" />
+			
+        </field>  
+        <field  property="moduleId" 
+                 depends="required">
+                 <arg  key="msg.moduleId"/>
+                 <arg position="1" name="required" key="${required}" resource="false" />
+                 
+        </field>  
+      </form>
+      
+<!--    <form name="RoleAccessMasterAddDynaValidatorForm">-->
+<!--        -->
+<!--        <field  property="roleId" -->
+<!--                 depends="required">-->
+<!--                 <arg  key="msg.roleId" />-->
+<!--        </field>  -->
+<!--        <field  property="moduleId" -->
+<!--                 depends="required">-->
+<!--                 <arg  key="msg.moduleId"/>-->
+<!--        </field>  -->
+<!--      </form>-->
+      
+  <form name="UserMasterAddDynaValidatorForm">
+        
+        <field  property="userId" depends="required,mask">
+                <arg position="0" key="msg.userId" />
+				<arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_a-zA-Z]*$</var-value>
+				</var>
+        </field>  
+        <field  property="userName" depends="required,mask">
+                <arg position="0" key="msg.userName" />
+				<arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_' a-zA-Z]*$</var-value>
+				</var>
+        </field> 
+        <field  property="empId" depends="required,mask">
+                <arg position="0" key="msg.empId" />
+				<arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_' a-zA-Z]*$</var-value>
+				</var>
+        </field>
+        <field  property="userDept" depends="required">
+                <arg key="msg.userDept" />
+				
+        </field>
+
+        <field property="branchId" depends="required">
+				<arg key="msg.defaultBranchId" />	
+	    </field>   
+	    <field property="userDesg" depends="required">
+				<arg key="msg.userDesg" />	
+	    </field> 
+	    <field  property="phone1" depends="required,mask,minlength,maxlength">
+                <arg position="0" key="msg.mobile" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+        <field  property="phone2" depends="mask,minlength,maxlength">
+                <arg key="msg.phone2" />
+                <var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        </field> 
+        
+       <field property="email" depends="email,required">				
+				<arg position="0" key="msg.email" />
+				<arg position="1" name="email" key="msg.email"/>				
+	   </field>   
+	     <field  property="reportingto" depends="required">
+                <arg key="msg.reportingName" />
+				
+        </field>
+        <field  property="validityDate" depends="required">
+                <arg key="msg.valDate" />
+				
+        </field>
+         			
+      </form>
+    
+      <!--  <form name="UserBranchMasterAddDynaValidatorForm">
+        
+        <field  property="userId" 
+                 depends="required">
+                 <arg  key="msg.userId" />
+        </field>  
+        <field  property="showlbxBranchR" 
+                 depends="required">
+                 <arg  key="msg.branchId"/>
+        </field>  
+      </form> -->
+      
+      <form name="UserAccessMasterAddDynaValidatorForm">
+        
+        <field  property="userId" 
+                 depends="required">
+                 <arg  key="msg.userId" />
+        </field>  
+        <field  property="roleId" 
+                 depends="required">
+                 <arg  key="msg.roleId"/>
+        </field>  
+        <field  property="moduleId" 
+                 depends="required">
+                 <arg  key="msg.moduleId" />
+        </field>  
+        
+      </form>
+
+  
+            
+      <form name="ChangePasswordMasterAddDynaValidatorForm">
+        
+      <!--   <field  property="userId" 
+                 depends="required">
+                 <arg  key="msg.userId" />
+        </field>  Commented by Rohit for security -->
+        <field  property="oldPassword" 
+                 depends="required">
+                 <arg  key="msg.oldPassword"/>
+        </field>  
+        <field  property="newPassword" 
+                 depends="required">
+                 <arg  key="msg.newPassword" />
+        </field>  
+        <field  property="confirmPassword" 
+                 depends="required">
+                 <arg  key="msg.confirmPassword" />
+        </field>
+     
+      </form>
+      
+      
+   <!--    <form name="BankAccountMasterAddDyanavalidatiorForm">
+         
+          <field property="bankCode" depends="required">
+                    <arg key="msg.bankCode"/>
+          </field>
+         
+         <field  property="bankBranchName" depends="required">
+                    <arg key="msg.bankBranchName"/>
+         </field>
+         
+         <field  property="accountNo" depends="required,mask">
+                    <arg position="0" key="msg.accountNo"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+         </field>
+         
+         <field  property="glCode" depends="mask">
+                    <arg position="0" key="msg.glCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+         </field>
+       
+          </form>  -->
+
+
+
+
+
+
+
+<!-- <form name="NPAStageMasterAddDyanavalidatiorForm">
+         
+          <field
+                property="npaStage" depends="required,mask">
+                    <arg key="msg.npaStage"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z']*$</var-value>
+                    </var>
+                   
+            </field>
+            <field
+                property="sequenceNo" depends="required,mask">
+                    <arg key="msg.sequenceNo"/>
+                    
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+                   
+            </field>
+            <field
+                property="npaCriteria" depends="required">
+                    <arg key="msg.npaCriteria"/>
+                   
+            </field>
+            <field
+                property="npaCriteriaValue" depends="required,mask">
+                    <arg key="msg.npaCriteriaValue"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+                   
+            </field>
+            <field
+                property="moveToNext" depends="required">
+                    <arg key="msg.moveToNext"/>
+                   
+            </field>
+            <field
+                property="moveToPrevious" depends="required">
+                    <arg key="msg.moveToPrevious"/>
+                   
+            </field>
+              </form>
+               -->
+ <!-- Ritu ends here -->
+
+    <!-- Apoorva  Validations starts (GCD GROUP)
+   			<form name="GcdGroupMasterDynaValidatorForm">
+        
+        <field  property="groupDescription" depends="required">
+                    <arg key="msg.groupDescription"/>
+           
+         </field> 
+         <field  property="groupExposureLimit" depends="required">
+                <arg position="0" key="msg.groupExposureLimit"/>
+             
+         </field> 
+   </form> -->
+   <!-- Apoorva Validations ends for (GCD GROUP)-->
+   
+    
+     <!-- validation for Dealer Master Add By Ankit 
+        <form name="DealerMasterAddDyanavalidatiorForm">
+  
+           <field  property="dealerDes" depends="required">
+                    <arg key="msg.dealerDes"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+                     
+            </field>
+            
+                <field  property="dealerType" depends="required">
+                    <arg key="msg.dealerType"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+                     
+            </field>
+                     
+         </form> -->
+         
+         
+                <!-- Validation for Department Master Add By Ankit    
+          <form name="DepartmentMasterAddDyanavalidatiorForm">
+
+         	<field  property="departmentDes" depends="required">
+                    <arg key="msg.deptDes"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>   
+         	</field>       
+		 </form>     -->  
+		 
+		 <!-- Validation for Reason Master Add By Ankit        
+
+<form name="ReasonMasterAddDyanaValidationForm">
+         
+         	<field  property="reasonType" depends="required">
+                    <arg key="msg.reasonType"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+  			</field>
+            
+         	 <field  property="reasonDes" depends="required">
+                    <arg key="msg.reasonDesc"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+              
+            </field>
+            
+            <field  property="chargeAmount" depends="mask">
+                    <arg key="msg.reasonAmt"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9.]*$</var-value>
+                    </var>
+              </field>
+
+         </form> --> 
+         
+    
+         
+         <!-- Validation for Region Master 
+         
+           <form name="RegionMasterAddDyanavalidatiorForm">
+         
+          	<field  property="regionDes" depends="required">
+                    <arg key="msg.regiondesc"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+                 
+            </field>
+           
+          </form>-->
+    
+         <!-- Validation for State Master 
+         
+           <form name="StateMasterAddDyanavalidatiorForm">
+         
+          	<field  property="stateDes" depends="required">
+                    <arg key="msg.statedesc"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+                     
+            </field>
+            
+            	<field  property="countryId" depends="required">
+                    <arg key="msg.counId"/>
+                     <arg position="1" name="required" key="${var:required}" resource="false"/>
+            </field>
+           
+          </form>-->
+    
+     <!-- Validation for District Master 
+         
+           <form name="DistrictMasterAddDyanavalidatiorForm">
+         
+          	<field  property="districtDes" depends="required">
+                    <arg key="msg.distDes"/>
+                    <arg position="1" name="required" key="${required}" resource="false"/>
+     
+            </field>
+            
+            <field  property="stateId" depends="required">
+                    <arg key="msg.state"/>  
+                    <arg position="1" name="required" key="${required}" resource="false"/>
+            </field>
+           
+          </form> -->
+          
+              <!-- Validation for Country Master 
+         
+           <form name="CountryMasterAddDyanavalidatiorForm">
+         
+          	<field  property="countryDes" depends="required">
+                    <arg key="msg.countryDes"/>
+                
+            </field>
+            
+            <field  property="currencyId" depends="required,mask">
+                    <arg key="msg.currencyId"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>      
+            </field>
+          </form>	-->
+        
+<!-- Apoorva  Validations starts (Generic Master)-->
+   			<form name="GenericMasterAddDynaValidatorForm">
+        
+        <field  property="genericKey" 
+                 depends="required,mask">
+                    <arg position="0" key="msg.genericKey"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+         </field> 
+         
+          <field  property="genericval" 
+                 depends="required,mask">
+                    <arg position="0" key="msg.value"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' \-a-zA-Z]*$</var-value>
+                    </var>
+         </field> 
+          <field  property="description" 
+                 depends="required">
+                    <arg position="0" key="msg.description"/>
+                    <arg position="1" name="required" key="${var:required}" resource="false"/>
+     
+         </field> 
+   </form> 
+   <!-- Apoorva Validations ends for (Generic Master)-->
+
+         <!-- Validations starts (Scheme Master)-->
+   	<form name="CrSchemeMasterDynaValidatorForm">
+        
+        <field  property="productId" depends="required">
+             <arg position="0" key="msg.productId"/>
+                      
+         </field> 
+         
+         <field  property="schemeDesc"  depends="required">
+                    <arg position="0" key="msg.schemeDesc"/>
+                         
+         </field> 
+         
+         <field  property="customerExposureLimit"  depends="required">
+                    <arg position="0" key="msg.customerExposureLimit"/>
+                         
+         </field> 
+         <field  property="minAmountFin" 
+                 depends="required">
+                    <arg position="0" key="msg.minAmountFin"/>
+           
+         </field> 
+          <field  property="maxAmountFin" 
+                 depends="required">
+                    <arg position="0" key="msg.maxAmountFin"/>
+          </field> 
+  
+         <field  property="reschLockinPeriod" 
+                 depends="mask">
+                    <arg position="0" key="msg.reschLockinPeriod"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="numberReschAllowedYear" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberReschAllowedYear"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="numberReschAllowedTotal" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberReschAllowedTotal"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="minimumGapResch" 
+                 depends="mask">
+                    <arg position="0" key="msg.minimumGapResch"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="defrLockinPeriod" 
+                 depends="mask">
+                    <arg position="0" key="msg.defrLockinPeriod"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="maximumDefrMonthsAllowed" 
+                 depends="mask">
+                    <arg position="0" key="msg.maximumDefrMonthsAllowed"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="maximumDefrMonthsTotal" 
+                 depends="mask">
+                    <arg position="0" key="msg.maximumDefrMonthsTotal"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="minimumGapDefr" 
+                 depends="mask">
+                    <arg position="0" key="msg.minimumGapDefr"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="numberDefrAllowedYear" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberDefrAllowedYear"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="numberDefrAllowedTotal" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberDefrAllowedTotal"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          
+                   <field  property="numberPrepayAllowedYear" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberPrepayAllowedYear"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+          <field  property="minimumGapPrepay" 
+                 depends="mask">
+                    <arg position="0" key="msg.minimumGapPrepay"/>
+                             <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+
+            
+          <field  property="minimumGapTermination" 
+                 depends="mask">
+                    <arg position="0" key="msg.minimumGapTermination"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+         <field  property="maximumDefrMonthsAllowed" 
+                 depends="mask">
+                    <arg position="0" key="msg.maxDefrMonthsAllowed"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+         
+         <field  property="prepayLockinPeriod" 
+                 depends="mask">
+                    <arg position="0" key="msg.prepayLockinPeriod"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+         
+          <field  property="numberPrepayAllowedTotal" 
+                 depends="mask">
+                    <arg position="0" key="msg.numberPrepayAllowTotal"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field> 
+ 
+  
+          <field  property="terminationLockinPeriod" 
+                 depends="mask">
+                    <arg position="0" key="msg.terminationLockinPeriod"/>
+               <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field>
+         
+          <field  property="minPeriodResch" depends="mask">
+                    <arg position="0" key="msg.minPeriodResch"/>
+               <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+             <var>
+                 <var-name>mask</var-name>
+                 <var-value>^[0-9]*$</var-value>
+             </var>
+             
+         </field>
+ 
+   </form> 
+   <!-- Validations ends for (Scheme Master)-->
+   
+  <!-- Validations for doc chcklist master       
+<form name="DocumentCheckListMasterAddDyanavalidatiorForm">
+         
+          
+             <field  property="docEntity" depends="required">
+                    <arg key="msg.docEntity"/>    
+            </field>
+            <field  property="docStage" depends="required">
+                    <arg key="msg.docStage"/>    
+            </field>
+            
+           
+          </form>--> 
+
+<!-- validation End for Masters -->  
+   
+   
+<!-- validation End for Masters -->
+   
+   <!--Abhimanyu validation -->
+
+<form name="WaiveOffMakerSaveDynaValidatorForm">
+         
+          <field
+                property="loanAccountNo"
+                depends="required">
+                    <arg key="msg.loanAccountNo"/>
+                    
+            </field>
+             <field
+                property="businessPartnerTypeDesc"
+                depends="required">
+                    <arg key="msg.businessPartnerType"/>
+                    
+            </field>
+             <field
+                property="chargeType"
+                depends="required">
+                    <arg key="msg.chargeType"/>
+                    
+            </field>
+             <field
+                property="waivOffAmount"
+                depends="required">
+                    <arg key="msg.waivOffAmount"/>
+                    
+            </field>
+<!--             <field-->
+<!--                property="remarks"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.remarks"/>-->
+<!--                    -->
+<!--            </field>-->
+       </form>
+        
+        
+<!--        <form name="WaiveOffAuthorDynaValidatorForm">-->
+<!--         -->
+<!--          <field-->
+<!--                property="remarks"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.remarksAuthor"/>-->
+<!--                    -->
+<!--            </field>-->
+<!--                    -->
+<!--           -->
+<!--        </form>-->
+        
+        
+     <!-- validation for loandetail in credit management -->   
+       <!-- 
+        <form name="LoanDetailsCMDynaValidatorForm">
+         
+          <field
+                property="loanAmount"
+                depends="required">
+                    <arg key="msg.loanAmount"/>
+                    
+            </field>
+             <field
+                property="agreementDate"
+                depends="required">
+                    <arg key="msg.agreementDate"/>
+                    
+            </field>
+             
+             <field
+                property="repayEffectiveDate"
+                depends="required">
+                    <arg key="msg.repayEffectiveDate"/>
+                    
+            </field>
+            
+                     
+            <field
+                property="remarks"
+                depends="required">
+                    <arg key="msg.remarks"/>
+                    
+            </field>
+         
+       </form>
+       --> 
+<!--        <form name="WaiveOffAuthorDynaValidatorForm">-->
+<!--         -->
+<!--          <field-->
+<!--                property="remarks"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.remarks"/>-->
+<!--                    -->
+<!--            </field>-->
+<!--                    -->
+<!--           -->
+<!--        </form>-->
+
+<!--   end   -->
+
+  <!--  Avinash, validation of cibil report  
+        <form name="CibilReportDynaValidatorForm">
+        
+        <field  property="consumername" depends="required">
+                    <arg position="0" key="msg.consumername"/>
+       </field> 
+       
+       
+          <field  property="leadDate"  depends="required">
+                    <arg position="0" key="msg.leadDate"/>
+                      
+            </field>
+            
+          <field  property="cibilCodes" depends="required,mask">
+                    <arg position="0" key="msg.cibilCodes"/>                   
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9-_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            
+           
+              <field  property="totalOverdueac" depends="required,mask">
+                    <arg key="msg.totalOverdueac"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            
+             <field  property="decison"  depends="required">
+                    <arg position="0" key="msg.decison"/>
+                      
+            </field>
+            <field  property="comment"  depends="required">
+                    <arg position="0" key="msg.comment"/>
+                      
+            </field>
+            
+            
+            
+         
+         <field  property="totalAc" depends="mask">
+                    <arg key="msg.totalAc"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+           
+            <field  property="noofEnquiry" depends="mask">
+                    <arg key="msg.noofEnquiry"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+   </form> -->
+   
+      
+      
+         <!--  Sanjog validation of Lead Capturing  -->
+       <form name="LeadAjaxParametersDynaValidator">
+	         <field  property="branchCode" depends="required">
+	                    <arg key="msg.relationship"/>
+	                    
+	         </field>
+         </form>
+<!--<form name="LeadCapturingDynaValidatorForm">-->
+<!--        <field  property="relationship" depends="required">-->
+<!--                    <arg key="msg.relationship"/>-->
+<!--                    -->
+<!--         </field> -->
+<!--         -->
+<!--          <field-->
+<!--                property="relationshipSince"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.relationshipSince"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--        <field  property="customerName" depends="required,mask">-->
+<!--                    <arg position="0" key="msg.customername"/>-->
+<!--                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[a-zA-Z/_'. - ]*$</var-value>-->
+<!--                    </var>-->
+<!--         </field> -->
+<!--                 <field  property="leadGenerator" depends="required">-->
+<!--                    <arg position="0" key="msg.leadGenerator"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[a-zA-Z ]*$</var-value>-->
+<!--                    </var>-->
+<!--         </field> -->
+<!--         <field  property="contactPerson" depends="required,mask">-->
+<!--                    <arg position="0" key="msg.contactperson"/>-->
+<!--                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[a-zA-Z/_'. - ]*$</var-value>-->
+<!--                    </var>-->
+<!--         </field> -->
+<!--                 <field  property="personDesignation" depends="required,mask">-->
+<!--                    <arg position="0" key="msg.persondesignation"/>-->
+<!--                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[a-zA-Z ]*$</var-value>-->
+<!--                    </var>-->
+<!--         </field> -->
+<!--         <field  property="address1" depends="required">-->
+<!--                    <arg key="msg.address1"/>-->
+<!--                    -->
+<!--         </field> -->
+<!---->
+<!---->
+<!--                     <field  property="country"  depends="required">-->
+<!--                    <arg key="msg.country"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--                        <field  property="state"  depends="required">-->
+<!--                    <arg key="msg.state"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--                        <field  property="dist"  depends="required">-->
+<!--                    <arg key="msg.district"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--             <field  property="pincode" depends="required,mask">-->
+<!--                <arg key="msg.pinCode" />-->
+<!--                <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--				<var>-->
+<!--					<var-name>mask</var-name>-->
+<!--					<var-value>^[0-9]*$</var-value>-->
+<!--				</var>-->
+<!--        </field>-->
+<!--        <field  property="phoneRes" depends="mask">-->
+<!--                <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--				<var>-->
+<!--					<var-name>mask</var-name>-->
+<!--					<var-value>^[0-9]*$</var-value>-->
+<!--				</var>-->
+<!--        </field>-->
+<!--                    <field  property="phoneOff" depends="required,mask">-->
+<!--                <arg key="msg.mobileoff" />-->
+<!--                <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--				<var>-->
+<!--					<var-name>mask</var-name>-->
+<!--					<var-value>^[0-9]*$</var-value>-->
+<!--				</var>-->
+<!--        </field> -->
+<!--        -->
+<!--       <field property="email" depends="email,required">-->
+<!--				-->
+<!--				<arg position="0" key="msg.email" />-->
+<!--				<arg position="1" name="email" key="msg.email"/>-->
+<!--				-->
+<!--	   </field>-->
+<!--	   <field property="altEmail" depends="email">-->
+<!--	   			<arg position="0" key="msg.altMail" />-->
+<!--				<arg position="1" name="altEmail" key="msg.altMail"/>-->
+<!--				-->
+<!--	   </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="noOfYears"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.noOfYears"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          <field-->
+<!--                property="industry"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.industry"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="subIndustry"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.subIndustry"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--	           -->
+<!--                <field  property="product"  depends="required">-->
+<!--                    <arg key="msg.productId"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--                    <field  property="scheme"  depends="required">-->
+<!--                    <arg key="msg.scheme"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--        <field  property="loanAmount"  depends="required">-->
+<!--                    <arg key="msg.loanAmount"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--        <field  property="loanTenure" depends="required,mask">-->
+<!--                <arg key="msg.loanTenure" />-->
+<!--                <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--				<var>-->
+<!--					<var-name>mask</var-name>-->
+<!--					<var-value>^[0-9]*$</var-value>-->
+<!--				</var>-->
+<!--        </field>-->
+<!--                    <field  property="loanPurpose"  depends="required">-->
+<!--                    <arg key="msg.loanPurpose"/>-->
+<!--                      -->
+<!--            </field>            -->
+<!--      </form>-->
+         
+         
+<!--         <form name="LeadNotepadDynaValidatorForm">-->
+<!--         -->
+<!--          <field-->
+<!--                property="noteCode"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.noteCode"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          <field-->
+<!--                property="meetingDate"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.meetingDate"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="meetingTime"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.meetingTime"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="personMet"-->
+<!--                depends="required,mask">-->
+<!--                  -->
+<!--                   <arg position="0" key="msg.personMet"/> -->
+<!--                   <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[a-zA-Z0-9/_'. - ]*$</var-value>-->
+<!--                    </var>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="meetingLocation"-->
+<!--                depends="required">-->
+<!--                -->
+<!--                 <arg key="msg.meetinLoc"/>-->
+<!--                -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="meetingRemarks"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.notes"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--          <field-->
+<!--                property="followUp"-->
+<!--                depends="required">-->
+<!--                    <arg key="msg.followUp"/>-->
+<!--                   -->
+<!--          </field>-->
+<!--          -->
+<!--         -->
+<!--         -->
+<!--          -->
+<!--    </form>-->
+<!--      -->
+   
+<!--  Avinash end  -->
+        
+      
+      
+        <!--SLI New Policy Form	
+		<form name="sliEmpDetailsForm">
+            <field property="fname" depends="required,mask">
+                    <arg0 key="subscriberinformation.fname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+            
+            <field property="lname" depends="required,mask">
+                    <arg0 key="subscriberinformation.lname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            <field property="empSex" depends="required,mask">
+				<arg0 key="subscriberinformation.empSex" />
+				<var><var-name>mask</var-name><var-value>Male|Female</var-value></var> 		
+			</field>
+			<field property="phone" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.phone" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>8</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>8</var-value></var>
+			</field>	
+			<field property="mobile" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.mobile" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>		
+			<field property="empMaritalStatus" depends="required,mask">
+				<arg0 key="subscriberinformation.empMaritalStatus" />
+				<var><var-name>mask</var-name><var-value>Married|Unmarried</var-value></var> 		
+			</field>
+			<field property="email" depends="required,email">
+				<arg0 key="subscriberinformation.email" />
+			</field>
+			<field property="pan" depends="required,mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.pan" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>	
+            <field property="empDob" depends="required,date">
+				<arg0 key="subscriberinformation.empDob" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="empDoj" depends="required,date">
+				<arg0 key="subscriberinformation.empDoj" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			
+			<field property="payType" depends="required,mask">
+				<arg0 key="policyinformation.payType" />
+				<var><var-name>mask</var-name><var-value>TR5|CHALLAN|DD</var-value></var> 		
+			</field>
+			<field property="dateRisk" depends="required,date">
+				<arg0 key="policyinformation.dateRisk" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			  <field property="fileNo" depends="required,mask">
+                    <arg0 key="policyinformation.fileNo"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+			<field property="maturityDate" depends="required,date">
+				<arg0 key="policyinformation.maturityDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="retireDate" depends="required,date">
+				<arg0 key="subscriberinformation.retirementDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="checkTr5ChlnNo" depends="required,mask">
+				<arg0 key="policyinformation.checkTr5ChlnNo" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>
+				
+			<field property="sumAssured" depends="required,mask">
+				<arg0 key="policyinformation.sumAssured" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>	
+			<field property="bankOfcName" depends="mask">
+				<arg0 key="policyinformation.bankOfcName" />
+				<var><var-name>mask</var-name><var-value>^[a-zA-Z]*$</var-value></var>
+			</field>
+			
+			<field property="empAge" depends="integer,intRange">
+				<arg0 key="policyinformation.empAge" />
+				<arg position="1" name="intRange" key="${var:min}" resource="false"/>
+        		<arg position="2" name="intRange" key="${var:max}" resource="false"/>
+        			<var><var-name>min</var-name><var-value>18</var-value></var>
+        			<var><var-name>max</var-name><var-value>50</var-value></var>
+			</field>
+			<field property="premium" depends="required,integer">
+        		<arg position="0" key="policyinformation.premium"/>
+   		   	</field>
+			<field property="empaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="empaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field> 
+			<field property="basicPay1" depends="required,double">
+				<arg0 key="subscriberinformation.basicPay1" />
+			</field> 
+        </form>
+
+        
+
+
+  
+		<form name="gisEmpDetailsForm">
+            <field property="fname" depends="required,mask">
+                    <arg0 key="subscriberinformation.fname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+            
+            
+          
+            
+            
+            
+            
+            
+            
+            
+            <field property="lname" depends="required,mask">
+                    <arg0 key="subscriberinformation.lname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            <field property="empSex" depends="required,mask">
+				<arg0 key="subscriberinformation.empSex" />
+				<var><var-name>mask</var-name><var-value>Male|Female</var-value></var> 		
+			</field>
+			<field property="phone" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.phone" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>8</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>8</var-value></var>
+			</field>	
+			<field property="mobile" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.mobile" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>		
+			<field property="empMaritalStatus" depends="required,mask">
+				<arg0 key="subscriberinformation.empMaritalStatus" />
+				<var><var-name>mask</var-name><var-value>Married|Unmarried</var-value></var> 		
+			</field>
+			<field property="email" depends="required,email">
+				<arg0 key="subscriberinformation.email" />
+			</field>
+			<field property="pan" depends="required,mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.pan" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>	
+            <field property="empDob" depends="required,date">
+				<arg0 key="subscriberinformation.empDob" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="empDoj" depends="required,date">
+				<arg0 key="subscriberinformation.empDoj" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			
+			<field property="payType" depends="required,mask">
+				<arg0 key="policyinformation.payType" />
+				<var><var-name>mask</var-name><var-value>TR5|CHALLAN|DD</var-value></var> 		
+			</field>
+			<field property="dateRisk" depends="required,date">
+				<arg0 key="policyinformation.dateRisk" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			  <field property="fileNo" depends="required,mask">
+                    <arg0 key="policyinformation.fileNo"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+			<field property="maturityDate" depends="required,date">
+				<arg0 key="policyinformation.maturityDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="retireDate" depends="required,date">
+				<arg0 key="subscriberinformation.retirementDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="checkTr5ChlnNo" depends="required,mask">
+				<arg0 key="policyinformation.checkTr5ChlnNo" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>
+				
+			<field property="sumAssured" depends="required,mask">
+				<arg0 key="policyinformation.sumAssured" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>	
+			<field property="bankOfcName" depends="mask">
+				<arg0 key="policyinformation.bankOfcName" />
+				<var><var-name>mask</var-name><var-value>^[a-zA-Z]*$</var-value></var>
+			</field>
+			
+			<field property="empAge" depends="integer,intRange">
+				<arg0 key="policyinformation.empAge" />
+				<arg position="1" name="intRange" key="${var:min}" resource="false"/>
+        		<arg position="2" name="intRange" key="${var:max}" resource="false"/>
+        			<var><var-name>min</var-name><var-value>18</var-value></var>
+        			<var><var-name>max</var-name><var-value>50</var-value></var>
+			</field>
+			<field property="premium" depends="required,integer">
+        		<arg position="0" key="policyinformation.premium"/>
+   		   	</field>
+			<field property="empaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="empaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field> 
+			<field property="basicPay1" depends="required,double">
+				<arg0 key="subscriberinformation.basicPay1" />
+			</field> 
+        </form>
+
+        
+      
+        <form name="bonusRateMasterForm">
+            <field
+                property="fromDate"
+                depends="required,date">
+                    <arg0 key="bonusRateMasterForm.fromDate"/>
+                    <var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+            </field>
+            <field
+                property="toDate"
+                depends="required,date">
+                    <arg0 key="bonusRateMasterForm.toDate"/>
+                    <var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+            </field>
+            <field
+                property="minAge"
+                depends="required,integer">
+                    <arg key="bonusRateMasterForm.minAge"/>
+                    
+            </field>
+            <field
+                property="maxAge"
+                depends="required,integer">
+                    <arg key="bonusRateMasterForm.maxAge"/>
+                    
+            </field>
+            <field
+                property="amount"
+                depends="required,double">
+                    <arg key="bonusRateMasterForm.amount"/>  
+            </field>
+        </form>
+        
+      
+		<form name="sliEmpDetailsForm">
+            <field property="fname" depends="required,mask">
+                    <arg0 key="subscriberinformation.fname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+            <field property="lname" depends="required,mask">
+                    <arg0 key="subscriberinformation.lname"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            <field property="empSex" depends="required,mask">
+				<arg0 key="subscriberinformation.empSex" />
+				<var><var-name>mask</var-name><var-value>Male|Female</var-value></var> 		
+			</field>
+			<field property="phone" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.phone" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>8</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>8</var-value></var>
+			</field>	
+			<field property="mobile" depends="mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.mobile" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>		
+			<field property="empMaritalStatus" depends="required,mask">
+				<arg0 key="subscriberinformation.empMaritalStatus" />
+				<var><var-name>mask</var-name><var-value>Married|Unmarried</var-value></var> 		
+			</field>
+			<field property="email" depends="required,email">
+				<arg0 key="subscriberinformation.email" />
+			</field>
+			<field property="pan" depends="required,mask,minlength,maxlength">
+				<arg0 key="subscriberinformation.pan" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+			</field>	
+            <field property="empDob" depends="required,date">
+				<arg0 key="subscriberinformation.empDob" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="empDoj" depends="required,date">
+				<arg0 key="subscriberinformation.empDoj" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			
+			<field property="payType" depends="required,mask">
+				<arg0 key="policyinformation.payType" />
+				<var><var-name>mask</var-name><var-value>TR5|CHALLAN|DD</var-value></var> 		
+			</field>
+			<field property="dateRisk" depends="required,date">
+				<arg0 key="policyinformation.dateRisk" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>	
+			<field property="maturityDate" depends="required,date">
+				<arg0 key="policyinformation.maturityDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="retireDate" depends="required,date">
+				<arg0 key="subscriberinformation.retirementDate" />
+				<var><var-name>datePatternStrict</var-name><var-value>dd-MM-yyyy</var-value></var>
+			</field>
+			<field property="checkTr5ChlnNo" depends="required,mask">
+				<arg0 key="policyinformation.checkTr5ChlnNo" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>
+				
+			<field property="sumAssured" depends="required,mask">
+				<arg0 key="policyinformation.sumAssured" />
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+			</field>	
+			<field property="bankOfcName" depends="mask">
+				<arg0 key="policyinformation.bankOfcName" />
+				<var><var-name>mask</var-name><var-value>^[a-zA-Z]*$</var-value></var>
+			</field>
+			
+			<field property="empAge" depends="integer,intRange">
+				<arg0 key="policyinformation.empAge" />
+				<arg position="1" name="intRange" key="${var:min}" resource="false"/>
+        		<arg position="2" name="intRange" key="${var:max}" resource="false"/>
+        			<var><var-name>min</var-name><var-value>18</var-value></var>
+        			<var><var-name>max</var-name><var-value>50</var-value></var>
+			</field>
+			<field property="premium" depends="required,integer">
+        		<arg position="0" key="policyinformation.premium"/>
+   		   	</field>
+			<field property="empaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="empaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.empaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs1" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr1" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field>
+			<field property="deptaddrs2" depends="required,mask">
+				<arg0 key="subscriberinformation.deptaddr2" />
+				<var><var-name>mask</var-name><var-value>^[0-9a-zA-Z]*$</var-value></var>
+			</field> 
+			<field property="basicPay1" depends="required,double">
+				<arg0 key="subscriberinformation.basicPay1" />
+			</field> 
+        </form>
+
+        
+
+    </formset>
+
+   
+    <formset language="fr">
+
+        <constant>
+            <constant-name>postalCode</constant-name>
+            <constant-value>^[0-9a-zA-Z]*$</constant-value>
+        </constant>
+
+     
+        <form name="logonForm">
+            <field
+                property="username"
+                depends="required">
+                    <arg key="logonForm.username"/>
+            </field>
+            <field
+                property="password"
+                depends="required,mask">
+                    <arg key="logonForm.password"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+        </form>
+form -->
+
+
+
+<!--  ravindra, validation of manual advice creation  
+          <form name="ManualAdviceCreationDynaValidatorForm">
+         
+         	<field  property="lbxLoanNoHID"  depends="required">
+                    <arg key="msg.loanAccountNumber"/>
+                      
+            </field>
+            <field  property="customersName" depends="required">
+                    <arg key="msg.customersName"/>
+                   
+                    
+            </field>
+         	<field  property="lbxBusinessPartnearHID"  depends="required">
+                    <arg key="msg.businessPartnerTypes"/>
+                      
+            </field>
+            
+             <field  property="businessPartnerName"  depends="required">
+                    <arg key="msg.businessPartnerName"/>
+                  
+            </field>
+            <field  property="lbxCharge"  depends="required">
+                    <arg key="msg.chargeCode"/>
+                      
+            </field>
+             <field property="chargeAmount" depends="required">
+                    <arg key="msg.chargeAmounts"/>
+                  
+            </field>
+            
+            <field  property="remarks"  depends="required">
+                    <arg key="msg.remarks"/>
+                  
+            </field>
+                 
+        </form>-->
+        
+        
+<!--  Ravindra bank account analysis start      -->
+<!-- <form name="BankAccountAnalysisDynaValidatorForm">-->
+<!--        -->
+<!--         	<field  property="lbxDealNo"  depends="required">-->
+<!--                    <arg key="msg.dealNo"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--            -->
+<!--         	<field  property="lbxBankID"  depends="required">-->
+<!--                    <arg key="msg.bankName"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--            -->
+<!--             <field  property="lbxBranchID"  depends="required">-->
+<!--                    <arg key="msg.branchName"/>-->
+<!--                  -->
+<!--            </field>-->
+<!--            <field  property="accountType"  depends="required">-->
+<!--                    <arg key="msg.accountType"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--             <field property="accountNo" depends="required,mask">-->
+<!--                    <arg key="msg.accountNo"/>-->
+<!--                     <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[0-9]*$</var-value>-->
+<!--                    </var>-->
+<!--                    -->
+<!--            </field>-->
+<!--             <field  property="year" depends="required">-->
+<!--                    <arg key="msg.year"/>-->
+<!--                 -->
+<!--            </field>-->
+<!--            <field  property="month" depends="required">-->
+<!--                    <arg key="msg.month"/>-->
+<!--                 -->
+<!--            </field>-->
+<!--            <field property="totalEMI" depends="required">-->
+<!--                    <arg key="msg.totalEMI"/>-->
+<!--                   -->
+<!--            </field>-->
+<!--            <field property="credit" depends="required">-->
+<!--                    <arg key="msg.credit"/>-->
+<!--                     -->
+<!--            </field>-->
+<!--            <field property="debit" depends="required">-->
+<!--                    <arg key="msg.debit"/>-->
+<!--                   -->
+<!--            </field>-->
+<!--            <field property="highestBalance" depends="required">-->
+<!--                    <arg key="msg.highestBalance"/>-->
+<!--              -->
+<!--            </field>-->
+<!--            <field property="lowestBalance" depends="required">-->
+<!--                    <arg key="msg.lowestBalance"/>-->
+<!--                 -->
+<!--            </field>-->
+<!--            <field property="checkBounceAmount" depends="required">-->
+<!--                    <arg key="msg.checkBounceAmount"/>-->
+<!--                    -->
+<!--            </field>-->
+<!--            -->
+<!--             <field property="checkBounceFrequency" depends="required,mask">-->
+<!--                    <arg key="msg.checkBouncingFrequency"/>-->
+<!--                     <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[0-9]*$</var-value>-->
+<!--                    </var>-->
+<!--                    -->
+<!--            </field>-->
+<!--             <field property="overLimitAmount" depends="required">-->
+<!--                    <arg key="msg.overLimitAmount"/>-->
+<!--                    -->
+<!--            </field>-->
+<!--            -->
+<!--             <field property="overLimitFrequency" depends="required,mask">-->
+<!--                    <arg key="msg.overLimitFrequency"/>-->
+<!--                  	 <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[0-9]*$</var-value>-->
+<!--                    </var>-->
+<!--            </field>-->
+<!--                 -->
+<!--        </form>-->
+<!--  Ravindra bank account analysis end      -->
+
+<!--  ravindra, validation of Obligations  -->
+          <form name="ObligationDynaValidatorForm">
+        
+            <field  property="institutionName" depends="required,mask">
+                    <arg key="msg.institutionName"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+         	
+            <field property="emiAmount" depends="required">
+                    <arg key="msg.emiAmount"/>
+                   
+            </field>
+            <field property="tenure" depends="required,mask">
+                    <arg key="msg.remainingTenure"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9.]*$</var-value>
+                    </var>
+            </field>
+             <field  property="maturityDate" depends="required">
+                    <arg key="msg.maturityDate"/>
+                 
+            </field>
+            <field  property="purpose"  depends="required">
+                    <arg key="msg.purpose"/>
+                  
+            </field>
+             <field  property="obligationType"  depends="required">
+                    <arg key="msg.obligationType"/>
+                  
+            </field> 
+             <field  property="financeAmount"  depends="required">
+                    <arg key="msg.financeAmount"/>
+                  
+            </field> 
+             <field  property="varificationMethod"  depends="required">
+                    <arg key="msg.varificationMethod"/>
+                  
+            </field> 
+        </form>
+        
+        
+<!--  Ravindra Obligations end      -->
+    
+    
+    <!--  ravindra, validation of sales analysis  -->
+<!--          <form name="SalesAnalysisDynaValidatorForm">-->
+<!--        -->
+<!--         	<field  property="year"  depends="required">-->
+<!--                    <arg key="msg.year"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--            <field  property="month"  depends="required">-->
+<!--                    <arg key="msg.month"/>-->
+<!--                      -->
+<!--            </field>-->
+<!--           -->
+<!--             <field property="netsales" depends="required">-->
+<!--                    <arg key="msg.netsales"/>-->
+<!--                   -->
+<!--            </field>-->
+<!--           -->
+<!--        </form>-->
+        
+        
+<!--  Ravindra sales analysis end      -->
+
+ <form name="GuaranteeAmountDynaValidatorForm">
+         	<field  property="guaranteeAmount"  depends="required">
+                    <arg key="msg.guaranteeAmount"/>
+                      
+            </field>
+        </form>
+   <!-- Ritu Field Verification Start -->         
+       <form name="FieldVarificationSaveDynaValidatorForm">
+         	<field  property="type"  depends="required">
+                    <arg key="msg.verificationtype"/>
+            </field>
+            
+            <field  property="varificationSubType"  depends="required">
+                    <arg key="msg.varificationSubType"/>
+            </field>
+            
+            <field  property="appraiser"  depends="required">
+                    <arg key="msg.appraiserType"/>
+            </field>
+            
+            <field  property="internalAppraiser"  depends="required">
+                    <arg key="msg.internalAppraiser"/>
+            </field>
+            
+            <field  property="externalAppraiser"  depends="required">
+                    <arg key="msg.externalAppraiser"/>
+            </field>
+        </form> 
+   <!-- Ritu Field Verification END -->   
+   
+   <!-- Trade Check Validation By Ankit -->
+   <form name="TradeCheckCapBuyerSupplierDynaValidatorForm">
+        
+            <field  property="appraiser"  depends="required">
+                    <arg key="msg.tradeAppraiser"/>
+            </field>
+            
+            <field  property="appraisalDate"  depends="required">
+                    <arg key="msg.tradeAppraisalDate"/>
+            </field>
+            
+          
+         	<field  property="contactPerson"  depends="required">
+                    <arg key="msg.TradecontactPerson"/>
+            </field>
+            
+            <field  property="relation"  depends="required">
+                    <arg key="msg.tradeRelation"/>
+            </field>
+            
+            <field  property="averagePurchase"  depends="required">
+                    <arg key="msg.averagePurchaseSales"/>
+            </field>
+            
+            <field  property="paymentTerms"  depends="required">
+                    <arg key="msg.paymentTerms"/>
+            </field>
+            
+            <field  property="productType"  depends="required">
+                    <arg key="msg.TradeproType"/>
+            </field>
+            
+            <field  property="vintageOfRelationship"  depends="required">
+                    <arg key="msg.vintageOfRelationship"/>
+            </field>
+            
+             <field  property="textarea"  depends="required">
+                    <arg key="msg.tradeRemarks"/>
+            </field>
+            
+             <field property="email" depends="email">
+				<arg position="0" key="msg.tradeEmail" />
+				<arg position="1" name="email" key="msg.tradeEmail"/>
+	   </field>   
+        </form> 
+        
+         <form name="TradeCheckCapMarketDynaValidatorForm">
+   
+   			<field  property="appraiser"  depends="required">
+                    <arg key="msg.tradeAppraiser"/>
+            </field>
+            
+            <field  property="appraisalDate"  depends="required">
+                    <arg key="msg.tradeAppraisalDate"/>
+            </field>
+            
+             <field  property="textarea"  depends="required">
+                    <arg key="msg.tradeRemarks"/>
+            </field>
+            
+            </form> 
+
+            
+            
+            
+   <!-- Field Verification Validation By Neeraj -->
+   			<form name="FieldVarificationCapturingForm">   
+<!--   				<field  property="referenceId"  depends="required">-->
+<!--                    <arg key="msg.referenceId"/>-->
+<!--            	</field>            	-->
+<!--            	            	-->
+            	<field  property="appraisalName"  depends="required">
+                    <arg key="msg.appraisalName"/>
+            	</field> 
+            	<field  property="verificationMode"  depends="required">
+                    <arg key="msg.verificationMode"/>
+            	</field>           	
+            	<field  property="appraisalDate"  depends="required">
+                    <arg key="msg.appraisalDate"/>
+            	</field>            	
+            	            	
+            	<field  property="personToMeet"  depends="required">
+                    <arg key="msg.personToMeet"/>
+            	</field>            	
+            	<field  property="relationWithApplicant"  depends="required">
+                    <arg key="msg.relationWithApplicant"/>
+            	</field> 	
+				<field  property="phone1" depends="required,mask,minlength,maxlength">
+                	<arg position="0" key="msg.phone1" />                
+                	<arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    	<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+					<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+						<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        			<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        				<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        		</field>        
+       		 	<field  property="phone2" depends="mask,minlength,maxlength">
+        			<arg position="0" key="msg.phone_number" />
+                	<arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    	<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+					<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+						<var><var-name>minlength</var-name><var-value>0</var-value></var>
+        			<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        				<var><var-name>maxlength</var-name><var-value>20</var-value></var>
+        		</field>           	
+            	<field property="email" depends="email">
+						<arg position="0" key="msg.tradeEmail" />
+						<arg position="1" name="email" key="msg.tradeEmail"/>
+	   			</field>            	
+            	<field  property="officeAddress"  depends="required">
+                    <arg key="msg.officeAddress"/>
+            	</field>           	
+            	<field  property="CPVStatus"  depends="required">
+                    <arg key="msg.CPVStatus"/>
+            	</field>            	
+            	<field  property="CPVNegReasonDesc"  depends="required">
+                    <arg key="msg.lbxReasonId"/>
+            	</field> 
+            	<field  property="remarks"  depends="required">
+                    <arg key="msg.remarks"/>
+            	</field>       	
+            </form>
+            
+            <form name="FieldVarAddCapturingForm">   
+<!--   				<field  property="referenceId"  depends="required">-->
+<!--                    <arg key="msg.referenceId"/>-->
+<!--            	</field>            	-->
+            	 <field  property="appraisalName"  depends="required">
+                    <arg key="msg.appraisalName"/>
+            	</field>
+            	<field  property="verificationMode"  depends="required">
+                    <arg key="msg.verificationMode"/>
+            	</field>            	
+            	<field  property="appraisalDate"  depends="required">
+                    <arg key="msg.appraisalDate"/>
+            	</field>            	
+            	            	
+            	<field  property="personToMeet"  depends="required">
+                    <arg key="msg.personToMeet"/>
+            	</field>            	
+            	<field  property="relationWithApplicant"  depends="required">
+                    <arg key="msg.relationWithApplicant"/>
+            	</field> 	
+				<field  property="phone1" depends="required,mask,minlength,maxlength">
+                	<arg position="0" key="msg.phone1" />                
+                	<arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    	<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+					<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+						<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        			<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        				<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+        		</field>        
+       		 	<field  property="phone2" depends="mask,minlength,maxlength">
+        			<arg position="0" key="msg.phone_number" />
+                	<arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    	<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+					<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+						<var><var-name>minlength</var-name><var-value>20</var-value></var>
+        			<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        				<var><var-name>maxlength</var-name><var-value>20</var-value></var>
+        		</field>           	          	
+            	<field property="email" depends="email">
+						<arg position="0" key="msg.tradeEmail" />
+						<arg position="1" name="email" key="msg.tradeEmail"/>
+	   			</field>            	
+            	<field  property="CPVStatus"  depends="required">
+                    <arg key="msg.CPVStatus"/>
+            	</field>            	
+            	<field  property="CPVNegReasonDesc"  depends="required">
+                    <arg key="msg.lbxReasonId"/>
+            	</field> 
+            	<field  property="remarks"  depends="required">
+                    <arg key="msg.remarks"/>
+            	</field>      	
+            </form>
+            
+            
+            
+            
+        
+
+            
+            <!-- Anil Code Start  -->
+            <form name="ActionCodeMasterAddDyanavalidatiorForm">
+   
+   			<field  property="codeId"  depends="required,mask">
+                    <arg position="0" key="msg.codeId"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_a-zA-Z']*$</var-value>
+				</var>
+            </field>
+            
+           <field  property="codeDesc"  depends="required">
+                    <arg key="msg.codeDesc"/>
+            </field>
+            
+            </form> 
+            
+
+            <form name="QueueCodeMasterAddDyanavalidatiorForm">
+            <field  property="queueCode"  depends="required,mask">
+                    <arg position="0" key="msg.queueCode"/>
+            <arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[0-9_a-zA-Z']*$</var-value>
+				</var>
+            </field>
+            
+           <field  property="queueDesc"  depends="required">
+                    <arg key="msg.queueDesc"/>
+            </field>
+             <field  property="priority"  depends="required">
+                    <arg key="msg.priority"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>^[1-9]*$</var-value>
+				</var>
+            </field>
+            </form>
+            
+             <!-- Anil Code End -->
+
+   <!-- ravi, Ratio Definition master validation start -->
+   		<form name="RatioDefinitionMasterAddDynaValidatorForm">
+   
+             <field  property="ratioCode" depends="required,mask">
+                    <arg position="0" key="msg.ratioCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+         	</field> 
+            
+            <field  property="ratioName"  depends="required">
+                    <arg key="msg.ratioName"/>
+            </field>
+            
+            <field  property="parameterCode"  depends="required">
+                    <arg key="msg.parameterCode"/>
+            </field>
+            
+            <field  property="operator"  depends="required">
+                    <arg key="msg.operator"/>
+            </field>
+            
+            
+            
+<!--            <field  property="constant" depends="required,mask">-->
+<!--                    <arg position="0" key="msg.constant"/>-->
+<!--                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>-->
+<!--                    <var>-->
+<!--                        <var-name>mask</var-name>-->
+<!--                        <var-value>^[0-9]*$</var-value>-->
+<!--                    </var>-->
+<!--         	</field>-->
+            
+            <field  property="expression"  depends="required">
+                    <arg key="msg.expression"/>
+            </field>
+            
+            
+          </form> 
+   		
+	<!-- ravi, Ratio Definition master validation end  -->
+
+
+<!-- Ankit, Financial Pramater Master -->
+
+<form name="FinancialPramMasterAddDyanavalidatiorForm">
+   
+   			<field  property="pramCode"  depends="required,mask">
+                    <arg key="msg.pramCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+            
+            <field  property="pramName"  depends="required">
+                    <arg key="msg.pramName"/>
+            </field>
+             <field  property="sequenceNo"  depends="required,mask">
+                    <arg key="msg.sequenceNo"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
+            </field>
+          </form> 
+          
+          
+          <!-- End -->
+          
+          
+     <!-- ravindra, Financial analysis -->
+
+<form name="FinancialAnalysisDynaValidatorForm">
+   
+            <field  property="financialYear"  depends="required">
+                    <arg key="msg.financialYear"/>
+                    
+            </field>
+            <field  property="parameCode"  depends="required">
+                    <arg key="msg.pramCode"/>
+            </field>
+            
+            
+          </form> 
+          
+       <form name="CollAddressValidatorForm">
+        	<field property="addr_type" depends="required">
+                   <arg key="msg.addr.type"/>
+           </field>
+            
+            <field  property="addr1" depends="required">
+                    <arg key="msg.addr.one"/>
+               
+            </field>
+           
+           
+            
+            <field  property="txtCountryCode" depends="required">
+                    <arg key="msg.country"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((addr1 == null) or (*this* != null))</var-value>
+                </var>
+           </field>
+         
+         <field  property="txtStateCode" depends="required">
+                    <arg key="msg.state"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((country == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+             <field  property="txtDistCode" depends="required">
+                    <arg key="msg.dist"/>
+                  <var>
+                        <var-name>test</var-name>
+                        <var-value>((state == null) or (*this* != null))</var-value>
+                </var>
+
+
+            </field>
+            
+             <field
+                property="pincode"
+                depends="required,long,minlength,maxlength,mask">
+                <arg key="msg.pincode"/>
+                
+				<var><var-name>mask</var-name><var-value>^[0-9]*$</var-value></var>
+				<arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>6</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>6</var-value></var>
+			  
+             </field>
+            
+         
+            
+            <field
+                property="primaryPhoneNo"
+                depends="required,minlength,maxlength">
+                    <arg key="msg.mobile"/>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+					<var><var-name>minlength</var-name><var-value>10</var-value></var>
+        		<arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+        			<var><var-name>maxlength</var-name><var-value>10</var-value></var>
+                    
+             </field>
+             
+             
+             <field
+                property="tollfreeNo"
+                depends="long">
+                    <arg key="CustomerAddressValidatorForm.tollFreeNo"/>
+                   
+             </field>
+             
+             <field
+                property="faxNo"
+                depends="long">
+                    <arg key="CustomerAddressValidatorForm.faxNo"/>
+                   
+             </field>
+            
+            
+            
+            <field
+                property="noYears"
+                depends="required">
+                    <arg key="msg.years"/>
+                   
+             </field>
+           
+           <field  property="landMark" depends="mask">
+                    <arg key="CustomerAddressValidatorForm.landMark"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_' a-zA-Z]*$</var-value>
+                    </var>
+                    
+            </field>
+            
+           
+        </form>
+        
+          
+          <!-- End -->     
+	          <form name="RuleParameterDynaValidator">  
+	          <field  property="parameterCode" depends="required,mask">
+	                    <arg position="0" key="msg.ruleCode"/>
+	                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+	                    <var>
+	                        <var-name>mask</var-name>
+	                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+	                    </var>
+	         	</field>
+	          <field  property="paramName" depends="required">
+	                    <arg key="msg.scoringCode"/>
+	          </field>
+	          <field  property="sourceTable" depends="required">
+	                    <arg key="msg.scoringCode"/>
+	          </field>
+	          <field  property="sourceColumn" depends="required">
+	                    <arg key="msg.scoringCode"/>
+	          </field>
+          </form> 
+	      <!-- scoring Master start from Sanjog -->
+	      
+	      <form name="ScoreMasterDynaValidatorForm">
+   
+   		 <field
+                property="scoreCode" depends="required,mask">
+                    <arg key="msg.scoringCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+            </field>
+   
+              <field  property="scoreDesc"  depends="required">
+                    <arg key="msg.scoringDesc"/>
+            </field>
+            <field  property="sourceTable"  depends="required">
+                    <arg key="msg.soucingTable"/>
+            </field>
+             <field  property="sourceColumn"  depends="required">
+                    <arg key="msg.scoringColumn"/>
+            </field>
+            
+          </form> 
+          
+          <form name="ScoreCardMasterDynaValidatorForm">
+
+            <field  property="scoreCardDesc"  depends="required">
+                    <arg key="msg.cardDesc"/>
+            </field>
+            <field  property="productId"  depends="required">
+                    <arg key="msg.productdes"/>
+            </field>
+           
+            
+          </form>
+          
+
+  <form name="ScoreCardMasterSearchDynaValidatorForm">
+   
+   			 <field  property="scoreCardId"  depends="mask">
+   			  <arg key="msg.scoringCardCode"/>
+                     <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+            </field> 
+      
+       </form>     
+          
+          
+          
+          
+          <form name="PolicyChecklistDefDynaValidatorForm">
+   
+            <field  property="product" depends="required">
+                    <arg key="msg.scoringCode"/>
+            </field>
+            <field  property="scheme" depends="required" >
+                    <arg key="msg.scoringDesc"/>
+            </field>
+            
+            
+          </form> 
+	      <!-- Scoring Master end from Sanjog -->
+
+	     
+	     
+	       
+	       
+
+	      
+	      <!-- ravi, Rule master validation start -->
+   		<form name="RuleMasterAddDynaValidatorForm">
+   
+<!--   			<field  property="ruleCode"  depends="required">-->
+<!--                    <arg key="msg.ruleCode"/>-->
+<!--            </field>-->
+<!--            -->
+            <field  property="ruleCode" depends="required,mask">
+                    <arg position="0" key="msg.ruleCode"/>
+                    <arg position="1" name="mask" key="${var:mask}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9_a-zA-Z]*$</var-value>
+                    </var>
+         	</field> 
+            
+            <field  property="ruleName"  depends="required">
+                    <arg key="msg.ruleName"/>
+            </field>
+            
+             <field  property="ruleType"  depends="required">
+                    <arg key="msg.ruleType"/>
+            </field>
+            
+            <field  property="stageForRule"  depends="required">
+                    <arg key="msg.stageForRule"/>
+            </field>
+            
+            <field  property="subRuleType"  depends="required">
+                    <arg key="msg.subRuleType"/>
+            </field>
+            
+          </form> 
+   		
+	<!-- ravi, Rule master validation end  -->
+
+<!-- Nishant Starts -->
+<form name="dealCancellationForm">
+   
+           
+             <field  property="dealNo"  depends="required">
+                    <arg key="msg.ruleType"/>
+            </field>
+            
+          </form> 
+<!-- Nishant End -->
+   </formset>
+
+</form-validation>

@@ -1,0 +1,14 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Dec 28 18:26:32 IST 2015
+http\://192.168.1.246\:8081/nexus/content/repositories/releases/.error=
+http\://192.168.1.246\:8081/nexus/content/repositories/snapshots/.error=
+http\://192.168.1.246\:8081/nexus/content/repositories/snapshots/.lastUpdated=1451304421386
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\cps/repo/.lastUpdated=1451307392350
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\cms/repo/.lastUpdated=1451304421324
+http\://repo.maven.apache.org/maven2/.lastUpdated=1451304422822
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\cms/repo/.error=
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\cps/repo/.error=
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\combined/repo/.error=
+http\://repo.maven.apache.org/maven2/.error=
+http\://192.168.1.246\:8081/nexus/content/repositories/releases/.lastUpdated=1451304421355
+file\:D\:\\workspaces\\AFC\\CORE_PATCH_DEV\\omnifin-core\\common\\app\\components\\combined/repo/.lastUpdated=1451307391180

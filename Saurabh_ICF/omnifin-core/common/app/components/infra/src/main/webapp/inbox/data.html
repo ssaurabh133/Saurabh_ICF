@@ -1,0 +1,832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<meta name="author" content="" />
+
+	<title>Untitled 4</title>
+    <link href="css/inbox.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+function popitup(url) {
+	newwindow=window.open(url,'name','height=550,width=850,top=100,left=100');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+</script>
+</head>
+
+<body bgcolor="#9099AE">
+<div style="margin: 10px;background-color: #F0F0F0;border:1px solid #000000;min-height: 373px;">
+<div style="margin: 10px;">
+
+<table width="539" cellspacing="0" cellpadding="0" border="0">
+              <tbody><tr>
+                    <td align="center" colspan="2"><div id="error"><font color="red" size="2">Selected messages marked as read!</font></div></td>
+                                      </tr>
+              
+                     <tr>
+                <td valign="middle" align="left"><table width="465" cellspacing="0" cellpadding="0" border="0" class="massbutt">
+                  <tbody><tr>
+                     <td height="20" align="center" class="borderright"><a onclick="deletemsg();" href="#">Delete</a></td>
+                    <td height="25" align="center" class="borderright"><a onclick="checkall();" href="#">Select All</a></td>
+                    <td align="center" class="borderright"> <a onclick="uncheckall()" href="#">Unselect All</a> </td>
+                    <td align="center" class="borderright"><a onclick="mread();" href="#">Mark as Read </a></td>
+                    <td nowrap="nowrap" align="center" class="borderright"><a onclick="munread();" href="#">Mark as Unread </a></td>
+                    </tr>
+                </tbody></table></td>
+              </tr>
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkheadibg2">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left">&nbsp;</td>
+                    
+                    <td width="22" align="center" class="borderright2">&nbsp;</td>
+                    <td width="121" align="center" class="borderright2"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td><b>File No.</b></td>
+                      </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright2"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td><b>Subject</b></td>
+                      </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright2"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td><b>Recieved</b></td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td align="center"><b>Action</b></td>
+                      </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+			  <form method="post" id="inbox" name="inbox"></form>
+    
+<input type="hidden" name="option"/>
+             
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="241" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg1.gif" />
+                          						  </td>
+						  <td width="82%" class="login_text_link"><a href="#" onclick="return popitup('../content.html')">898921</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">Re: Re: hiiii..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Dec 14, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=241"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="239" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg1.gif">
+                          						  </td>
+						  <td width="82%">898922</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">hi..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Dec 14, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href=""><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="232" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898923  </td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">hiii..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Nov 27, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=232"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="230" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898924</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">http://softskillsinl..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jul 1, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=230"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="222" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898925</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">hhhhhhhhhhhhhhhhhhhh..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 30, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=222"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="159" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898926</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">hhhhhhhhhhhhhhhhhhhh..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 30, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=159"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="158" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898927</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="">hhhhhhhhhhhhhhhhhhhh..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 30, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=158"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="139" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898928</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">sasasas..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 14, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=139"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="137" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898929</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 14, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=137"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="126" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898930</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">jhjhk..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 12, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=126"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="122" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898931</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">msg testing..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 12, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=122"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="118" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898932</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">kjasjsj..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 12, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=118"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="117" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898932</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">mahendran..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 12, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=117"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="116" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898933</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">test msg..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 12, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=116"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="115" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898934</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">Re:hi mahendran..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=115"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="108" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898935</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">hi mahendran..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=108"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="107" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898936</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">gujyuj..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=107"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="105" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898937</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">h r u ..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=105"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="100" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898938</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">gu gu gu..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=100"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+                
+              <tr>
+                <td valign="top" align="left"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="newblkbody">
+                  <tbody><tr>
+                    <td width="22" valign="middle" align="left"><input type="checkbox" value="98" id="msgid" name="msgid[]"></td>
+                    
+                    <td width="22" align="center" class="borderright">&nbsp;</td>
+                    <td width="121" align="center" class="borderright"><table width="100%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td width="18%" align="center">
+						  						  <img width="12" height="12" src="images/msg.gif">
+                          						  </td>
+						  <td width="82%">898939</td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="151" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                        <tbody><tr>
+                          <td class="login_text_link"><a href="#">5wsy6yhc..</a></td>
+                        </tr>
+                    </tbody></table></td>
+                    <td width="120" align="center" class="borderright"><table width="95%" cellspacing="0" cellpadding="2" border="0" class="newblkbodytext">
+                      <tbody><tr>
+                        <td>Jun 11, 2009 </td>
+                      </tr>
+                    </tbody></table></td>
+                    <td align="center"><table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody><tr>
+                        <td valign="middle" align="center"><a href="#"><img width="16" height="16" border="0" alt="Reply" src="images/reply.gif"></a></td>
+                        <td align="center">
+						<a href="inbox.php?chid=98"><img width="16" height="16" border="0" alt="Delete" src="images/delete.gif"></a>
+						
+					</td>
+                        </tr>
+                    </tbody></table></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+     
+  
+    <tr>
+                <td valign="top" align="right" class="login_text"><span class="login_text_link">First</span>&nbsp;|&nbsp; <span class="login_text_link">Prev</span>&nbsp;|&nbsp;<span class="login_text_link"><a href="inbox.php?page=2">Next</a></span>&nbsp;|&nbsp;<span class="login_text_link"><a href="inbox.php?page=2">Last</a></span></td>
+              </tr>
+			
+            
+              
+ 
+          
+  
+             
+             
+              <tr>
+                <td valign="top" align="left">&nbsp;</td>
+              </tr>
+              
+            </tbody></table>
+</div>
+</div>
+</body>
+</html>

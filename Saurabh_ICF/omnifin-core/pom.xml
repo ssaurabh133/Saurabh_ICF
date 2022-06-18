@@ -1,0 +1,479 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.a3s.omnifin.prod</groupId>
+	<artifactId>omnifin-indostar</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<name>omnifin-indostar</name>
+	<url>http://maven.apache.org</url>
+	<profiles>
+		<profile>
+			<id>all</id>
+			<modules>
+				<module>common</module>
+				<!-- <module>cv</module> <module>hf</module> -->
+			</modules>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<!-- <profile> <id>cv</id> <modules> <module>common</module> <module>cv</module> 
+			</modules> </profile> <profile> <id>hf</id> <modules> <module>common</module> 
+			<module>hf</module> </modules> </profile> -->
+	</profiles>
+
+	<properties>
+		<omnifin.version>4.0.0</omnifin.version>
+	</properties>
+
+    <distributionManagement>
+		 <snapshotRepository>
+			<id>omnifin-snapshots</id>
+			<name>omnifin-snapshots</name>
+			<url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-snapshots/</url>
+		 </snapshotRepository>
+		<repository>
+          <id>omnifin-release</id>
+          <name>Releases</name>
+          <url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-release</url>
+        </repository>
+		<!-- <repository>
+		  <uniqueVersion>false</uniqueVersion>
+		  <id>component-version</id>
+		  <name>component-version</name>
+		  <url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-snapshots/</url>
+		</repository> -->
+		 <!--  <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>omnifin-snapshots</id>
+      <name>omnifin-snapshots</name>
+      <url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-snapshots/</url>
+      <layout>default</layout>
+    </repository> -->
+	</distributionManagement> 
+
+
+	<repositories>
+		<repository>
+			<id>com.a3s.omnifin.lib.external</id>
+			<name>omnifin-lib-external</name>
+			<url>file:${project.basedir}/repo/</url>
+		</repository>
+		<repository>
+			<id>com.a3s.omnifin.lib.internal</id>
+			<name>omnifin-lib-internal</name>
+			<url>file:${project.basedir}/repo/</url>
+		</repository>
+	   	<repository>
+	        <id>deploymentRepoReleases</id>
+	        <name>Releases (Nexus)</name>
+	        <url>http://192.168.1.246:8081/nexus/content/repositories/releases/</url>
+	    </repository>
+	    <repository>
+	        <id>deploymentRepoSnapshots</id>
+	        <name>Snapshots (Nexus)</name>
+	        <url>http://192.168.1.246:8081/nexus/content/repositories/snapshots/</url>
+   	   </repository> 
+	  <repository>
+	        <id>omnifin-snapshots</id>
+	        <name>omnifin-snapshots</name>
+	        <url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-snapshots/</url>
+   	   </repository>   
+	  <repository>
+          <id>omnifin-release</id>
+          <name>Releases</name>
+          <url>http://192.168.1.246:8081/nexus/content/repositories/omnifin-release</url>
+        </repository>
+ 
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>struts</groupId>
+			<artifactId>struts</artifactId>
+			<version>1.2.9</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+		</dependency>-->
+		<dependency>
+		<groupId>javax.jms</groupId>
+			<artifactId>javax.jms-api</artifactId>
+			<version>2.0</version>
+		</dependency>  
+
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.pentaho-kettle</groupId>
+			<artifactId>kettle-core</artifactId>
+			<version>4.2.1-stable</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.pentaho-kettle</groupId>
+			<artifactId>kettle-db</artifactId>
+			<version>4.2.1-stable</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.pentaho-kettle</groupId>
+			<artifactId>kettle-engine</artifactId>
+			<version>4.2.1-stable</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.pentaho-kettle</groupId>
+			<artifactId>kettle-test</artifactId>
+			<version>4.2.1-stable</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.pentaho-kettle</groupId>
+			<artifactId>kettle-ui-swt</artifactId>
+			<version>4.2.1-stable</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.enterprisedt</groupId>
+			<artifactId>edtftpj</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external.javax</groupId>
+			<artifactId>comm</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>posadapterconf</artifactId>
+			<version>1.0</version>
+		</dependency>
+<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>poi-3.6-20091214</artifactId>
+			<version>1.0</version>
+		</dependency>
+<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>poi-ooxml-3.6-20091214</artifactId>
+			<version>1.0</version>
+		</dependency>
+<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>poi-ooxml-schemas-3.6-20091214</artifactId>
+			<version>1.0</version>
+		</dependency>		
+<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>org.apache.commons.codec_1.3.0.v20080530-1600</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>prudwebclient</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>checker-annotated-openjdk7-1.6.0</artifactId>
+			<version>1.6.0</version>
+		</dependency>		
+		 <dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>sapjco</artifactId>
+			<version>1.0</version>
+		</dependency>	 
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>ahfclsmswebclient</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>ShreeSmsForFiafl</artifactId>
+			<version>1.0</version>
+		</dependency>
+		  <dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>milyn-smooks-all-1.5.1</artifactId>
+			<version>1.5.1</version>
+			<scope>compile</scope>
+		</dependency> 
+		<!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+<dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>itextpdf</artifactId>
+    <version>5.5.6</version>
+</dependency>
+		<!--  <dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>itextpdf-5.5.6</artifactId>
+			<version>5.5.6</version>
+			<scope>compile</scope>
+		</dependency>  -->
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>xerces-2_6_2</artifactId>
+			<version>2.6.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>base64decoder</artifactId>
+			<version>1.9</version>
+		</dependency>  
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.xmlbeans</groupId>
+		    <artifactId>xmlbeans</artifactId>
+		    <version>2.5.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
+		    <version>4.3.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+	<!-- 	 <dependency>
+			<groupId>com.a3s.omnifin.lib.external</groupId>
+			<artifactId>sun.misc.base64decoder</artifactId>
+			<version>1.0</version>
+			</dependency>  -->
+<!-- 		<dependency>
+			<groupId>sun.misc.base64decoder</groupId>
+			<artifactId>base64decoder</artifactId>
+			<version>1.0</version>
+		</dependency> -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+			</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		 </dependency>
+			
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.12</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-jxpath</groupId>
+			<artifactId>commons-jxpath</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+	<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava-async-util</artifactId>
+			<version>0.21.0</version>
+	</dependency>
+	<dependency>
+			<groupId>com.cedarsoft.utils</groupId>
+			<artifactId>async</artifactId>
+			<version>1.3.5</version>
+	</dependency>
+	<dependency>
+			<groupId>eu.cedarsoft.utils</groupId>
+			<artifactId>async</artifactId>
+			<version>1.3</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+<dependency>
+    <groupId>com.jcraft</groupId>
+    <artifactId>jsch</artifactId>
+    <version>0.1.55</version>
+</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				<fork>true</fork>
+			      <meminitial>128m</meminitial>
+			      <maxmem>1024m</maxmem>
+			      <compilerArgs>
+			        <arg>-XX:MaxPermSize=256m</arg>
+			      </compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <version>2.18</version>
+			    <configuration>
+			        <forkCount>1</forkCount>
+			        <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+			    </configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptor>src/main/assembly/dep.xml</descriptor>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-ear-plugin</artifactId> 
+				<version>2.10</version> <configuration> <packagingIncludes>META-INF/**,**/OmniFin*.jar,**/web*.war</packagingIncludes> 
+				</configuration> </plugin> -->
+
+			
+
+ 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+	</build>
+</project>

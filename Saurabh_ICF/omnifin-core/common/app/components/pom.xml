@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.a3s.omnifin.prod</groupId>
+		<artifactId>omnifin-indostar-app</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<name>Components</name>
+	<artifactId>omnifin-indostar-components</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>combined-war</module>
+		<module>combined</module>
+		<module>combinedEJB</module>
+		<module>generic</module>
+		<module>addons</module>
+		<module>cms</module>
+		<module>cps</module>
+		<module>dms</module>
+		<module>gcd</module>
+		<module>infra</module>
+		<module>legal</module>
+		<module>LMSUploadsEJB</module>
+		<module>masters</module>
+		<module>payout</module>
+		<module>reports</module>
+		<module>reposession</module>
+		<module>securitization</module>
+		 
+	</modules>
+	
+</project>

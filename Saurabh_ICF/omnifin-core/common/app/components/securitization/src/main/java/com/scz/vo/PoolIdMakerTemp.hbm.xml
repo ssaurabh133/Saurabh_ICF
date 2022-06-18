@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	
+	<class name="com.scz.vo.PoolCreationUpdateTempVO" table="SCZ_POOL_UPLOAD_TEMP" dynamic-update="true">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		
+		<property name="batch_id" column ="BATCH_ID" length="10" />
+		<property name="pool_id" column ="POOL_ID" />
+		<property name="customer_id" column ="CUSTOMER_ID"  />
+		<property name="deal_no" column ="DEAL_NO" />
+		<property name="loan_id" column ="LOAN_ID"  />
+		
+		<property name="loan_no" column ="LOAN_NO" />
+		<property name="loan_ref_no" column ="LOAN_REF_NO" />
+		<property name="loan_initiation_date" column ="LOAN_INITIATION_DATE" />
+		<property name="case_book_date" column ="CASE_BOOK_DATE"  />
+		<property name="loan_expiry_date" column ="LOAN_EXPIRY_DATE" />
+		
+		<property name="loan_status" column ="LOAN_STATUS" />
+		<property name="loan_disbursal_status" column ="LOAN_DISBURSAL_STATUS" />
+		<property name="buyback" column ="BUYBACK" />
+		<property name="loan_type" column ="LOAN_TYPE" />
+		<property name="loan_scheme" column ="LOAN_SCHEME" />
+		
+		<property name="first_emi_date" column ="FIRST_EMI_DATE" />
+		<property name="advance_emi_date" column ="ADVANCE_EMI_DATE" />
+		<property name="first_emi_amount" column ="FIRST_EMI_AMOUNT" />
+		<property name="advance_emi_amount" column ="ADVANCE_EMI_AMOUNT" />
+		<property name="emi_pattern" column ="EMI_PATTERN" />
+		
+		<property name="no_of_advance_emi" column ="NO_OF_ADVANCE_EMI" />
+		<property name="classification" column ="CLASSIFICATION" />
+		<property name="standard_classification" column ="STANDARD_CLASSIFICATION" />
+		<property name="vehicle_category" column ="VEHICLE_CATEGORY" />
+		<property name="vehicle_model" column ="VEHICLE_MODEL" />
+
+		<property name="seasoning_without_advance" column ="SEASONING_WITHOUT_ADVANCE" />
+		<property name="seasoning_with_advance" column ="SEASONING_WITH_ADVANCE" />
+		<property name="pos_cut_off_date" column ="POS_CUT_OFF_DATE" />
+		<property name="future_flow_cut_off_date" column ="FUTURE_FLOW_CUT_OFF_DATE" />
+		<property name="finance_amount" column ="FINANCE_AMOUNT" />
+		
+		<property name="loan_repayment_frequency" column ="LOAN_REPAYMENT_FREQUENCY" />
+		<property name="loan_tenure" column ="LOAN_TENURE" />
+		<property name="remaning_tenure" column ="REMANING_TENURE" />
+		<property name="new_used" column ="NEW_USED" />
+		<property name="effective_irr" column ="EFFECTIVE_IRR" />
+		
+		<property name="processing_amount" column ="PROCESSING_AMOUNT" />
+		<property name="file_charges" column ="FILE_CHARGES" />
+		<property name="customer_name" column ="CUSTOMER_NAME" />
+		<property name="owner_name" column ="OWNER_NAME" />
+		<property name="branch" column ="BRANCH" />
+		
+		<property name="state" column ="STATE" />
+		<property name="asset_cost" column ="ASSET_COST" />
+		<property name="gross_ltv" column ="GROSS_LTV" />
+		<property name="net_ltv" column ="NET_LTV" />
+		<property name="dpd_last_month" column ="DPD_LAST_MONTH" />
+		
+		<property name="dpd_bucket" column ="DPD_BUCKET" />
+		<property name="rate_bucket1" column ="RATE_BUCKET1" />
+		<property name="rate_bucket2" column ="RATE_BUCKET2" />
+		<property name="seasoning_bucket_without_advance" column ="SEASONING_BUCKET_WITHOUT_ADVANCE" />
+		<property name="seasoning_bucket_with_advance" column ="SEASONING_BUCKET_WITH_ADVANCE" />
+		
+		<property name="customer_segment" column ="CUSTOMER_SEGMENT" />
+		<property name="customer_category" column ="CUSTOMER_CATEGORY" />
+		<property name="dealer_name" column ="DEALER_NAME" />
+		<property name="manufacturer" column ="MANUFACTURER" />
+		<property name="vehicle_no" column ="VEHICLE_NO" />
+		
+		<property name="chassis_no" column ="CHASSIS_NO" />
+		<property name="engine_no" column ="ENGINE_NO" />
+		<property name="overdue_amount" column ="OVERDUE_AMOUNT" />
+		<property name="overdue_prin_amt" column ="OVERDUE_PRIN_AMT" />
+		<property name="overdue_int_amt" column ="OVERDUE_INT_AMT" />
+		
+		<property name="total_age_of_vehicle_loan_sanction" column ="TOTAL_AGE_OF_VEHICLE_LOAN_SANCTION" />
+		<property name="total_age_of_vehicle_loan_maturity" column ="TOTAL_AGE_OF_VEHICLE_LOAN_MATURITY" />
+		<property name="total_future_cashflows" column ="TOTAL_FUTURE_CASHFLOWS" />
+		<property name="age_of_borrower" column ="AGE_OF_BORROWER" />
+		<property name="dob" column ="DOB" />
+		
+		<property name="year_of_manufacture" column ="YEAR_OF_MANUFACTURE" />
+		<property name="repayment_mode" column ="REPAYMENT_MODE" />
+		<property name="address" column ="ADDRESS" />
+		<property name="city_customer" column ="CITY_CUSTOMER" />
+		<property name="district_customer" column ="DISTRICT_CUSTOMER" />
+		
+		<property name="state_customer" column ="STATE_CUSTOMER" />
+		<property name="pan_number" column ="PAN_NUMBER" />
+		<property name="id_proof" column ="ID_PROOF" />
+		<property name="address_proof" column ="ADDRESS_PROOF" />
+		<property name="co_applicant_name" column ="CO_APPLICANT_NAME" />
+		
+		<property name="gurantor_name" column ="GURANTOR_NAME" />
+		<property name="total_vehicles" column ="TOTAL_VEHICLES" />
+		<property name="name_of_landholding" column ="NAME_OF_LANDHOLDING" />
+		<property name="weaker_section" column ="WEAKER_SECTION" />
+		<property name="landholding_size" column ="LANDHOLDING_SIZE" />
+		
+		<property name="agri_owner_name" column ="AGRI_OWNER_NAME" />
+		<property name="relation_with_applicant" column ="RELATION_WITH_APPLICANT" />
+		<property name="peak_dpd" column ="PEAK_DPD" />
+		<property name="net_paid_amount_customer" column ="NET_PAID_AMOUNT_CUSTOMER" />
+		<property name="loan_inst_mode" column ="LOAN_INST_MODE" />
+		
+		<property name="do_date" column ="DO_DATE" />
+		<property name="do_number" column ="DO_NUMBER" />
+		<property name="security_deposit" column ="SECURITY_DEPOSIT" />
+		<property name="npa_status" column ="NPA_STATUS" />
+		<property name="rec_status" column ="REC_STATUS" />
+		
+		<property name="user_id" column ="USER_ID" />
+		<property name="maker_date" column ="MAKER_DATE" />
+		<property name="uploaded_flag" column ="UPLOADED_FLAG" />
+		<property name="reject_reason" column ="REJECT_REASON" />
+	</class>
+	
+	<class name="com.scz.vo.CrSecuritizationPoolDtlTempVO" table="SCZ_POOL_UPLOAD_DTL" dynamic-update="true">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		
+		<property name="batch_id" column ="BATCH_ID" length="10" />
+		<property name="pool_id" column ="POOL_ID" />
+		<property name="customer_id" column ="CUSTOMER_ID" length="200" />
+		<property name="deal_no" column ="DEAL_NO" />
+		<property name="loan_id" column ="LOAN_ID"  />
+		
+		<property name="loan_no" column ="LOAN_NO" />
+		<property name="loan_ref_no" column ="LOAN_REF_NO" />
+		<property name="loan_initiation_date" column ="LOAN_INITIATION_DATE" />
+		<property name="case_book_date" column ="CASE_BOOK_DATE"  />
+		<property name="loan_expiry_date" column ="LOAN_EXPIRY_DATE" />
+		
+		<property name="loan_status" column ="LOAN_STATUS" />
+		<property name="loan_disbursal_status" column ="LOAN_DISBURSAL_STATUS" />
+		<property name="loan_type" column ="LOAN_TYPE" />
+		<property name="loan_scheme" column ="LOAN_SCHEME" />
+		
+		<property name="first_emi_date" column ="FIRST_EMI_DATE" />
+		<property name="advance_emi_date" column ="ADVANCE_EMI_DATE" />
+		<property name="first_emi_amount" column ="FIRST_EMI_AMOUNT" />
+		<property name="advance_emi_amount" column ="ADVANCE_EMI_AMOUNT" />
+		<property name="emi_pattern" column ="EMI_PATTERN" />
+		
+		<property name="no_of_advance_emi" column ="NO_OF_ADVANCE_EMI" />
+		<property name="classification" column ="CLASSIFICATION" />
+		<property name="standard_classification" column ="STANDARD_CLASSIFICATION" />
+		<property name="vehicle_category" column ="VEHICLE_CATEGORY" />
+		<property name="vehicle_model" column ="VEHICLE_MODEL" />
+
+		<property name="seasoning_without_advance" column ="SEASONING_WITHOUT_ADVANCE" />
+		<property name="seasoning_with_advance" column ="SEASONING_WITH_ADVANCE" />
+		<property name="pos_cut_off_date" column ="POS_CUT_OFF_DATE" />
+		<property name="future_flow_cut_off_date" column ="FUTURE_FLOW_CUT_OFF_DATE" />
+		<property name="finance_amount" column ="FINANCE_AMOUNT" />
+		
+		<property name="loan_repayment_frequency" column ="LOAN_REPAYMENT_FREQUENCY" />
+		<property name="loan_tenure" column ="LOAN_TENURE" />
+		<property name="remaning_tenure" column ="REMANING_TENURE" />
+		<property name="new_used" column ="NEW_USED" />
+		<property name="effective_irr" column ="EFFECTIVE_IRR" />
+		
+		<property name="processing_amount" column ="PROCESSING_AMOUNT" />
+		<property name="file_charges" column ="FILE_CHARGES" />
+		<property name="customer_name" column ="CUSTOMER_NAME" />
+		<property name="owner_name" column ="OWNER_NAME" />
+		<property name="branch" column ="BRANCH" />
+		
+		<property name="state" column ="STATE" />
+		<property name="asset_cost" column ="ASSET_COST" />
+		<property name="gross_ltv" column ="GROSS_LTV" />
+		<property name="net_ltv" column ="NET_LTV" />
+		<property name="dpd_last_month" column ="DPD_LAST_MONTH" />
+		
+		<property name="dpd_bucket" column ="DPD_BUCKET" />
+		<property name="rate_bucket1" column ="RATE_BUCKET1" />
+		<property name="rate_bucket2" column ="RATE_BUCKET2" />
+		<property name="seasoning_bucket_without_advance" column ="SEASONING_BUCKET_WITHOUT_ADVANCE" />
+		<property name="seasoning_bucket_with_advance" column ="SEASONING_BUCKET_WITH_ADVANCE" />
+		
+		<property name="customer_segment" column ="CUSTOMER_SEGMENT" />
+		<property name="customer_category" column ="CUSTOMER_CATEGORY" />
+		<property name="dealer_name" column ="DEALER_NAME" />
+		<property name="manufacturer" column ="MANUFACTURER" />
+		<property name="vehicle_no" column ="VEHICLE_NO" />
+		
+		<property name="chassis_no" column ="CHASSIS_NO" />
+		<property name="engine_no" column ="ENGINE_NO" />
+		<property name="overdue_amount" column ="OVERDUE_AMOUNT" />
+		<property name="overdue_prin_amt" column ="OVERDUE_PRIN_AMT" />
+		<property name="overdue_int_amt" column ="OVERDUE_INT_AMT" />
+		
+		<property name="total_age_of_vehicle_loan_sanction" column ="TOTAL_AGE_OF_VEHICLE_LOAN_SANCTION" />
+		<property name="total_age_of_vehicle_loan_maturity" column ="TOTAL_AGE_OF_VEHICLE_LOAN_MATURITY" />
+		<property name="total_future_cashflows" column ="TOTAL_FUTURE_CASHFLOWS" />
+		<property name="age_of_borrower" column ="AGE_OF_BORROWER" />
+		<property name="dob" column ="DOB" />
+		
+		<property name="year_of_manufacture" column ="YEAR_OF_MANUFACTURE" />
+		<property name="repayment_mode" column ="REPAYMENT_MODE" />
+		<property name="address" column ="ADDRESS" />
+		<property name="city_customer" column ="CITY_CUSTOMER" />
+		<property name="district_customer" column ="DISTRICT_CUSTOMER" />
+		
+		<property name="state_customer" column ="STATE_CUSTOMER" />
+		<property name="pan_number" column ="PAN_NUMBER" />
+		<property name="id_proof" column ="ID_PROOF" />
+		<property name="address_proof" column ="ADDRESS_PROOF" />
+		<property name="co_applicant_name" column ="CO_APPLICANT_NAME" />
+		
+		<property name="gurantor_name" column ="GURANTOR_NAME" />
+		<property name="total_vehicles" column ="TOTAL_VEHICLES" />
+		<property name="name_of_landholding" column ="NAME_OF_LANDHOLDING" />
+		<property name="weaker_section" column ="WEAKER_SECTION" />
+		<property name="landholding_size" column ="LANDHOLDING_SIZE" />
+		
+		<property name="agri_owner_name" column ="AGRI_OWNER_NAME" />
+		<property name="relation_with_applicant" column ="RELATION_WITH_APPLICANT" />
+		<property name="peak_dpd" column ="PEAK_DPD" />
+		<property name="net_paid_amount_customer" column ="NET_PAID_AMOUNT_CUSTOMER" />
+		<property name="loan_inst_mode" column ="LOAN_INST_MODE" />
+		
+		<property name="do_date" column ="DO_DATE" />
+		<property name="do_number" column ="DO_NUMBER" />
+		<property name="security_deposit" column ="SECURITY_DEPOSIT" />
+		<property name="npa_status" column ="NPA_STATUS" />
+		<property name="rec_status" column ="REC_STATUS" />
+		
+		<property name="user_id" column ="USER_ID" />
+		<property name="maker_date" column ="MAKER_DATE" />
+		<property name="buyback" column ="BUYBACK" />
+		<property name="buyback_date" column ="BUYBACK_DATE" />
+		
+	</class>
+	
+	<class name="com.scz.vo.BankUploadFormatVO" table="scz_bank_upload_format" dynamic-update="true">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="poolID" column ="POOL_ID" />
+		<property name="instlNO" column ="INSTL_NO"  />
+		<property name="instlDate" column ="INSTL_DATE" />	
+		<property name="instlAmount" column ="INSTL_AMOUNT" type="big_decimal" scale="4" precision="22"/>
+		<property name="prinComp" column ="PRIN_COMP" type="big_decimal" scale="4" precision="22" />
+		<property name="intComp" column ="INT_COMP" type="big_decimal" scale="4" precision="22" />	
+		<property name="auPrinComp" column ="AU_PRIN_COMP" type="big_decimal" scale="4" precision="22" />
+		<property name="auIntComp" column ="AU_INT_COMP" type="big_decimal" scale="4" precision="22" />
+		<property name="distributionRatioBank" column ="DISTRIBUTION_RATIO_BANK" type="big_decimal" scale="4" precision="22" />	
+		<property name="distributionRatioAu" column ="DISTRIBUTION_RATIO_AU" type="big_decimal" scale="4" precision="22" />
+		<property name="prinOS" column ="PRIN_OS" type="big_decimal" scale="4" precision="22" />
+		<property name="userID" column ="USER_ID" />	
+	</class>
+	
+	<class name="com.scz.vo.poolIdUploadButFlagVO" table="scz_upload_but_flag" dynamic-update="true">
+		<id name="id" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="pool_id" column ="pool_id" />
+		<property name="upload_type" column ="upload_type"  />
+		<property name="upload_flag" column ="upload_flag" />	
+	</class>
+	
+	<class name="com.scz.vo.BankUploadUploadVO" table="scz_cr_bankpoolupload_dtl" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="repaysch_id" column ="repaysch_id" />
+		<property name="pool_id" column ="pool_id"  />
+		<property name="instl_no" column ="instl_no" />
+		<property name="instl_date" column ="instl_date" type="java.sql.Date" />
+		
+		<property name="instl_amount" column ="instl_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp" column ="prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="int_comp" column ="int_comp" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="au_prin_comp" column ="au_prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="other_charges" column ="other_charges" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="bill_flag" column ="bill_flag" length="1" />
+		<property name="au_int_comp" column ="au_int_comp" type="big_decimal" scale="4" precision="22" />
+		<property name="distribution_ratio_bank" column ="distribution_ratio_bank" type="big_decimal" scale="4" precision="22" />
+		<property name="distribution_ratio_au" column ="distribution_ratio_au" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="other_charges_recd" column ="other_charges_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="last_pmnt_date" column ="last_pmnt_date" type="java.sql.Date" />
+		<property name="last_od_calc_date" column ="last_od_calc_date" type="java.sql.Date" />
+		<property name="total_od_amount" column ="total_od_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="interest_rate" column ="interest_rate" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="adv_flag" column ="adv_flag" length="1" />
+		<property name="disbursal_amount" column ="disbursal_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_os" column ="prin_os" type="big_decimal" scale="4" precision="22" />
+		<property name="rec_type" column ="rec_type" length="1"/>
+		<property name="rec_status" column ="rec_status" length="1" />
+		
+		<property name="maker_id" column ="maker_id" length="10" />
+		<property name="maker_date" type="java.sql.Timestamp" column ="maker_date" />
+		<property name="author_id" column ="author_id" length="10" />
+		<property name="author_date" type="java.sql.Timestamp" column ="author_date" />
+		<property name="repay_eff_date" column ="repay_eff_date" type="java.sql.Date" />
+		
+		<property name="loan_disbursal_id" column ="loan_disbursal_id" />
+		<property name="seq_no" column ="seq_no" length="3" />
+	</class>
+	
+	<class name="com.scz.vo.BankUploadUploadTempVO" table="scz_cr_bankpoolupload_dtl_temp" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null" >
+			<generator class="identity" />
+		</id>
+		<property name="repaysch_id" column ="repaysch_id" />
+		<property name="pool_id" column ="pool_id"  />
+		<property name="instl_no" column ="instl_no" />
+		<property name="instl_date" type="java.sql.Date" column ="instl_date"  />
+		
+		<property name="instl_amount" column ="instl_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp" column ="prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="int_comp" column ="int_comp" type="big_decimal" scale="4" precision="22" />
+		<property name="au_prin_comp" column ="au_prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="other_charges" column ="other_charges" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="bill_flag" column ="bill_flag" length="1" />
+		<property name="au_int_comp" column ="au_int_comp" type="big_decimal" scale="4" precision="22" />
+		<property name="distribution_ratio_bank" column ="distribution_ratio_bank" type="big_decimal" scale="4" precision="22" />
+		<property name="distribution_ratio_au" column ="distribution_ratio_au" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="other_charges_recd" column ="other_charges_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="last_pmnt_date" column ="last_pmnt_date" type="java.sql.Date" />
+		<property name="last_od_calc_date" column ="last_od_calc_date" type="java.sql.Date" />
+		<property name="total_od_amount" column ="total_od_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="interest_rate" column ="interest_rate" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="adv_flag" column ="adv_flag" length="1" />
+		<property name="disbursal_amount" column ="disbursal_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_os" column ="prin_os" type="big_decimal" scale="4" precision="22" />
+		<property name="rec_type" column ="rec_type" length="1" />
+		<property name="rec_status" column ="rec_status" length="1" />
+		
+		<property name="maker_id" column ="maker_id" length="10" />
+		<property name="maker_date" column ="maker_date" type="java.sql.Timestamp" />
+		<property name="author_id" column ="author_id" length="10" />
+		<property name="author_date" type="java.sql.Timestamp" column ="author_date" />
+		<property name="repay_eff_date" column ="repay_eff_date" type="java.sql.Date" />
+		
+		<property name="loan_disbursal_id" column ="loan_disbursal_id" />
+		<property name="seq_no" column ="seq_no" length="3" />
+	</class>
+	
+	
+	<class name="com.scz.vo.RepaymentScheduleUploadTempVO" table="scz_cr_repaysch_dtl_temp" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		<property name="repaysch_id" column ="repaysch_id" />
+		<property name="pool_id" column ="Pool_Id"  />
+		<property name="loan_id" column ="loan_id"  />
+		<property name="instl_no" column ="instl_no" />
+		<property name="instl_date" column ="instl_date" type="java.sql.Date" />
+		
+		<property name="instl_amount" column ="instl_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp" column ="prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="int_comp" column ="int_comp" type="big_decimal" scale="4" precision="22" />
+		<property name="excess_int" column ="excess_int" type="big_decimal" scale="4" precision="22"/>
+		<property name="other_charges" column ="other_charges" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="bill_flag" column ="bill_flag" length="1" />
+		<property name="instl_amount_recd" column ="instl_amount_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp_recd" column ="prin_comp_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="int_comp_recd" column ="int_comp_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="excess_int_recd" column ="excess_int_recd" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="other_charges_recd" column ="other_charges_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="last_pmnt_date" column ="last_pmnt_date" type="java.sql.Date" />
+		<property name="last_od_calc_date" column ="last_od_calc_date" type="java.sql.Date" />
+		<property name="total_od_amount" column ="total_od_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="interest_rate" column ="interest_rate" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="adv_flag" column ="adv_flag" length="1" />
+		<property name="disbursal_amount" column ="disbursal_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_os" column ="prin_os" type="big_decimal" scale="4" precision="22" />
+		<property name="rec_type" column ="rec_type" length="1"/>
+		<property name="rec_status" column ="rec_status" length="1" />
+		
+		<property name="maker_id" column ="maker_id"  />
+		<property name="maker_date" column ="maker_date" type="java.sql.Timestamp" />
+		<property name="author_id" column ="author_id"  />
+		<property name="author_date" column ="author_date" type="java.sql.Timestamp" />
+		<property name="repay_eff_date" column ="repay_eff_date"  />
+		
+		<property name="loan_disbursal_id" column ="loan_disbursal_id" />
+		<property name="seq_no" column ="seq_no"  />
+	</class>
+
+	<class name="com.scz.vo.RepaymentScheduleUploadVO" table="scz_cr_repaysch_dtl" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		<property name="repaysch_id" column ="repaysch_id" />
+		<property name="pool_id" column ="Pool_Id"  />
+		<property name="loan_id" column ="loan_id"  />
+		<property name="instl_no" column ="instl_no" />
+		<property name="instl_date" column ="instl_date" type="java.sql.Date"  />
+		
+		<property name="instl_amount" column ="instl_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp" column ="prin_comp" type="big_decimal" scale="4" precision="22"/>
+		<property name="int_comp" column ="int_comp" type="big_decimal" scale="4" precision="22" />
+		<property name="excess_int" column ="excess_int" type="big_decimal" scale="4" precision="22"/>
+		<property name="other_charges" column ="other_charges" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="bill_flag" column ="bill_flag" length="1" />
+		<property name="instl_amount_recd" column ="instl_amount_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_comp_recd" column ="prin_comp_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="int_comp_recd" column ="int_comp_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="excess_int_recd" column ="excess_int_recd" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="other_charges_recd" column ="other_charges_recd" type="big_decimal" scale="4" precision="22" />
+		<property name="last_pmnt_date" column ="last_pmnt_date" type="java.sql.Date" />
+		<property name="last_od_calc_date" column ="last_od_calc_date" type="java.sql.Date" />
+		<property name="total_od_amount" column ="total_od_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="interest_rate" column ="interest_rate" type="big_decimal" scale="4" precision="22" />
+		
+		<property name="adv_flag" column ="adv_flag" length="1" />
+		<property name="disbursal_amount" column ="disbursal_amount" type="big_decimal" scale="4" precision="22" />
+		<property name="prin_os" column ="prin_os" type="big_decimal" scale="4" precision="22" />
+		<property name="rec_type" column ="rec_type" length="1" />
+		<property name="rec_status" column ="rec_status" length="1" />
+		
+		<property name="maker_id" column ="maker_id" length="10" />
+		<property name="maker_date" column ="maker_date" type="java.sql.Timestamp" />
+		<property name="author_id" column ="author_id" length="10" />
+		<property name="author_date" column ="author_date" type="java.sql.Timestamp" />
+		<property name="repay_eff_date" column ="repay_eff_date" type="java.sql.Date" />
+		
+		<property name="loan_disbursal_id" column ="loan_disbursal_id" />
+		<property name="seq_no" column ="seq_no" length="3" />
+	</class>
+
+
+	
+	
+	<class name="com.scz.vo.Tab1VO" table="TAB1_DATA" dynamic-update="true">
+		<id name="id" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="poolID" column ="POOL_ID" length="10" />
+		<property name="creditEnhanceType" column ="CREDIT_ENHANCE_TYPE" />
+		<property name="creditEnhanceDocRefNo" column ="CREDIT_ENHANCE_DOCREFNO" />
+		<property name="creditEnhanceAmount" column ="CREDIT_ENHANCE_AMOUNT" />
+	</class>
+	
+	<class name="com.scz.vo.Tab2VO" table="TAB2_DATA" dynamic-update="true">
+		<id name="id" column="ID" >
+			<generator class="increment" />
+		</id>
+		<property name="poolID" column ="POOL_ID" length="10" />
+		<property name="lbxinstituteID" column ="INSTITUTE_ID"  />
+		<property name="investmentRatio" column ="INVESTMENT_RATIO" />
+		<property name="interestRate" column ="INTEREST_RATE"  />
+		<property name="distributionPriority" column ="DISTRIBUTION_PRIORITY" />
+	</class>
+	
+	
+	<class name="com.scz.vo.UploadSummaryTempVO" table="upload_summary" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="identity" />
+		</id>
+		<property name="batch_id" column ="batch_id" length="10" />
+		<property name="file_name" column ="file_name"  />
+		<property name="maker_id" column ="maker_id" />
+		<property name="maker_date" column ="maker_date"  />
+		<property name="no_of_records_rejected" column ="no_of_records_rejected" />
+		<property name="no_of_records_uploaded" column ="no_of_records_uploaded" />
+		<property name="instrument_batch_id" column ="instrument_batch_id" />
+	</class>
+	
+	
+	
+	
+</hibernate-mapping>
+
+	

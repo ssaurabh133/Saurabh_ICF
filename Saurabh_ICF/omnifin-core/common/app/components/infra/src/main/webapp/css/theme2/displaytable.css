@@ -1,0 +1,313 @@
+@CHARSET "ISO-8859-1";
+
+.dataTable {
+background: none repeat scroll 0 0 #B45252;
+}
+
+.dataTable th {
+    background: url("../../images/theme2/grey-up.png") repeat-x scroll left bottom #DAB5B5;
+    height: 20px;
+	font-size: 12px;
+}
+.dataTable th a:link, a:visited {
+	color:#000;
+	text-decoration:none;
+	font-size: 12px;
+}
+.dataTable th a:hover {
+	color:#ccc;
+	text-decoration:none;
+}
+
+.dataTable  td {
+background: none repeat-x scroll left bottom #FFFFFF;
+}
+.dataTable tr.total td {
+     white-space: nowrap;
+     vertical-align: top;
+     font-weight: bold;
+     border-top: 1px solid black;
+     padding-bottom: 10px;
+}
+
+.dataTable tr.total td.customer {
+     visibility: hidden;
+}
+
+.dataTable td.hidden {
+     display: none;
+}
+
+.dataTable th.hidden {
+     display: none;
+}
+
+.dataTable th.r {
+     text-align: right;
+     padding-right: 10px;
+}
+
+.dataTable th.c {
+     text-align: center;
+}
+
+.dataTable td.r {
+     text-align: right;
+     padding-right: 10px;
+}
+
+.dataTable td.c {
+     text-align: center;
+}
+
+.dataTable  tr.odd {
+     background-color: #ffffff;
+}
+.dataTable  tr.odd td {
+     padding:5px;
+}
+
+.dataTable tr.even {
+     background-color: #F1F5FA;
+}
+.dataTable tr.even td {
+     padding:5px;
+}
+
+.dataTable th a   ,.dataTable th a:visited {
+     text-align: left;
+     color: white;
+}
+
+.dataTable th a:hover {
+     color: #ffcc00;
+     background-color: transparent;
+}
+
+.dataTable .order1 {
+     background-position: right;
+     background-image: url(../../images/theme2/arrow_up.gif);
+     background-repeat: no-repeat;
+}
+
+.dataTable .order2 {
+     background-position: right;
+     background-image: url(../../images/theme2/arrow_down.gif);
+     background-repeat: no-repeat;
+}
+
+.pagelinks {
+     color: #999999;
+     margin: 5px;
+}
+
+.pagelinks img {
+     vertical-align: middle;
+}
+
+span.export {
+     padding: 0 4px 1px 20px;
+     font-size: x-small;
+     text-align: center;
+}
+
+span.excel {
+     background-image: url(../../images/theme2/ico_file_excel.png);
+     background-repeat: no-repeat;
+     width: 16px;
+}
+
+span.csv {
+     background-image: url(../../images/theme2/ico_file_csv.png);
+     background-repeat: no-repeat;
+     width: 16px;
+}
+
+span.xml {
+     background-image: url(../../images/theme2/ico_file_xml.png);
+     background-repeat: no-repeat;
+     width: 16px;
+}
+
+span.pdf {
+     background-image: url(../../images/theme2/ico_file_pdf.png);
+     background-repeat: no-repeat;
+     width: 16px;
+}
+
+span.rtf {
+     background-image: url(../../images/theme2/ico_file_rtf.png);
+     background-repeat: no-repeat;
+     width: 16px;
+}
+
+.dataTable tr.rowMouseOver {
+     background-image: url(../../images/theme2/selected.gif);
+     background-repeat: repeat-x;
+     background-color: #ffff99;
+}
+
+/*html,body {
+     width: 100%;
+     height: 100%;
+     margin: 0px;
+     font-family: arial, helvetica, sans-serif;
+     font-size: 9pt;
+}*/
+
+.pageHeader {
+     height: 60px;
+     background-image: url(../../images/theme2/header.gif);
+     background-repeat: repeat-x;
+}
+
+.pageHeaderText {
+     font-size: 30px;
+     margin-left: 5px;
+     color: whitesmoke;
+     font-family: "century gothic", verdana, arial, helvetica, sans-serif;
+     font-weight: bold;
+     text-align: left;
+     display:inline;
+     white-space: nowrap;
+}
+
+.leftMenu {
+     white-space: nowrap;
+     height: 100%;
+     background-color: #d6cfe6;
+     font-family: verdana, arial, helvetica, sans-serif;
+}
+
+.content {
+     width: 100%;
+     padding: 10px;
+}
+
+.rightColumn {
+     width: 3px;
+}
+
+.customer {
+     width: 20%;
+     text-align: left;
+}
+
+.orderNumber {
+     width: 10%;
+     text-align: left;
+}
+
+.orderDate {
+     text-align: center;
+     width: 10%;
+}
+
+.productName {
+     width: 25%;
+}
+
+.quantity {
+     text-align: center;
+     width: 10%;
+}
+
+.lineItemTotal {
+     text-align: right;
+     width: 15%;
+     padding-right:10px;
+}
+
+.logo {
+     border-top: 1px solid #000066;
+     border-left: 1px solid #000066;
+     border-bottom: 1px solid #000066;
+     display:inline;
+     text-align: right;
+}
+
+.code {
+     font-family: verdana, arial, helvetica, "courier new", monospace;
+     font-size: 9pt;
+}
+
+.borderedInline {
+     display: inline;
+     border: 1px solid black;
+}
+
+a:link {
+     color: #000099;
+     text-decoration: none;
+     background-color: transparent;
+     font-weight: bold;
+}
+
+a:visited {
+     color: #000099;
+     text-decoration: none;
+     background-color: transparent;
+     font-weight: bold;
+}
+
+a:hover {
+     color: #d68000;
+     background-color: transparent;
+     font-weight: bold;
+}
+
+img {
+     border: 0px;
+}
+<!--knockoff table start here-->
+	
+fieldset .knockoff{
+}
+fieldset .knockoff {
+border:#B45252 solid 1px; 
+font-size: 1em;
+}
+fieldset .knockoff .bnone {
+	border-top:none;
+	border-right:none;
+	border-left:none; 
+}
+fieldset .knockoff .none {
+	border-left:none;
+	border-bottom:none; 
+}
+fieldset .knockoff .rtnone {
+	border-left:none;
+	border-bottom:none;
+	border-right:none; 
+}
+fieldset table.knockoff {
+	border-bottom:none; 
+}
+
+fieldset .knockoff th {
+    background: url("../../images/theme1/grey-up.png") repeat-x scroll left bottom #DAB5B5;
+    height: 20px;
+    border-right:#B45252 solid 1px;
+    border-left:#B45252 solid 1px; 
+}
+fieldset .knockoff .thnone{
+	border-right:none; 
+}
+fieldset .knockoff th a:link, a:visited {
+	color:#000;
+	text-decoration:none;
+}
+fieldset .knockoff th a:hover {
+	color:#ccc;
+	text-decoration:none;
+}
+
+fieldset .knockoff td {
+background: none repeat-x scroll left bottom #FFFFFF;
+border-right:#B45252 solid 1px;
+border-bottom:#B45252 solid 1px;
+border-left:#B45252 solid 1px;
+}
+
+<!--knockoff table end here-->

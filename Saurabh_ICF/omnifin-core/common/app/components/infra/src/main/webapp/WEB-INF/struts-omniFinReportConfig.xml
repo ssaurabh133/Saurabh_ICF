@@ -1,0 +1,879 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+		
+		<form-bean name="UserAccess"
+			type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userId" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+		<form-property name="BusinessDate" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="UserDetailsAccess"
+			type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="reportformat" type="java.lang.String" />
+		<form-property name="userId" type="java.lang.String" />
+		<form-property name="lbxUserId" type="java.lang.String" />
+		</form-bean>
+		
+		<form-bean name="ReportFunctionAccessAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="lbxRoleId" type="java.lang.String" />
+			<form-property name="moduleId" type="java.lang.String" />
+			<form-property name="lbxModuleId" type="java.lang.String" />
+		</form-bean>
+		
+		<!-- kanika code for reports -->
+   		<form-bean name="delinquentCaseReportForm" 	type="com.caps.actionForm.CasesReportForm" />
+
+        <form-bean name="unallocatedForm" type="com.caps.actionForm.UnallocatedReportForm" />
+    
+        <form-bean name="performanceForm" type="com.caps.actionForm.PerformanceReportForm" />
+        <form-bean name="promisetoPayForm" type="com.caps.actionForm.PromisetoPayReportForm" />
+   <!-- end of kanika reports code --> 
+   
+      
+     <!--Anil Code For reports Code Master Start  -->
+     
+   <form-bean name="resolvedCaseReportsForm" type="com.caps.actionForm.ResolvedCaseReportsForm" />
+   <form-bean name="collectionMISReportsForm" type="com.caps.actionForm.CollectionMISReportsForm" />
+   <form-bean name="paymentReportsForm" type="com.caps.actionForm.PaymentReportsForm"/>
+   <form-bean name="paymentDetailsForm" type="com.caps.actionForm.PaymentDetailsForm"/>
+   
+     <!--Anil Code For reports Code Master End  -->
+     
+    <!-- Aditi code for reports -->
+    <form-bean name="collectionDumpForm" type="org.apache.struts.validator.DynaValidatorForm">
+     <form-property name="reportId" type="java.lang.String" />
+     <form-property name="reportformat" type="java.lang.String" />
+     <form-property name="toDate" type="java.lang.String" /> 
+     <form-property name="fromDate" type="java.lang.String" />
+    </form-bean>
+    
+    
+<!-- end of Aditi reports code --> 
+      <form-bean name="followUpTrailReportsForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="reportformat" type="java.lang.String" />
+			<form-property name="loanno" type="java.lang.String" />
+			<form-property name="loanSearchButton" type="java.lang.String" />
+			<form-property name="lbxLoanno" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="userButton" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="fromdate" type="java.lang.String" />
+			<form-property name="todate" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="actionTaken" type="java.lang.String" />
+			<form-property name="branchid" type="java.lang.String"></form-property>
+			<form-property name="lbxBranchId" type="java.lang.String"></form-property>
+			<form-property name="branch" type="java.lang.String"></form-property>
+			<form-property name="producTCategory" type="java.lang.String"></form-property>	
+			<form-property name="loanClassification" type="java.lang.String"></form-property>
+			<form-property name="passwordPdf" type="java.lang.String"></form-property>  <!-- shubham -->
+			
+		</form-bean>
+		
+
+		<form-bean name="CollUploadDataForm" type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="uploadFileLoan" type="org.apache.struts.upload.FormFile" />
+		</form-bean>
+		
+		<!-- Aditi reports form bean starts -->
+		
+		<form-bean name="CPReportFormRPT"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="reportName" type="java.lang.String"></form-property>
+			<form-property name="reportformat" type="java.lang.String"></form-property>
+			<form-property name="specificDealNo" type="java.lang.String"></form-property>
+			<form-property name="specificLeadNo" type="java.lang.String"></form-property>
+			<form-property name="lbxDealNo" type="java.lang.String"></form-property>
+			<form-property name="reportForm" type="java.lang.String"></form-property>
+			<form-property name="reportId" type="java.lang.String"></form-property>
+			<form-property name="loanno" type="java.lang.String"></form-property>
+			<form-property name="status1" type="java.lang.String"></form-property>
+			<form-property name="status2" type="java.lang.String"></form-property>
+			<form-property name="fromDeal" type="java.lang.String"></form-property>
+			<form-property name="toDeal" type="java.lang.String"></form-property>
+			<form-property name="fromDate" type="java.lang.String"></form-property>
+			<form-property name="toDate" type="java.lang.String"></form-property>
+			<form-property name="lbxDealTo" type="java.lang.String"></form-property>
+			<form-property name="branchid" type="java.lang.String"></form-property>
+			<form-property name="lbxBranchId" type="java.lang.String"></form-property>
+			<form-property name="branch" type="java.lang.String"></form-property>
+			<form-property name="branchDet" type="java.lang.String"></form-property>
+			<form-property name="leadBranchId" type="java.lang.String"></form-property>
+			<form-property name="rmAllo" type="java.lang.String"></form-property>
+			<form-property name="lbxUserId" type="java.lang.String"></form-property>
+			<form-property name="userID" type="java.lang.String"></form-property>
+			<form-property name="productDescs" type="java.lang.String"></form-property>
+			<form-property name="productIds" type="java.lang.String"></form-property>	
+			<form-property name="producTCategory" type="java.lang.String"></form-property>	
+			<form-property name="loanClassification" type="java.lang.String"></form-property>	
+			<form-property name="specificLoanNo" type="java.lang.String"></form-property>
+			<form-property name="lbx_loan_from_id" type="java.lang.String"></form-property>			
+			<form-property name="specificLoanButton" type="java.lang.String"></form-property>
+			<form-property name="level" type="java.lang.String"></form-property>
+			<form-property name="passwordPdf" type="java.lang.String"></form-property>  <!-- shubham -->
+			</form-bean>
+		<!-- Aditi reports form bean ends here -->
+		
+		<form-bean name="dumpDownLoadForm" type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="fromDate" type="java.lang.String" />
+			<form-property name="toDate" type="java.lang.String" />
+			<form-property name="paramValueOne" type="java.lang.String" />
+			<form-property name="paramValueTwo" type="java.lang.String" />
+			<form-property name="lbxRecordID" type="java.lang.String" />
+			<form-property name="recordDesc" type="java.lang.String"/>
+			<form-property name="asOnDate" type="java.lang.String"/>
+			<form-property name="query" type="java.lang.String"/>
+			<form-property name="query1" type="java.lang.String"/>
+			<form-property name="quer2" type="java.lang.String"/>
+			<form-property name="quer3" type="java.lang.String"/>
+			<form-property name="quer4" type="java.lang.String"/>
+		</form-bean>
+		
+		    
+		    <!-- Nazia/Richa work space for cheque allocation details starts -->
+		    
+		    <form-bean name="ChequeAllocationDynaValidatorForm" 
+		    type="org.apache.struts.validator.DynaValidatorForm">
+		    <form-property name="instrumentId" type="java.lang.String" />
+		     <form-property name="loanNumber" type="java.lang.String" />
+		    <form-property name="instrumentno" type="java.lang.String" />
+			<form-property name="instrumentType" type="java.lang.String" />
+			<form-property name="instrumentAmount" type="java.lang.String" />
+			<form-property name="instrumentStatus" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="statusTypeR" type="java.lang.String" />
+			<form-property name="reportformat" type="java.lang.String" />
+			<form-property name="instrumentTypesearch" type="java.lang.String" />
+			<form-property name="lbx_loan_from_id" type="java.lang.String" />
+			<form-property name="fromDate" type="java.lang.String" />
+			<form-property name="toDate" type="java.lang.String" />
+			<form-property name="mybutton" type="java.lang.String" />
+			<form-property name="instrumentDate" type="java.lang.String" />
+			<form-property name="instrumentNoSearch" type="java.lang.String" />
+			<form-property name="reciptNo" type="java.lang.String" />
+							
+		</form-bean>
+		  
+		  <!-- Nazia/Richa work space for cheque allocation details ends -->
+		  
+		  <form-bean name="commonForAllReport" type="org.apache.struts.validator.DynaValidatorForm">
+		
+			<form-property name="reportId" type="java.lang.String" />
+			<form-property name="loanNumber" type="java.lang.String" />
+			<form-property name="lbx_loan_from_id" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="instrumentType" type="java.lang.String" />
+			<form-property name="statusTypeP" type="java.lang.String" />
+			<form-property name="statusTypeA" type="java.lang.String" />
+			<form-property name="statusTypeR" type="java.lang.String" />
+			<form-property name="fromDate" type="java.lang.String" />
+			<form-property name="toDate" type="java.lang.String" />
+			<form-property name="reportformat" type="java.lang.String" />
+			<form-property name="producTCategory" type="java.lang.String" />
+			<form-property name="loanClassification" type="java.lang.String"></form-property>	
+			<form-property name="branch" type="java.lang.String"></form-property>
+			<form-property name="branchid" type="java.lang.String"></form-property>	
+			<form-property name="lbxBranchId" type="java.lang.String"></form-property>	
+			<form-property name="fromLoan" type="java.lang.String" />
+			<form-property name="toLoan" type="java.lang.String" />
+			<form-property name="lbx_loan_to_id" type="java.lang.String" />
+			<form-property name="stage" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="fromDeal" type="java.lang.String" />
+			<form-property name="toDeal" type="java.lang.String" />
+			<form-property name="lbxDealNo" type="java.lang.String" />
+			<form-property name="lbxDealTo" type="java.lang.String" />
+			<form-property name="cutOffDate" type="java.lang.String" />	
+			<form-property name="asonDate" type="java.lang.String" />	
+			<form-property name="scheme" type="java.lang.String" />	
+			<form-property name="report" type="java.lang.String" />	
+			<form-property name="instrumentId" type="java.lang.String" />	
+			<form-property name="passwordPdf" type="java.lang.String"></form-property>  <!-- shubham -->
+
+		</form-bean>
+		  
+			<form-bean name="userLogged" type="org.apache.struts.validator.DynaValidatorForm">
+		
+			<form-property name="userName" type="java.lang.String" />
+			<form-property name="userEmpID" type="java.lang.String" />
+			<form-property name="branchName" type="java.lang.String" />
+			<form-property name="department" type="java.lang.String" />
+			<form-property name="reportingTo" type="java.lang.String" />
+			<form-property name="mobileNo" type="java.lang.String" />
+			<form-property name="ipAddress" type="java.lang.String" />
+			<form-property name="loginStatus" type="java.lang.String" />
+		
+	   </form-bean>
+	   
+	   	
+		<!--vinod bean space start  -->
+		<form-bean name="reportsform" type="com.cm.actionform.ReportsForm"></form-bean>
+		
+		<!-- vinod bean space end -->
+		
+			  
+  <!--  Manisha search for Reports Dynavalidator form  start -->
+		  <form-bean name="ReportsDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="reportName" type="java.lang.String" />
+			<form-property name="reportformat" type="java.lang.String" />
+			<form-property name="loanNo" type="java.lang.String" />
+			<form-property name="lbx_loan_from_id" type="java.lang.String" />		
+			<form-property name="custName" type="java.lang.String" />
+			<form-property name="InstrumentMode" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="fromDate" type="java.lang.String" />
+			<form-property name="toDate" type="java.lang.String" />
+			<form-property name="asonDate" type="java.lang.String" />
+			<form-property name="paySlipSatus" type="java.lang.String" />
+			<form-property name="productCategory" type="java.lang.String" />
+			<form-property name="producTCategory" type="java.lang.String" />
+			<form-property name="loanClassification" type="java.lang.String"></form-property>	
+			<form-property name="branch" type="java.lang.String"></form-property>
+			<form-property name="branchid" type="java.lang.String"></form-property>	
+			<form-property name="lbxBranchId" type="java.lang.String"></form-property>	
+			<form-property name="passwordPdf" type="java.lang.String"></form-property>  <!-- shubham -->
+		</form-bean>
+		 	   
+		    <!--  Manisha search for Reports Dynavalidator form  end -->
+	   
+	    <form-bean name="glTrialBalanceForm" type="com.GL.actionForm.GlTrialBalanceForm" />
+		<form-bean name="glCashBookForm" type="com.GL.actionForm.GlCashBookForm" />
+		<form-bean name="glFASchedule5Form"	type="com.GL.actionForm.glFASchedule5" />
+		<form-bean name="glLoanWiseTrialBalanceForm" type="com.GL.actionForm.LoanWiseTrialBalanceForm" />
+		<form-bean name="glBankReconcilationForm" type="com.GL.actionForm.BankReconcilationForm" />
+		<form-bean name="glFixedAssetRegisterForm" type="com.GL.actionForm.FixedAssetRegisterForm" />
+		<form-bean name="PartyWiseExpRptForm" type="com.GL.actionForm.PartyWiseExpRptForm" />
+		<form-bean name="saleDetailForm" type="com.GL.actionForm.SaleDetailForm" />
+		<!-- Amit Ruhela Bill Recevable Report Form 28 june   --> 
+		<form-bean name="BillRecevableReportForm" type="com.GL.actionForm.BillRecevableReportForm" />
+		<form-bean name="depreciationDetailForm" type="com.GL.actionForm.DepreciationDetailForm" />
+		<form-bean name="glPartyCreationForm" type="com.GL.actionForm.GlPartyCreationForm" />
+		<form-bean name="glBillCaptureForm" type="com.GL.actionForm.BillCapturingForm" />
+		<form-bean name="glBillReceivablePayableReportForm" type="com.GL.actionForm.BillReceivablePayableReportForm" />
+		<form-bean name="glBillReceviableForm" type="com.GL.actionForm.BillReceivablePayableReportForm" />
+        <!-- Amit2 work space start --> 
+		<form-bean name="bulkReportGenerationFormBean" type="org.apache.struts.validator.DynaValidatorForm">			
+		<form-property name="docFile" type="org.apache.struts.upload.FormFile" />				
+		</form-bean>
+        <!-- Amit2 work space ends -->
+	
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+	
+			<!--aditi  code Start -->
+		
+		<action path="/userAccessSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userAccess.jsp"></forward>
+		</action>
+		<action  path="/userAccessLogAction" type="com.masters.actions.UserAccessAction" name="UserAccess" scope="request">
+		</action>
+		
+		<action path="/userFunctionAccessSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userFunctionAccess.jsp"></forward>
+		</action>
+		<action  path="/UserFunctionAccessAction" type="com.masters.actions.UserFunctionAccessAction" name="UserFunctionAccess" scope="request">
+		</action>
+		
+		<action path="/userDetailSearch" type="com.cm.actions.ReportBehindAction" >
+		<forward name="success" path="/JSP/masterspage/userDetails.jsp"></forward>
+		</action>
+		<action  path="/UserDetailsAction" type="com.masters.actions.UserDetailsAction" name="UserDetailsAccess" scope="request">
+		</action>
+
+	<!-- aditi code End -->
+	
+	   <action  path="/unallocatedReports" 
+		     type="com.caps.action.UnallocatedReportsAction" name="unallocatedForm">
+		</action>
+		
+	  <action path="/unallocatedreport" name="unallocatedForm"
+		type="com.caps.action.UnallocatedReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/unallocatedcasesreports.jsp"></forward>
+		</action>
+		
+		
+		<action  path="/caseReports" 
+		type="com.caps.action.CaseReportsAction" name="delinquentCaseReportForm">
+		</action>
+		
+	
+		<action path="/performancereport" name="performanceForm"
+		type="com.caps.action.PerformanceReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/performancecasesreports.jsp"></forward>
+		</action>
+		
+		<action  path="/performanceReports" 
+		type="com.caps.action.PerformanceReportsAction" name="performanceForm" scope="request">
+		</action>
+		
+		<action path="/promisereport" name="promisetoPayForm"
+		type="com.caps.action.PromisetoPayReportsAction" scope="request">
+			<forward name="success" path="/JSP/CAPSJSP/promisetopayreports.jsp"></forward>
+		</action>
+		<!-- end of case reports -->
+		
+		<!-- Anil code for reports Start -->
+		
+		<action path="/resolvedCaseBehind" name="resolvedCaseReportsForm"  
+		type="com.caps.action.ResolvedCaseReportsBehindAction" scope="request">
+			<forward name="ResolvedCaseSuccess" path="/JSP/CAPSJSP/resolvedCaseReports.jsp"></forward>
+		</action>
+		
+		<action path="/resolvedCaseReports" name="resolvedCaseReportsForm"  
+		type="com.caps.action.ResolvedCaseReportsAction" scope="request">
+		</action>
+		
+		<action path="/collectionMISBehind" name="collectionMISReportsForm" parameter="method"
+		type="com.caps.action.CollectionMISReportsBehindAction" scope="request">
+			<forward name="openCollMisSuccess" path="/JSP/CAPSJSP/collectionMISReports.jsp"/>
+		</action>
+		
+		<action path="/collectionMIS" name="collectionMISReportsForm" parameter="method"
+		type="com.caps.action.CollectionMISReportsAction" scope="request">
+		</action>
+		
+		<action path="/paymentReportsBehind" name="paymentReportsForm" parameter="method" 
+		type="com.caps.action.PaymentReportsBehindAction">
+			<forward name="openPaymentSuccess" path="/JSP/CAPSJSP/paymentReports.jsp"/>
+		</action>
+		
+		<action path="/paymentReports" name="paymentReportsForm" parameter="method"
+		type="com.caps.action.PaymentReportsAction">
+		</action>
+				
+		<!-- Anil code for reports End-->
+		
+		<!-- Manish follow Up Trails -->
+		<action path="/followUpTrailDispatch" name="followUpTrailReportsForm" parameter="method"
+		type="com.caps.action.FollowUpTrailDispatchAction" scope="request">
+			<forward name="openSuccess" path="/JSP/CAPSJSP/followUpTrailReports.jsp"/>
+		</action>
+
+		<!-- Manish  End follow Up Trails -->
+		<!-- Aditi code for reports Start -->
+		<action path="/collectionDumpAction" type="com.cm.actions.ReportBehindAction">
+		<forward name="success" path="/JSP/CAPSJSP/collectionDumpReport.jsp"></forward>
+		</action>
+		<action  path="/collectionDumpReport" type="com.caps.action.CollectionDumpActionData" name="collectionDumpForm" scope="request">
+		</action>
+		
+		
+		<!-- Aditi code for reports End-->
+		
+		<!-- Nishant space starts -->
+		<action path="/teleCallerScorecardAction" type="com.cm.actions.ReportBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/teleCallerScorecardReport.jsp"></forward>
+		</action>
+		<action  path="/teleCallerScorecardActionReport" type="com.caps.action.TeleCallerScorecardActionReport" name="collectionDumpForm" scope="request">
+		</action>
+		<!-- Nishant space end -->
+			 <action path="/collectionSummary"  scope="request" 
+		        type="com.caps.action.CollectionSummaryAction" >
+		 <forward name="success"  path="/JSP/CAPSJSP/collectionSummary.jsp"></forward>
+				
+		</action>
+		
+		<!-- kanika code for case reports -->
+		<action path="/casereport" name="delinquentCaseReportForm"
+		type="com.caps.action.CaseReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/deliquentcasesreports.jsp"></forward>
+		</action>
+		
+		<!-- Sidharth code for allocatedcase reports -->
+		<action path="/allocatedCases" name="delinquentCaseReportForm"
+		type="com.caps.action.CaseReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/allocatedcasesreports.jsp"></forward>
+		</action>
+		<action  path="/allocatecaseReports" 
+		type="com.caps.action.AllocateCaseReportsAction" name="delinquentCaseReportForm">
+		</action>
+		
+		<!-- Aditi space for report Start-->
+		
+		<action path="/reportsBehindAction" type="com.cp.actions.ReportBehindActionForCP" >
+			<forward name="success" path="/JSP/reports/ReportsForCP.jsp"></forward>
+		</action>
+		<action  path="/CPReportsAction" type="com.cp.actions.ReportActionForCP" name="CPReportFormRPT" scope="request">
+		<forward name="uw" path="/underWriting.do?method=getUnderWriterDataFrameset" />
+		<forward name="success" path="/reportsBehindAction.do"></forward>
+		</action>
+	
+		
+	     <action path="/cpDashboard" type="com.cp.actions.ReportBehindActionForCP" >
+			<forward name="success" path="/JSP/reports/summaryReport.jsp"></forward>
+		 </action>
+		<!-- Aditi space  for report end --> 
+
+		 <!-- Sidharth space start -->
+		<action path="/adhocreports" type="com.cm.actions.AdHocReportBehindAction" >
+		<forward name="success" path="/JSP/CMJSP/adhocreport.jsp"></forward>
+		</action>
+		
+		<action path="/adhocreportsDispatchAction" type="com.cm.actions.DumpDownLoadDispatchAction" name="dumpDownLoadForm" scope="request" parameter="method">
+			<forward name="hdHocSuccess" path="/JSP/CMJSP/adhocreport.jsp"></forward>
+		</action>
+		
+<!-- Sidharth space start --> 
+
+		<!-- Nazia/Richa work space for cheque allocation details starts -->
+    	
+    	<action path="/chequeAllocationDetail" type="com.cm.actions.ChequeAllocationDetailAction" scope="request"
+	      name="ChequeAllocationDynaValidatorForm">
+    	  <forward name="success" path="/JSP/reports/chequeAllocationDetailReport.jsp" />
+       	  </action>
+       	  
+       	  <action path="/chequeAllocationReportAction" type="com.cm.actions.ChequeAllocationReportAction" scope="request"
+       	  name="ChequeAllocationDynaValidatorForm">
+       	  </action>
+       	  
+       	  <!-- Nazia/Richa work space for cheque allocation details ends -->
+       	  
+       	<action path="/cibilReportDownLoad" type="com.cm.actions.ReportBehindAction" >
+			<forward name="success" path="/JSP/reports/cibilReportDownLoad.jsp"></forward>
+		</action>
+		<action  path="/cibilReportGenerate" type="com.cm.actions.CibilReportDownLoadAction" name="commonForAllReport" scope="request">
+			<forward name="error" path="/JSP/reports/cibilReportDownLoad.jsp"></forward>
+		</action>
+		
+		 <action path="/cmsDownLoad" type="com.cm.actions.ReportBehindAction"  >
+			<forward name="success" path="/JSP/reports/cmsDownLoadReport.jsp"></forward>
+		</action>
+		
+		<action  path="/cmsdownLoadReportProcessAction" type="com.cm.actions.CMSDownLoadReportProcessAction" name="commonForAllReport" scope="request" parameter="method" >
+		
+			<forward name="error" path="/JSP/reports/cmsDownLoadReport.jsp"></forward>
+			
+		</action>
+		
+			<action path="/chequeStatusReportBehindAction" type="com.cm.actions.ReportBehindAction" >
+			<forward name="success" path="/JSP/reports/chequeStatusReport.jsp"></forward>
+		</action>
+		<action path="/documentCollection" type="com.cm.actions.ReportBehindAction"  >
+			<forward name="success" path="/JSP/reports/documentCollectionReport.jsp"></forward>
+		</action>
+		<action  path="/commonActionForReport" type="com.cm.actions.CommonActionForAllReports" name="commonForAllReport" scope="request">
+		</action>
+		
+		<action path="/userLoggedInReportBehindAction" type="com.cm.actions.LoggedInUserReportBehindAction" name="userLogged" scope="request">
+		<forward name="success" path="/JSP/reports/loggedInUserReport.jsp"></forward>
+		</action>
+		<!-- Aditi space  for report end --> 
+		
+<!-- Neeraj space Start --> 
+        <action path="/nhbReport" type="com.cm.actions.ReportBehindAction" >
+        <forward name="success" path="/JSP/reports/nhbReport.jsp"></forward>
+		</action>
+		<action  path="/nhbReportAction" type="com.cm.actions.NHBReportAction" name="commonForAllReport" scope="request" parameter="method"></action>
+		
+       <action path="/summaryReport" type="com.cm.actions.ReportBehindAction" >
+        <forward name="success" path="/JSP/reports/summaryReport.jsp"></forward>
+		</action>
+		
+		<action  path="/summaryReportAction" type="com.cm.actions.SummaryReportAction" name="reportsform" scope="request" parameter="method" />
+		
+		<action path="/paymentMemoReportsBehindAction" type="com.cm.actions.ReportBehindAction" >
+			<forward name="success" path="/JSP/reports/paymentMemoReport.jsp"></forward>
+		</action>
+		<action  path="/paymentMemoGenerate" type="com.cm.actions.PaymentMemoReportAction" name="commonForAllReport" scope="request">
+		</action>
+		
+		  <action
+      parameter="method"
+      path="/generateReport"
+      name="CommonDynaValidatorForm"
+      scope="request"  
+      type="com.cm.actions.GenerateReportDispatchAction">   
+    <forward name="success" path="/JSP/CMJSP/generateBankingReport.jsp" />
+     	
+    </action>
+    
+       <!--vinod space start for action class for report  -->
+    
+    
+		<action path="/firstReports" type="com.cm.actions.ReportBehindAction" scope="request"> 
+			<forward name="success" path="/JSP/reports/reports.jsp"></forward>
+		</action>
+		<action  path="/AllReports" type="com.cm.actions.ReportDispatchAction" name="reportsform"  parameter="method" scope="request">
+		<forward name="errorInProcedure" path="/JSP/reports/reports.jsp"></forward>
+		<forward name="lodReportValidation" path="/JSP/reports/reports.jsp"></forward>
+		<forward name="nocReportValidation" path="/JSP/reports/reports.jsp"></forward>
+		</action>
+		<action  path="/GenerateAllReports" type="com.cm.actions.GenerateAllReports" />
+			
+		<!--vinod space  for report end -->
+		<action path="/dumpDownLoad" type="com.cm.actions.DumpDownLoadBehindAction" >
+			<forward name="success" path="/JSP/CMJSP/dumpDownLoad.jsp"></forward>
+		</action>
+		<action path="/dumpDownLoadDispatchAction" type="com.cm.actions.DumpDownLoadDispatchAction" name="dumpDownLoadForm" scope="request" parameter="method">
+			<forward name="success" path="/JSP/CMJSP/dumpDownLoad.jsp"></forward>
+		</action>
+		
+		<action path="/fileTrackingDashbord" type="com.cm.actions.FileTrackingDashbord" scope="request" parameter="method"/>
+		
+		<action path="/generateBankingReport" type="com.cm.actions.GenerateBankingReportBehindAction"
+			scope="request">
+			<forward name="success" path="/JSP/CMJSP/generateBankingReport.jsp" />
+		</action>
+		
+		  	<!--  manisha  reports start-->
+    	<action  path="/repaymentServicesReportBehindAction" type="com.cm.actions.RepaymentServicesReportBehindAction"
+    	name="ReportsDynaValidatorForm" >
+		 <forward name="success" path="/JSP/reports/repaymentServicesReport.jsp" />
+			
+		</action>
+		<action  path="/repaymentServicesReportsAction" type="com.cm.actions.RepaymentServicesReportsAction" 
+    	name="ReportsDynaValidatorForm" >
+		 <forward name="generateRepayReport" path="/JSP/reports/repaymentServicesReport.jsp" />
+			
+		</action>
+		<!--  manisha  reports end-->
+      
+         <action path="/reconciliationReport"  type="com.GL.action.ReconReportBehindAction"  scope="request"  validate="true" parameter="method"
+    	 	name="glTrialBalanceForm" >
+    	 	<forward name="success" path="/JSP/glForm/reconciliationReport.jsp" />
+    	 </action>
+			
+		<action path="/reconciliationReportShow" type="com.GL.action.ReconciliationReportAction"
+			scope="request" validate="true" parameter="method"  name="glTrialBalanceForm" >
+			<forward name="success" path="/reconciliationReport.do" />
+		</action>
+			
+					
+		<!-- sidharth code start here  -->
+		
+		<action path="/reportforGL" type="com.GL.action.ReportsActionLedger"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="cashPage" path="/glCashBook.do"></forward>	
+			<forward name="bankPage" path="/glBankBook.do"></forward>
+			<forward name="ledgerPage" path="/glLedgerReport.do"></forward>	
+			<forward name="subLedgerPage" path="/glSubLedgerReport.do"></forward>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>	
+		</action>
+		
+		<!-- sidharth code end here -->
+		
+		<action path="/glTrialBalance" type="com.GL.action.GlTrialBalanceAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+			<forward name="glTrialBalanceReport" path="/JSP/FrmTrialBalance.jsp" />
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+
+		<action path="/glCashBook" type="com.GL.action.GlCashBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+<!--			<forward name="glTrialBalanceReport" path="/JSP/FrmCashBankLedgerReport.jsp" />-->
+		</action>
+		
+		<action path="/glLedgerReport" type="com.GL.action.GlLedgerReport"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/glBankBook" type="com.GL.action.GLBankBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+<!--			<forward name="glTrialBalanceReport" path="/JSP/DummyReport.jsp" />-->
+		</action>
+		
+		<action path="/glDayBook" type="com.GL.action.GLDayBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforDayBook" type="com.GL.action.DayBookReport"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDayBook.do"/>
+			</action>	
+		
+		<action path="/glDailyCashRegister" type="com.GL.action.GlDailyBookAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforGLDailyCashRegister" type="com.GL.action.ReportsActionForDailyCahRegister"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDailyCashRegister.do"></forward>		
+		</action>
+		
+		<action path="/glLedgerDump" type="com.GL.action.GLLdgerDumpAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glLedgerDump.jsp" />
+			<forward name="ajaxForLedgerDump" path="/JSP/glForm/ajaxForLedgerDump.jsp" />
+		</action>
+		
+		<action path="/glLedgerDumpReport" type="com.GL.action.ReportsActionForLedgerDump"
+			name="glTrialBalanceForm" scope="request" validate="true">
+		</action>
+		
+<!-- 		SIDHARTH(CONSOLIDATED DCR) -->
+		<action path="/glDailyCashRegisterconsolidated" type="com.GL.action.GlDailyBookActionconsolidated"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforGLDailyCashRegisterConsolidated" type="com.GL.action.ReportsActionForDailyCahRegisterConsolidated"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/glDailyCashRegisterconsolidated.do"></forward>		
+		</action>
+		
+<!-- 		SIDHARTH(CONSOLIDATED DCR) END -->
+		
+         <action path="/glVoucherPrinting" type="com.GL.action.GlVoucherPrintingAction" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glVoucherPrinting.jsp"/>
+			<forward name="glTrialBalanceReport" path="/JSP/FrmVoucherPrintingReport.jsp" />
+			<forward name="glTrialBalanceReportMulti" path="/JSP/FrmVoucherPrintingReport.jsp" />
+		</action>
+		
+		<action path="/glBalanceSheet" type="com.GL.action.GlBalanceSheetAction" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glBalanceSheet.jsp"/>
+			<forward name="profitReport" path="/glProfitLoss.do"/>
+			<forward name="glBalanceSheetReport" path="/JSP/FrmBalanceShhetReport.jsp"/>
+			<forward name="glProfitLossReport" path="/JSP/FrmProffitNLossReport.jsp"/>
+			<forward name="glProfitLossReportcust" path="/JSP/FrmRevenueStatement.jsp"/>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+		
+		<action path="/glProfitLoss" type="com.GL.action.GlProfitLossAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glBalanceSheet.jsp" />
+		</action>
+		
+		<action path="/glProfitLossAjax" type="com.GL.action.GlProfitLossAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/ajaxForProfiandLosReport.jsp" />
+		</action>
+		
+		
+		<action path="/glSubLedgerReport" type="com.GL.action.GLSubLedgerReportAction"
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glSubLedgerReport.jsp" />
+<!--			<forward name="glSubLedgerReport" path="/JSP/FrmCashBankLedgerReport.jsp" />-->
+		</action>
+		
+		 <action path="/glFASchedule5"
+			type="com.GL.action.glFAScheduleBehindAction"
+			name="glFASchedule5Form" scope="request" validate="true">
+			<forward name="success"
+				path="/JSP/glForm/glFASchedule5.jsp" />
+		</action>		
+		<action path="/glFASchedule"
+			type="com.GL.action.glFASchedule5Action" name="glFASchedule5Form"
+			scope="request" validate="true">
+			<forward name="success"
+				path="/JSP/glForm/glFASchedule5.jsp" />
+			<forward name="glFAScedule5Report"
+				path="/JSP/FrmFASceduleV.jsp" />
+		</action> 
+		
+		<action path="/budgetVarianceReport" type="com.GL.action.GLBudgetVarianceReportAction" 
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glBudgetVarianceReport.jsp" />		
+		</action>
+		
+		<action path="/exceptionReport" type="com.GL.action.ExceptionReportAction" 
+			name="glTrialBalanceForm" scope="request">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />		
+		</action>
+		<action path="/accountingListAction" type="com.GL.action.AccountingListAction" 
+			name="glTrialBalanceForm" scope="request" parameter="method">
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />	
+			<forward name="accListReport" path="/accountingListAction.do?method=openJsp"/>
+			<forward name="driling" path="/GenerateAllGLReports.do"></forward>
+		</action>
+		<action path="/voucherPrintingFromCreation" type="com.GL.action.VoucherPrintingFromCreation" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glTrialBalance.jsp" />		
+		</action>
+		
+		<action path="/balancestotrial" type="com.GL.action.GroupDetailAction" name="glTrialBalanceForm">
+
+		</action>
+
+		<!-- Amit Ruhela add BillRecevable Report arap 28 june -->
+		 <action path="/billreceivablereport" type="com.GL.action.BillRecevableReportAction"
+				 name="BillRecevableReportForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/billRecevableReport.jsp" />
+		</action>
+		
+		<!-- Amit Ruhela end  -->
+		
+		<!-- sidharth space for subledger trial balance   -->
+		<action path="/subledgertrialbalance" name="glTrialBalanceForm"
+			scope="request" type="com.GL.action.SubledgerTrialBalanceBehindAction">
+		<forward name="success" path="/JSP/glForm/subLedgerTrialbalancereport.jsp" />
+		</action>
+		
+		<action path="/reportforSubLedgerTrial" type="com.GL.action.SubledgerTrialBalanceReportAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/subledgertrialbalance.do" />
+     	</action>
+
+		<action path="/branchBalanceSheet" name="glTrialBalanceForm"
+			scope="request" type="com.GL.action.BranchBalanceSheetBehindAction">
+			<forward name="success" path="/JSP/glForm/branchWiseBalanceSheetReport.jsp" />
+		</action>
+		
+		<action path="/reportforBranchBalanceSheet" type="com.GL.action.BranchBalanceSheetReportAction"
+			name="glTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/branchBalanceSheet.do" />
+     	</action>
+<!-- sidharth space for subledger trial balance  end here  -->
+
+		<action path="/customisedReport" type="com.GL.action.CustomisedReportAction" 
+			name="glTrialBalanceForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/customisedReport.jsp"/>
+		</action>
+		
+		<action path="/loanWiseTrailBalance" type="com.GL.action.LoanWiseTrailBalanceAction"
+			name="glLoanWiseTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/loanWiseTrialBalance.jsp" />
+		</action>
+		
+		<action path="/reportforLoanWise" type="com.GL.action.LoanWiseTrialBalanceReport"
+			name="glLoanWiseTrialBalanceForm" scope="request" validate="true">
+			<forward name="success" path="/loanWiseTrailBalance.do" />		
+		</action>		
+	
+		<action path="/bankstatement" type="com.GL.action.glBankStatementaction"
+			name="glBankReconcilationForm" scope="request" validate="true">
+			<forward name="success" path="/JSP/glForm/glBankStatement.jsp" />
+		</action>
+	
+		<action path="/reportForBillStatement" type="com.GL.action.glBankStatementreport"
+			name="glBankReconcilationForm" scope="request" validate="true" parameter="method">
+		</action>	
+
+	<!-- Bank Reconcilation start -->
+		
+		<action path="/bankreconcilation" type="com.GL.action.BankReconcilationAction"
+			name="glBankReconcilationForm" scope="request" >
+				<forward name="success" path="/JSP/glForm/bankreconcilation.jsp" />
+		</action>
+
+		<action path="/reportforBankReconcilation" type="com.GL.action.BankReconcilationReport"
+			name="glBankReconcilationForm" scope="request" validate="true">
+				<forward name="success" path="/bankreconcilation.do" />
+		</action>
+
+		<!-- Bank Reconcilation End -->
+		<!-- fixed Asset - Register start -->
+		<action path="/fixedAssetRegister" type="com.GL.action.FixedAssetRegisterAction"
+				name="glFixedAssetRegisterForm" scope="request">
+				<forward name="success" path="/JSP/glForm/fixedAssetRegiter.jsp" />
+		</action>
+		
+		<action path="/reportforFixedAssetRegister" type="com.GL.action.FixedAssetRegisterReport"
+				name="glFixedAssetRegisterForm" scope="request" >
+				<forward name="success" path="/JSP/glForm/fixedAssetRegiter.jsp" />
+		</action>
+		
+		<!-- fixed Asset - Register End -->
+
+<!-- Bank Recon Statement -->
+		<action path="/bankReconStatement" type="com.GL.action.BankReconcilationStatementAction" name="glBankReconcilationForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/bankReconStatementReport.jsp" />
+		</action>
+		
+		<action path="/reportforBankReconStatement" type="com.GL.action.BankReconStatementReport" 
+			name="glBankReconcilationForm" scope="request" validate="true">
+				<forward name="success" path="/bankReconStatement.do" />
+		</action>
+<!-- End -->
+
+		 <action path="/partyWiseExpRpt" type="com.GL.action.PartyWiseExpAction" name="PartyWiseExpRptForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/glpartyWiseExpReport.jsp" />
+		 </action>
+  
+  		<action path="/reportForPartyWiseExp" type="com.GL.action.PartyWiseExpReport" 
+				name="PartyWiseExpRptForm" scope="request" validate="true">
+				<forward name="success" path="/partyWiseExpRpt.do" />
+		</action>
+	
+		<action path="/saleDiscardReport" type="com.GL.action.SaleDetailReportAction"
+			name="saleDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/saleDiscardReport.jsp" />
+		</action>
+		
+		<action path="/glDepreciationDetail" type="com.GL.action.DepreciationDetailReportAction"
+			name="depreciationDetailForm" scope="request" >
+			<forward name="success" path="/JSP/glForm/depreciationDetail.jsp" />
+		</action>
+		
+	<!-- sidharth party master starts -->
+	<action path="/partyMasterReport" name="glPartyCreationForm"
+			scope="request" type="com.GL.action.PartyMasterBehindAction">
+		<forward name="success" path="/JSP/glForm/partyMasterReport.jsp" />
+	</action>
+		
+	<action path="/reportForPartyMaster" type="com.GL.action.GlPartyMasterReportAction"
+			name="glPartyCreationForm" scope="request" validate="true" parameter="method">
+	</action>
+<!-- Sidharth ends -->
+		<action  path="/GenerateAllGLReports" type="com.GL.action.GenerateAllGLReports" />
+	
+	 
+
+    <action path="/billreceivablepayablevoucher" type="com.GL.action.GlBillRcevablePayableVoucher"
+			name="glBillCaptureForm" scope="request" validate="true">
+			<forward name="authorPage" path="/JSP/glForm/GlBillRcevablePayableVoucher.jsp" />
+	</action>
+	
+	<action path="/reportForBillRecepayVoucher" type="com.GL.action.GlBillRcevablePayableVoucherReport"
+			name="glBillCaptureForm" scope="request" validate="true" parameter="method">
+	</action>
+
+	<action path="/reportforbill" type="com.GL.action.BillReceivablePayableReportAction"
+				name="glBillReceivablePayableReportForm" scope="request" validate="true" parameter="method">
+	</action>
+		
+		<action path="/reportforCenVat" type="com.omniFinReport.actions.CenvatReportAction"
+					name="glBillReceivablePayableReportForm" scope="request" validate="true" parameter="method">
+		</action>
+	
+		<action path="/billreceivablepayablereport" type="com.GL.action.BillReceivablePayableReport"
+			name="glBillReceviableForm" scope="request" validate="true">
+				<forward name="success" path="/JSP/glForm/billReceivablePayableReport.jsp" />
+   		</action>		
+
+			<!-- Ankit Agarwal for Cenvat -->
+		<action path="/cenvatReport" type="com.omniFinReport.actions.GlCanvetReportAction"
+				name="glBillReceviableForm" scope="request" validate="true">
+					<forward name="success" path="/JSP/omniFinReportJSP/canvetReport.jsp" />
+		   </action>
+		
+<!--Amit2 Kumar changes start   -->	
+	<action path="/bulkReportGeneration" parameter="method" scope="request" 
+	        name="bulkReportGenerationFormBean" type="com.cm.actions.BulkReportGenerationCM">
+	        <forward name="success" path="/JSP/CMJSP/bulkReportGenerationCM.jsp" /> 	
+	</action>	
+<!--Amit2 Kumar changes ends   -->
+		
+		</action-mappings>
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

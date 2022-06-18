@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="customer_details_Management_Details_subreport1_refrence_detail_CORPORATE_INFO" language="groovy" pageWidth="802" pageHeight="554" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_deal_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT gcm.CUSTMER_PAN,SHOP_ESTABLISHMENT_NO,SALES_TAX_TIN_NO,DGFT_NO,CUSTOMER_REGISTRATION_NO,CDBAM.ASSOCIATION_NAME,
+if(ADDRESS_LINE1 is null,if(ADDRESS_LINE2 is null,if(ADDRESS_LINE3 is null,' ',concat(ADDRESS_LINE3,' ')),if(ADDRESS_LINE3 is null,concat(ADDRESS_LINE2,' '),concat(concat(ADDRESS_LINE2,','),concat(ADDRESS_LINE3,' ')))),if(ADDRESS_LINE2 is null,if(ADDRESS_LINE3 is null,concat(ADDRESS_LINE1,' '),concat(concat(ADDRESS_LINE1,','),concat(ADDRESS_LINE3,' '))),if(ADDRESS_LINE3 is null,concat(concat(ADDRESS_LINE1,','),concat(ADDRESS_LINE2,' ')),concat(concat(concat(ADDRESS_LINE1,','),concat(ADDRESS_LINE2,',')),concat(ADDRESS_LINE3,' ')))))as addressLine1,
+concat(if(DISTRICT_DESC is null,if(STATE_DESC is null,if(COUNTRY_DESC is null,' ',concat('(',COUNTRY_DESC,') ')),if(COUNTRY_DESC is null,concat(STATE_DESC,' '),concat(concat(STATE_DESC,','),concat('(',COUNTRY_DESC,') ')))),if(STATE_DESC is null,if(COUNTRY_DESC is null,concat(DISTRICT_DESC,' '),concat(concat(DISTRICT_DESC,','),concat('(',COUNTRY_DESC,') '))),if(COUNTRY_DESC is null,concat(concat(DISTRICT_DESC,','),concat(STATE_DESC,' ')),concat(concat(concat(DISTRICT_DESC,','),concat(STATE_DESC,',')),concat('(',COUNTRY_DESC,') '))))),if(PINCODE is null,' ',concat('- ',PINCODE)))as addressLine2,
+if(PRIMARY_PHONE is null,if(ALTERNATE_PHONE is null,' ',concat('Phone No.-',concat(ALTERNATE_PHONE,' '))),if(ALTERNATE_PHONE is null,concat('Phone No.-',concat(PRIMARY_PHONE,' ')),concat('Phone No.-',concat(concat(PRIMARY_PHONE,','),concat(ALTERNATE_PHONE,' '))))) as phone, cdl.DEAL_CUSTOMER_TYPE
+from cr_deal_dtl cdl
+left join cr_loan_dtl cld on cld.LOAN_DEAL_ID=cdl.DEAL_ID
+LEFT JOIN cr_loan_customer_role clcr on(clcr.LOAN_ID=cld.LOAN_ID)
+LEFT JOIN gcd_customer_m gcm  on(clcr.GCD_ID=gcm.CUSTOMER_ID )
+LEFT JOIN customer_business_activity_m CDBAM ON (gcm.CUSTOMER_ID=CDBAM.CUSTOMER_ID)
+LEFT JOIN com_address_m cdam on((cdam.BPID=gcm.CUSTOMER_ID)and(cdam.COMMUNICATION_ADDRESS='Y') AND ADDRESS_TYPE='REGOFF')
+LEFT JOIN com_country_m on(com_country_m.COUNTRY_ID=cdam.COUNTRY)
+LEFT JOIN  com_state_m on((com_state_m.COUNTRY_ID=cdam.COUNTRY)and(com_state_m.STATE_ID=cdam.STATE))
+LEFT JOIN com_district_m on(com_district_m.STATE_ID=cdam.STATE)and(com_district_m.DISTRICT_ID=cdam.DISTRICT)
+WHERE   cdl.DEAL_ID=$P{p_deal_id}]]>
+	</queryString>
+	<field name="CUSTMER_PAN" class="java.lang.String"/>
+	<field name="SHOP_ESTABLISHMENT_NO" class="java.lang.String"/>
+	<field name="SALES_TAX_TIN_NO" class="java.lang.String"/>
+	<field name="DGFT_NO" class="java.lang.String"/>
+	<field name="CUSTOMER_REGISTRATION_NO" class="java.lang.String"/>
+	<field name="ASSOCIATION_NAME" class="java.lang.String"/>
+	<field name="addressLine1" class="java.lang.String"/>
+	<field name="addressLine2" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="DEAL_CUSTOMER_TYPE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="14" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Corporate Information And Registration Details ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="24" width="89" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAN Number ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="89" y="24" width="106" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shop & Establishment no.   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="195" y="24" width="97" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sales tax / TIN Number  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="24" width="96" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DGFT No / IE code   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="388" y="24" width="92" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SSI Registration Number  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="24" width="107" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Association Membership / Name   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="587" y="24" width="214" height="31" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="89" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSTMER_PAN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="89" y="0" width="106" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SHOP_ESTABLISHMENT_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="195" y="0" width="97" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SALES_TAX_TIN_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="292" y="0" width="96" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DGFT_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="388" y="0" width="92" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CUSTOMER_REGISTRATION_NO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="480" y="0" width="107" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSOCIATION_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="587" y="0" width="214" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{addressLine1}+"\n"+$F{addressLine2}+"\n"+$F{phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

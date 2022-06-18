@@ -1,0 +1,752 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+	<!-- kanika code for allocation -->
+	<form-bean name="ExcelSheetUploadFormCM" type="com.cm.actionform.ExcelSheetUploadFormCM"  /> 
+  <form-bean name="AllocationAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="userSearchId" type="java.lang.String" />
+			<form-property name="lbxUserIdSearch" type="java.lang.String" />
+			<form-property name="queueId" type="java.lang.String" />
+			<form-property name="lbxqueue" type="java.lang.String" />
+			<form-property name="queueStatus" type="java.lang.String" />
+			<form-property name="userIdsearch" type="java.lang.String" />
+			<form-property name="queueIdSearch" type="java.lang.String" />
+			<form-property name="lbxQueuesearchId" type="java.lang.String" />
+			<form-property name="userIdSearch" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+
+			<form-property name="showbranchName" type="java.lang.String" />
+			<form-property name="showbranchId" type="java.lang.String" />
+			<form-property name="allocId" type="java.lang.String" />
+			<form-property name="allocIdList" type="java.lang.String[]" />
+			<form-property name="recStatus" type="java.lang.String" />
+			 <form-property name="areaCode" type="java.lang.String" />
+			<form-property name="lbxareaCodeVal" type="java.lang.String" />
+			<form-property name="allocationType" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			</form-bean>
+		
+<!-- end of allocation -->
+<!-- kanika code for reallocation -->
+		<form-bean name="reallocationCollForm" 	type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="loanno" type="java.lang.String" />
+			<form-property name="lbxCustomerID" type="java.lang.String" />
+			<form-property name="customername" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="dpd1" type="java.lang.String" />
+			<form-property name="dpd2" type="java.lang.String" />
+			<form-property name="queue" type="java.lang.String" />
+			<form-property name="lbxQueuesearchId" type="java.lang.String" />
+			<form-property name="pos1" type="java.lang.String" />
+			<form-property name="pos2" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="lbxHierarchyUserId" type="java.lang.String" />
+			<form-property name="tos1" type="java.lang.String" />
+			<form-property name="tos2" type="java.lang.String" />
+			<form-property name="npastage" type="java.lang.String" />
+			<form-property name="custype" type="java.lang.String" />
+			<form-property name="custcategory" type="java.lang.String" />
+			<form-property name="assignfrom" type="java.lang.String" />
+			<form-property name="assignto" type="java.lang.String" />
+			<form-property name="remarks" type="java.lang.String" />
+			<form-property name="cstcat" type="java.lang.String" />
+			<form-property name="userID" type="java.lang.String" />
+			<form-property name="lbxLoanno" type="java.lang.String" />
+	<form-property name="balanceprincipal" type="java.lang.String" />
+		<form-property name="lbxUserSearchId" type="java.lang.String" />
+		<form-property name="heirarchyuser" type="java.lang.String" />
+</form-bean>
+		
+  <!-- end for reallocation  -->
+
+		<!--Anil Code For Action Code Master Start -->
+
+
+		<form-bean name="ActionCodeMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="codeId" type="java.lang.String" />
+			<form-property name="codeDesc" type="java.lang.String" />
+			<form-property name="codeStatus" type="java.lang.String" />
+		</form-bean>
+
+      <!--Anil Code For DynaValidatorForm Action End -->
+    
+
+		<!--Anil Code For Queue Code Master Start -->
+
+
+		<form-bean name="QueueCodeMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="queueDesc" type="java.lang.String" />
+			<form-property name="queueCode" type="java.lang.String" />
+			<form-property name="dpdLess" type="java.lang.String" />
+			<form-property name="dpdGreater" type="java.lang.String" />
+			<form-property name="posLess" type="java.lang.String" />
+			<form-property name="posGreater" type="java.lang.String" />
+			<form-property name="tosLess" type="java.lang.String" />
+			<form-property name="tosGreater" type="java.lang.String" />
+			<form-property name="npaStage" type="java.lang.String" />
+			<form-property name="custCategory" type="java.lang.String" />
+			<form-property name="custType" type="java.lang.String" />
+			<form-property name="priority" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="actionPeriod" type="java.lang.String" />
+			<form-property name="queueStatus" type="java.lang.String" />
+			<form-property name=" String npaStageId" type="java.lang.String" />
+			<form-property name="npaStageValue" type="java.lang.String" />
+			<form-property name="custCategoryId" type="java.lang.String" />
+			<form-property name="custCategoryValue" type="java.lang.String" />
+			<form-property name="productListId" type="java.lang.String" />
+	        <form-property name="productListValue" type="java.lang.String" />
+	        <form-property name="branch" type="java.lang.String"/>
+	        <form-property name="scheme" type="java.lang.String"/>
+	         <form-property name="lbxBranchId" type="java.lang.String"/>
+	        <form-property name="lbxscheme" type="java.lang.String"/>
+	        <form-property name="lbxProductID" type="java.lang.String"/>
+	        <form-property name="branch1" type="java.lang.String"/>
+	        <form-property name="product1" type="java.lang.String"/>
+	        <form-property name="scheme1" type="java.lang.String"/>
+	        <form-property name="queueQuery" type="java.lang.String"/>
+	        
+
+		</form-bean>
+
+		<!--Anil Code For DynaValidatorForm Queue Code End -->
+		 
+		
+		<!-- Anil Code For Escalation Code Master Start  -->
+	<form-bean name="EscalationMatrixForm" 
+	           type="org.apache.struts.validator.DynaValidatorForm">
+	<form-property name="loanno" type="java.lang.String" /> 
+	<form-property name="customername" type="java.lang.String" />
+	<form-property name="lbxCustomerID" type="java.lang.String" />
+	<form-property name="product" type="java.lang.String" />
+	<form-property name="lbxProductSearchID" type="java.lang.String" />
+	<form-property name="dpd1" type="java.lang.String" />
+	<form-property name="dpd2" type="java.lang.String" />
+	<form-property name="queue" type="java.lang.String" />
+	<form-property name="lbxQueuesearchId" type="java.lang.String" />
+	<form-property name="pos1" type="java.lang.String" />
+	<form-property name="pos2" type="java.lang.String" />
+	<form-property name="user" type="java.lang.String" />
+	<form-property name="lbxUserSearchId" type="java.lang.String" />
+	<form-property name="tos1" type="java.lang.String" />
+	<form-property name="tos2" type="java.lang.String" />
+	<form-property name="npastage" type="java.lang.String" />
+	<form-property name="npastageval" type="java.lang.String" />
+	<form-property name="npastageid" type="java.lang.String" />
+	<form-property name="custype" type="java.lang.String" />
+	<form-property name="custcategory" type="java.lang.String" />
+	<form-property name="cstcat" type="java.lang.String" />
+	<form-property name="cstcatval" type="java.lang.String" />
+	<form-property name="queueDateFrom" type="java.lang.String" />
+	<form-property name="queueDateTo" type="java.lang.String" />
+	<form-property name="remarks" type="java.lang.String" />
+	<form-property name="productid" type="java.lang.String" />
+	<form-property name="productval" type="java.lang.String" />
+	<form-property name="userID" type="java.lang.String" />
+	<form-property name="makerId" type="java.lang.String" />
+	<form-property name="makerDate" type="java.lang.String" />
+	<form-property name="lbxLoanno" type="java.lang.String" />
+	<form-property name="balanceprincipal" type="java.lang.String" />
+	<form-property name="actionNotTaken" type="java.lang.String" />
+
+    </form-bean>	
+    
+    <!--Anil Code For   Escalation Code Master End  -->
+    
+    <form-bean name="ForeClosureForm" 
+	           type="org.apache.struts.validator.DynaValidatorForm">
+	<form-property name="loanNO" type="java.lang.String" /> 
+	<form-property name="effectiveDate" type="java.lang.String" />
+	<form-property name="loanNumber" type="java.lang.String" />
+	<form-property name="applicantType" type="java.lang.String" />
+	</form-bean>
+   <!-- kanika code for reports -->
+   		<form-bean name="delinquentCaseReportForm" 	type="com.caps.actionForm.CasesReportForm" />
+
+    <form-bean name="unallocatedForm" type="com.caps.actionForm.UnallocatedReportForm" />
+    
+     <form-bean name="performanceForm" type="com.caps.actionForm.PerformanceReportForm" />
+       <form-bean name="promisetoPayForm" type="com.caps.actionForm.PromisetoPayReportForm" />
+   <!-- end of kanika reports code --> 
+   
+     <!--Anil Code For reports Code Master Start  -->
+     
+   <form-bean name="resolvedCaseReportsForm" type="com.caps.actionForm.ResolvedCaseReportsForm" />
+   <form-bean name="collectionMISReportsForm" type="com.caps.actionForm.CollectionMISReportsForm" />
+   <form-bean name="paymentReportsForm" type="com.caps.actionForm.PaymentReportsForm"/>
+   <form-bean name="paymentDetailsForm" type="com.caps.actionForm.PaymentDetailsForm"/>
+   
+     <!--Anil Code For reports Code Master End  -->
+     
+    <!-- Aditi code for reports -->
+    <form-bean name="collectionDumpForm" type="org.apache.struts.validator.DynaValidatorForm">
+     <form-property name="reportId" type="java.lang.String" />
+     <form-property name="reportformat" type="java.lang.String" />
+     <form-property name="toDate" type="java.lang.String" /> 
+     <form-property name="fromDate" type="java.lang.String" />
+    </form-bean>
+    
+    
+<!-- end of Aditi reports code --> 
+
+
+    <form-bean name="ContactRordingForm" 
+	           type="org.apache.struts.validator.DynaValidatorForm">
+	<form-property name="loanId" type="java.lang.String" />
+	<form-property name="loanNo" type="java.lang.String" />
+	</form-bean>
+    <form-bean name="ContactRordingSearchForm" 	type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="loanno" type="java.lang.String" />
+			<form-property name="lbxCustomerID" type="java.lang.String" />
+			<form-property name="customername" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="dpd1" type="java.lang.String" />
+			<form-property name="dpd2" type="java.lang.String" />
+			<form-property name="queue" type="java.lang.String" />
+			<form-property name="lbxQueuesearchId" type="java.lang.String" />
+			<form-property name="pos1" type="java.lang.String" />
+			<form-property name="pos2" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="tos1" type="java.lang.String" />
+			<form-property name="tos2" type="java.lang.String" />
+			<form-property name="npastage" type="java.lang.String" />
+			<form-property name="custype" type="java.lang.String" />
+			<form-property name="custcategory" type="java.lang.String" />
+			<form-property name="assignfrom" type="java.lang.String" />
+			<form-property name="assignto" type="java.lang.String" />
+			<form-property name="remarks" type="java.lang.String" />
+			<form-property name="cstcat" type="java.lang.String" />
+			<form-property name="userID" type="java.lang.String" />
+			<form-property name="lbxLoanno" type="java.lang.String" />
+	        <form-property name="balanceprincipal" type="java.lang.String" />
+	        <form-property name="actionDue" type="java.lang.String" />
+	        <form-property name="lbxBranchId" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<!-- toni -->
+			<form-property name="dueDate" type="java.lang.String" />
+			<form-property name="actionFlag" type="java.lang.String" />
+			<form-property name="loanDpdStatus" type="java.lang.String"/>
+	
+	
+	
+	
+</form-bean>
+	 <form-bean name="ContactRordingFollowUpForm" 	type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="loanno" type="java.lang.String" />
+			<form-property name="loanId" type="java.lang.String" />
+			<form-property name="actionDate" type="java.lang.String" />
+			<form-property name="actionStartTime" type="java.lang.String" />
+			<form-property name="actionCode" type="java.lang.String" />
+			<form-property name="contactMode" type="java.lang.String" />
+			<form-property name="personContacted" type="java.lang.String" />
+			<form-property name="placeContacted" type="java.lang.String" />
+			<form-property name="instrumentNo" type="java.lang.String" />
+			<form-property name="paymentMode" type="java.lang.String" />
+			<form-property name="receiptNo" type="java.lang.String" />
+			<form-property name="instrumentDate" type="java.lang.String" />
+			<form-property name="actionAmount" type="java.lang.String" />
+			<form-property name="nxtActionDate" type="java.lang.String" />
+			<form-property name="nxtActionTime" type="java.lang.String" />
+			<form-property name="contactedBy" type="java.lang.String" />
+			<form-property name="customerMemoLine" type="java.lang.String" />
+			<form-property name="remarks" type="java.lang.String" />
+			<form-property name="exclationFlag" type="java.lang.String" />
+			<form-property name="totalTimeTaken" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="resolutionStatus" type="java.lang.String"/>
+			<form-property name="resolutionDate" type="java.lang.String"/>
+			<form-property name="resolutionRemarks" type="java.lang.String"/>
+			<form-property name="follActionId" type="java.lang.String"></form-property>
+			<form-property name="followupId" type="java.lang.String"></form-property>
+			<form-property name="resolutionType" type="java.lang.String"></form-property>
+			<form-property name="resolStatusval" type="java.lang.String"></form-property>
+			<form-property name="resolTypeval" type="java.lang.String"></form-property>
+			<form-property name="actionTime" type="java.lang.String" /><!--  rohit changes -->
+	    	<form-property name="relationshipS" type="java.lang.String" /><!--  rohit changes -->
+			<form-property name="relationType" type="java.lang.String" /><!--  rohit changes -->
+			<form-property name="addressType" type="java.lang.String" /><!--  rohit changes -->
+			<form-property name="applicantType" type="java.lang.String" /><!--  rohit changes -->				
+	</form-bean>
+
+		<form-bean name="CollAddressValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="addr_type" type="java.lang.String" />
+			<form-property name="bp_type" type="java.lang.String" />
+			<form-property name="bp_id" type="java.lang.String" />
+			<form-property name="bp_id1" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="addr1" type="java.lang.String" />
+			<form-property name="addr2" type="java.lang.String" />
+			<form-property name="addr3" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="bpid" type="java.lang.String" />
+			<form-property name="region" type="java.lang.String" />
+			<form-property name="pincode" type="java.lang.String" />
+			<form-property name="primaryPhoneNo" type="java.lang.String" />
+			<form-property name="alternatePhoneNo" type="java.lang.String" />
+			<form-property name="tollfreeNo" type="java.lang.String" />
+			<form-property name="faxNo" type="java.lang.String" />
+			<form-property name="landMark" type="java.lang.String" />
+			<form-property name="noYears" type="java.lang.String" />
+			<form-property name="flag" type="java.lang.String" />
+			<form-property name="communicationAddress" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="followUpTrailReportsForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="reportformat" type="java.lang.String" />
+			<form-property name="loanno" type="java.lang.String" />
+			<form-property name="loanSearchButton" type="java.lang.String" />
+			<form-property name="lbxLoanno" type="java.lang.String" />
+			<form-property name="user" type="java.lang.String" />
+			<form-property name="userButton" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="fromdate" type="java.lang.String" />
+			<form-property name="todate" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="actionTaken" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="producTCategory" type="java.lang.String" />
+			<form-property name="loanClassification" type= "java.lang.String" />
+			<form-property name="lbxBranchId"  type="java.lang.String" />
+			
+			
+		</form-bean>
+		
+
+		<form-bean name="CollUploadDataForm" type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="uploadFileLoan" type="org.apache.struts.upload.FormFile" />
+		</form-bean>
+		
+		<form-bean name="ApplicantTypeAtCollectionDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm" >
+			<form-property name="loanAccNo" type="java.lang.String" />
+			<form-property name="instrumentType" type="java.lang.String" />
+			<form-property name="bank" type="java.lang.String" />
+			<form-property name="branch" type="java.lang.String" />
+			<form-property name="lbxLoanNoHID" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="lbxBranchID" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="fromInstallment" type="java.lang.String" />
+			<form-property name="startingChequeNo" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="holdReason" type="java.lang.String" />
+			<form-property name="date" type="java.lang.String" />
+			<form-property name="chk" type="java.lang.String" />
+			<form-property name="comments" type="java.lang.String" />
+			<form-property name="decision" type="java.lang.String" />
+			<form-property name="instrumentNo" type="java.lang.String" />
+			<form-property name="statusvalue" type="java.lang.String[]" />
+			<form-property name="holdReasonvalue" type="java.lang.String[]" />
+			<form-property name="toStatus" type="java.lang.String" />
+			<form-property name="fromStatus" type="java.lang.String" />
+			<form-property name="generateBankingDate" type="java.lang.String" />
+			<form-property name="allotedAmount" type="java.lang.String" />
+			<form-property name="installmentNo" type="java.lang.String" />
+			<form-property name="presentationDate" type="java.lang.String" />
+			<form-property name="bankAccount" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="userName" type="java.lang.String" />
+			<form-property name="reportingToUserId" type="java.lang.String" />
+			<form-property name="instrumentMode" type="java.lang.String" />
+			<form-property name="pdcSubmitCustomerName" type="java.lang.String" />
+			<form-property name="repayment" type="java.lang.String" />
+			<form-property name="personContacted" type="java.lang.String" />
+			
+		</form-bean>
+		
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+    <!-- kanika code for allocation -->
+       <action  input="/JSP/CAPSJSP/allocationSearch.jsp" path="/allocationmasteradd" parameter="method" scope="request"
+    name="AllocationAddDynaValidatorForm" 
+     type="com.caps.action.AllocationMasterDispatchAction">
+      	<forward name="success" path="/JSP/CAPSJSP/allocationSearch.jsp"></forward>
+        <forward name="openAdd" path="/JSP/CAPSJSP/allocationAddMaster.jsp"></forward>
+        <forward name="success1" path="/allocationMasterSearch.do"></forward> 
+    </action>
+  <!--   
+  <action input="/JSP/CAPSJSP/allocationMasterSearch.jsp"
+     path="/allocationMasterSearch" parameter="method" scope="request"
+    name="AllocationAddDynaValidatorForm" attribute="AllocationAddDynaValidatorForm"
+     type="com.caps.action.AllocationMasterBehindAction">
+      
+      	<forward name="searchsuccess" path="/JSP/CAPSJSP/allocationMasterSearch.jsp"></forward>
+      	           	<forward name="addsuccess" path="/JSP/CAPSJSP/allocationMasterAdd.jsp"></forward> 
+    </action> -->
+    <action input="/JSP/CAPSJSP/allocationSearch.jsp"
+     path="/allocationMasterSearch" parameter="method" scope="request"
+    name="AllocationAddDynaValidatorForm" attribute="AllocationAddDynaValidatorForm"
+     type="com.caps.action.AllocationMasterBehindAction">
+      
+      	<forward name="searchsuccess" path="/JSP/CAPSJSP/allocationSearch.jsp"></forward>
+      	</action>
+    <!-- end of kanika for allocation -->
+    <!-- kanika code for reallocation -->
+   <action  input="/JSP/CAPSJSP/reallocationMaster.jsp" path="/reallocation" parameter="method" scope="request"
+    name="reallocationCollForm" 
+     type="com.caps.action.ReallocationMasterDispatchAction">
+      
+    <forward name="success" path="/JSP/CAPSJSP/reallocationMaster.jsp"></forward> 
+   <forward name="success1" path="/reallocation.do?method=openReallocationJsp"></forward> 
+
+   </action>
+   <action  input="/JSP/CAPSJSP/reallocationMaster.jsp" path="/reallocationSearch" parameter="method" scope="request"
+    name="reallocationCollForm" 
+     type="com.caps.action.ReallocationSearchBehindAction">
+      
+    <forward name="success" path="/JSP/CAPSJSP/reallocationMaster.jsp"></forward> 
+   <forward name="success1" path="/reallocation.do?method=openReallocationJsp"></forward> 
+   </action>
+<!-- end of reallocation -->
+<!-- end of reallocation -->
+
+
+		<!--Anil Code For Action Code Master Start -->
+		<action path="/actionCodeMasterSearch" parameter="method"
+			scope="request" validate="true" name="CommonDynaValidatorForm"
+			type="com.caps.action.ActionCodeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/CAPSJSP/actionCodeMasterAdd.jsp"/>
+
+		</action>
+
+		<action path="/actionCodeMasterBehind" parameter="method"
+			scope="request" name="CommonDynaValidatorForm" type="com.caps.action.ActionCodeMasterBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/actionCodeMasterSearch.jsp" />
+		</action>
+
+		<action path="/actionCodeMasterAdd" input="/JSP/CAPSJSP/actionCodeMasterAdd.jsp" 
+			validate="true" parameter="method" scope="request"
+			name="ActionCodeMasterAddDyanavalidatiorForm" type="com.caps.action.ActionCodeMasterDispatchAction">
+
+		</action>
+
+		<!--Anil Code For Action Code Master End -->
+
+		<!-- Anil Code For Collection(Queue Code) Master Start -->
+
+		<action path="/queueCodeMasterBehind" parameter="method" scope="request" 
+			name="CommonDynaValidatorForm" type="com.caps.action.QueueCodeMasterBehindAction">
+			<forward name="QueueCodeSearch" path="/JSP/CAPSJSP/queueCodeMasterSearch.jsp" />
+		 <forward name="OpenAddQueue" path="/JSP/CAPSJSP/queueCodeMasterAdd.jsp" />
+		</action>
+
+
+		
+		
+		<action path="/queueCodeMasterAdd" input="/JSP/CAPSJSP/queueCodeMasterAdd.jsp" 
+			validate="false" parameter="method" scope="request"
+			name="QueueCodeMasterAddDyanavalidatiorForm" type="com.caps.action.QueueCodeMasterDispatchAction">
+    <!--       <forward name="QueueSuccess" path="/queueCodeMasterBehind.do?method=searchQueue" />-->
+      <forward name="QueueSuccess"  path="/JSP/CAPSJSP/queueCodeMasterAdd.jsp"/>
+           <forward name="openAddJsp" path="/queueCodeMasterBehind.do?method=openAddQueueCode"/> 
+            
+           
+		</action>
+
+		<!--Anil Code For Collection(Queue Code) Master End -->
+		
+		<!-- Anil Code For Escalations Matrix  End -->
+		
+		<action path="/escalationsMatrixBehind" parameter="method" scope="request" validate="true" attribute="method"
+		name="EscalationMatrixForm" type="com.caps.action.EscalationMatrixBehindDispatchAction">
+		<forward name="escalationBehind" path="/JSP/CAPSJSP/esclationMatrix.jsp"/>
+		<forward name="escalationSearch" path="/escalationsMatrixBehind.do?method=openEsclationJsp"/>
+
+		
+		</action>
+		
+
+		<action path="/escalationsMatrix" parameter="method" scope="request" attribute="method"
+		        type="com.caps.action.EscalationMatrixUpdateAction" name="EscalationMatrixForm">
+<!--		<forward name="escalationUpdate"  path="/escalationsMatrixBehind.do?method=openEsclationJsp"/>-->
+           <forward name="escalationUpdate"  path="/escalationsMatrixBehind.do?method=openJsp"/>
+            <forward name="success"  path="/JSP/CAPSJSP/esclationMatrix.jsp"/>
+		
+		
+			
+		</action>
+		<!-- Anil Code For Escalations Matrix  End -->
+		
+		<!-- kanika code for case reports -->
+		<action path="/casereport" name="delinquentCaseReportForm"
+		type="com.caps.action.CaseReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/deliquentcasesreports.jsp"></forward>
+		</action>
+		
+		<!-- Sidharth code for allocatedcase reports -->
+		<action path="/allocatedCases" name="delinquentCaseReportForm"
+		type="com.caps.action.CaseReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/allocatedcasesreports.jsp"></forward>
+		</action>
+		<action  path="/allocatecaseReports" 
+		type="com.caps.action.AllocateCaseReportsAction" name="delinquentCaseReportForm">
+		</action>
+
+		
+
+
+			<!--Code For Contact Recording Starts Here  -->
+			<action path="/contactRecordingBehindAction"  scope="request" 
+		        type="com.caps.action.ContactRecordingBehindAction" name="ContactRordingSearchForm" >
+		 <forward name="success"  path="/JSP/CAPSJSP/contactRecordingSearch.jsp"></forward>
+			
+		</action>
+		
+		<action path="/contactRecordingDispatchAction" parameter="method" scope="request" attribute="method"
+		        type="com.caps.action.ContactRecordingDispatchAction" name="ContactRordingFollowUpForm">
+		<forward name="openContactRecording"  path="/JSP/CAPSJSP/contactRecording.jsp"></forward>
+	   <forward name="openFollowUp"  path="/JSP/CAPSJSP/ContactRecFollowUp.jsp"></forward>
+				<forward name="showSuccess" path="/JSP/CAPSJSP/contactAddressDtl.jsp"/>		
+		</action>
+		<action path="/collAddressAction" name="CollAddressValidatorForm"  parameter="method"
+		attribute="CollAddressValidatorForm" validate="true" input="/JSP/CAPSJSP/contactAddressDtl.jsp"
+		type="com.caps.action.CollAddressAction">
+		<forward name="showSuccess" path="/JSP/CAPSJSP/contactAddressDtl.jsp"/>		
+		<forward name="openjsp" path="/collAddressBehindAction.do" />
+		<forward name="success" path="/JSP/CAPSJSP/collCustomerAddress.jsp" />
+		</action>
+		<action path="/collAddressBehindAction" 
+		 type="com.caps.action.CollAddressBehindAction">
+		<forward name="success" path="/JSP/CAPSJSP/collCustomerAddress.jsp" />
+		</action>
+
+		<action path="/collButtonAction" parameter="method" attribute="method" name="ForeClosureForm"
+		 type="com.caps.action.ContactRecordingButtonsAction">
+		<forward name="followUp" path="/JSP/CAPSJSP/followUpTrailsDtlPopUp.jsp" />
+		<forward name="foreClosure" path="/JSP/CAPSJSP/foreClosurePopUp.jsp" />
+		<forward name="viewPaybleReceivable" path="/JSP/CAPSJSP/viewpayablerecievable.jsp" />
+		<forward name="paymentSuccess" path="/JSP/CAPSJSP/paymentDetail.jsp"/>
+		<forward name="bounceSuccess" path="/JSP/CAPSJSP/bounceDetail.jsp"/>
+		<forward name="viewBankInfo" path="/JSP/CAPSJSP/viewCommonAddressInfo.jsp"/>
+		<forward name="errorInProcedure" path="/JSP/CAPSJSP/foreClosurePopUp.jsp" />
+		</action>
+		<!-- Changes Start for save Resolution Detail -->
+		<action path="/followUpResolutionAction" parameter="method" attribute="method" name="ContactRordingFollowUpForm"
+		 type="com.caps.action.FollowUpResolutionDispatchAction">
+		<forward name="resolveInfo" path="/JSP/CAPSJSP/resolutionFollowUp.jsp" />
+		<forward name="saveResolve" path="/JSP/CAPSJSP/resolutionFollowUp.jsp"></forward>
+		</action>
+		<!-- Changes End for save Resolution Detail -->
+		
+		<action path="/supervisorReviwBehindAction"  scope="request" 
+		        type="com.caps.action.SupervisorReviewBehindAction" name="ContactRordingSearchForm" >
+		 <forward name="success"  path="/JSP/CAPSJSP/supervisorReviwSearch.jsp"></forward>
+			
+		</action>
+			<!--Code For Contact Recording Ends Here  -->
+			
+			
+			<!--Code For Adhoc Contact Recording Starts Here By NAZIA -->
+			
+			<action path="/AdhocContactRecordingBehindAction"  scope="request" 
+		        type="com.caps.action.AdhocContactRecordingBehindAction" name="ContactRordingSearchForm" >
+		 <forward name="success"  path="/JSP/CAPSJSP/adhocContactRecordingSearch.jsp"></forward>
+			
+		</action>
+		
+		<action path="/AdhocContactRecordingDispatchAction" parameter="method" scope="request" attribute="method"
+		        type="com.caps.action.AdhocContactRecordingDispatchAction" name="ContactRordingFollowUpForm">
+		<forward name="openAdhocContactRecording"  path="/JSP/CAPSJSP/adhocContactRecording.jsp"></forward>
+	   <forward name="openFollowUp"  path="/JSP/CAPSJSP/adhocContactRecFollowUp.jsp"></forward>
+				<forward name="showSuccess" path="/JSP/CAPSJSP/contactAddressDtl.jsp"/>		
+		</action>
+		<action path="/collAddressAction" name="CollAddressValidatorForm"  parameter="method"
+		attribute="CollAddressValidatorForm" validate="true" input="/JSP/CAPSJSP/contactAddressDtl.jsp"
+		type="com.caps.action.CollAddressAction">
+		<forward name="showSuccess" path="/JSP/CAPSJSP/contactAddressDtl.jsp"/>		
+		<forward name="openjsp" path="/collAddressBehindAction.do" />
+		<forward name="success" path="/JSP/CAPSJSP/collCustomerAddress.jsp" />
+		</action>
+		<action path="/collAddressBehindAction" 
+		 type="com.caps.action.CollAddressBehindAction">
+		<forward name="success" path="/JSP/CAPSJSP/collCustomerAddress.jsp" />
+		</action>
+
+		<action path="/collButtonAction" parameter="method" attribute="method" name="ForeClosureForm"
+		 type="com.caps.action.ContactRecordingButtonsAction">
+		<forward name="followUp" path="/JSP/CAPSJSP/followUpTrailsDtlPopUp.jsp" />
+		<forward name="foreClosure" path="/JSP/CAPSJSP/foreClosurePopUp.jsp" />
+		<forward name="viewPaybleReceivable" path="/JSP/CAPSJSP/viewpayablerecievable.jsp" />
+		<forward name="paymentSuccess" path="/JSP/CAPSJSP/paymentDetail.jsp"/>
+		<forward name="bounceSuccess" path="/JSP/CAPSJSP/bounceDetail.jsp"/>
+		<forward name="viewBankInfo" path="/JSP/CAPSJSP/viewCommonAddressInfo.jsp"/>
+		<forward name="errorInProcedure" path="/JSP/CAPSJSP/foreClosurePopUp.jsp" />
+		
+		</action>
+		
+		<action path="/supervisorReviwBehindAction"  scope="request" 
+		        type="com.caps.action.SupervisorReviewBehindAction" name="ContactRordingSearchForm" >
+		 <forward name="success"  path="/JSP/CAPSJSP/supervisorReviwSearch.jsp"></forward>
+			
+		</action>
+			<!--Code For Adhoc Contact Recording Ends Here BY NAZIA -->
+			
+
+
+
+   
+
+		<action  path="/caseReports" 
+		type="com.caps.action.CaseReportsAction" name="delinquentCaseReportForm">
+		</action>
+		<action  path="/unallocatedReports" 
+		type="com.caps.action.UnallocatedReportsAction" name="unallocatedForm">
+		</action>
+		
+	<action path="/unallocatedreport" name="unallocatedForm"
+		type="com.caps.action.UnallocatedReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/unallocatedcasesreports.jsp"></forward>
+		</action>
+	
+		<action path="/performancereport" name="performanceForm"
+		type="com.caps.action.PerformanceReportsBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/performancecasesreports.jsp"></forward>
+		</action>
+		
+		<action  path="/performanceReports" 
+		type="com.caps.action.PerformanceReportsAction" name="performanceForm" scope="request">
+		</action>
+		
+		<action path="/promisereport" name="promisetoPayForm"
+		type="com.caps.action.PromisetoPayReportsAction" scope="request">
+			<forward name="success" path="/JSP/CAPSJSP/promisetopayreports.jsp"></forward>
+		</action>
+		<!-- end of case reports -->
+		
+		<!-- Anil code for reports Start -->
+		
+		<action path="/resolvedCaseBehind" name="resolvedCaseReportsForm"  
+		type="com.caps.action.ResolvedCaseReportsBehindAction" scope="request">
+			<forward name="ResolvedCaseSuccess" path="/JSP/CAPSJSP/resolvedCaseReports.jsp"></forward>
+		</action>
+		
+		<action path="/resolvedCaseReports" name="resolvedCaseReportsForm"  
+		type="com.caps.action.ResolvedCaseReportsAction" scope="request">
+		</action>
+		
+		<action path="/collectionMISBehind" name="collectionMISReportsForm" parameter="method"
+		type="com.caps.action.CollectionMISReportsBehindAction" scope="request">
+			<forward name="openCollMisSuccess" path="/JSP/CAPSJSP/collectionMISReports.jsp"/>
+		</action>
+		
+		<action path="/collectionMIS" name="collectionMISReportsForm" parameter="method"
+		type="com.caps.action.CollectionMISReportsAction" scope="request">
+		</action>
+		
+		<action path="/paymentReportsBehind" name="paymentReportsForm" parameter="method" 
+		type="com.caps.action.PaymentReportsBehindAction">
+			<forward name="openPaymentSuccess" path="/JSP/CAPSJSP/paymentReports.jsp"/>
+		</action>
+		
+		<action path="/paymentReports" name="paymentReportsForm" parameter="method"
+		type="com.caps.action.PaymentReportsAction">
+		</action>
+				
+		<!-- Anil code for reports End-->
+		
+		<!-- Manish follow Up Trails -->
+		<action path="/followUpTrailDispatch" name="followUpTrailReportsForm" parameter="method"
+		type="com.caps.action.FollowUpTrailDispatchAction" scope="request">
+			<forward name="openSuccess" path="/JSP/CAPSJSP/followUpTrailReports.jsp"/>
+		</action>
+
+		<!-- Manish  End follow Up Trails -->
+		<!-- Aditi code for reports Start -->
+		<action path="/collectionDumpAction" type="com.cm.actions.ReportBehindAction">
+		<forward name="success" path="/JSP/CAPSJSP/collectionDumpReport.jsp"></forward>
+		</action>
+		<action  path="/collectionDumpReport" type="com.caps.action.CollectionDumpActionData" name="collectionDumpForm" scope="request">
+		</action>
+		
+		
+		<!-- Aditi code for reports End-->
+		
+		<!-- Nishant space starts -->
+		<action path="/teleCallerScorecardAction" type="com.cm.actions.ReportBehindAction">
+			<forward name="success" path="/JSP/CAPSJSP/teleCallerScorecardReport.jsp"></forward>
+		</action>
+		<action  path="/teleCallerScorecardActionReport" type="com.caps.action.TeleCallerScorecardActionReport" name="collectionDumpForm" scope="request">
+		</action>
+		<!-- Nishant space end -->
+		
+       <action path="/classificationProcessAction"  scope="request"  parameter="method"
+		        type="com.caps.action.ClassificationProcessAction" name="ContactRordingSearchForm" >
+		 <forward name="openJsp"  path="/JSP/CAPSJSP/classificationProcess.jsp"></forward>
+		  <forward name="openAjaxJsp"  path="/JSP/CAPSJSP/classificationProcessAjax.jsp"></forward>
+			
+		</action>
+         <action path="/collUploadData"  scope="request"  parameter="method"
+		        type="com.caps.action.CollUploadDataAction" name="CollUploadDataForm" >
+		 <forward name="success"  path="/JSP/CAPSJSP/uploadData.jsp"></forward>
+				
+		</action>
+		 <action path="/collectionSummary"  scope="request" 
+		        type="com.caps.action.CollectionSummaryAction" >
+		 <forward name="success"  path="/JSP/CAPSJSP/collectionSummary.jsp"></forward>
+				
+		</action>
+		<!-- Changes Start for allocation Upload -->
+		<action path="/AllocationProcessUpload" type="com.cm.actions.ExcelSheetUploadingActionCM"
+				name="ExcelSheetUploadFormCM" scope="request" validate="true">
+		<forward name="sucesss" path="/JSP/CMJSP/cmExcelUpload.jsp" />	
+
+		</action>
+   		<!-- Changes End for allocation Upload -->
+				<!-- Kamlesh Changes Start for mobile download -->
+		<action path="/MobileDownload" type="com.caps.action.MobileDownload"
+				name="ExcelSheetUploadForm" scope="request" validate="true">
+		<forward name="sucesss" path="/JSP/CAPSJSP/mobileDownload.jsp" />
+
+		</action>
+		<action path="/MobileDownloadAction" type="com.caps.action.MobileDownloadAction"
+				name="ExcelSheetUploadForm" scope="request" validate="true">
+		<forward name="sucesss" path="/JSP/CAPSJSP/mobileDownload.jsp" />
+
+		</action>
+   		<!-- Kamlesh Changes End for  mobile download -->
+   		
+   		<action path="/getApplicantTypeInCollection" type="com.caps.action.CustomerNameAtCollectionDispatchAction"
+			name="ApplicantTypeAtCollectionDynaValidatorForm" scope="request" parameter="method">
+			<forward name="insNonInsFlag"	path="/JSP/CAPSJSP/ajaxToGetApplicantTypeAtCollection.jsp"   />
+		</action>
+   		
+	</action-mappings>
+
+
+	
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

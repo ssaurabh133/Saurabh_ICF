@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<application>
+	<display-name>OmniFin</display-name>
+	<module>
+	<web>
+		<web-uri>LMS.war</web-uri>
+		<context-root>/OmniFin</context-root>
+	</web>
+	</module>
+	<module>
+    	<ejb>OmniFinServer.jar</ejb>
+   </module>
+
+</application>
+

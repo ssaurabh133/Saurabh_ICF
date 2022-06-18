@@ -1,0 +1,3460 @@
+ 
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+
+
+		<!--Ravindra DynaValidatorForm Start -->
+
+		<form-bean name="CorporateDetailsDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+
+			<form-property name="corporateCode" type="java.lang.String" />
+			<form-property name="corporateName" type="java.lang.String" />
+			<form-property name="corporateCategory" type="java.lang.String" />
+			<form-property name="incorporationDate" type="java.lang.String" />
+			<form-property name="currentAge" type="java.lang.String" />	
+			<form-property name="casteCategory" type="java.lang.String" />	
+			<form-property name="maritalStatus" type="java.lang.String" />	
+			<form-property name="drivingLicense" type="java.lang.String" />	
+			<form-property name="voterId" type="java.lang.String" />	
+			<form-property name="passport" type="java.lang.String" />			
+			<form-property name="fatherHusband" type="java.lang.String" />			
+			<form-property name="constitution" type="java.lang.String" />
+			<form-property name="registrationType" type="java.lang.String" />
+			<form-property name="registrationNo" type="java.lang.String" />
+			<form-property name="pan" type="java.lang.String" />
+			<form-property name="vatRegNo" type="java.lang.String" />
+			<form-property name="businessSegment" type="java.lang.String" />
+			<form-property name="lbxIndustry" type="java.lang.String" />
+			<form-property name="lbxSubIndustry" type="java.lang.String" />
+			<form-property name="institutionEmail" type="java.lang.String" />
+			<form-property name="webAddress" type="java.lang.String" />
+			<form-property name="referredBy" type="java.lang.String" />
+			<form-property name="blackListed" type="java.lang.String" />
+			<form-property name="reasonForBlackListed" type="java.lang.String" />
+			<form-property name="pagestatus" type="java.lang.String" />
+			<form-property name="hiApplType" type="java.lang.String" />
+			<form-property name="groupName" type="java.lang.String" />
+			<form-property name="hGroupId" type="java.lang.String" />
+			<form-property name="industry" type="java.lang.String" />
+			<form-property name="subIndustry" type="java.lang.String" />
+			<form-property name="bypassDedupe" type="java.lang.String" />
+			<form-property name="groupType" type="java.lang.String" />
+			<form-property name="groupNameText" type="java.lang.String" />
+			<form-property name="otherRelationShip" type="java.lang.String" />
+            <form-property name="lbxBusinessPartnearHID" type="java.lang.String" />
+			<form-property name="businessPartnerTypeDesc" type="java.lang.String"/>
+			<!-- Nishant space starts -->
+			<form-property name="natureOfBus" type="java.lang.String"/>
+			<form-property name="yearOfEstb" type="java.lang.String"/>
+			<form-property name="shopEstbNo" type="java.lang.String"/>
+			<form-property name="salesTax" type="java.lang.String"/>
+			<form-property name="dgftNo" type="java.lang.String"/>
+			<form-property name="noBVYears" type="java.lang.String"/>
+			<form-property name="noBVMonths" type="java.lang.String"/>
+			<form-property name="gstIn" type="java.lang.String"/>
+			<form-property name="industryPercent" type="java.lang.String"/>	
+			<!-- Nishant space ends -->
+			<form-property name="projectedSales" type="java.lang.String"/>
+			<form-property name="projectedExports" type="java.lang.String"/>
+			<form-property name="minorityCommunity" type="java.lang.String"/>
+			<form-property name="handiCapped" type="java.lang.String"/>
+			<form-property name="riskCategory" type="java.lang.String"/>
+			<form-property name="cgtmseIndustry" type="java.lang.String"/>
+			<form-property name="lbxcgtmseIndustry" type="java.lang.String"/>
+		</form-bean>
+  <!-- Sarvesh space  for Masters starts -->		
+		<form-bean name="irrCalculationAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="customername" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="lbxscheme" type="java.lang.String" />
+			<form-property name="irrType" type="java.lang.String" />
+			<form-property name="irrChargeCode" type="java.lang.String" />
+			<form-property name="irrChargeCodeModify" type="java.lang.String" />
+			<form-property name="irrID" type="java.lang.String" />
+			<form-property name="lbxIrrType" type="java.lang.String"/>
+			<form-property name="lbxIrrChargeCode" type="java.lang.String"/>			
+		</form-bean>
+		<!-- Sarvesh space For Masters ends -->
+		<form-bean name="CustomerAddressValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="addressId" type="java.lang.String" />
+			<form-property name="adType" type="java.lang.String" />
+			<form-property name="cmAdd" type="java.lang.String" />
+			<form-property name="customerId" type="java.lang.String" />
+			<form-property name="customerName" type="java.lang.String" />
+			<form-property name="addr_type" type="java.lang.String" />
+			<form-property name="bp_type" type="java.lang.String" />
+			<form-property name="bp_id" type="java.lang.String" />
+			<form-property name="bp_id1" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="addr1" type="java.lang.String" />
+			<form-property name="addr2" type="java.lang.String" />
+			<form-property name="addr3" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="region" type="java.lang.String" />
+			<form-property name="pincode" type="java.lang.String" />
+			<form-property name="primaryPhoneNo" type="java.lang.String" />
+			<form-property name="alternatePhoneNo" type="java.lang.String" />
+			<form-property name="tollfreeNo" type="java.lang.String" />
+			<form-property name="distanceBranch" type="java.lang.String" />
+			<form-property name="tahsil" type="java.lang.String" />
+			<form-property name="faxNo" type="java.lang.String" />
+			<form-property name="landMark" type="java.lang.String" />
+			<form-property name="noYears" type="java.lang.String" />
+			<form-property name="noMonths" type="java.lang.String" />
+			<form-property name="flag" type="java.lang.String" />
+			<form-property name="communicationAddress" type="java.lang.String" />
+			<form-property name="addDetails" type="java.lang.String" />
+			<form-property name="firstName" type="java.lang.String" />
+			<form-property name="middleName" type="java.lang.String" />
+			<form-property name="lastName" type="java.lang.String" />
+			<form-property name="relationshipS" type="java.lang.String" />
+			<form-property name="primaryRefMbNo" type="java.lang.String" />
+			<form-property name="alternateRefPhNo" type="java.lang.String" />
+			<form-property name="knowingSince" type="java.lang.String" />
+			<form-property name="addRef" type="java.lang.String" />
+			<form-property name="customerProfile" type="java.lang.String" />
+			<form-property name="institutionEmail" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="dist" type="java.lang.String" />
+			<form-property name="nominee" type="java.lang.String" /><!-- By Rohit for Sarv Suraksha -->
+			<form-property name="nomineeRelation" type="java.lang.String" /><!-- By Rohit for Sarv Suraksha -->
+			<form-property name="nomineeDOB" type="java.lang.String" /><!-- By Rohit for Sarv Suraksha -->
+			<form-property name="gstIn" type="java.lang.String"/>
+			<form-property name="stdNo" type="java.lang.String"/>
+			<form-property name="relationShipFlag" type="java.lang.String"/>
+			<form-property name="relationShipId" type="java.lang.String"/>
+			<form-property name="relation" type="java.lang.String" />
+			<form-property name="relationAddressId" type="java.lang.String" />
+			<form-property name="relationCustomerId" type="java.lang.String" />
+			<form-property name="relationCustomerName" type="java.lang.String" />
+			<form-property name="relationPhone" type="java.lang.String" />
+			<form-property name="relationCustomerType" type="java.lang.String" />
+			
+			
+		</form-bean>
+		<form-bean name="StackHolderDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="holderid" type="java.lang.String" />
+			<form-property name="sex" type="java.lang.String" />
+			<form-property name="holderName" type="java.lang.String" />
+			<form-property name="holderType" type="java.lang.String" />
+			<form-property name="holdingPerc" type="java.lang.String" />
+			<form-property name="dob" type="java.lang.String" />
+			<form-property name="totalExp" type="java.lang.String" />
+			<form-property name="dinNo" type="java.lang.String" />
+			<form-property name="idNo" type="java.lang.String" />
+			<form-property name="primaryPhone" type="java.lang.String" />
+			<form-property name="alternatePhone" type="java.lang.String" />
+			<form-property name="primaryEmail" type="java.lang.String" />
+			<form-property name="alternateEmail" type="java.lang.String" />
+			<form-property name="website" type="java.lang.String" />
+			<form-property name="position" type="java.lang.String" />
+			<form-property name="doj" type="java.lang.String" />
+			<form-property name="compute" type="java.lang.String" />
+			<form-property name="relatedinterest" type="java.lang.String" />
+			<form-property name="obligationDetails" type="java.lang.String" />
+			<form-property name="mgmtPAN" type="java.lang.String" />
+			<form-property name="addId1" type="java.lang.String" />
+			<form-property name="addId2" type="java.lang.String" />
+		</form-bean>
+
+
+
+
+		<form-bean name="CreditRatingPageDynaValidatorActionForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+
+			<form-property name="institute" type="java.lang.String" />
+			<form-property name="rating" type="java.lang.String" />
+			<form-property name="creditDate" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean name="IdividualDetailDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="corporateCode" type="java.lang.String" />
+			<form-property name="firstName" type="java.lang.String" />
+			<form-property name="middleName" type="java.lang.String" />
+			<form-property name="lastName" type="java.lang.String" />
+			<form-property name="corporateCategory" type="java.lang.String" />
+			<form-property name="incorporationDate" type="java.lang.String" />
+			<form-property name="currentAge" type="java.lang.String" />	
+			<form-property name="casteCategory" type="java.lang.String" />	
+			<form-property name="maritalStatus" type="java.lang.String" />	
+			<form-property name="drivingLicense" type="java.lang.String" />	
+			<form-property name="voterId" type="java.lang.String" />	
+			<form-property name="passport" type="java.lang.String" />			
+			<form-property name="fatherHusband" type="java.lang.String" />			
+			<form-property name="pan" type="java.lang.String" />
+			<form-property name="institutionEmail" type="java.lang.String" />
+			<form-property name="referredBy" type="java.lang.String" />
+			<form-property name="blackListed" type="java.lang.String" />
+			<form-property name="reasonForBlackListed" type="java.lang.String" />
+			<form-property name="pagestatus" type="java.lang.String" />
+			<form-property name="constitution" type="java.lang.String" />
+			<form-property name="bypassDedupe" type="java.lang.String" />
+            <form-property name="relationShip" type="java.lang.String" />
+            <form-property name="genderIndividual" type="java.lang.String" />
+            <form-property name="otherRelationShip" type="java.lang.String" />
+            <form-property name="lbxBusinessPartnearHID" type="java.lang.String" />
+            <form-property name="businessPartnerTypeDesc" type="java.lang.String"/>
+            <form-property name="aadhaar" type="java.lang.String" />
+            <form-property name="other" type="java.lang.String" />
+            <form-property name="eduDetailInd" type="java.lang.String" />
+
+            <form-property name="groupName" type="java.lang.String" />
+            <form-property name="hGroupId" type="java.lang.String" />
+            <form-property name="groupType" type="java.lang.String" />
+			<form-property name="groupNameText" type="java.lang.String" />
+
+            <form-property name="lbxIndustry" type="java.lang.String" />
+			<form-property name="lbxSubIndustry" type="java.lang.String" />
+            <form-property name="gstIn" type="java.lang.String" />
+            
+            <!-- Abhishek Start For CKYC -->
+            <form-property name="motherPrifx" type="java.lang.String" />
+			<form-property name="motherFName" type="java.lang.String" />
+			<form-property name="motherMName" type="java.lang.String" />
+			<form-property name="motherLName" type="java.lang.String" />
+			<!-- <form-property name="maritalStatus" type="java.lang.String" /> -->
+			<form-property name="citizenship" type="java.lang.String" />
+			<form-property name="residentialStatus" type="java.lang.String" />
+			<form-property name="occpation" type="java.lang.String" />
+			<form-property name="uIDAI" type="java.lang.String" />
+			<form-property name="pesTaxPrsJuriOutSideInd" type="java.lang.String" />
+			<form-property name="prfIdentityDocNo" type="java.lang.String" />
+			<form-property name="prfIdentityDocExpDate" type="java.lang.String" />
+			<form-property name="prfAddressDocNo" type="java.lang.String" />
+			<form-property name="prfAddressDocExpDate" type="java.lang.String" />
+			<form-property name="relatedPersonType" type="java.lang.String" />
+			<form-property name="relatedPersonPrifix" type="java.lang.String" />
+			<form-property name="relatedPersonFName" type="java.lang.String" />
+			<form-property name="relatedPersonMName" type="java.lang.String" />
+			<form-property name="relatedPersonLName" type="java.lang.String" />
+			<form-property name="relatedPersonCkycNo" type="java.lang.String" /> 
+			<form-property name="relatedPersonPrfIdntyDoc" type="java.lang.String" /> 
+			<form-property name="relatedPersonPrfIdntyDocNo" type="java.lang.String" /> 
+			<form-property name="relatedPersonPrfIdntyDocExpDate" type="java.lang.String" /> 
+			<form-property name="cKYC" type="java.lang.String" />
+			<form-property name="accountType" type="java.lang.String" />
+			<form-property name="customerNamePrifx" type="java.lang.String" />
+			<form-property name="proofOfIdentityDocument" type="java.lang.String" />
+			<form-property name="proofOfIdentityDocumentNo" type="java.lang.String" />
+			<form-property name="proofOfIdentityDocumentExpDate" type="java.lang.String" />
+			<form-property name="proofOfAddressDocument" type="java.lang.String" />
+			<form-property name="proofOfAddressDocumentNo" type="java.lang.String" />
+			<form-property name="proofOfAddressDocumentExpDate" type="java.lang.String" />
+            <!-- Abhishek End For CKYC -->
+            <form-property name="projectedSales" type="java.lang.String" />
+            <form-property name="projectedExports" type="java.lang.String" />
+            <form-property name="minorityCommunity" type="java.lang.String" />
+            <form-property name="handiCapped" type="java.lang.String" />
+            <form-property name="riskCategory" type="java.lang.String" />
+            <form-property name="riskCategoryCode" type="java.lang.String" />
+            <form-property name="riskCategoryDesc" type="java.lang.String" />
+            <form-property name="ucic" type="java.lang.String" />
+            <form-property name="cgtmseIndustry" type="java.lang.String"/>
+			<form-property name="lbxcgtmseIndustry" type="java.lang.String"/>
+      </form-bean>
+
+
+		<!--Ravindra  Master bean end-->
+		<!-- Ritu Master Bean Start -->
+
+		<!-- Country Master Start -->
+		<form-bean name="CountryMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="countryId" type="java.lang.String" />
+			<form-property name="countryDes" type="java.lang.String" />
+			<form-property name="currencyId" type="java.lang.String" />
+			<form-property name="countryStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Country Master End -->
+
+		<!-- State Master Start-->
+		<form-bean name="StateMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="stateId" type="java.lang.String" />
+			<form-property name="stateDes" type="java.lang.String" />
+			<form-property name="countryId" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="stateStatus" type="java.lang.String" />
+			<form-property name="vatPercent" type="java.lang.String" />
+			<form-property name="serviceTax" type="java.lang.String" />
+			<form-property name="gstId" type="java.lang.String" /><!-- added by priyanka -->
+			<form-property name="unionterritory" type="java.lang.String" /><!-- added by priyanka -->
+			<form-property name="gstCode" type="java.lang.String" /><!-- added by priyanka -->			
+		</form-bean>
+		<!-- State Master End -->
+
+		<!-- District Master Start-->
+		<form-bean name="DistrictMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="districtId" type="java.lang.String" />
+			<form-property name="districtDes" type="java.lang.String" />
+			<form-property name="lbxStateId" type="java.lang.String" />
+			<form-property name="stateId" type="java.lang.String" />
+			<form-property name="districtStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- District Master End -->
+
+		<!-- Region Master Start-->
+		<form-bean name="RegionMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="regionId" type="java.lang.String" />
+			<form-property name="regionDes" type="java.lang.String" />
+			<form-property name="regionStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Region Master End -->
+		
+		<!-- ConsortiumPartner Start-->
+		<form-bean name="ConsortiumPartnerAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="consortiumPartnerName" type="java.lang.String"/>
+			<form-property name="consortiumPartnerNameSearch" type="java.lang.String"/>
+			<form-property name="defaultPercentageLoan" type="java.lang.String"/>
+			<form-property name="consortiumPartnerId" type="java.lang.String"/>
+		   <form-property name="defaultAgreedLoan" type="java.lang.String"/>
+		   <form-property name="consortiumPartnerStatus" type="java.lang.String"/>
+		   <form-property name="consortiumStatus" type="java.lang.String"/>
+		</form-bean>
+		<!-- ConsortiumPartner End -->
+		
+
+		<!-- Branch Master Start -->
+		<form-bean name="BranchMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="branchAccount" type="java.lang.String" />
+			<form-property name="companyId" type="java.lang.String" />
+			<form-property name="lbxCompanyID" type="java.lang.String" />
+			<form-property name="regionId" type="java.lang.String" />
+			<form-property name="lbxRegionID" type="java.lang.String" />
+			<form-property name="branchStatus" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="branchShortCode" type="java.lang.String" />
+						<!-- Abhishek Added  -->
+			<form-property name="addr1" type="java.lang.String" />
+			<form-property name="addr2" type="java.lang.String" />
+			<form-property name="addr3" type="java.lang.String" />
+			<form-property name="pincode" type="java.lang.String" />
+			<form-property name="lbxPincode" type="java.lang.String" />
+			<form-property name="tahsil" type="java.lang.String" />
+			<form-property name="txnTahsilHID" type="java.lang.String" />	
+			<form-property name="dist" type="java.lang.String" />
+			<!-- Abhishek End -->	
+				
+			<!-- Ritu -->
+			<form-property name="defaultcountryid" type="java.lang.String" />
+			<form-property name="defaultcountryname" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="district" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<!-- Kanika code branch -->
+					<form-property name="areaCodename" type="java.lang.String[]" />
+					<form-property name="lbxareaCodeVal" type="java.lang.String[]" />
+				<form-property name="zone" type="java.lang.String" />
+				<form-property name="cluster" type="java.lang.String" />
+				<form-property name="txtZoneCode" type="java.lang.String" />
+				<form-property name="txtclusterCode" type="java.lang.String" />
+			<!-- end of kanika -->
+
+			<!--changes by shubham-->
+				<form-property name="branchAddress1" type="java.lang.String" />
+			    <form-property name="branchAddress2" type="java.lang.String" />
+			    <form-property name="branchAddress3" type="java.lang.String" />
+			    <form-property name="branchPincode" type="java.lang.String" />
+			<!--changes end by shubham-->
+
+			<!-- Added by Richa for branch category at branch master -->
+				<form-property name="branchCategory" type="java.lang.String" />
+				<form-property name="name" type="java.lang.String" />
+				<form-property name="id" type="java.lang.String" />
+				<!-- Added by Richa for branch category at branch master -->	
+				<!-- Added by Richa for deposit bank LOV at branch master -->
+				<form-property name="depositBankAccount" type="java.lang.String" />
+				<form-property name="depositBankID" type="java.lang.String" />
+				<form-property name="depositBranchID" type="java.lang.String" />
+				
+				<form-property name="depositMicr" type="java.lang.String" />
+				<form-property name="depositIfscCode" type="java.lang.String" />
+				<form-property name="temp" type="java.lang.String" />
+				<!-- Added by Richa for deposit bank LOV at branch master -->
+			
+			
+		</form-bean>
+		<!-- Branch Master End -->
+
+		<!--Department Master Start -->
+		<form-bean name="DepartmentMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="departmentId" type="java.lang.String" />
+			<form-property name="departmentDes" type="java.lang.String" />
+			<form-property name="departmentStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Department Master End  -->
+
+		<!--  Generic Perameter Master Start-->
+		<form-bean name="GenericMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="genericKey" type="java.lang.String" />
+			<form-property name="parentValue" type="java.lang.String" />
+			<form-property name="genericval" type="java.lang.String" />
+			<form-property name="description" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="lbxGenericId" type="java.lang.String" />
+		</form-bean>
+		<!-- Generic Perameter Master END -->
+
+		<!-- Reason Master Start -->
+		<form-bean name="ReasonMasterAddDyanaValidationForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="reasonId" type="java.lang.String" />
+			<form-property name="reasonType" type="java.lang.String" />
+			<form-property name="reasonDes" type="java.lang.String" />
+			<form-property name="chargeFlag" type="java.lang.String" />
+			<!--  		<form-property name="chargeAmount" type="java.lang.String"/>-->
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxReason" type="java.lang.String" />
+				<form-property name="reasonShortcode" type="java.lang.String" />
+		</form-bean>
+		<!-- Reason Master End -->
+
+		<!-- Agency Master Start -->
+		<form-bean name="AgencyMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="agencyCode" type="java.lang.String" />
+			<form-property name="agencyDesc" type="java.lang.String" />
+			<form-property name="agencyType" type="java.lang.String" />
+			<form-property name="agencyStatus" type="java.lang.String" />
+			<form-property name="agencyValue" type="java.lang.String" />
+			<form-property name="agencyDescription" type="java.lang.String" />
+			<form-property name="userName" type="java.lang.String" />
+			<form-property name="lbxUserIds" type="java.lang.String" />
+		</form-bean>
+		<!-- Agency Master End -->
+
+		<!--Dealer Master Start-->
+		<form-bean name="DealerMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="dealerId" type="java.lang.String" />
+			<form-property name="dealerDes" type="java.lang.String" />
+			<form-property name="dealerType" type="java.lang.String" />
+			<form-property name="dealerStatus" type="java.lang.String" />
+			<form-property name="lbxdealerType" type="java.lang.String" />
+			<!-- Ritu Code Start -->
+			<form-property name="userId" type="java.lang.String" />
+			<form-property name="userDesc" type="java.lang.String" />
+			<!-- Ritu Code End -->
+			<!-- Surendra Code Start -->
+			<form-property name="accountNo" type="java.lang.String" />
+			<form-property name="bankCode" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="bankBranchName" type="java.lang.String" />
+			<form-property name="lbxBranchID" type="java.lang.String" />
+			<form-property name="micrCode" type="java.lang.String" />
+			<form-property name="ifscCode" type="java.lang.String" />
+
+<!--			changed by sachin for add some field at dealer master-->
+			<form-property name="addressDealer1" type="java.lang.String" />
+			<form-property name="addressDealer2" type="java.lang.String" />
+			<form-property name="addressDealer3" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="dist" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="pincode" type="java.lang.String" />
+			<form-property name="contractPerson" type="java.lang.String" />
+			<form-property name="phoneOff" type="java.lang.String" />
+			<form-property name="phoneRes" type="java.lang.String" />
+			<form-property name="email" type="java.lang.String" />
+			<form-property name="registrationNo" type="java.lang.String" />
+			
+			<form-property name="pan" type="java.lang.String" />
+			<form-property name="gstids" type="java.lang.String" />			
+
+<!--end by sachin-->
+
+			<!-- Surendra Code End -->	
+
+		</form-bean>
+		<!-- Dealer Master End  -->
+		
+		<!--Surendra Sub Dealer Master Start-->
+		<form-bean name="SubDealerMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="subDealerID" type="java.lang.String" />
+			<form-property name="subDealerCode" type="java.lang.String" />
+			<form-property name="subDealerDes" type="java.lang.String" />
+			<form-property name="subDealerBankAC" type="java.lang.String" />
+			<form-property name="subDealerStatus" type="java.lang.String" />
+			<form-property name="lbxdealerType" type="java.lang.String" />	
+			<form-property name="dealerID" type="java.lang.String" />
+			<form-property name="dealerDes" type="java.lang.String" />
+			<form-property name="lbxdealerID" type="java.lang.String" />
+			<form-property name="hid" type="java.lang.String" />
+			 <form-property name="subDealerCodeModify" type="java.lang.String" />
+		</form-bean>
+		<!-- Sub Dealer Master End  -->
+
+		<!-- Industry Master Start -->
+		<form-bean name="IndustryMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="industryDesc" type="java.lang.String" />
+			<form-property name="industryStatus" type="java.lang.String" />
+			<form-property name="manufacturer" type="java.lang.String" />
+			<form-property name="trader" type="java.lang.String" />
+			<form-property name="service" type="java.lang.String" />
+		</form-bean>
+		<!-- Industry Master End  -->
+
+		<!-- Sub Industry Master Start -->
+		<form-bean name="SubIndustryMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="subIndustryDesc" type="java.lang.String" />
+			<form-property name="industryId" type="java.lang.String" />
+			<form-property name="lbxIndustry" type="java.lang.String" />
+			<form-property name="subIndustryStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Sub Industry Master End  -->
+
+		<!-- Product Master Start-->
+		<form-bean name="ProductMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="productDes" type="java.lang.String" />
+			<form-property name="productCategory" type="java.lang.String" />
+			<form-property name="assetFlag" type="java.lang.String" />
+			<form-property name="repaymentType" type="java.lang.String" />
+			<form-property name="revolvingFlag" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="daysBasis" type="java.lang.String" />
+			<form-property name="insRound" type="java.lang.String" />
+			<form-property name="insRounding" type="java.lang.String" />
+			<form-property name="intRounType" type="java.lang.String" />
+			<form-property name="intRounding" type="java.lang.String" />
+			<form-property name="opportunityRate" type="java.lang.String" />
+			<form-property name="daysPerYear" type="java.lang.String" />
+			<form-property name="oneDealOneLoan" type="java.lang.String" />
+			<form-property name="productLoanType" type="java.lang.String" />
+			<form-property name="assetMandatoryAtDeal" type="java.lang.String" />
+			<form-property name="interestAdvance" type="java.lang.String" />
+		</form-bean>
+		<!-- Product Master End -->
+		
+		<!-- Gold Ornament Master Start-->
+		
+		<form-bean name="GoldOrnamentMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			
+			
+			 <form-property name="ornamentTypeSearch" type="java.lang.String" />
+			<form-property name="ornamentId" type="java.lang.String" />
+			<form-property name="ornamentStandard" type="java.lang.String" />
+			<form-property name="ornamentStandardSearch" type="java.lang.String" />
+		     <form-property name="goldOrnament" type="java.lang.String" />
+		      <form-property name="goldORnamentStatus" type="java.lang.String" />
+		      <form-property name="ornamentType" type="java.lang.String" />
+		      <form-property name="ornamentTypeModify" type="java.lang.String" />
+		       <form-property name="goldOrnamentType" type="java.lang.String" />
+		         <form-property name="lbxOrnamentType" type="java.lang.String" />
+		      <form-property name="lbxOrnamentStandard" type="java.lang.String" />
+		      <form-property name="goldOrnamentLTV" type="java.lang.String" />
+		    
+		</form-bean>
+		<!-- Gold Ornament Master End -->
+
+		<!-- Scheme Master Start -->
+		<form-bean name="CrSchemeMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="minPeriodResch" type="java.lang.String" />
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="schemeDesc" type="java.lang.String" />
+			<form-property name="minAmountFin" type="java.lang.String" />
+			<form-property name="maxAmountFin" type="java.lang.String" />
+			<form-property name="minMarginRate" type="java.lang.String" />
+			<form-property name="maxMarginRate" type="java.lang.String" />
+			<form-property name="defaultMarginRate" type="java.lang.String" />
+			<form-property name="rateType" type="java.lang.String" />
+			<form-property name="rateMethod" type="java.lang.String" />
+			<form-property name="baseRateType" type="java.lang.String" />
+			<form-property name="minFlatRate" type="java.lang.String" />
+			<form-property name="maxFlatRate" type="java.lang.String" />
+			<form-property name="defFlatRate" type="java.lang.String" />
+			<form-property name="minEffRate" type="java.lang.String" />
+			<form-property name="maxEffRate" type="java.lang.String" />
+			<form-property name="defEffRate" type="java.lang.String" />
+			<form-property name="minIrr" type="java.lang.String" />
+			<form-property name="maxIrr" type="java.lang.String" />
+			<form-property name="minTenure" type="java.lang.String" />
+			<form-property name="maxTenure" type="java.lang.String" />
+			<form-property name="defTenure" type="java.lang.String" />
+			<form-property name="repaymentFreq" type="java.lang.String" />
+			<form-property name="installmentType" type="java.lang.String" />
+			<form-property name="repaymentMode" type="java.lang.String" />
+			<form-property name="installmentMode" type="java.lang.String" />
+			<form-property name="reschAllowed" type="java.lang.String" />
+			<form-property name="reschLockinPeriod" type="java.lang.String" />
+			<form-property name="numberReschAllowedYear" type="java.lang.String" />
+			<form-property name="numberReschAllowedTotal" type="java.lang.String" />
+			<form-property name="minimumGapResch" type="java.lang.String" />
+			<form-property name="deferralAllowed" type="java.lang.String" />
+			<form-property name="defrLockinPeriod" type="java.lang.String" />
+			<form-property name="maximumDefrMonthsAllowed" type="java.lang.String" />
+			<form-property name="maximumDefrMonthsTotal" type="java.lang.String" />
+			<form-property name="minimumGapDefr" type="java.lang.String" />
+			<form-property name="numberDefrAllowedYear" type="java.lang.String" />
+			<form-property name="numberDefrAllowedTotal" type="java.lang.String" />
+			<form-property name="prepayAllowed" type="java.lang.String" />
+			<form-property name="numberPrepayAllowedYear" type="java.lang.String" />
+			<form-property name="minimumGapPrepay" type="java.lang.String" />
+			<form-property name="minimumPrepayPercent" type="java.lang.String" />
+			<form-property name="maximumPrepayPercent" type="java.lang.String" />
+			<form-property name="terminationAllowed" type="java.lang.String" />
+			<form-property name="minimumGapTermination" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="prepayLockinPeriod" type="java.lang.String" />
+			<form-property name="numberPrepayAllowedTotal" type="java.lang.String" />
+			<form-property name="terminationLockinPeriod" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="lbxAssetFlag" type="java.lang.String" />
+			<form-property name="customerExposureLimit" type="java.lang.String" />
+			<form-property name="preEMI" type="java.lang.String" />
+			<form-property name="fixPriod" type="java.lang.String" />
+			<form-property name="reviewEvnet" type="java.lang.String" />
+			<form-property name="gapReview" type="java.lang.String" />
+			<form-property name="increse" type="java.lang.String" />
+			<form-property name="decrese" type="java.lang.String" />
+			<form-property name="additionalDisbAllowed" type="java.lang.String" />
+			<form-property name="minimumGapBetPrepayAndTer" type="java.lang.String" />
+			<form-property name="repaymentLabel" type="java.lang.String" />
+			<form-property name="validityDays" type="java.lang.String" />
+			<form-property name="expiryDate" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="branchDesc" type="java.lang.String" />
+			<form-property name="allselection" type="java.lang.String" />
+			<form-property name="singleselection" type="java.lang.String" />
+			<form-property name="selectionAccecc" type="java.lang.String" />
+			<form-property name="schemeExposure" type="java.lang.String" />
+			
+		</form-bean>
+		<form-bean name="CrAccountDetailDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="chk" type="java.lang.String" />
+			<form-property name="stageId" type="java.lang.String" />
+			<form-property name="accountingFlag" type="java.lang.String" />
+			<form-property name="stageDes" type="java.lang.String" />
+			<form-property name="schemId" type="java.lang.String" />
+
+		</form-bean>
+		<!-- Scheme Master End -->
+
+		<!-- Base Rate Master Start -->
+		<form-bean name="BaseRateMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="baseRateType" type="java.lang.String" />
+			<form-property name="effectiveFromDate" type="java.lang.String" />
+			<form-property name="baseRate" type="java.lang.String" />
+			<form-property name="baseRateDesc" type="java.lang.String" />
+			<form-property name="baseRateStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Base Rate Master End -->
+
+		<!-- Bank Master Start-->
+		<form-bean name="BankMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bankCode" type="java.lang.String" />
+			<form-property name="bankName" type="java.lang.String" />
+			<!--			<form-property name="micrCode" type="java.lang.String" />-->
+			<form-property name="bankStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Bank Master End  -->
+
+		<!-- Bank Branch Master Start-->
+		<form-bean name="BankBranchDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bankBranchCode" type="java.lang.String" />
+			<form-property name="bankBranchName" type="java.lang.String" />
+			<form-property name="branchMICRCode" type="java.lang.String" />
+			<form-property name="branchIFCSCode" type="java.lang.String" />
+			<form-property name="bank" type="java.lang.String" />
+			<form-property name="contactPerson" type="java.lang.String" />
+			<form-property name="personDesignation" type="java.lang.String" />
+			<form-property name="address1" type="java.lang.String" />
+			<form-property name="address2" type="java.lang.String" />
+			<form-property name="address3" type="java.lang.String" />
+			<form-property name="dist" type="java.lang.String" />
+			<form-property name="state" type="java.lang.String" />
+			<form-property name="country" type="java.lang.String" />
+			<form-property name="zipCode" type="java.lang.String" />
+			<form-property name="phone1" type="java.lang.String" />
+			<form-property name="phone2" type="java.lang.String" />
+			<form-property name="fax" type="java.lang.String" />
+			<form-property name="email" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="bankBranchStatus" type="java.lang.String" />
+			<form-property name="ecsStatus" type="java.lang.String" />
+			<form-property name="achStatus" type="java.lang.String" /><!-- Added by Rohit for ACH -->
+		</form-bean>
+		<!-- Bank Branch Master End-->
+
+		<!-- Bank Account Start -->
+		<form-bean name="BankAccountMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bankCode" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="bankBranchName" type="java.lang.String" />
+			<form-property name="lbxBranchID" type="java.lang.String" />
+			<form-property name="lbxLedgerId" type="java.lang.String" />
+			<form-property name="ifscCode" type="java.lang.String" />
+			<form-property name="micrCode" type="java.lang.String" />
+			<form-property name="accountNo" type="java.lang.String" />
+			<form-property name="glCode" type="java.lang.String" />
+			<form-property name="bankAccountStatus" type="java.lang.String" />
+			<form-property name="accountType" type="java.lang.String" />
+			<form-property name="clientCode" type="java.lang.String" />
+			<form-property name="drawingPower" type="java.lang.String" />
+			
+		</form-bean>
+		<!-- Bank Account End -->
+			<!-- Surendra Cust Bank Details  Start -->
+		<form-bean name="CustBankDetailsDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bankCode" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="bankBranchName" type="java.lang.String" />
+			<form-property name="lbxBranchID" type="java.lang.String" />
+			<form-property name="ifscCode" type="java.lang.String" />
+			<form-property name="micrCode" type="java.lang.String" />
+			<form-property name="accountNo" type="java.lang.String" />			
+			<form-property name="bankAccountStatus" type="java.lang.String" />			
+			<form-property name="recStatus" type="java.lang.String" />	
+			<form-property name="customerId" type="java.lang.String" />	
+			<form-property name="pageStat" type="java.lang.String" />
+			<!-- Himanshu Verma		Changes started for ACH Tracking -->
+			<form-property name="selAchStatus" type="java.lang.String" />
+			<form-property name="txtAchServiceProvider" type="java.lang.String" />
+			<form-property name="txtSponsorBankCode" type="java.lang.String" />
+			<form-property name="txtUtilityCode" type="java.lang.String" />
+			<form-property name="hidAchServiceProvider" type="java.lang.String" />
+			<form-property name="hidSponsorBankCode" type="java.lang.String" />
+			<form-property name="hidUtilityCode" type="java.lang.String" />
+			<form-property name="selToDebit" type="java.lang.String" />
+			<form-property name="selDebitType" type="java.lang.String" />
+			<form-property name="accountHolding" type="java.lang.String" />
+			<form-property name="accountSince" type="java.lang.String" />
+			<form-property name="nameOfAccountHolder" type="java.lang.String[]"/>
+			<form-property name="accountType" type="java.lang.String" />
+			<form-property name="noYears" type="java.lang.String" />
+			<form-property name="noMonths" type="java.lang.String" />
+			<!-- Himanshu Verma		Changes ended for ACH Tracking -->			
+		</form-bean>
+		<!-- Surendra Bank Details  End  -->
+
+		<!-- Document Master Start -->
+		<form-bean name="DocumentMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="documentDesc" type="java.lang.String" />
+			<form-property name="documentStatus" type="java.lang.String" />
+			<form-property name="documentCategory" type="java.lang.String" /><!-- Virender -->
+		</form-bean>
+		<!-- Document Master End -->
+
+		<!-- Document CheckList Master Start -->
+		<form-bean name="DocumentCheckListMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="schemeId" type="java.lang.String" />
+			<form-property name="docStage" type="java.lang.String" />
+			<form-property name="docEntity" type="java.lang.String" />
+			<form-property name="docConstitution" type="java.lang.String" />
+			<form-property name="assetClass" type="java.lang.String" />
+			<form-property name="docId" type="java.lang.String" />
+			<form-property name="docMandatory" type="java.lang.String" />
+			<form-property name="docOriginal" type="java.lang.String" />
+			<form-property name="docExpiryFlag" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="lbxSchemeID" type="java.lang.String" />
+			<form-property name="lbxDocId" type="java.lang.String" />
+			<form-property name="stageDescription" type="java.lang.String" />
+			<form-property name="stageValue" type="java.lang.String" />
+			<form-property name="entityValue" type="java.lang.String" />
+			<form-property name="entityDescription" type="java.lang.String" />
+			<form-property name="consValue" type="java.lang.String" />
+			<form-property name="consDescription" type="java.lang.String" />
+			<form-property name="assetValue" type="java.lang.String" />
+			<form-property name="assetDescription" type="java.lang.String" />
+			<form-property name="docDes" type="java.lang.String" />
+			<form-property name="docCheckId" type="java.lang.String" />
+			<form-property name="lbxAssetCollId" type="java.lang.String" />
+		</form-bean>
+		<!-- Document CheckList Master End -->
+		
+			<!-- Mradul Scoring Benchmark Master Start -->
+			<form-bean name="ScoringBenchmarkMasterDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="weightage" type="java.lang.String" />
+			<form-property name="industry" type="java.lang.String" />
+			<form-property name="lbxIndustryID" type="java.lang.String" />
+			<form-property name="scorecard" type="java.lang.String" />
+			<form-property name="lbxScorecardID" type="java.lang.String" />
+			<form-property name="dataType" type="java.lang.String" />
+			<form-property name="rating" type="java.lang.String[]" />
+			<form-property name="numericValueFrom" type="java.lang.String[]" />
+			<form-property name="numericValueTo" type="java.lang.String[]" />
+			<form-property name="characterValue" type="java.lang.String[]" />
+			<form-property name="rating1" type="java.lang.String" />
+			<form-property name="numericValueFrom1" type="java.lang.String" />
+			<form-property name="numericValueTo1" type="java.lang.String" />
+			<form-property name="characterValue1" type="java.lang.String" />
+			<form-property name="benchmarkCodeId" type="java.lang.String" />
+		
+			</form-bean>
+		<!-- Mradul Scoring Benchmark Master End -->
+
+		<form-bean name="FinancialPramMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="pramCode" type="java.lang.String" />
+			<form-property name="pramName" type="java.lang.String" />
+			<form-property name="pramType" type="java.lang.String" />
+			<form-property name="pramStatus" type="java.lang.String" />
+			<form-property name="negativeAllowed" type="java.lang.String" />
+		   <form-property name="sequenceNo" type="java.lang.String" />
+			<form-property name="autoCalculated" type="java.lang.String" />
+            <form-property name="subType" type="java.lang.String" />
+<!--   add by sachin              -->
+			<form-property name="finParameterCode" type="java.lang.String" />
+			<form-property name="finConstant" type="java.lang.String" />
+			<form-property name="finOperator" type="java.lang.String" />
+			<form-property name="finExpression" type="java.lang.String" />
+			<form-property name="finAllParamCodes" type="java.lang.String" />
+
+		</form-bean>
+
+
+		<!-- Document Child  Master Start  -->
+		<form-bean name="DocChildMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="docChildID" type="java.lang.String" />
+			<form-property name="docId" type="java.lang.String" />
+			<form-property name="docDes" type="java.lang.String" />
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="docChildDes" type="java.lang.String" />
+		</form-bean>
+		<!-- Document Child  Master End -->
+
+		<!-- Charge Code Master Start -->
+		<form-bean name="ChargeCodeDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="chargeCode" type="java.lang.String" />
+			<form-property name="chargeDescription" type="java.lang.String" />
+			<form-property name="manualAdviceFlag" type="java.lang.String" />
+			<form-property name="waveOffFlag" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="taxdescription1" type="java.lang.String" />
+			<form-property name="lbxTaxdescription1" type="java.lang.String" />
+			<form-property name="taxdescription2" type="java.lang.String" />
+			<form-property name="lbxTaxdescription2" type="java.lang.String" />
+			<form-property name="taxdescription3" type="java.lang.String" />
+			<form-property name="lbxTaxdescription3" type="java.lang.String" />
+			<form-property name="cgstId" type="java.lang.String" />
+			<form-property name="sgstId" type="java.lang.String" />
+			<form-property name="igstId" type="java.lang.String" />
+			<form-property name="ugstId" type="java.lang.String" />
+			<form-property name="lbxCgstId" type="java.lang.String" />
+			<form-property name="lbxSgstId" type="java.lang.String" />
+			<form-property name="lbxIgstId" type="java.lang.String" />
+			<form-property name="lbxUgstId" type="java.lang.String" />
+			<form-property name="dueReceiptBasis" type="java.lang.String" />
+			<form-property name="hscscn" type="java.lang.String" />
+			<form-property name="hscscnc" type="java.lang.String" />
+			<form-property name="taxapp" type="java.lang.String" />
+			<form-property name="taxrate1" type="java.lang.String" />
+			<form-property name="taxrate2" type="java.lang.String" />			
+			
+		</form-bean>
+		<!-- Charge Code Master End -->
+
+		<!-- Charge Master Start -->
+		<form-bean name="ChargeMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="chargeId" type="java.lang.String" />
+			<form-property name="lbxCharge" type="java.lang.String" />
+			<form-property name="productId" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="schemeId" type="java.lang.String" />
+			<form-property name="lbxScheme" type="java.lang.String" />
+			<form-property name="stageId" type="java.lang.String" />
+			<form-property name="lbxStage" type="java.lang.String" />
+			<form-property name="appStageId" type="java.lang.String" />
+			<form-property name="lbxAppStage" type="java.lang.String" />
+			<form-property name="chargeBPType" type="java.lang.String" />
+			<form-property name="hBuyerSupplierBPType" type="java.lang.String" />
+			<form-property name="chargeCode" type="java.lang.String" />
+			<form-property name="chargeType" type="java.lang.String" />
+			<form-property name="chargeMethod" type="java.lang.String" />
+			<form-property name="chargeAmount" type="java.lang.String" />
+			<form-property name="calculatedOn" type="java.lang.String" />
+			<form-property name="tdsStatus" type="java.lang.String" />
+			<form-property name="tdsRate" type="java.lang.String" />
+			<form-property name="taxStatus" type="java.lang.String" />
+			<form-property name="taxInclusiveStatus" type="java.lang.String" />
+			<form-property name="taxRate1" type="java.lang.String" />
+			<form-property name="taxRate2" type="java.lang.String" />
+			<form-property name="minChargeAmount" type="java.lang.String" />
+			<form-property name="chargeStatus" type="java.lang.String" />
+			<form-property name="lbxCalculatedOn" type="java.lang.String" />
+			<form-property name="chargeDes" type="java.lang.String" />
+			<form-property name="minchargeMethod" type="java.lang.String" />
+			<form-property name="minCalculatedOn" type="java.lang.String" />
+			<form-property name="lbxminCalculatedOn" type="java.lang.String" />
+
+		</form-bean>
+		<!-- Charge Master End -->
+
+		<!-- NPA Stage Master Start -->
+		<form-bean name="NPAStageMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="npaStage" type="java.lang.String" />
+			<form-property name="sequenceNo" type="java.lang.String" />
+			<form-property name="npaCriteria" type="java.lang.String" />
+			<form-property name="npaCriteriaValue" type="java.lang.String" />
+			<form-property name="moveToNext" type="java.lang.String" />
+			<form-property name="moveToPrevious" type="java.lang.String" />
+			<form-property name="billingFlagStatus" type="java.lang.String" />
+			<form-property name="accrualFlagStatus" type="java.lang.String" />
+			<form-property name="npaStageStatus" type="java.lang.String" />
+			<form-property name="sdAccrualFlag" type="java.lang.String" />
+			<form-property name="productId" type="java.lang.String"/>
+		</form-bean>
+		<!-- NPA Stage Master End -->
+
+		<!-- GCD Group Master Start -->
+		<form-bean name="GcdGroupMasterDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="gcdgroupId" type="java.lang.String" />
+			<form-property name="groupDescription" type="java.lang.String" />
+			<form-property name="groupExposureLimit" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- GCD Group Master End -->
+
+		<!-- Common Bean For Search Start -->
+		<form-bean name="CommonDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="lbxSchemeId" type="java.lang.String" />
+			<form-property name="bankBranchSearchCode" type="java.lang.String" />
+			<form-property name="chargeSearchCode" type="java.lang.String" />
+			<form-property name="branchSearchId" type="java.lang.String" />
+			<form-property name="branchSearchDesc" type="java.lang.String" />
+			<form-property name="subIndustryId" type="java.lang.String" />
+			<form-property name="subIndustrySearchDesc" type="java.lang.String" />
+			<form-property name="industryId" type="java.lang.String" />
+			<form-property name="industrySearchDesc" type="java.lang.String" />
+			<form-property name="agencySearchCode" type="java.lang.String" />
+			<form-property name="agencySearchDesc" type="java.lang.String" />
+			<form-property name="documentId" type="java.lang.String" />
+			<form-property name="documentSearchDesc" type="java.lang.String" />
+			<form-property name="bankSearchCode" type="java.lang.String" />
+			<form-property name="bankSearchName" type="java.lang.String" />
+			<form-property name="baseRateTypeSearch" type="java.lang.String" />
+			<form-property name="effectiveFromDateSearch" type="java.lang.String" />
+			<form-property name="baseRateDescSearch" type="java.lang.String" />
+			<form-property name="groupSearchDescription" type="java.lang.String" />
+			<form-property name="branchMICRCode" type="java.lang.String" />
+			<form-property name="branchIFCSCode" type="java.lang.String" />
+			<form-property name="lbxBranchIds" type="java.lang.String" />
+			<form-property name="mobileUserId" type="java.lang.String" />
+		    <form-property name="mobileUserName" type="java.lang.String" />
+		    <form-property name="mobileUserNameSearch" type="java.lang.String" />
+		    <form-property name="userId" type="java.lang.String" />
+		    <form-property name="mobile" type="java.lang.String" />
+		    <form-property name="mobileNo" type="java.lang.String" />
+		    <form-property name="imeiNo" type="java.lang.String" />
+            <form-property name="userStatus" type="java.lang.String" />
+            <form-property name="idModify" type="java.lang.String" />
+			<form-property name="consortiumPartnerName" type="java.lang.String"/>
+			<form-property name="defaultPercentageLoan" type="java.lang.String"/>
+			<form-property name="consortiumPartnerId" type="java.lang.String"/>
+		   <form-property name="defaultAgreedLoan" type="java.lang.String"/>
+		    <form-property name="consortiumPartnerNameSearch" type="java.lang.String"/>
+		    <form-property name="consortiumPartnerIdSearch" type="java.lang.String"/>
+		   <form-property name="consortiumPartnerIdModify" type="java.lang.String"/>
+		
+		
+			<!-- KANIKA FOR FINANCIAL PARAM MASTER -->
+			<form-property name="negativeAllowed" type="java.lang.String" />
+			<!-- END -->
+			<form-property name="chargeId" type="java.lang.String" />
+			<form-property name="lbxChargeSearch" type="java.lang.String" />
+
+			<form-property name="lbxProductSearchID" type="java.lang.String" />
+			<form-property name="schemeSearchId" type="java.lang.String" />
+			<form-property name="lbxSchemeSearch" type="java.lang.String" />
+			<form-property name="stageId" type="java.lang.String" />
+			<form-property name="lbxStage" type="java.lang.String" />
+			<form-property name="appStageId" type="java.lang.String" />
+			<form-property name="lbxAppStage" type="java.lang.String" />
+
+			<form-property name="roleId" type="java.lang.String" />
+			<form-property name="roleSearchDesc" type="java.lang.String" />
+
+			<form-property name="countryId" type="java.lang.String" />
+			<form-property name="regionId" type="java.lang.String" />
+			<form-property name="districtId" type="java.lang.String" />
+			<form-property name="stateId" type="java.lang.String"></form-property>
+
+			<form-property name="reasonId" type="java.lang.String" />
+			<form-property name="dealerId" type="java.lang.String" />
+			<form-property name="departmentId" type="java.lang.String" />
+			<form-property name="userSearchId" type="java.lang.String" />
+			<form-property name="userSearchName" type="java.lang.String" />
+			<form-property name="lbxBranchId" type="java.lang.String" />
+
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="userAccessId" type="java.lang.String" />
+			<form-property name="departmentSearchDes" type="java.lang.String" />
+			<form-property name="reasonSearchDes" type="java.lang.String" />
+			<form-property name="regionSearchDes" type="java.lang.String" />
+			<form-property name="districtSearchDes" type="java.lang.String" />
+			<form-property name="stateSearchDes" type="java.lang.String" />
+			<form-property name="searchDescription" type="java.lang.String" />
+			<form-property name="schemeDesc" type="java.lang.String" />
+			<form-property name="schemeId" type="java.lang.String" />
+			<form-property name="countrySearchDes" type="java.lang.String" />
+			<form-property name="bankBranchSearchName" type="java.lang.String" />
+			<form-property name="chargeSearchDescription" type="java.lang.String" />
+			<form-property name="dealerSearchDes" type="java.lang.String" />
+			<form-property name="moduleSearchId" type="java.lang.String" />
+			<form-property name="lbxModuleSearch" type="java.lang.String" />
+			<form-property name="gcdgroupId" type="java.lang.String" />
+			<form-property name="docChildID" type="java.lang.String" />
+			<form-property name="docChildSearchDes" type="java.lang.String" />
+			<form-property name="lbxRoleSearchId" type="java.lang.String" />
+			<form-property name="genericSearchKey" type="java.lang.String" />
+			<form-property name="roleSearchId" type="java.lang.String" />
+
+			<form-property name="productSearchId" type="java.lang.String" />
+			<form-property name="productSearchDes" type="java.lang.String" />
+			<form-property name="branchId" type="java.lang.String" />
+			<form-property name="lbxBranchSearchId" type="java.lang.String" />
+			<form-property name="lbxUserSearchId" type="java.lang.String" />
+			<form-property name="chargeSearchDes" type="java.lang.String" />
+			<form-property name="chargeCode" type="java.lang.String" />
+
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="lbxBankID" type="java.lang.String" />
+			<form-property name="npaSearchStage" type="java.lang.String" />
+			<form-property name="sequenceNoSearch" type="java.lang.String" />
+			<form-property name="generateBankingDate" type="java.lang.String" />
+			<form-property name="lbxBankSearchID" type="java.lang.String" />
+			<form-property name="lbxBranchSearchID" type="java.lang.String" />
+
+			<form-property name="ratioCode" type="java.lang.String" />
+			<form-property name="ratioName" type="java.lang.String" />
+			<form-property name="constant" type="java.lang.String" />
+			<form-property name="expression" type="java.lang.String" />
+			<form-property name="ratioStatus" type="java.lang.String" />
+
+
+
+			<form-property name="codeSearchId" type="java.lang.String" />
+			<form-property name="codeSearchDesc" type="java.lang.String" />
+			<form-property name="queueSearchCode" type="java.lang.String" />
+			<form-property name="queueSearchDesc" type="java.lang.String" />
+
+			<form-property name="scoreCardId" type="java.lang.String" />
+			<form-property name="scoreCardDesc" type="java.lang.String" />
+
+			<form-property name="pramSearchCode" type="java.lang.String" />
+			<form-property name="pramSearchName" type="java.lang.String" />
+
+			
+			<form-property name="productSearch" type="java.lang.String" />
+			<form-property name="findApprovalSearch" type="java.lang.String" />
+			<form-property name="amountFromSearch" type="java.lang.String" />
+			<form-property name="amountToSearch" type="java.lang.String" />
+			<form-property name="productModify" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+
+
+			<form-property name="report" type="java.lang.String" />
+
+			
+			
+			<form-property name="ruleCode" type="java.lang.String" />
+			<form-property name="ruleName" type="java.lang.String" />
+			
+			
+			<!--  vishal Holiday Master start  -->
+			<form-property name="holidayDate" type="java.lang.String" />
+			<form-property name="holidayDes" type="java.lang.String" />
+			<form-property name="holidayId" type="java.lang.String" />
+			<form-property name="holidayStatus" type="java.lang.String" />
+			<form-property name="holidaySearchDate" type="java.lang.String" />
+			<form-property name="holidaySearchDes" type="java.lang.String" />
+			<form-property name="holidayIdModify" type="java.lang.String" />
+			
+			<form-property name="holidayType" type="java.lang.String" />
+			<form-property name="holidayDay" type="java.lang.String" />
+			<form-property name="weekendDay" type="java.lang.String" />
+			<form-property name="holidayDateModify" type="java.lang.String" />
+			<form-property name="holidayTypeSearch" type="java.lang.String" />
+			
+			<!-- vishal Holiday Master end -->
+			
+			
+			<!--  For Gold Ornament Master -->
+			
+			<form-property name="ornamentTypeSearch" type="java.lang.String" />
+			<form-property name="ornamentId" type="java.lang.String" />
+			<form-property name="ornamentStandard" type="java.lang.String" />
+			<form-property name="ornamentStandardSearch" type="java.lang.String" />
+			
+			
+			<form-property name="goldOrnament" type="java.lang.String" />
+			
+			
+			<!-- End Gold Ornament Master -->
+			
+		<!-- Anil Branch Master Start -->
+		
+		<form-property name="district" type="java.lang.String" />
+		
+		<!-- vishal Branch Master end -->
+		
+		<!-- Prashant Verification Mapping Search Master Start -->
+		
+		<form-property name="verificationMappingId" type="java.lang.String" />
+		<form-property name="verificationType" type="java.lang.String" />
+		<form-property name="verificationQuestId" type="java.lang.String" />
+		<form-property name="verificationSubType" type="java.lang.String" />
+		
+	<!-- Prashant Verification Mapping Search Master end -->
+	
+<!--	ravi start -->
+		<form-property name="lbxNPAStageId" type="java.lang.String" />
+		<form-property name="type" type="java.lang.String" />
+		<form-property name="installmentCharges" type="java.lang.String" />
+		<form-property name="preEmiCharges" type="java.lang.String" />
+		<form-property name="otherCharges" type="java.lang.String" />
+		<form-property name="principalCharges" type="java.lang.String" />
+		<form-property name="interestCharges" type="java.lang.String" />
+		<form-property name="otherChargesNon" type="java.lang.String" />
+		
+		<form-property name="allocationStatus" type="java.lang.String" />
+		<form-property name="repayType" type="java.lang.String" />
+		<form-property name="repayTypeHid" type="java.lang.String" />
+		
+		<form-property name="installmentChargesID" type="java.lang.String" />
+		<form-property name="preEmiChargesID" type="java.lang.String" />
+		<form-property name="otherChargesID" type="java.lang.String" />
+		
+		<form-property name="principalChargesID" type="java.lang.String" />
+		<form-property name="interestChargesID" type="java.lang.String" />
+		<form-property name="otherChargesNonID" type="java.lang.String" />
+		
+<!--ravi end -->
+			<!-- Surendra Sub Dealer Master Start -->
+		
+		<form-property name="subDealerCode" type="java.lang.String" />
+		<form-property name="subDealerDes" type="java.lang.String" />
+		<form-property name="subDealerType" type="java.lang.String" />
+		<form-property name="subDealerStatus" type="java.lang.String" />
+		<form-property name="subDealerSearchDes" type="java.lang.String" />
+		<form-property name="subDealerSearchCode" type="java.lang.String" />
+		<form-property name="subDealerIdModify" type="java.lang.String" />
+		<form-property name="dealerSearchID" type="java.lang.String" />
+		<form-property name="dealerSearchDesc" type="java.lang.String" />
+		
+		
+	<!-- Surendra Sub DealerMaster End -->
+	<form-property name="searchScoringDesc" type="java.lang.String" />
+	<!-- By Arun For financial Param  Starts-->
+		<form-property name="pramTypeSearch" type="java.lang.String" />
+	<!-- By Arun For financial Param Ends here -->
+	<!-- Asesh Kumar Starts  --> 
+			<form-property name="benchmarkRatioCode" type="java.lang.String" /> 
+			<form-property name="lbxRatioSearch" type="java.lang.String" />
+			<form-property name="benchmarkRatio" type="java.lang.String" />
+			<form-property name="benchmarkIndustryId" type="java.lang.String" />
+			<form-property name="lbxIndustrySearch" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="benchmarkEffFrom" type="java.lang.String" />
+			<form-property name="ratioCodeModify" type="java.lang.String" />
+			
+	<!-- Asesh Kumar End -->
+		<form-property name="searchStatus" type="java.lang.String" />
+		
+		<form-property name="comments"  type="java.lang.String" />
+		<form-property name="decision"  type="java.lang.String" />	
+		<form-property name="vatPercent"  type="java.lang.String" />
+		<form-property name="serviceTax"  type="java.lang.String" />	
+		<form-property name="manufacturer" type="java.lang.String" />
+			<form-property name="trader" type="java.lang.String" />
+			<form-property name="service" type="java.lang.String" />	
+		</form-bean>
+		<!-- Common Bean For Search End -->
+
+		<!-- Ritu Master Bean End -->
+
+
+		<!--ravi ratio definition start	-->
+		<form-bean name="RatioDefinitionMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="ratioCode" type="java.lang.String" />
+			<form-property name="ratioName" type="java.lang.String" />
+			<form-property name="expression" type="java.lang.String" />
+			<form-property name="ratioStatus" type="java.lang.String" />
+			<form-property name="parameterCode" type="java.lang.String" />
+			<form-property name="constant" type="java.lang.String" />
+			<form-property name="operator" type="java.lang.String" />
+			<form-property name="allParamCodes" type="java.lang.String" />
+		
+		
+
+		</form-bean>
+
+		<!--ravi ratio definition end	-->
+
+	<!--ravi ratio definition end	-->
+	
+	<!--ravi Rule Master start	-->
+		<form-bean name="RuleMasterAddDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="ruleCode" type="java.lang.String" />
+			<form-property name="ruleName" type="java.lang.String" />
+			<form-property name="expression" type="java.lang.String" />
+			<form-property name="ruleStatus" type="java.lang.String" />
+			<form-property name="parameterCode" type="java.lang.String" />
+			<form-property name="constant" type="java.lang.String" />
+			<form-property name="operator" type="java.lang.String" />
+			<form-property name="ruleType" type="java.lang.String" />
+			<form-property name="allParamCodes" type="java.lang.String" />
+			<form-property name="stageForRule" type="java.lang.String" />
+			<form-property name="subRuleType" type="java.lang.String" />
+		</form-bean>
+	<!--ravi Rule Master end	-->
+	
+	
+			<!-- Charge Code Master Start By Sanjog --> 
+			
+				<form-bean name="ScoreMasterDynaValidatorForm"
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="scoreCode" type="java.lang.String" />
+					<form-property name="hiddenScoreCode" type="java.lang.String" />
+					<form-property name="scoreDesc" type="java.lang.String" />
+					<form-property name="scoreStatus" type="java.lang.String" />
+					
+					<form-property name="sourceTable" type="java.lang.String" />
+					<form-property name="sourceColumn" type="java.lang.String" />
+					<form-property name="dataType" type="java.lang.String" />
+					<form-property name="dataType2" type="java.lang.String" />
+					<form-property name="dataType1" type="java.lang.String" />
+		       </form-bean>
+		       
+		       
+		       <form-bean name="ScoreCardMasterDynaValidatorForm"
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="scoringCode" type="java.lang.String" />
+					<form-property name="scoreCardId" type="java.lang.String" />
+					<form-property name="hiddenScoreCode" type="java.lang.String" />
+					<form-property name="scoreCardDesc" type="java.lang.String" />
+					<form-property name="productId" type="java.lang.String" />
+					<form-property name="cardStatus" type="java.lang.String" />
+					<form-property name="lbxProductID" type="java.lang.String" />
+					<form-property name="lbxProduct" type="java.lang.String" />
+					<form-property name="weightage" type="java.lang.String" />
+					<form-property name="score" type="java.lang.String" />
+		       </form-bean>
+		       
+		       
+	
+			<form-bean name="ScoreCardMasterSearchDynaValidatorForm"
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="scoreCardId" type="java.lang.String" />
+					<form-property name="scoreCardDesc" type="java.lang.String" />
+			</form-bean>
+			<!-- Charge Code Master End By Sanjog-->
+
+			<!-- Rule Parameter Master By Sanjog -->
+				<form-bean name="RuleParameterDynaValidator" type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="parameterCode" type="java.lang.String" />
+					<form-property name="hiddenparameterCode" type="java.lang.String" />
+					<form-property name="paramName" type="java.lang.String" />
+					<form-property name="parameterStatus" type="java.lang.String" />
+					
+					<form-property name="sourceTable" type="java.lang.String" />
+					<form-property name="sourceColumn" type="java.lang.String" />
+					<form-property name="dataType" type="java.lang.String" />
+					<form-property name="dataType2" type="java.lang.String" />
+					<form-property name="dataType1" type="java.lang.String" />
+		       </form-bean>
+			
+			<!-- Rule Parameter Master End By Sanjog -->
+			
+			<form-bean name="PolicyChecklistDefDynaValidatorForm"
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="product" type="java.lang.String" />
+					<form-property name="lbxProductID" type="java.lang.String" />
+					<form-property name="scheme" type="java.lang.String" />
+					<form-property name="schemeId" type="java.lang.String" />
+					<form-property name="lbxSchemeID" type="java.lang.String" />
+					<form-property name="status" type="java.lang.String" />
+					<form-property name="ruleCode" type="java.lang.String" />
+					<form-property name="ruleDesc" type="java.lang.String" />
+					<form-property name="action" type="java.lang.String" />
+					<form-property name="appLevel" type="java.lang.String" />
+					<form-property name="stage" type="java.lang.String" />
+					<form-property name="psize" type="java.lang.String" />
+					<form-property name="lbxDocId" type="java.lang.String" />
+					<form-property name="lbxPCDStage" type="java.lang.String" />
+					<form-property name="docId" type="java.lang.String" />
+		       </form-bean>
+
+
+
+			
+			
+		<!-- User Approval Matreix start by Neeraj -->
+			<form-bean name="userApprovalMatrixDynaValidatorForm" 
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="userId" type="java.lang.String" />
+					<form-property name="role" type="java.lang.String" />
+					<form-property name="level" type="java.lang.String" />
+					<form-property name="amountFrom" type="java.lang.String" />
+					<form-property name="amountTo" type="java.lang.String" />
+					<form-property name="lbxUserId" type="java.lang.String" />
+					<form-property name="subRuleType" type="java.lang.String" />
+					<form-property name="subRuleTypeP" type="java.lang.String" />
+					<form-property name="statusCase" type="java.lang.String" />
+					<form-property name="decison" type="java.lang.String" />
+					<form-property name="textArea" type="java.lang.String" />
+			</form-bean>		
+		<!-- User Approval Matreix end by Neeraj -->
+		<!-- Make Model master start by Neeraj -->
+			<form-bean name="makeModelMasterDynaValidatorForm" 
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="menufacturer" type="java.lang.String" />					
+					<form-property name="manufacturerId" type="java.lang.String" />
+<!--			New Added by abhimanyu kumar on 18/07/2012		-->
+					<form-property name="usesTypeId" type="java.lang.String" />
+					<form-property name="usesType" type="java.lang.String" />
+					<form-property name="productCategory" type="java.lang.String" />					
+					<form-property name="state" type="java.lang.String" />
+					<form-property name="stateId" type="java.lang.String" />
+					<form-property name="type" type="java.lang.String" />						
+
+<!--			New Added by abhimanyu kumar on 18/07/2012		-->
+					
+					
+					<form-property name="make" type="java.lang.String" />
+					<form-property name="model" type="java.lang.String" />
+					<form-property name="ltv" type="java.lang.String" />
+					<!-- Nishant space starts -->
+					<form-property name="manufact" type="java.lang.String" />
+					<form-property name="manufactId" type="java.lang.String" />
+					<form-property name="product" type="java.lang.String" />
+					<form-property name="lbxProductID" type="java.lang.String" />
+					<form-property name="scheme" type="java.lang.String" />
+					<form-property name="lbxSchemeId" type="java.lang.String" />
+					<!-- Nishant space starts -->
+			  <!-- Mradul space starts -->
+					<form-property name="vct" type="java.lang.String"/>
+			</form-bean>		
+		<!-- Make Model master end by Neeraj -->
+
+
+<!-- Parameter Score Defination Start By Abhimanyu-->			
+			 <form-bean name="ParameterScoreDefDynaValidatorForm"
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="scoreCardId" type="java.lang.String" />
+					<form-property name="description" type="java.lang.String" />
+					<form-property name="profit" type="java.lang.String" />
+					<form-property name="parameterCode" type="java.lang.String" />
+					<form-property name="type" type="java.lang.String" />
+					<form-property name="numericFrom" type="java.lang.String" />
+					<form-property name="numericTo" type="java.lang.String" />
+					<form-property name="charecter" type="java.lang.String" />
+					<form-property name="score" type="java.lang.String" />	
+					<form-property name="lbxScoreDesc" type="java.lang.String" />
+					<form-property name="allchk" type="java.lang.String" />	
+					<form-property name="flag" type="java.lang.String" />					
+					<form-property name="parametergGridCode" type="java.lang.String[]" />
+					<form-property name="gridtype" type="java.lang.String[]" />
+					<form-property name="gridnumericFrom" type="java.lang.String[]" />
+					<form-property name="gridnumericTo" type="java.lang.String[]" />
+					<form-property name="gridcharecter" type="java.lang.String[]" />										
+					<form-property name="gridscore" type="java.lang.String[]" />
+					
+					
+</form-bean>
+
+
+
+
+
+	<!-- Parameter Score Defination Start By Abhimanyu-->
+
+		<!-- Parameter Score Defination Start By Abhimanyu-->
+
+		<form-bean name="ParameterScoreDefDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="scoreCardId" type="java.lang.String" />
+			<form-property name="description" type="java.lang.String" />
+			<form-property name="profit" type="java.lang.String" />
+			<form-property name="parameterCode" type="java.lang.String" />
+			<form-property name="type" type="java.lang.String" />
+			<form-property name="numericFrom" type="java.lang.String" />
+			<form-property name="numericTo" type="java.lang.String" />
+			<form-property name="charecter" type="java.lang.String" />
+			<form-property name="score" type="java.lang.String" />
+			<form-property name="lbxScoreDesc" type="java.lang.String" />
+			<form-property name="allchk" type="java.lang.String" />
+			<form-property name="parametergGridCode" type="java.lang.String[]" />
+			<form-property name="gridtype" type="java.lang.String[]" />
+			<form-property name="gridnumericFrom" type="java.lang.String[]" />
+			<form-property name="gridnumericTo" type="java.lang.String[]" />
+			<form-property name="gridcharecter" type="java.lang.String[]" />
+			<form-property name="gridscore" type="java.lang.String[]" />
+
+		</form-bean>
+		<!-- Parameter Score Defination End By Abhimanyu-->
+		
+<!--	Anil Code Start Here	-->
+		<form-bean name="ApprovalLevelDefDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="product" type="java.lang.String"/>
+			<form-property name="findApprovalLevel" type="java.lang.String"/>
+			<form-property name="amountFrom" type="java.lang.String"/>
+			<form-property name="amountTo" type="java.lang.String"/>
+			<form-property name="level1" type="java.lang.String"/>
+			<form-property name="level2" type="java.lang.String"/>
+			<form-property name="level3" type="java.lang.String"/>
+			<form-property name="level4" type="java.lang.String"/>
+			<form-property name="level5" type="java.lang.String"/>
+			<form-property name="level6" type="java.lang.String"/>
+			<form-property name="level7" type="java.lang.String"/>
+			<form-property name="level8" type="java.lang.String"/>
+			<form-property name="level9" type="java.lang.String"/>
+			<form-property name="user11" type="java.lang.String"/>
+			<form-property name="user12" type="java.lang.String"/>
+			<form-property name="user13" type="java.lang.String"/>
+			<form-property name="user21" type="java.lang.String"/>
+			<form-property name="user22" type="java.lang.String"/>
+			<form-property name="user23" type="java.lang.String"/>
+			<form-property name="user31" type="java.lang.String"/>
+			<form-property name="user32" type="java.lang.String"/>
+			<form-property name="user33" type="java.lang.String"/>
+			<form-property name="condition1" type="java.lang.String"/>
+			<form-property name="condition2" type="java.lang.String"/>
+			<form-property name="lbxProductID" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId11" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId12" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId13" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId21" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId22" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId23" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId31" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId32" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId33" type="java.lang.String"/>
+			<form-property name="status" type="java.lang.String"/>
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="lbxSchemeId" type="java.lang.String" />
+			<form-property name="pmstSize" type="java.lang.String" />
+			<form-property name="pmstList" type="java.lang.String" />
+			
+			<form-property name="user41" type="java.lang.String"/>
+			<form-property name="user42" type="java.lang.String"/>
+			<form-property name="user43" type="java.lang.String"/>
+			<form-property name="user51" type="java.lang.String"/>
+			<form-property name="user52" type="java.lang.String"/>
+			<form-property name="user53" type="java.lang.String"/>
+			<form-property name="user61" type="java.lang.String"/>
+			<form-property name="user62" type="java.lang.String"/>
+			<form-property name="user63" type="java.lang.String"/>
+			<form-property name="user71" type="java.lang.String"/>
+			<form-property name="user72" type="java.lang.String"/>
+			<form-property name="user73" type="java.lang.String"/>
+			<form-property name="user81" type="java.lang.String"/>
+			<form-property name="user82" type="java.lang.String"/>
+			<form-property name="user83" type="java.lang.String"/>
+			<form-property name="user91" type="java.lang.String"/>
+			<form-property name="user92" type="java.lang.String"/>
+			<form-property name="user93" type="java.lang.String"/>
+			
+			<form-property name="lbxUserSearchId41" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId42" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId43" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId51" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId52" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId53" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId61" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId62" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId63" type="java.lang.String"/>			
+			<form-property name="lbxUserSearchId71" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId72" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId73" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId81" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId82" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId83" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId91" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId92" type="java.lang.String"/>
+			<form-property name="lbxUserSearchId93" type="java.lang.String"/>
+			
+			
+			</form-bean>
+<!--	Anil Code End Here	-->
+
+
+<!--    vinod code start here      -->
+
+<form-bean name="UserProductAccessDynaValidatorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="showUserDesc" type="java.lang.String" />
+			<form-property name="showUserDescSearch" type="java.lang.String" />
+			<form-property name="lbxUserId" type="java.lang.String" />
+			<form-property name="showProductDesc" type="java.lang.String" />
+			<form-property name="showProductDescSearch" type="java.lang.String" />
+			<form-property name="lbxProductId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="radioSelection" type="java.lang.String" />
+
+</form-bean>
+
+<!--   vinod Code End Here       -->
+	<!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->
+	
+	<form-bean name="ManualDeviationMasDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+	         <form-property name="product" type="java.lang.String" />
+	         <form-property name="lbxProductID" type="java.lang.String" />
+			 <form-property name="scheme" type="java.lang.String" />
+			 <form-property name="lbxSchemeID" type="java.lang.String" />
+			 <form-property name="stage" type="java.lang.String" />
+			 <form-property name="lbxPCDStage" type="java.lang.String" />
+			 <form-property name="ruleDescription" type="java.lang.String" />
+			 <form-property name="status" type="java.lang.String" />			
+			  <form-property name="approvalLevel" type="java.lang.String" />
+			  <form-property name="subRuleType" type="java.lang.String" />		
+			  	
+	</form-bean>
+	
+		<!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->
+		
+		
+		
+			<form-bean name="MfrSupplMappingDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+	         <form-property name="manufacturerDesc" type="java.lang.String" />
+	         <form-property name="manufacturerId" type="java.lang.String" />
+			 <form-property name="lbxmachineManufact" type="java.lang.String" />
+			  <form-property name="supplierDesc" type="java.lang.String" />
+			 <form-property name="lbxSupplierId" type="java.lang.String" />
+			 <form-property name="supplierId" type="java.lang.String" />
+			 <form-property name="recStatus" type="java.lang.String" />
+			 <form-property name="mappingId" type="java.lang.String" />	
+			  	
+	</form-bean>
+	
+	<!-- Verification Mapping start by Prashant -->
+			<form-bean name="verificationMappingDynaValidatorForm" 
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="verificationMappingId" type="java.lang.String" />
+					<form-property name="verificationType" type="java.lang.String" />
+					
+					<form-property name="contactVerificationSubType" type="java.lang.String" />
+					<form-property name="tecVerificationSubType" type="java.lang.String" />
+					<form-property name="tradeVerificationSubType" type="java.lang.String" />
+					<form-property name="incomeVerificationSubType" type="java.lang.String" />
+					
+					<form-property name="entityType" type="java.lang.String" />
+					<form-property name="contactEntityType" type="java.lang.String" />
+					<form-property name="techEntityType" type="java.lang.String" />
+					<form-property name="tradeEntityType" type="java.lang.String" />
+					<form-property name="incomeEntityType" type="java.lang.String" />
+					
+					<form-property name="entitySubType" type="java.lang.String" />
+					<form-property name="contactEntitySubType" type="java.lang.String" />
+					<form-property name="techEntitySubType" type="java.lang.String" />
+					<form-property name="tradeEntitySubType" type="java.lang.String" />
+					<form-property name="incomeEntitySubType" type="java.lang.String" />
+					
+					
+					<form-property name="addressType" type="java.lang.String" />
+					<form-property name="appraiserType" type="java.lang.String" />
+				    <form-property name="verificationStatus" type="java.lang.String" />
+					
+			</form-bean>	
+			<form-bean name="verificationQuestionDynaValidatorForm" 
+					type="org.apache.struts.validator.DynaValidatorForm">
+					<form-property name="verificationQuestId" type="java.lang.String" />
+					<form-property name="verificationType" type="java.lang.String" />
+					
+					<form-property name="verificationSubType" type="java.lang.String" />
+										
+					<form-property name="verificationQuest" type="java.lang.String" />
+					
+				    <form-property name="questStatus" type="java.lang.String" />
+				    
+				    <form-property name="verificationRequired" type="java.lang.String" />
+				    
+				    <form-property name="qSequenceNo" type="java.lang.String" />
+				    
+				     <form-property name="entityType" type="java.lang.String" />
+				    
+				    <form-property name="entitySubType" type="java.lang.String" />
+				    
+			    	<form-property name="addrType" type="java.lang.String" />
+					
+            <form-property name="groupName" type="java.lang.String" />
+            <form-property name="hGroupId" type="java.lang.String" />
+            <form-property name="groupType" type="java.lang.String" />
+			<form-property name="groupNameText" type="java.lang.String" />
+
+            <form-property name="lbxIndustry" type="java.lang.String" />
+			<form-property name="lbxSubIndustry" type="java.lang.String" />
+			<form-property name="lbxproduct" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="productType" type="java.lang.String" />
+			</form-bean>	
+				
+		<!-- Verification Mapping end by Prashant -->
+		
+		<!-- Amit starts Here -->
+		<form-bean name="BusinessActivityDynaValidatorForm" 
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="brands" type="java.lang.String" />
+			<form-property name="productServices" type="java.lang.String" />
+			<form-property name="noOfEmployees" type="java.lang.String" />
+			<form-property name="auditors" type="java.lang.String" />
+			<form-property name="certifications" type="java.lang.String" />
+			<form-property name="awards" type="java.lang.String" />
+			<form-property name="assocoationMembershipName" type="java.lang.String" />
+			<form-property name="customerId" type="java.lang.String" />					
+		</form-bean>
+		<!-- Amit Ends Here -->		
+		
+		<!-- ravi starts Here -->
+		<form-bean name="BusinessDescirptionDynaValidatorForm" 
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bp_id1" type="java.lang.String" />	
+			<form-property name="businessDesc" type="java.lang.String" />					
+		</form-bean>
+		<!-- ravi Ends Here -->
+		<!-- Arun Code for Scoring MAster Starts Here  -->
+		<form-bean name="ScoringMasterDynaValidatorForm" 
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="scoringId" type="java.lang.String" />	
+			<form-property name="scoreingDesc" type="java.lang.String" />					
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="lbxSchemeId" type="java.lang.String" />
+			<form-property name="scheme" type="java.lang.String" />
+			<form-property name="scoringParam" type="java.lang.String[]" />
+			<form-property name="weightage" type="java.lang.String[]" />
+			<form-property name="defaultValue" type="java.lang.String[]" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxScoringParam" type="java.lang.String[]" />
+			<form-property name="from" type="java.lang.String[]" />
+			<form-property name="to" type="java.lang.String[]" />
+			<form-property name="charValue" type="java.lang.String[]" />
+			<form-property name="score" type="java.lang.String[]" />
+			
+		</form-bean>
+		<!-- Arun Code for Scoring MAster Starts Here  -->
+		<!-- Asesh Kumar Code for BenchMarkRatio Master Starts Here  -->
+		<form-bean name="BenchmarkRatioMasterDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">		
+		<form-property name="benchmarkRatio" type="java.lang.String" />
+		<form-property name="benchmarkRatioCode" type="java.lang.String" />
+		<form-property name="benchmarkIndustryId" type="java.lang.String" />
+		<form-property name="benchmarkIndustryDesc" type="java.lang.String" />
+		<form-property name="benchmarkRatioName" type="java.lang.String" />
+		<form-property name="industry" type="java.lang.String" />
+		<form-property name="lbxRatio" type="java.lang.String" />
+		<form-property name="lbxIndustry" type="java.lang.String" />
+		<form-property name="lbxRatioSearch" type="java.lang.String" />
+		<form-property name="lbxIndustrySearch" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		<form-property name="modifyRecord" type="java.lang.String" />
+		<form-property name="effectiveDate" type="java.lang.String" />
+		<form-property name="benchmarkEffFrom" type="java.lang.String" />
+		<form-property name="ratioCodeModify" type="java.lang.String" />
+		
+		</form-bean>
+		<!-- Asesh Kumar Code for BenchMarkRatio Master End Here  -->
+		<!-- Asesh Kumar Code for Business Month closure Master Start Here  -->
+		<form-bean name="BusinessMonthClosureDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="businessMonth" type="java.lang.String" />
+		<form-property name="businessYear" type="java.lang.String" />
+		<form-property name="businessMonthSearch" type="java.lang.String" />
+		<form-property name="businessYearSearch" type="java.lang.String" />
+		<form-property name="businessMonthss" type="java.lang.String" />
+		<form-property name="startDate" type="java.lang.String" />
+		<form-property name="endDate" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Asesh Kumar Code for Business Month closure Master End Here  -->
+		
+		<!-- sachin balyan Code for sales executive  Master Start Here  -->
+		<form-bean name="salesExecutiveMasterDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+	
+		<form-property name="bpEmpUniqueId" type="java.lang.String" />	
+		
+		<form-property name="businessPartnerName" type="java.lang.String" />
+		<form-property name="lbxBusinessPartnerId" type="java.lang.String" />
+		<form-property name="employeeType" type="java.lang.String" />
+		<form-property name="employeeName" type="java.lang.String" />
+	    <form-property name="bank" type="java.lang.String" />
+	    <form-property name="lbxBankID" type="java.lang.String" />
+	    <form-property name="branch" type="java.lang.String" />
+		<form-property name="lbxBranchID" type="java.lang.String" />
+		<form-property name="bankAccountNo" type="java.lang.String" />
+		<form-property name="ifscCode" type="java.lang.String" />
+		<form-property name="micrCode" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		
+		</form-bean>
+		<!-- sachin balyan Code for sales executive  Master end Here  -->
+		
+		<!-- Manish Shukla Code for Rate Approval Matrix Maker Master Start  -->
+		<form-bean name="rateApprovalMakerDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="product" type="java.lang.String" />
+		<form-property name="lbxProduct" type="java.lang.String" />
+		<form-property name="lbxProductID" type="java.lang.String" />
+		<form-property name="productButton" type="java.lang.String" />
+		<form-property name="productDesc" type="java.lang.String" />
+		<form-property name="lbxScheme" type="java.lang.String" />
+		<form-property name="scheme" type="java.lang.String" />
+		<form-property name="schemeButton" type="java.lang.String" />
+		<form-property name="schemeDesc" type="java.lang.String" />
+		<form-property name="rateApprovalId" type="java.lang.String" />
+		<form-property name="creditInsuranceCover" type="java.lang.String" />
+		<form-property name="typeOfCoverage" type="java.lang.String" />
+		<form-property name="dob" type="java.lang.String" />
+		<form-property name="sumAssuredToLoan" type="java.lang.String" />
+		<form-property name="csliPremiumAmount" type="java.lang.String" />
+		<form-property name="csgiPremiumAmount" type="java.lang.String" />
+		<form-property name="creditInsuranceTenor" type="java.lang.String" />
+		<form-property name="generalInsurance" type="java.lang.String" />
+		<form-property name="anyOtherInsurance" type="java.lang.String" />
+		<form-property name="ifyesOtherAmount" type="java.lang.String" /> 
+		<form-property name="csoiPremiumAmount" type="java.lang.String" />
+		<form-property name="transactionFee" type="java.lang.String" />
+		<form-property name="rackRate" type="java.lang.String" />
+		<form-property name="rackProcessingFee" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		<form-property name="searchByStatus" type="java.lang.String" />
+		</form-bean>
+		
+		<!-- Manish Rate Approval checker master Starts -->
+		<form-bean name="rateApprovalCheckerDynaValidatorForm" type="org.apache.struts.validator.DynaValidatorForm">
+		<form-property name="product" type="java.lang.String" />
+		<form-property name="lbxProduct" type="java.lang.String" />
+		<form-property name="lbxProductID" type="java.lang.String" />
+		<form-property name="productButton" type="java.lang.String" />
+		<form-property name="productDesc" type="java.lang.String" />
+		<form-property name="lbxScheme" type="java.lang.String" />
+		<form-property name="scheme" type="java.lang.String" />
+		<form-property name="schemeButton" type="java.lang.String" />
+		<form-property name="schemeDesc" type="java.lang.String" />
+		<form-property name="rateApprovalId" type="java.lang.String" />
+		<form-property name="creditInsuranceCover" type="java.lang.String" />
+		<form-property name="typeOfCoverage" type="java.lang.String" />
+		<form-property name="dob" type="java.lang.String" />
+		<form-property name="sumAssuredToLoan" type="java.lang.String" />
+		<form-property name="csliPremiumAmount" type="java.lang.String" />
+		<form-property name="csgiPremiumAmount" type="java.lang.String" />
+		<form-property name="creditInsuranceTenor" type="java.lang.String" />
+		<form-property name="generalInsurance" type="java.lang.String" />
+		<form-property name="anyOtherInsurance" type="java.lang.String" />
+		<form-property name="ifyesOtherAmount" type="java.lang.String" /> 
+		<form-property name="csoiPremiumAmount" type="java.lang.String" />
+		<form-property name="transactionFee" type="java.lang.String" />
+		<form-property name="rackRate" type="java.lang.String" />
+		<form-property name="rackProcessingFee" type="java.lang.String" />
+		<form-property name="recStatus" type="java.lang.String" />
+		<form-property name="decision" type="java.lang.String" />
+		<form-property name="comments" type="java.lang.String" />
+		
+		</form-bean>
+		
+		
+		<!-- Manish Shukla Code for Rate Approval Matrix Maker Master End Here  -->
+		
+		<!-- Richa code for used vehicle pricing  -->
+		<form-bean name="usedVehiclePricingAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="usedVehicleMakeSearch" type="java.lang.String" />
+			<form-property name="usedVehicleModelSearch" type="java.lang.String" />
+			<form-property name="usedVehicleYear" type="java.lang.String" />
+			<form-property name="usedVehiclePrice" type="java.lang.String" />
+			<form-property name="usedVehicleState" type="java.lang.String" />
+			<form-property name="usedVehicleBranch" type="java.lang.String" />
+			<form-property name="vehicleMake" type="java.lang.String" />
+			<form-property name="usedBranchArr" type="java.lang.String[]" />
+			<form-property name="usedStateArr" type="java.lang.String[]" />
+			<form-property name="usedVehicleYearArr" type="java.lang.String[]" />
+			<form-property name="usedVehiclePriceArr" type="java.lang.String[]" />
+			<form-property name="usedVehicleStateArr" type="java.lang.String[]" />
+			<form-property name="usedVehicleBranchArr" type="java.lang.String[]" />
+			<form-property name="makeModelId" type="java.lang.String"></form-property>
+			<form-property name="usedState" type="java.lang.String"></form-property>
+			<form-property name="usedBranch" type="java.lang.String"></form-property>
+			<form-property name="refinanceId" type="java.lang.String"></form-property>
+			
+		</form-bean>
+		
+		<!-- Richa code for used vehicle pricing  -->
+		
+		
+		 <!-- Vishal code start for vehicle refinance grid -->
+				<form-bean name="vehicleApprovalDyanavalidatiorForm" type="org.apache.struts.validator.DynaValidatorForm">
+		    <form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="vehicleApprovalID" type="java.lang.String" />
+			<form-property name="lbxScheme" type="java.lang.String" />
+		    <form-property name="scheme"  type="java.lang.String" />
+		    <form-property name="manufacturer"  type="java.lang.String" />
+		    <form-property name="model"  type="java.lang.String" />
+		    <form-property name="vehicleApprovalYear" type="java.lang.String"></form-property>
+			<form-property name="branchAmt" type="java.lang.String" /> 
+			<form-property name="hoAmt" type="java.lang.String" /> 
+			<form-property name="nationalAmt" type="java.lang.String" /> 
+			<form-property name="gridBranchAmt" type="java.lang.String" /> 
+			<form-property name="gridHoAmt" type="java.lang.String" /> 
+			<form-property name="gridNationalAmt" type="java.lang.String" /> 
+			<form-property name="status" type="java.lang.String" />
+			<form-property name="vehicleType" type="java.lang.String"></form-property>
+			<form-property name="gridId" type="java.lang.String"></form-property>
+			<form-property name="manufactId" type="java.lang.String"></form-property>
+			<form-property name="modelDesc" type="java.lang.String"></form-property>
+			<form-property name="modelDescId" type="java.lang.String"></form-property>
+			<form-property name="vehicleApprovalYearArr" type="java.lang.String[]" />
+			<form-property name="vehicleApprovalBranchArr" type="java.lang.String[]" />
+			<form-property name="vehicleApprovalNationalArr" type="java.lang.String[]" />
+			<form-property name="vehicleApprovalHOArr" type="java.lang.String[]" />
+			
+		</form-bean>
+		<!-- Vishal code end for vehicle refinance grid -->
+		
+		<!-- Pooja Code For SBL & GBL Master Start-->
+		<form-bean name="GBLSBLMasterAddDyanavalidatiorForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="productName" type="java.lang.String" />
+			<form-property name="product" type="java.lang.String" />
+			<form-property name="lbxProductID" type="java.lang.String" />
+			<form-property name="singleBorrowerLimit" type="java.lang.String" />
+			<form-property name="groupBorrowerLimit" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<!-- Pooja Code For SBL & GBL Master End -->
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+	<action-mappings>
+
+<!-- Neeraj space for gcd start-->
+		<action path="/individualFrame" type="com.gcd.actions.IndividualCustomerBehindAction" >
+			<forward name="success" path="/JSP/gcdJSP/Maker.jsp"></forward>
+		</action>
+		<action path="/corporateFrame" type="com.gcd.actions.CorporateCustomerBehindAction" >
+			<forward name="success" path="/JSP/gcdJSP/Maker.jsp"></forward>
+		</action>
+		<action path="/updateCustomerMaker" type="com.gcd.actions.UpdateCustomerMakerBehindAction" >
+			<forward name="success" path="/JSP/gcdJSP/Maker.jsp"></forward>
+		</action>
+		<action path="/updateCustomerAuthor" type="com.gcd.actions.UpdateCustomerAuthorBehindAction" >
+			<forward name="success" path="/JSP/gcdJSP/Maker.jsp"></forward>
+		</action>
+<!-- Neeraj space for gcd end -->
+		
+		<!-- Ravindra Action start-->
+		<action path="/corporateDetailAction" attribute="CorporateDetailsDynaValidatorForm"
+			input="/JSP/gcdJSP/corporateDetail.jsp" name="CorporateDetailsDynaValidatorForm"
+			parameter="method" scope="request" validate="false"
+			type="com.gcd.actions.CorporateDetailAction">
+			<forward name="displaySuccess" path="/JSP/gcdJSP/corporateDetail.jsp" />
+			<forward name="success" path="/JSP/gcdJSP/saveAndForward.jsp"></forward>
+		</action>
+
+
+		<action path="/corporateDetailProcessAction" attribute="CorporateDetailsDynaValidatorForm"
+			name="CorporateDetailsDynaValidatorForm" input="/JSP/gcdJSP/corporateDetail.jsp"
+			validate="false" parameter="method" scope="request"
+			type="com.gcd.actions.CorporateDetailProcessAction">
+			<forward name="success" path="/JSP/gcdJSP/corporateDetail.jsp" />
+			<!--      <forward name="error" path="/JSP/error.jsp"  />-->
+		</action>
+		<action path="/corporateDetailAjaxAction" input="/JSP/gcdJSP/corporateDetail.jsp"
+			name="CorporateDetailsDynaValidatorForm" parameter="method" scope="request"
+			validate="false" type="com.gcd.actions.CorporateDetailAjaxAction">
+			<forward name="displaySuccess"
+				path="/JSP/gcdJSP/corporateDetailSubIndustryDisplay.jsp" />
+		</action>
+	
+		<action input="/JSP/gcdJSP/Corporate.jsp" parameter="method"
+			path="/corporateAddressAction" scope="request"
+			type="com.gcd.actions.CorporateAddressAction">
+			<forward name="displayIndsuccess" path="/JSP/gcdJSP/individualReference.jsp"></forward>
+			<forward name="displaysuccess" path="/JSP/gcdJSP/corporateCustomerAddress.jsp"></forward>
+			<forward name="backsuccess"	path="/corporateDetailAction.do?method=displayCorporateDetails"></forward>
+			<forward name="indBacksuccess"	path="/individualDetailAction.do?method=BackIndividualDetails"></forward>
+			<!-- Ritu Code -->
+			<forward name="indCustProfile"	path="/JSP/gcdJSP/individualCustomerProfile.jsp"></forward>
+			<forward name="backIndCustProfile"	path="/individualDetailAction.do?method=BackIndividualDetails"></forward>
+			
+			
+			
+			
+			
+				<forward name="displayIndsarvsuccess" path="/JSP/gcdJSP/savaSuraksha.jsp"></forward>
+		</action>
+		
+		<action name="CustomerAddressValidatorForm" input="/JSP/gcdJSP/corporateCustomerAddress.jsp"
+			parameter="method" path="/customerAddressAction" scope="request"
+			validate="false" type="com.gcd.actions.CustomerAddressAction">
+			<forward name="successRef" path="/JSP/gcdJSP/individualReference.jsp"></forward>
+			<forward name="successProfile" path="/JSP/gcdJSP/individualCustomerProfile.jsp"></forward>
+			<forward name="successSarv" path="/JSP/gcdJSP/savaSuraksha.jsp"></forward>
+			<forward name="successRelation" path="/JSP/gcdJSP/customerRelation.jsp"></forward>
+			
+		</action>
+			<!--Shashank Starts For Mobile/Email Verification -->
+				 <action path="/mobileVerificationAction" type="com.gcd.actions.MobileVerificationAction"
+					parameter="method">
+					<forward name="openMobileVerification" path="/JSP/gcdJSP/openMobileVerification.jsp" />
+					<forward name="openMobileIndividualDetail" path="/JSP/gcdJSP/individualDetail.jsp" />
+					<forward name="openMobileCorporateDetail" path="/JSP/gcdJSP/corporateDetail.jsp" />
+				</action>
+		<!--Shashank Ends For Mobile/Email Verification -->
+
+		<action path="/gcdSearchSreen" type="com.gcd.actions.GcdSeachAction">
+			<forward name="success" path="/JSP/gcdJSP/Maker.jsp" />
+		</action>
+
+		<action path="/customerAddressAjaxAction" parameter="method"
+			name="CustomerAddressValidatorForm" validate="false"
+			type="com.gcd.actions.CustomerAddressAjaxAction">
+			<forward name="countryDetail" path="/JSP/gcdJSP/countryDetail.jsp"></forward>
+			<forward name="cityDetail" path="/JSP/gcdJSP/cityDetail.jsp"></forward>
+		</action>
+
+		<action path="/corporateStackHolderAction" input="/JSP/gcdJSP/corporateStackHolder.jsp"
+			scope="session" type="com.gcd.actions.CorporateStackHolderAction">
+
+			<forward name="backsuccess"
+				path="/corporateDetailAction.do?method=displayCorporateDetails" />
+		</action>
+
+		<action path="/corporateCradingRatingAction" type="com.gcd.actions.CorporateCradingRatingAction">
+			<forward name="corporateRating" path="/JSP/gcdJSP/corporateCradingRating.jsp"></forward>
+			<forward name="backsuccess"
+				path="/corporateDetailAction.do?method=displayCorporateDetails" />
+		</action>
+		<action path="/corporatStackHolderPageAction" name="StackHolderDynaValidatorForm"
+			input="/JSP/gcdJSP/corporateStackHolder.jsp" scope="request"
+			parameter="method" type="com.gcd.actions.CorporatStackHolderPageAction">
+			<!--
+				<forward name="success" path="/corporateCradingRatingAction.do" />
+			-->
+			<!--	<forward name="error" path="/JSP/error.jsp"  />-->
+		</action>
+
+
+		<action path="/deleteStakeHolderAction" type="com.gcd.actions.DeleteStakeHolderAction"
+			parameter="method">
+			<forward name="deletestake" path="/corporateStackHolderAction.do" />
+		</action>
+
+		<action path="/creditRatingPageAction" name="CreditRatingPageDynaValidatorActionForm"
+			input="/JSP/gcdJSP/corporateCradingRating.jsp" scope="request"
+			parameter="method" type="com.gcd.actions.CreditRatingPageAction">
+
+			<forward name="error" path="/JSP/error.jsp" />
+		</action>
+
+
+
+
+
+
+		<!--Individual Actions Start -->
+		<!-- ravi  26 april -->
+		<action path="/individualDetailAction" scope="request"
+			input="/JSP/gcdJSP/individualDetail.jsp" parameter="method"
+			type="com.gcd.actions.IndividualDetailAction">
+			<forward name="individualDetail" path="/JSP/gcdJSP/individualDetail.jsp" />
+			<forward name="success" path="/JSP/gcdJSP/saveAndForward.jsp" />
+
+		</action>
+		<!--  26 april -->
+
+
+		<action attribute="IdividualDetailDynaValidatorForm" input="/JSP/gcdJSP/individualDetail.jsp"
+			name="IdividualDetailDynaValidatorForm" path="/idividualDetailActionPage"
+			scope="request" type="com.gcd.actions.IdividualDetailActionPage">
+			<forward name="success" path="/JSP/gcdJSP/individualDetail.jsp" />
+		</action>
+
+
+		<action input="/JSP/gcdJSP/Maker.jsp" parameter="method"
+			path="/showCustomerDetailAction" scope="request"
+			type="com.gcd.actions.ShowCustomerDetailAction">
+			<forward name="customer_success" path="/JSP/gcdJSP/customerSuccess.jsp"></forward>
+		</action>
+
+		<action path="/deleteCreditRatingAction" scope="request"
+			parameter="method" type="com.gcd.actions.DeleteCreditRatingAction">
+			<forward name="success" path="/corporateCradingRatingAction.do"></forward>
+		</action>
+
+
+		<action parameter="method" path="/deleteAddressAction"
+			type="com.gcd.actions.DeleteAddressAction">
+
+			<forward name="delete"
+				path="/corporateAddressAction.do?method=displayCorporateAddress"></forward>
+			<forward name="deleteIndividusal"
+				path="/corporateAddressAction.do?method=displayIndividualAddress"></forward>
+			<forward name="deleteIndReference"
+				path="/corporateAddressAction.do?method=displayIndividualReference"></forward>
+			<forward name="deleteCorReference"
+				path="/corporateAddressAction.do?method=displayCorporateReference"></forward>
+			<!-- Rohit Changes for sava Suraksha Start -->	
+				<forward name="deleteSarvaSuraksha"
+				path="/corporateAddressAction.do?method=displaySarvSurakshaDetails"></forward>
+				<forward name="deleteCorSarvaSuraksha"
+				path="/corporateAddressAction.do?method=displayCorporateSarvaSurksha"></forward>
+			<!-- Rohit Changes for sava Suraksha end -->
+		</action>
+
+
+
+
+		<!-- 5 april -->
+		<action path="/fetchCustomerAddressAction" input="/JSP/gcdJSP/corporateCustomerAddress.jsp"
+			parameter="method" scope="request" validate="false"
+			type="com.gcd.actions.CorporateAddressAction">
+		<forward name="fetchIndReference" path="/JSP/gcdJSP/individualReference.jsp"></forward>
+		<forward name="fetchsarvaSuraksha" path="/JSP/gcdJSP/savaSuraksha.jsp"></forward>
+
+		</action>
+
+
+		<action path="/fetchStackHolderAction" input="/JSP/gcdJSP/corporateStackHolder.jsp"
+			parameter="method" scope="request" validate="false"
+			type="com.gcd.actions.CorporatStackHolderPageAction">
+
+		</action>
+
+		<action path="/fetchCreditRatingAction" input="/JSP/gcdJSP/corporateCradingRating.jsp"
+			parameter="method" scope="request" validate="false"
+			type="com.gcd.actions.CreditRatingPageAction">
+
+		</action>
+
+		<action path="/corporateEntryForm" parameter="method"
+			input="/JSP/gcdJSP/Maker.jsp" type="com.gcd.actions.DisplayFormPage">
+
+			<forward name="corporate" path="/JSP/gcdJSP/firstFrame.jsp"></forward>
+			<forward name="individual" path="/JSP/gcdJSP/individualFrame.jsp"></forward>
+			<forward name="photoUplaodScreen" path="/JSP/gcdJSP/photoUploadScreen.jsp"></forward>
+		</action>
+		
+		<!-- Ravindra Action End-->
+
+		<!-- Ritu Action Start -->
+
+		<!-- country Master Start-->
+		<action path="/countryMaster" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.CountryMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/contryMasterAdd.jsp" />
+			<forward name="search" path="/countryMasterBehind.do" />
+			<forward name="editCountry" path="/JSP/masterspage/contryMasterAdd.jsp"></forward>
+		</action>
+		<action path="/countryMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.CountryMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/countryMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/contryMasterAdd.jsp" path="/countryMasterAdd"
+			parameter="method" scope="request" name="CountryMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.CountryMasterDispatchAction">
+			<forward name="searchPage" path="/countryMasterBehind.do" />
+		</action>
+		<!-- country Master End-->
+
+		<!-- State Master Start -->
+
+		<action path="/stateMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.StateMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/stateMasterAdd.jsp" />
+			<forward name="search" path="/stateMasterBehind.do" />
+			<forward name="editState" path="/JSP/masterspage/stateMasterAdd.jsp"></forward>
+			<forward name="success" path="/JSP/masterspage/stateMasterSearch.jsp" />
+
+		</action>
+
+		<action path="/stateMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.StateMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/stateMasterSearch.jsp" />
+
+		</action>
+
+		<action input="/JSP/masterspage/stateMasterAdd.jsp" path="/stateMasterAdd"
+			parameter="method" scope="request" name="StateMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.StateMasterDispatchAction">
+			<forward name="searchPage" path="/stateMasterBehind.do" />
+		</action>
+		<!-- State Master End -->
+
+		<!-- District Master Start -->
+		<action path="/districtMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.DistrictMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/districtMasterSearch.jsp" />
+
+		</action>
+		<action path="/districtMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.DistrictMasterSearchAction">
+			<forward name="openAdd" path="/JSP/masterspage/districtMasterAdd.jsp" />
+			<forward name="search" path="/districtMasterBehind.do" />
+			<forward name="editDistrict" path="/JSP/masterspage/districtMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/districtMasterAdd.jsp" path="/districtMasterAdd"
+			parameter="method" scope="request" name="DistrictMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.DistrictMasterSearchAction">
+			<forward name="searchPage" path="/districtMasterBehind.do" />
+		</action>
+		<!-- District Master END -->
+
+		<!-- Region Master Start -->
+		<action path="/regionMasterBehind" type="com.masters.actions.RegionMasterBehindAction"
+			name="CommonDynaValidatorForm" parameter="method" scope="request">
+			<forward name="success" path="/JSP/masterspage/regionMasterSearch.jsp" />
+		</action>
+
+		<action path="/regionMasterSearch" type="com.masters.actions.RegionMasterDispatchAction"
+			name="CommonDynaValidatorForm" parameter="method" scope="request">
+			<forward name="openAdd" path="/JSP/masterspage/regionMasterAdd.jsp" />
+			<forward name="search" path="/regionMasterBehind.do" />
+			<forward name="editRegion" path="/JSP/masterspage/regionMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/regionMasterAdd.jsp" path="/regionMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="RegionMasterAddDyanavalidatiorForm" type="com.masters.actions.RegionMasterDispatchAction">
+			<forward name="searchPage" path="/regionMasterBehind.do" />
+
+		</action>
+		<!-- Region Master End -->
+
+		<!-- Branch Master Start -->
+		<action path="/branchMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.BranchMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/branchMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/branchMasterSearch.jsp" path="/branchMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.BranchMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/branchMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/branchMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/branchMasterAdd.jsp" path="/branchMasterAdd"
+			parameter="method" scope="request" name="BranchMasterAddDynaValidatorForm"
+			type="com.masters.actions.BranchMasterDispatchAction">
+			<forward name="success" path="/branchMasterBehind.do"></forward>
+		</action>
+		<!-- Branch Master End -->
+
+		<!-- Department Master Start -->
+		<action path="/departmentMasterSearch" parameter="method"
+			scope="request" validate="true" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DepartmentMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/departmentMasterAdd.jsp"></forward>
+			<forward name="searchDepart" path="/departmentMasterBehind.do" />
+			<forward name="editDepartment" path="/JSP/masterspage/departmentMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		<!-- User Approval Matrix Action Start by neeraj -->
+			
+			<action path="/userApprovalMatrixBehindAction" name="userApprovalMatrixDynaValidatorForm"
+			type="com.masters.actions.UserApprovalMatrixBehindAction">
+			<forward name="success" path="/JSP/masterspage/userApprovalMatrix.jsp"></forward>
+			</action>
+			<action path="/userApprovalMatrixAction" name="userApprovalMatrixDynaValidatorForm"
+			type="com.masters.actions.UserApprovalMatrixDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/userApprovalMatrix.jsp"></forward>
+			<forward name="product" path="/JSP/masterspage/showProductUserId.jsp"></forward>
+			<forward name="branch" path="/JSP/masterspage/showBranchUserId.jsp"></forward>
+			<forward name="makerAuthor" path="/JSP/masterspage/userApprovalAuthorFrame.jsp"></forward>
+			<forward name="uaAuthor" path="/JSP/masterspage/userApprovalAuthor.jsp"></forward>
+			<forward name="authorStatus" path="/JSP/masterspage/userApprovalAuthor.jsp"></forward>
+			</action>
+				
+		<!-- User Approval Matrix Action End  by neeraj -->
+		<!-- User Approval Author Starts by Nishant -->
+		<action path="/userApprovalAuthorBehindAction" name="userApprovalMatrixDynaValidatorForm"
+				type="com.masters.actions.UserApprovalAuthorBehindAction" scope="request">
+			<forward name="success" path="/JSP/masterspage/userApprovalAuthorSearch.jsp"></forward>
+		</action>
+		<!-- User Approval Author End by Nishant -->
+		
+		<!-- Make Model Master Action Start by neeraj -->
+							
+			<action path="/MakeModelMasterBehindAction" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterSearch.jsp"></forward>
+			</action>
+			<action path="/searchMakeModelMaster" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterSearch.jsp"></forward>
+			</action>
+			
+			<action path="/updateMakeModel" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterAdd.jsp"></forward>
+			</action>
+						
+			<action path="/addMakeModelMaster" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterAdd.jsp"></forward>
+			</action>
+						
+			<action path="/MakeModelMasterSearch" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterAdd.jsp"></forward>
+			</action>
+						
+			<action path="/MakeModelMasterSave" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterAdd.jsp"></forward>
+			</action>
+			<action path="/MakeModelMasterUpdate" name="makeModelMasterDynaValidatorForm"
+			type="com.masters.actions.MakeModelMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/MakeModelMasterAdd.jsp"></forward>
+			</action>
+							
+		<!-- Make Model Master Action Action End  by neeraj -->
+		
+		
+		<action path="/departmentMasterBehind" parameter="method"
+			scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DepartmentMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/departmentMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/departmentMasterAdd.jsp" path="/departmentMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="DepartmentMasterAddDyanavalidatiorForm" type="com.masters.actions.DepartmentMasterDispatchAction">
+			<forward name="updateDepartment" path="/JSP/masterspage/departmentMasterSearch.jsp"></forward>
+			<forward name="searchPage" path="/departmentMasterBehind.do" />
+		</action>
+		<!-- Department Master End -->
+
+		<!-- Generic Perameter Master Start -->
+
+		<action path="/genericMasterBehind" validate="false"
+			name="CommonDynaValidatorForm" parameter="method" scope="request"
+			type="com.masters.actions.GenericMasterSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/genericMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/genericMasterSearch.jsp" path="/genericMasterSearchDispatch"
+			scope="request" name="CommonDynaValidatorForm" parameter="method"
+			type="com.masters.actions.GenericMasterDispatchAction">
+			<forward name="modifyDetails" path="/JSP/masterspage/genericMasterAdd.jsp"></forward>
+			<forward name="newGenericMaster" path="/JSP/masterspage/genericMasterAdd.jsp"></forward>
+			<forward name="search" path="/genericMasterBehind.do" />
+
+		</action>
+
+		<action input="/JSP/masterspage/genericMasterAdd.jsp" path="/genericAction"
+			scope="request" name="GenericMasterAddDynaValidatorForm" parameter="method"
+			type="com.masters.actions.GenericMasterDispatchAction">
+			<forward name="modifyDetails" path="/JSP/masterspage/genericMasterAdd.jsp"></forward>
+			<forward name="saveModifyDetails" path="/genericMasterBehind.do"></forward>
+			<forward name="insertDetails" path="/genericMasterBehind.do"></forward>
+		</action>
+		<!-- Generic Perameter Master End -->
+
+		<!-- Reason Master Start -->
+		<action path="/reasonMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ReasonMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/reasonMasterAdd.jsp"></forward>
+			<forward name="search" path="/reasonMasterBehind.do" />
+			<forward name="editReason" path="/JSP/masterspage/reasonMasterAdd.jsp"></forward>
+		</action>
+
+		<action path="/reasonMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ReasonMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/reasonMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/reasonMasterAdd.jsp" path="/reasonMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="ReasonMasterAddDyanaValidationForm" type="com.masters.actions.ReasonMasterDispatchAction">
+			<forward name="searchPage" path="/reasonMasterBehind.do" />
+
+		</action>
+		<!-- Reason Master End -->
+
+		<!-- Agency Master Start -->
+		<action path="/agencyMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.AgencyMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/agencyMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/agencyMasterSearch.jsp" path="/agencyMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.AgencyMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/agencyMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/agencyMasterBehind.do"></forward>
+		</action>
+
+		<action name="AgencyMasterAddDynaValidatorForm" input="/JSP/masterspage/agencyMasterAdd.jsp"
+			path="/agencyMasterAdd" parameter="method"
+			type="com.masters.actions.AgencyMasterDispatchAction">
+			<forward name="success" path="/JSP/masterspage/agencyMasterSearch.jsp"></forward>
+			<forward name="add" path="/JSP/masterspage/agencyMasteradd.jsp"></forward>
+			<forward name="searchPage" path="/agencyMasterBehind.do"></forward>
+		</action>
+		<!-- Agency Master End -->
+
+		<!-- Dealer Master Start -->
+		<action path="/dealerMasterBehind" name="CommonDynaValidatorForm"
+			validate="false" parameter="method" scope="request"
+			type="com.masters.actions.DealerMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/dealerMasterSearch.jsp" />
+		</action>
+		<!-- Sub Dealer Master Start from Here @SURENDRA -->
+		<action path="/subDealerBehind" name="CommonDynaValidatorForm"
+			validate="false" parameter="method" scope="request"
+			type="com.masters.actions.SubDealerMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/subDealerMasterSearch.jsp" />
+		</action>	
+		
+		
+		<action input="/JSP/masterspage/subDealerMasterSearch.jsp" path="/subDealerMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.SubDealerMasterSearchAction">
+			<forward name="openAdd" path="/JSP/masterspage/subDealerMasterAdd.jsp"></forward>
+			<forward name="searchSubDealer" path="/subDealerBehind.do" />
+			<forward name="editSubDealer" path="/JSP/masterspage/subDealerMasterAdd.jsp"></forward>
+		</action>
+		<action input="/JSP/masterspage/subDealerMasterAdd.jsp" path="/subDealerMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="SubDealerMasterAddDyanavalidatiorForm" type="com.masters.actions.SubDealerMasterSearchAction">
+			<forward name="updateSubDealer" path="/JSP/masterspage/subDealerMasterSearch.jsp"></forward>
+			<forward name="searchPage" path="/subDealerBehind.do" />
+		</action>
+		<!-- Sub Dealer Master End Here @SURENDRA -->
+
+		<action input="/JSP/masterspage/dealerMasterSearch.jsp" path="/dealerMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DealerMasterSearchAction">
+			<forward name="openAdd" path="/JSP/masterspage/dealerMasterAdd.jsp"></forward>
+			<forward name="searchDealer" path="/dealerMasterBehind.do" />
+			<forward name="editDealer" path="/JSP/masterspage/dealerMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/dealerMasterAdd.jsp" path="/dealerMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="DealerMasterAddDyanavalidatiorForm" type="com.masters.actions.DealerMasterSearchAction">
+			<forward name="updateDealer" path="/JSP/masterspage/dealerMasterSearch.jsp"></forward>
+			<forward name="searchPage" path="/dealerMasterBehind.do" />
+		</action>
+		<!-- Dealer Master End -->
+
+		<!-- Industry Master Start -->
+		<action path="/industryMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.IndustryMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/industryMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/industryMasterAdd.jsp" path="/industryMasterAdd"
+			parameter="method" scope="request" name="IndustryMasterAddDynaValidatorForm"
+			type="com.masters.actions.IndustryMasterDispatchAction">
+			<forward name="success" path="/industryMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/industryMasterSearch.jsp" path="/industryMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.IndustryMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/industryMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/industryMasterBehind.do"></forward>
+		</action>
+		<!-- Industry Master End -->
+
+		<!-- Sub Industry Master Start -->
+		<action path="/subIndustryMasterBehind" scope="request"
+			validate="false" name="CommonDynaValidatorForm"
+			type="com.masters.actions.SubIndustryMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/subIndustryMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/subIndustryMasterSearch.jsp"
+			path="/subIndustryMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.SubIndustryMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/subIndustryMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/subIndustryMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/subIndustryMasterAdd.jsp" path="/subIndustryMasterAdd"
+			parameter="method" scope="request" name="SubIndustryMasterAddDynaValidatorForm"
+			type="com.masters.actions.SubIndustryMasterDispatchAction">
+			<forward name="success" path="/subIndustryMasterBehind.do"></forward>
+		</action>
+		<!-- Sub Industry Master End -->
+
+		<!-- Product Master Start -->
+		<action path="/productMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ProductMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/productMasterAdd.jsp"></forward>
+			<forward name="search" path="/productMasterBehind.do" />
+			<forward name="editProduct" path="/JSP/masterspage/productMasterAdd.jsp"></forward>
+		</action>
+
+		<action path="/productMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ProductMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/productMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/productMasterAdd.jsp" path="/productMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="ProductMasterAddDyanavalidatiorForm" type="com.masters.actions.ProductMasterDispatchAction">
+		</action>
+		<!-- Product Master End -->
+		
+			<!-- gold Ornament Master Start -->
+			
+		<action path="/goldOrnamentMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.GoldOrnamentMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/goldOrnamentMasterAdd.jsp"></forward>
+			 <forward name="search" path="/goldOrnamentMasterBehind.do" /> 
+			<forward name="editGoldOrnament" path="/JSP/masterspage/goldOrnamentMasterAdd.jsp"></forward>
+		</action>
+
+		<action path="/goldOrnamentMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.GoldOrnamentMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/goldOrnamentMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/goldOrnamentMasterAdd.jsp" path="/goldOrnamentMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="GoldOrnamentMasterAddDyanavalidatiorForm" type="com.masters.actions.GoldOrnamentMasterDispatchAction">
+		</action>
+		<!-- Gold Ornament Master End -->
+
+		<!-- Scheme Master Start -->
+		<action path="/crSchemeSearchBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.CrSchemeSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/crSchemeMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/crSchemeMasterSearch.jsp" path="/crSchemeMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.CrSchemeDispatchAction">
+			<forward name="addScemeCodeDetails" path="/JSP/masterspage/crSchemeMaster.jsp"></forward>
+			<forward name="modifyDetails" path="/JSP/masterspage/crSchemeMaster.jsp"></forward>
+			<forward name="searchScheme" path="/crSchemeSearchBehind.do"></forward>
+		</action>
+
+		<action path="/crStageMapping" parameter="method" scope="request"
+			name="CrAccountDetailDynaValidatorForm" type="com.masters.actions.CrSchemeDispatchAction">
+			<forward name="stageMapping" path="/JSP/masterspage/crSchemeAccounting.jsp" />
+			<forward name="accountMapping" path="/JSP/masterspage/crSchemeAccounting.jsp" />
+			<forward name="saveAcDetail" path="/JSP/masterspage/crSchemeAccounting.jsp" />
+			<forward name="modifyAcDetail" path="/JSP/masterspage/crSchemeAccounting.jsp" />
+		</action>
+
+		<action path="/crSchemeMasterAction" input="/JSP/masterspage/crSchemeMaster.jsp"
+			name="CrSchemeMasterDynaValidatorForm" validate="true" parameter="method"
+			scope="request" type="com.masters.actions.CrSchemeDispatchAction">
+			<forward name="success" path="/crSchemeSearchBehind.do"></forward>
+			<forward name="modifyDetails" path="/crSchemeSearchBehind.do"></forward>
+		</action>
+		<!-- Scheme Master End -->
+
+		<!-- Base Rate Master Start -->
+		<action path="/baseRateMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.BaseRateMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/baseRateMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/baseRateMasterSearch.jsp" path="/baseRateMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.BaseRateMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/baseRateMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/baseRateMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/baseRateMasterAdd.jsp" path="/baseRateMasterAdd"
+			parameter="method" scope="request" name="BaseRateMasterAddDynaValidatorForm"
+			type="com.masters.actions.BaseRateMasterDispatchAction">
+			<forward name="success" path="/baseRateMasterBehind.do"></forward>
+		</action>
+		<!-- Base Rate Master End -->
+
+		<!-- Bank master Start -->
+		<action path="/bankMasterBehind" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.BankMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/bankMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/bankMasterAdd.jsp" path="/bankMasterAdd"
+			parameter="method" scope="request" name="BankMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.BankMasterDispatchAction">
+			<forward name="savesuccess" path="/JSP/masterspage/bankMasterSearch.jsp"></forward>
+			<forward name="updateBank" path="/JSP/masterspage/bankMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/bankMasterSearch.jsp" path="/bankMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.BankMasterDispatchAction">
+			<forward name="search" path="/bankMasterBehind.do"></forward>
+			<forward name="openAdd" path="/JSP/masterspage/bankMasterAdd.jsp"></forward>
+			<forward name="editBank" path="/JSP/masterspage/bankMasterAdd.jsp"></forward>
+		</action>
+		<!-- Bank Master End -->
+
+		<!-- Bank Branch Master Start -->
+		<action path="/bankbranchAction" attribute="BankBranchDynaValidatorForm"
+			input="/JSP/masterspage/bankBranchMaster.jsp" name="BankBranchDynaValidatorForm"
+			parameter="method" scope="request"
+			type="com.masters.actions.BankBranchDispatchAction">
+			<forward name="success" path="/bankBranchSearchBehind.do"></forward>
+			<forward name="modifyDetails" path="/bankBranchSearchBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/bankBranchMasterSearch.jsp"
+			path="/bankbranchMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.BankBranchDispatchAction">
+			<forward name="addBranchDetails" path="/JSP/masterspage/bankBranchMaster.jsp"></forward>
+			<forward name="modifyDetails" path="/JSP/masterspage/bankBranchMaster.jsp"></forward>
+			<forward name="search" path="/bankBranchSearchBehind.do"></forward>
+		</action>
+
+		<action path="/bankBranchSearchBehind" name="CommonDynaValidatorForm"
+			scope="request" validate="false"
+			type="com.masters.actions.BankBranchSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/bankBranchMasterSearch.jsp"></forward>
+		</action>
+		<!-- Bank Branch Master End -->
+
+		<!-- Bank Account Master Start -->
+		<action path="/bankAccountMasterBehind" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.BankAccountMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/bankAccountMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/bankAccountMasterAdd.jsp" path="/bankAccountMasterAdd"
+			parameter="method" scope="request" name="BankAccountMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.BankAccountMasterDispatchAction">
+			<forward name="success" path="/bankAccountMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/bankAccountMasterSearch.jsp"
+			path="/bankAccountMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" attribute="CommonDynaValidatorForm"
+			type="com.masters.actions.BankAccountMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/bankAccountMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/bankAccountMasterBehind.do"></forward>
+		</action>
+		<!-- Bank Account Master End -->
+
+		<!-- Document Master Start -->
+		<action path="/documentMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.DocumentMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/documentMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/documentMasterSearch.jsp" path="/documentMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DocumentMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/documentMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/documentMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/documentMasterAdd.jsp" path="/documentMasterAdd"
+			parameter="method" scope="request" name="DocumentMasterAddDynaValidatorForm"
+			type="com.masters.actions.DocumentMasterDispatchAction">
+			<forward name="success" path="/documentMasterBehind.do"></forward>
+		</action>
+		<!-- Document Master End -->
+
+		<!-- Document Checklist Master Start-->
+		<action path="/documentChecklistMasterSearchBehind" scope="request"
+			validate="false" name="DocumentCheckListMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.DocumentChecklistMasterSearchBehind">
+			<forward name="success" path="/JSP/masterspage/documentCheckListMaster.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/documentCheckListMaster.jsp"
+			path="/documentCheckListSearch" scope="request"
+			name="DocumentCheckListMasterAddDyanavalidatiorForm" type="com.masters.actions.DocumentChecklistMasterDispatchAction">
+		</action>
+
+		<action input="/JSP/masterspage/documentCheckListMaster.jsp"
+			path="/documentChecklistMasterAdd" name="DocumentCheckListMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.DocumentChecklistMasterDispatchAction"
+			parameter="method">
+			<forward name="save" path="/JSP/masterspage/documentCheckListMaster.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/documentCheckListMaster.jsp"
+			path="/documentChecklistMasterSearch" parameter="method"
+			name="DocumentCheckListMasterAddDyanavalidatiorForm" type="com.masters.actions.DocumentChecklistMasterDispatchAction">
+			<forward name="search" path="/documentChecklistMasterSearchBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/documentCheckListMaster.jsp"
+			path="/documentChecklistMasterUpdate" parameter="method"
+			attribute="DocumentCheckListMasterAddDyanavalidatiorForm" name="DocumentCheckListMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.DocumentChecklistMasterDispatchAction">
+			<forward name="update" path="/JSP/masterspage/documentCheckListMaster.jsp"></forward>
+		</action>
+		<!-- Document Checklist Master End -->
+
+		<!-- Doc Child Master Start -->
+
+		<action path="/documentChildMasterBehind" scope="request"
+			validate="false" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DocChildMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/docChildMasterSearch.jsp"></forward>
+		</action>
+
+		<action path="/docChildMasterSearch" scope="request" validate="false"
+			parameter="method" name="CommonDynaValidatorForm"
+			type="com.masters.actions.DocChildMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/docChildMasterAdd.jsp"></forward>
+			<forward name="search" path="/documentChildMasterBehind.do"></forward>
+			<forward name="editState" path="/JSP/masterspage/docChildMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/docChildMasterAdd.jsp" path="/docChildMasterAdd"
+			scope="request" parameter="method" name="DocChildMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.DocChildMasterDispatchAction">
+		</action>
+		<!-- Doc Child Master End -->
+
+		<!-- Charge Code Master Start -->
+		<action path="/chargeCodeSearchBehind" name="CommonDynaValidatorForm"
+			scope="request" type="com.masters.actions.ChargeCodeSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/chargeCodeMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/chargeCodeMasterSearch.jsp"
+			path="/chargeCodeMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ChagreCodeDispatchAction">
+			<forward name="addChargeCodeDetails" path="/JSP/masterspage/chargeCodeMaster.jsp"></forward>
+			<forward name="modifyDetails" path="/JSP/masterspage/chargeCodeMaster.jsp"></forward>
+			<forward name="search" path="/chargeCodeSearchBehind.do"></forward>
+		</action>
+
+		<action path="/chargeCodeAction" attribute="ChargeCodeDynaValidatorForm"
+			input="/JSP/masterspage/chargeCodeMaster.jsp" name="ChargeCodeDynaValidatorForm"
+			parameter="method" scope="request"
+			type="com.masters.actions.ChagreCodeDispatchAction">
+			<forward name="success" path="/chargeCodeSearchBehind.do"></forward>
+			<forward name="modifyDetails" path="/chargeCodeSearchBehind.do"></forward>
+		</action>
+		<!-- Charge Code Master End -->
+
+		<!-- Charge Master Start -->
+		<action path="/chargeMasterBehind" scope="request" validate="false"
+			name="CommonDynaValidatorForm" type="com.masters.actions.ChargeMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/chargeMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/chargeMasterSearch.jsp" path="/chargeMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.ChargeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/chargeMasterAdd.jsp"></forward>
+			<forward name="searchPage" path="/chargeMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/chargeMasterAdd.jsp" path="/chargeMasterAdd"
+			parameter="method" scope="request" name="ChargeMasterAddDynaValidatorForm"
+			type="com.masters.actions.ChargeMasterDispatchAction">
+			<forward name="success" path="/chargeMasterBehind.do"></forward>
+		</action>
+		<!-- Charge Master End -->
+
+		<!-- NPA Stage Master Start -->
+		<action path="/npaStageMasterBehind" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.NPASatgeMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/npaStageMasterSearch.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/npaStageAddMaster.jsp" path="/npaStageMasterAdd"
+			parameter="method" scope="request" name="NPAStageMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.NPASatgeMasterDispatchAction">
+			<forward name="success" path="/npaStageMasterBehind.do"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/npaStageMasterSearch.jsp" path="/npaStageMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			attribute="CommonDynaValidatorForm" type="com.masters.actions.NPASatgeMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/npaStageAddMaster.jsp"></forward>
+			<forward name="searchPage" path="/npaStageMasterBehind.do"></forward>
+		</action>
+		<!-- NPA Stage Master End -->
+
+		<!-- Ankit Financial Pram Start -->
+
+		<action path="/financialPramBehind" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.FinancialPramMasterBehindAction">
+			<set-property property="cancellable" value="true" />
+			<forward name="success" path="/JSP/masterspage/financialParameter.jsp"></forward>
+		</action>
+
+		<action path="/finPramMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.FinancialPramMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/financialPramAdd.jsp"></forward>
+			<forward name="editFinanPram" path="/JSP/masterspage/financialPramAdd.jsp"></forward>
+		</action>
+
+		<action path="/finMasterAdd" input="/JSP/masterspage/financialPramAdd.jsp"
+			parameter="method" scope="request" name="FinancialPramMasterAddDyanavalidatiorForm"
+			type="com.masters.actions.FinancialPramMasterDispatchAction">
+
+		</action>
+		<!--  End -->
+
+		<!-- GCD Group Master Start -->
+
+		<action input="/JSP/masterspage/gcdGroupMasterSearch.jsp" path="/gcdGroupMasterSearch"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.GcdGroupMasterDispatchAction">
+			<forward name="addGroupMasterDetails" path="/JSP/masterspage/gcdGroupMasterAdd.jsp"></forward>
+			<forward name="modifyDetails" path="/JSP/masterspage/gcdGroupMasterAdd.jsp"></forward>
+			<forward name="success" path="/gcdGroupMasterSearchBehind.do"></forward>
+		</action>
+
+		<action path="/gcdGroupMasterAction" input="/JSP/masterspage/gcdGroupMasterAdd.jsp" scope="request"
+			type="com.masters.actions.GcdGroupMasterDispatchAction" name="GcdGroupMasterDynaValidatorForm"
+			attribute="GcdGroupMasterDynaValidatorForm" parameter="method">
+			<forward name="success" path="/gcdGroupMasterSearchBehind.do"></forward>
+			<forward name="saveModifyDetails" path="/gcdGroupMasterSearchBehind.do"></forward>
+
+		</action>
+		<action path="/gcdGroupMasterSearchBehind" scope="request"
+			parameter="method" name="CommonDynaValidatorForm" validate="false"
+			type="com.masters.actions.GcdGroupMasterSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/gcdGroupMasterSearch.jsp"></forward>
+		</action>
+		<!-- GCD Group Master End -->
+		<!-- Ritu Action End -->
+
+
+		<action path="/theme" type="com.login.action.ThemeAction">
+			<forward name="success" path="/JSP/home.jsp" />
+		</action>
+
+		<!--    ravi , Ratio definition master begin     -->
+		<action path="/ratioDefinitionMasterBehindAction" name="CommonDynaValidatorForm" type="com.masters.actions.RatioDefinitionBehindAction"
+		validate="false"
+		>
+			<forward name="success"	path="/JSP/masterspage/ratioDefinitionMasterSearch.jsp"></forward>
+		</action>
+		
+		<action path="/ratioDefinitionMasterSearchAction" name="CommonDynaValidatorForm"
+			type="com.masters.actions.RatioDefinitionSearchAction" validate="false">
+			<forward name="success"
+				path="/JSP/masterspage/ratioDefinitionMasterSearch.jsp"></forward>
+		</action>
+
+		<action path="/addRatioDefinition" parameter="method" scope="request"
+			validate="false" name="RatioDefinitionMasterAddDynaValidatorForm"
+			type="com.masters.actions.RatioDefinitionMasterProcessAction">
+			<forward name="openAdd" path="/JSP/masterspage/ratioDefinition.jsp"></forward>
+			<!--
+				<forward name="searchPage" path="/agencyMasterBehind.do"></forward>
+			-->
+			<forward name="ajaxSuccess" path="/JSP/masterspage/ajaxSuccessMaster.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/ratioDefinition.jsp" path="/saveRatioDefinition"
+			parameter="method" scope="request" name="RatioDefinitionMasterAddDynaValidatorForm"
+			type="com.masters.actions.RatioDefinitionMasterProcessAction">
+			<!--
+				<forward name="success" path="/agencyMasterBehind.do"></forward>
+			-->
+		</action>		
+
+
+		<!--		<action path="/editRatioDefinition"-->
+		<!--        	parameter="method" -->
+		<!--        	scope="request" name="CommonDynaValidatorForm"-->
+		<!--			type="com.masters.actions.RatioDefinitionMasterProcessAction">-->
+		<!--
+			<forward name="openAdd"
+			path="/JSP/masterspage/ratioDefinition.jsp"></forward>
+		-->
+		<!--
+			<forward name="searchPage" path="/agencyMasterBehind.do"></forward>
+		-->
+		<!--		</action>-->
+
+
+		<!--	Scoring Masters By Sanjog	-->
+
+		<action attribute="scoreMasterSearch" path="/scoringSearchMasters"
+			parameter="method" scope="request" name="ScoreMasterDynaValidatorForm"
+			type="com.masters.actions.ScoreMasterDispatchAction">
+			<forward name="scoringList" path="/JSP/masterspage/scoringParameterMaster.jsp"></forward>
+			<forward name="scoringAdd" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+
+		</action>
+
+		<action input="/JSP/masterspage/scoreMasterAdd.jsp" path="/scoringMastersAdd"
+			parameter="method" scope="request" name="ScoreMasterDynaValidatorForm"
+			type="com.masters.actions.ScoreMasterDispatchAction" validate="true">
+			<forward name="addNew" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+			<forward name="editScoreDetails" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+		</action>
+
+	<action path="/scoringMastersForModify"
+			parameter="method" scope="request" name="ScoreMasterDynaValidatorForm"
+			type="com.masters.actions.ScoreMasterDispatchAction" validate="false">
+			<forward name="editScoreDetails" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+		</action>
+
+
+		<action path="/scoringMastersUpdate" parameter="method" scope="request"
+			name="ScoreMasterDynaValidatorForm" type="com.masters.actions.ScoreMasterDispatchAction">
+			<forward name="updateScore" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+		</action>
+
+<!-- Sarvesh work For Master start -->		
+			<action path="/irrCalculation" input="/JSP/masterspage/irrCalculation.jsp" scope="request" name="irrCalculationAddDyanavalidatiorForm" 
+			type="com.masters.actions.IrrCalculationAction"   parameter="method">
+				<forward name="success" path="/JSP/masterspage/irrCalculation.jsp"></forward>
+				<forward name="modifyDetails" path="/JSP/masterspage/irrCalculationAdd.jsp"></forward>			
+				<forward name="save" path="/JSP/masterspage/irrCalculationAdd.jsp"></forward>
+				<forward name="openAdd" path="/JSP/masterspage/irrCalculationAdd.jsp" ></forward>
+			</action>
+       <!-- Sarvesh work for Master End -->
+		<!--		 for Score Card Master-->
+
+		<action attribute="ScoreCardMasterSearchDynaValidatorForm" path="/scoreCardMasters" validate="false"
+			parameter="method" scope="request" name="ScoreCardMasterSearchDynaValidatorForm"
+			type="com.masters.actions.ScoreCardMasterDispatchAction">
+			<forward name="cardList" path="/JSP/masterspage/scoringCardMaster.jsp"></forward>
+			<forward name="scoreCardAdd" path="/JSP/masterspage/scoreCardAdd.jsp"></forward>
+
+		</action>
+
+		<action input="/JSP/masterspage/scoreCardAdd.jsp" path="/scoreCardAdd"
+			validate="false" parameter="method" scope="request"
+			name="ScoreCardMasterDynaValidatorForm" type="com.masters.actions.ScoreCardMasterDispatchAction">
+			<forward name="addCardNew" path="/JSP/masterspage/scoreCardAdd.jsp"></forward>
+			<forward name="editCardDetails" path="/JSP/masterspage/scoreCardAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/scoreCardAdd.jsp" path="/scoringCardMastersUpdate"
+			parameter="method" scope="request" name="ScoreCardMasterDynaValidatorForm"
+			type="com.masters.actions.ScoreCardMasterDispatchAction">
+			<forward name="updateCardScore" path="/JSP/masterspage/scoreCardAdd.jsp"></forward>
+		</action>
+
+
+
+	
+	<!--for Rule Parameter Master By Sanjog -->
+	
+	
+	<action attribute="ruleParameterSearch" path="/ruleSearchMasters"
+				parameter="method" scope="request" name="RuleParameterDynaValidator" validate="false"
+				type="com.masters.actions.RuleMasterDispatchAction">
+	            	<forward name="ruleParameterList" path="/JSP/masterspage/ruleParameterMaster.jsp"></forward>
+
+		</action>
+		
+		<action attribute="ruleParameterAddEdit" path="/ruleAddMasters"
+				parameter="method" name="RuleParameterDynaValidator"
+				type="com.masters.actions.RuleMasterDispatchAction" validate="false">
+	            	<forward name="ruleAdd" path="/JSP/masterspage/ruleParameterMasterAdd.jsp"></forward>
+
+		</action>
+
+
+<!-- Policy CheckList Details Start By Sanjog -->
+
+			<action attribute="policyChecklistDef"
+				path="/policyChecklistMasterSearchScreen" parameter="method" scope="request"
+				name="PolicyChecklistDefDynaValidatorForm" type="com.masters.actions.PCDSearchBehindAction">
+			<forward name="success" path="/JSP/masterspage/PolicyCheckListDefMaster.jsp"></forward>
+		</action>
+
+			<action	attribute="policyChecklistDef" scope="request"
+					path="/policyChecklistMasterSearchExisting" name="PolicyChecklistDefDynaValidatorForm"
+					type="com.masters.actions.policyChecklistMasterDispatchAction" parameter="method">
+			<forward name="success" path="/JSP/masterspage/PolicyCheckListDefMaster.jsp"></forward>
+		</action>
+		
+		<action attribute="policyChecklistDef"
+				path="/policyChecklistMasterAdd" parameter="method" scope="request"
+				name="PolicyChecklistDefDynaValidatorForm" type="com.masters.actions.PCDaddNewBehindAction">
+			<forward name="success" path="/JSP/masterspage/AddPolicyChecklistMaster.jsp"></forward>
+		</action>
+		
+		<!-- Open for editing -->
+		
+		<action attribute="policyChecklistDef" input="/JSP/masterspage/PolicyCheckListDefMaster.jsp"
+				path="/policyChecklistEditMode" parameter="method" scope="request" 
+				name="PolicyChecklistDefDynaValidatorForm" type="com.masters.actions.policyChecklistMasterDispatchAction" >
+			<forward name="success" path="/JSP/masterspage/AddPolicyChecklistMaster.jsp" ></forward>
+		</action>
+		
+		<!-- to add new record -->
+		
+		<action attribute="policyChecklistAdd" path="/policyChecklistEdit"
+				name="PolicyChecklistDefDynaValidatorForm" 
+				type="com.masters.actions.policyChecklistMasterDispatchAction"
+				parameter="method" scope="request">
+			<forward name="save" path="/JSP/masterspage/AddPolicyChecklistMaster.jsp"></forward>
+		</action>
+		
+<!-- Policy CheckList Details End By Sanjog -->		
+
+
+
+		<!-- Parameter Score Defination Action Start By Abhimanyu-->
+
+		<action input="/JSP/masterspage/ParameterScoreDef.jsp" path="/parameterScoreDef"
+			scope="request" name="ParameterScoreDefDynaValidatorForm" validate="false"
+			type="com.masters.actions.ParameterScoreDefBehindAction">
+			<forward name="success" path="/JSP/masterspage/ParameterScoreDef.jsp"></forward>
+       </action>
+
+
+		
+		<action input="/JSP/masterspage/ruleParameterMasterAdd.jsp" attribute="ruleParameterAddEdit"
+						path="/ruleParameterAdd" parameter="method" 
+						scope="request" name="RuleParameterDynaValidator"
+						type="com.masters.actions.RuleMasterDispatchAction"  validate="false">
+	            	<forward name="addRuleNew" path="/JSP/masterspage/ruleParameterMasterAdd.jsp"></forward>
+	            	<forward name="editRuleDetails" path="/JSP/masterspage/ruleParameterMasterAdd.jsp"></forward>
+		</action>
+		
+				<action input="/JSP/masterspage/scoreCardAdd.jsp"
+						path="/ruleMastersUpdate"  validate="true" 
+						parameter="method" scope="request" name="RuleParameterDynaValidator"
+						type="com.masters.actions.RuleMasterDispatchAction">
+					<forward name="updateRule" path="/JSP/masterspage/ruleParameterMasterAdd.jsp"></forward>
+		</action>
+
+		<!--    ravi , Rule master begin     -->
+     <action path="/ruleMasterSearchBehindAction" name="CommonDynaValidatorForm"
+          type="com.masters.actions.RuleMasterSearchBehindAction"
+          validate="false">
+			<forward name="success" path="/JSP/masterspage/ruleMasterSearch.jsp"></forward>
+	 </action>
+         
+      <action path="/ruleMasterSearchAction" name="CommonDynaValidatorForm"
+          type="com.masters.actions.RuleMasterSearchAction"
+          validate="false">
+			<forward name="success" path="/JSP/masterspage/ruleMasterSearch.jsp"></forward>
+	 </action>
+	     
+        <action path="/addRule"	parameter="method" scope="request" validate="false" name="RuleMasterAddDynaValidatorForm"
+			type="com.masters.actions.RuleMasterProcessAction">
+			<forward name="openAdd" path="/JSP/masterspage/ruleMaster.jsp"></forward>
+		</action>
+		
+		<action path="/saveRuleMaster"
+			input="/JSP/masterspage/ruleMaster.jsp" 
+			parameter="method" scope="request" name="RuleMasterAddDynaValidatorForm"
+			type="com.masters.actions.RuleMasterProcessAction">
+		</action>
+		
+<!--    ravi , Rule master end     -->
+
+
+	 <!-- Parameter Score Defination Action Start By Abhimanyu-->
+
+	
+	
+		
+		<action input="/JSP/masterspage/scoreMasterAdd.jsp"
+				path="ruleParamMastersAdd"
+				parameter="method" scope="request" name="ScoreMasterDynaValidatorForm"
+				type="com.masters.actions.ScoreMasterDispatchAction">
+	            	<forward name="addNew" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+	            	<forward name="editScoreDetails" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+		</action>
+		
+		
+		<action path="/scoringMastersUpdate"
+				parameter="method" scope="request" name="ScoreMasterDynaValidatorForm"
+				type="com.masters.actions.ScoreMasterDispatchAction">
+            		<forward name="updateScore" path="/JSP/masterspage/scoreMasterAdd.jsp"></forward>
+		</action>
+
+		<action input="/JSP/masterspage/ParameterScoreDef.jsp"
+						path="/parameterScoreDef"
+						scope="request" name="ParameterScoreDefDynaValidatorForm"
+						type="com.masters.actions.ParameterScoreDefBehindAction">
+				        <forward name="success" path="/JSP/masterspage/ParameterScoreDefSearch.jsp"></forward>
+
+		</action>
+
+		<action input="/JSP/masterspage/ParameterScoreDef.jsp" path="/parameterScoreBusiness"
+			parameter="method" scope="request" name="ParameterScoreDefDynaValidatorForm"
+			type="com.masters.actions.ParameterScoreDefDispatchAction">
+			<forward name="success" path="/JSP/masterspage/ParameterScoreDef.jsp"></forward>
+		</action>
+
+		<!-- Parameter Score Defination Action End By Abhimanyu-->
+
+
+		<!--	Anil Code For U/W Approval Level Def  Start Here   -->
+		<action path="/approvalLevelDefSearchBehind" type="com.masters.actions.ApprovalLevelDefBehindAction"
+		     name="CommonDynaValidatorForm" scope="request" parameter="method" >	
+			<forward name="ApprovalLevelSearch" path="/JSP/masterspage/approvalLevelDefSearch.jsp"/>
+			<forward name="OpenApprovalLevel" path="/JSP/masterspage/approvalLevelDefAdd.jsp"/>
+			<forward name="AddApprovalLevel" path="/JSP/masterspage/approvalLevelDefAdd.jsp"/>
+
+        </action>
+        
+        <action path="/approvalLevelDefAdd" input="/JSP/masterspage/approvalLevelDefSearch.jsp"
+
+			parameter="method" scope="request" name="ApprovalLevelDefDynaValidatorForm"
+			type="com.masters.actions.ApprovalLevelDefDispatchAction">
+			<forward name="UpdateApprovalLevel" path="/JSP/masterspage/approvalLevelDefAdd.jsp"/>
+			<forward name="SaveApprovalLevel" path="/JSP/masterspage/approvalLevelDefAdd.jsp"/>
+			<forward name="forwardApproval" path="/JSP/masterspage/approvalLevelDefAdd.jsp" />
+		</action>
+
+			<action input="/JSP/masterspage/ParameterScoreDef.jsp"
+						path="/parameterScoreBusiness" parameter="method"
+						scope="request" name="ParameterScoreDefDynaValidatorForm"
+						type="com.masters.actions.ParameterScoreDefDispatchAction">
+				        <forward name="success" path="/JSP/masterspage/ParameterScoreDef.jsp"></forward>
+				        <forward name="paramsuccess" path="/JSP/masterspage/ParameterScoreAjax.jsp"></forward>
+				         <forward name="paramedit" path="/JSP/masterspage/ParameterEditAjax.jsp"></forward>
+	   
+             </action>
+		
+		
+   
+			<!--	Anil Code For U/W Approval Level Def  End Here   -->
+   
+      <action path="/userProductAccessBehindAction" name="UserProductAccessDynaValidatorForm"
+			type="com.masters.actions.UserProductAccessBehindAction">
+			<forward name="UserProductAccessSearch" path="/JSP/masterspage/userProductAccessSearch.jsp"/>
+	</action>
+
+	<action path="/openAddUserProductAccess" name="UserProductAccessDynaValidatorForm"
+			type="com.masters.actions.UserProductAccessDispatchAction" parameter="method" scope="request">
+			<forward name="openAddJSP" path="/JSP/masterspage/UserProductAccessAdd.jsp"/>
+			<forward name="jspForUpdate" path="/JSP/masterspage/UserProductAccessAdd.jsp"/>
+			<forward name="searchedRecord" path="/JSP/masterspage/userProductAccessSearch.jsp"/>
+			</action>
+			
+
+	<!-- vishal Holiday Master start -->
+		
+		<action path="/holidayMaintenance" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.HolidayMaintenanceDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/holidayMaintenanceAdd.jsp" />
+			<forward name="search" path="/countryMasterBehind.do" />
+			<forward name="editHoliday" path="/JSP/masterspage/holidayMasterEdit.jsp"></forward>
+		</action>
+		<action path="/holidayMaintenanceBehind"  scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.HolidayMaintenanceBehindAction">
+			<forward name="success" path="/JSP/masterspage/holidayMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/holidayMaintenanceAdd.jsp" path="/holiDayMasterAdd"
+			parameter="method" scope="request" name="CommonDynaValidatorForm"
+			type="com.masters.actions.HolidayMaintenanceDispatchAction">
+			<forward name="searchPage" path="/holidayMaintenanceBehind.do" />
+		</action>
+		
+    <!-- Vishal  Holiday Master end -->		
+		
+	  <!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->
+			<action path="/manualDevMasterBehindAction" scope="request" name="ManualDeviationMasDynaValidatorForm"
+			 type="com.masters.actions.ManualDeviationMasterBehindAction" >	
+			 <forward name="SearchPage" path="/JSP/masterspage/ManualDeviationSearch.jsp" />			 		
+		    </action>
+		    <action path="/manualDeviationAddProcessAction" parameter="method" scope="request" name="ManualDeviationMasDynaValidatorForm"
+			 type="com.masters.actions.ManualDeviationMasterProcessAction" >	
+			 <forward name="AddPage" path="/JSP/masterspage/ManualDeviationAdd.jsp" />
+			 <forward name="SavePage" path="/JSP/masterspage/ManualDeviationAdd.jsp" />
+			 <forward name="SearchPage" path="/JSP/masterspage/ManualDeviationSearch.jsp" />
+			 <forward name="updatepage" path="/JSP/masterspage/ManualDeviationAdd.jsp" /> 			 			 		
+		    </action>		
+		    
+				
+		<!-- Abhimanyu kumar added new link for manual deviation on 23/07/2012	-->  
+		
+		 <!-- Anil Code for Manufacturer Supplier Mapping Start Here-->
+	 
+	 <action path="/mfrSupplMappingBehindAction" scope="request"
+	type="com.masters.actions.ManufacturerSupplierMappingBehindAction" parameter="method"
+               name="MfrSupplMappingDynaValidatorForm" validate="false">               
+		<forward name="mfsupplierMapping" path="/JSP/masterspage/manufacturerSupplierMapping.jsp" />
+	 </action>
+	 
+	 <action path="/mfrSupplMappingDispatchAction" scope="request"
+	type="com.masters.actions.ManufacturerSupplierMappingDispatchAction" parameter="method"
+               name="MfrSupplMappingDynaValidatorForm" validate="false">               
+		<forward name="openMfsupplierMapping" path="/JSP/masterspage/addManufacturerSupplierMapping.jsp" />
+		<forward name="openEditMfsupplierMapping" path="/JSP/masterspage/addManufacturerSupplierMapping.jsp" />
+		<forward name="saveMfsupplierMapping" path="/JSP/masterspage/addManufacturerSupplierMapping.jsp" />
+	 </action>
+	
+	 <!-- Anil Code for Manufacturer Supplier Mapping End Here-->   
+	 <!-- Prashant Code for Verification Mapping Start Here-->
+	   <action path="/verificationMappingMasterBehindAction" scope="request"
+			   name="CommonDynaValidatorForm"  type="com.masters.actions.VerificationMappingMasterBehindAction">
+			
+           <forward name="success" path="/JSP/masterspage/verificationMappingMasterSearch.jsp" />
+           
+    </action>
+    
+    <action input="/JSP/masterspage/verificationMappingMasterAdd.jsp"  path="/verificationMappingProcessingMaster" parameter="method" scope="request"
+			name="verificationMappingDynaValidatorForm" type="com.masters.actions.VerificationMappingProcessingMasterAction">
+			<forward name="openAdd" path="/JSP/masterspage/verificationMappingMasterAdd.jsp" />
+			<forward name="search" path="/verificationMappingMasterBehindAction.do" />
+			<forward name="editVerificationMapping" path="/JSP/masterspage/verificationMappingMasterAdd.jsp"></forward>
+		</action>
+    <action path="/verificationQuestMasterBehindAction" name="CommonDynaValidatorForm" scope="request"  type="com.masters.actions.VerificationQuestMasterBehindAction">
+       <forward name="success" path="/JSP/masterspage/verificationQuestMasterSearch.jsp" />
+    </action>
+    <action input="/JSP/masterspage/verificationQuestionMasterAdd.jsp" path="/verificationQuestProcessingMaster" name="verificationQuestionDynaValidatorForm" parameter="method" scope="request"  type="com.masters.actions.VerificationQuestProcessingMasterAction">
+            <forward name="openAdd" path="/JSP/masterspage/verificationQuestionMasterAdd.jsp" />
+			<forward name="search" path="/verificationQuestMasterBehindAction.do" />
+			<forward name="editVerificationQuest" path="/JSP/masterspage/verificationQuestionMasterAdd.jsp"></forward>
+			<forward name="gridInAddVerificationQuest" path="/JSP/masterspage/verificationQuestionMasterAdd.jsp"></forward>
+    </action>
+   
+   
+   <!-- Prashant Code for Verification Mapping End Here-->
+   
+   <!-- Manish Shukla Code for Rate Approval Matrix Starts-->
+
+    
+    <action path="/rateMatrixMakerDispatchAction" parameter="method" scope="request" input = "/JSP/masterspage/rateApprovalMasterAdd.jsp"
+			name="rateApprovalMakerDynaValidatorForm" type="com.masters.actions.RateApprovalMakerAction">
+			<forward name="open" path="/JSP/masterspage/rateApprovalMasterAdd.jsp" />
+			<forward name="search" path="/JSP/masterspage/rateApprovalMasterSearch.jsp" />
+	</action>
+    <action path="/rateMatrixCheckerDispatchAction" parameter="method" scope="request" input = "/JSP/masterspage/rateApprovalChecker.jsp"
+			name="rateApprovalCheckerDynaValidatorForm" type="com.masters.actions.RateApprovalCheckerAction">
+			<forward name="open" path="/JSP/masterspage/rateApproval_framesChecker.jsp" />
+			<forward name="search" path="/JSP/masterspage/rateApprovalMasterCheckerSearch.jsp" />
+			<forward name="authorScreen" path="/JSP/masterspage/rateApprovalChecker.jsp" />
+	</action>
+    
+    
+   
+    <!-- Manish Shukla Code for Rate Approval Matrix End Here-->
+   
+   
+    <!-- Mradul Code for scoringBenchmark Mapping Start Here-->
+	    <action path="/scoringBenchmarkSearchBehindAction" scope="request"
+		name="ScoringBenchmarkMasterDyanavalidatiorForm"  type="com.masters.actions.ScoringBenchmarkSearchBehindAction">
+	    <forward name="success" path="/JSP/masterspage/scoringBenchmarkMaster.jsp" />
+        </action> 
+        
+        <action input="/JSP/masterspage/scoringBenchmarkMaster.jsp"
+		path="/scoringBenchmarkMasterAdd" name="ScoringBenchmarkMasterDyanavalidatiorForm"
+		type="com.masters.actions.ScoringBenchmarkMasterDispatchAction"	parameter="method">
+		<forward name="save" path="/JSP/masterspage/scoringBenchmarkMaster.jsp"></forward>
+		<forward name="search" path="/JSP/masterspage/scoringBenchmarkMaster.jsp"></forward>
+		</action>   
+     
+    <!-- Mradul Code for scoringBenchmark Mapping End Here-->
+      
+   <!-- Amit Code Starts -->
+    <action path="/corporateBusinessActivityBehindAction" name="BusinessActivityDynaValidatorForm" parameter="method" 
+    	scope="request" type="com.gcd.actions.CorporateBusinessActivityBehindAction">
+		<forward name="corBusinessActivity" path="/JSP/gcdJSP/businessActivity.jsp" />
+		<forward name="backsuccess"	path="/corporateDetailAction.do?method=displayCorporateDetails"></forward>
+	</action>
+	 <action path="/corporateBusinessActivityDispatchAction" name="BusinessActivityDynaValidatorForm" parameter="method" 
+    	scope="request" type="com.gcd.actions.CorporateBusinessActivityProcessAction">
+		<forward name="success" path="/JSP/gcdJSP/businessActivity.jsp" />
+	</action>
+	<!-- Amit Code Ends -->
+	
+	<!-- Surendra Cust Bank Details Code Starts -->	   
+		<action  parameter="method" path="/custBankDetailAction" scope="request"	name="CustBankDetailsDynaValidatorForm"
+		type="com.gcd.actions.CustBankDetailAction">			
+			<forward name="indCustBankDetails"	path="/JSP/gcdJSP/custBankDetails.jsp"></forward>
+		    <forward name="backIndCustBankDetails"	path="/individualDetailAction.do?method=BackIndividualDetails"></forward>
+		    <forward name="backCorpCustBankDetails"	path="/corporateDetailAction.do?method=displayCorporateDetails"></forward>
+		     <forward name="saveSuceess"	path="/JSP/gcdJSP/custBankDetails.jsp"></forward>
+		      <forward name="updateSuccess"	path="/JSP/gcdJSP/custBankDetails.jsp"></forward>
+		     
+		</action>
+		<!--	Surendra 	-->		  
+	<!-- Amit Code Ends -->
+	
+	
+	<!-- ravi Code Starts -->
+    <action path="/corporateBusinessDescirption" name="BusinessDescirptionDynaValidatorForm" parameter="method" 
+    	scope="request" type="com.gcd.actions.CorporateBusinessDescirptionBehindAction">
+		<forward name="corBusinessDescirption" path="/JSP/gcdJSP/businessDescirption.jsp" />
+		<forward name="backsuccess"	path="/corporateDetailAction.do?method=displayCorporateDetails"></forward>
+	</action>
+	
+	 <action path="/saveCorporateBusinessDescirption" name="BusinessDescirptionDynaValidatorForm" parameter="method" 
+    	scope="request" type="com.gcd.actions.CorporateBusinessDescirptionDispatchAction">
+		<forward name="success" path="/JSP/gcdJSP/businessDescirption.jsp" />
+	</action>
+      
+     <action path="/autoAllocationDefinitionSearchBehind" name="CommonDynaValidatorForm"
+			scope="request" validate="false"
+			type="com.masters.actions.AutoAllocationDefSearchBehind">
+			<forward name="success" path="/JSP/masterspage/autoAllocationDefinitionSearch.jsp"></forward>
+	</action>
+		
+		<action path="/autoAllocationDefinitionAction"
+				name="CommonDynaValidatorForm"
+		  	input="/JSP/masterspage/autoAllocationDefinitionAdd.jsp"
+			parameter="method" scope="request" 
+			attribute="CommonDynaValidatorForm" type="com.masters.actions.AutoAllocationDefDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/autoAllocationDefinitionAdd.jsp"></forward>
+			<forward name="success" path="/JSP/masterspage/autoAllocationDefinitionSearch.jsp"></forward>
+		</action>
+          
+	<!-- ravi end Starts -->
+	<!-- Arun code for Scoring Master Starts Here -->
+	<action path="/scoringMasterBehind" 
+	name="CommonDynaValidatorForm" attribute="CommonDynaValidatorForm" scope="request" 
+	type="com.masters.actions.ScoringMasterBehindAction" >
+	<forward name="success" path="/JSP/masterspage/scoringMasterSearch.jsp"></forward>
+	</action>
+	
+	<action path="/scoringMasterDispatch" 
+	name="ScoringMasterDynaValidatorForm" attribute="ScoringMasterDynaValidatorForm" scope="request" 
+	type="com.masters.actions.ScoringMasterDispatchAction"  parameter="method">
+	<forward name="openAdd" path="/JSP/masterspage/scoringMasterAdd.jsp"></forward>
+	<forward name="openParamValue" path="/JSP/masterspage/scoringMasterParamValue.jsp"></forward>
+	
+	</action>
+	<!-- Arun code for Scoring Master Ends Here -->
+<!-- asesh code for Benchmark Ratios Master Starts Here -->
+	<action path="/benchmarkRatioBehind" 
+			name="CommonDynaValidatorForm" attribute="CommonDynaValidatorForm" scope="request" 
+			type="com.masters.actions.BenchmarkRatioMasterBehindAction" >
+			<forward name="success" path="/JSP/masterspage/benchmarkRatioSearch.jsp"></forward>
+	</action>
+			
+	<action input="/JSP/masterspage/benchmarkRatioAdd.jsp" path="/benchMarkRatioAdd"
+			validate="false" parameter="method" scope="request"
+			name="BenchmarkRatioMasterDynaValidatorForm" type="com.masters.actions.BenchmarkRatioMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/benchmarkRatioAdd.jsp"></forward>
+			<forward name="editBenchMark" path="/JSP/masterspage/benchmarkRatioAdd.jsp" />
+			<forward name="updateSearch" path="/JSP/masterspage/benchmarkRatioAdd.jsp"></forward>
+	</action> 
+<!-- asesh code for Benchmark Ratios Master Ends Here -->
+<!-- asesh code for business Month closer Marketing Master Ends Here -->
+		<action path="/closureMarketingBehindAction" scope="request" 
+               type="com.masters.actions.BusinessMonthBehindAction" 
+               name="BusinessMonthClosureDynaValidatorForm">               
+			  <forward name="success" path="/JSP/masterspage/businessMonthClosureSearch.jsp" />
+		</action>
+	
+		<!-- sachin balyan for sales executive-->
+		<action path="/salesExecutiveMaster" scope="request" 
+               type="com.masters.actions.SalesExecutiveBehindAction" name="salesExecutiveMasterDynaValidatorForm">               
+			  <forward name="success" path="/JSP/masterspage/salesExecutiveMasterSearch.jsp" />
+		</action>
+		
+		<action path="/salesExecutiveMasterAdd" validate="false" parameter="method" scope="session"
+               type="com.masters.actions.SalesExecutiveMasterDispatchAction" name="salesExecutiveMasterDynaValidatorForm">               
+			  <forward name="openAdd" path="/JSP/masterspage/salesExecutiveMasterAdd.jsp" />
+			  <forward name="updateSearch" path="/JSP/masterspage/salesExecutiveMasterAdd.jsp"></forward>
+			  <forward name="EditSalesExecutive" path="/JSP/masterspage/salesExecutiveMasterAdd.jsp" />
+			    
+		</action>
+		
+		<action input="/JSP/masterspage/businessMonthClosureAdd.jsp" path="/businessMonthAdd"
+			validate="false" parameter="method" scope="request"
+			name="BusinessMonthClosureDynaValidatorForm" type="com.masters.actions.BusinessMonthDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/businessMonthClosureAdd.jsp"></forward>
+			<forward name="editBusinessClosure" path="/JSP/masterspage/businessMonthClosureAdd.jsp" />
+			<forward name="updateSearch" path="/JSP/masterspage/businessMonthClosureAdd.jsp"></forward>
+			<forward name="ajaxBusinessMonth" path="/JSP/masterspage/businessMonthClosureAjax.jsp"></forward>
+		</action>
+<!-- asesh code for business Month closer Marketing Master Ends Here -->
+
+<!--  saurabh chnages starts  -->
+	<action path="/UWApprovalLevelDefAuthor" scope="request" type="com.masters.actions.UWApprovalLevelDefAuthorBehindAction" 
+			name="CommonDynaValidatorForm"  validate="false" parameter="method" >
+			<forward name="success" path="/JSP/masterspage/uwApprovalLevelDefAuthorSearch.jsp" />
+	</action>
+	<action path="/UWApprovalLevelDefAuthorApprove" scope="request" type="com.masters.actions.UWApprovalLevelDefAuthorDispatchAction" 
+			name="CommonDynaValidatorForm"  validate="false" parameter="method" >
+			<forward name="openFrame" path="/JSP/masterspage/MAS_Frames_UWMaster.jsp" />
+			<forward name="openApprovalAuthor" path="/JSP/masterspage/UWMasterAuthorApprove.jsp" />
+			<forward name="onAuthorSearchPage" path="/JSP/masterspage/UWMasterAuthorApprove.jsp" />
+			<forward name="openWithoutFrame" path="/JSP/masterspage/UWMasterAuthorBody.jsp" />
+			
+	</action>
+<!--  saurabh changes ends  -->
+<!-- Richa work start for used vehicle pricing -->
+<action path="/usedVehiclePricing" parameter="method" scope="request"
+			name="usedVehiclePricingAddDyanavalidatiorForm" type="com.masters.actions.UsedVehiclePricingMasterDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/usedVehiclePricingAdd.jsp"></forward>
+			<forward name="search" path="/usedVehiclePricingBehind.do" />
+			<forward name="editVehiclePrice" path="/JSP/masterspage/usedVehiclePricingAdd.jsp"></forward>
+			<forward name="updateSuccess" path="/JSP/masterspage/usedVehiclePricingAdd.jsp"></forward>
+			
+			
+		</action>
+		
+		<action path="/usedVehiclePricingBehind" parameter="method" scope="request"
+			name="usedVehiclePricingAddDyanavalidatiorForm" type="com.masters.actions.UsedVehiclePricingBehindAction">
+			<forward name="success" path="/JSP/masterspage/usedVehiclePricingSearch.jsp" />
+			
+			
+		</action>
+		
+		<action input="/JSP/masterspage/usedVehiclePricingAdd.jsp" path="/usedVehiclePricingAdd"
+			validate="false"  scope="request"  	name="usedVehiclePricingAddDyanavalidatiorForm" 
+			type="com.masters.actions.UsedVehiclePricingMasterDispatchAction"   parameter="method">
+			<forward name="openAdd" path="/JSP/masterspage/usedVehiclePricingAdd.jsp"></forward>
+			<forward name="updateSuccess" path="/JSP/masterspage/usedVehiclePricingAdd.jsp"></forward>
+			<forward name="success" path="/JSP/masterspage/usedVehiclePricingSearch.jsp" />
+		</action>
+<!-- parvez starts  -->
+		<action path="/consortiumPartnerMasterBehindAction" scope="request" type="com.masters.actions.ConsortiumPartnerMasterBehindAction"
+		            name="ConsortiumPartnerAddDyanavalidatiorForm">
+			<forward name="success" path="/JSP/masterspage/ConsortiumPartnerSearch.jsp" />
+		</action>
+		
+		<action path="/ConsortiumPartnerDispatchAction" type="com.masters.actions.ConsortiumPartnerDispatchAction"
+			name="ConsortiumPartnerAddDyanavalidatiorForm" parameter="method" scope="request" input="/JSP/masterspage/consortiumPartnerAdd.jsp">
+			<forward name="openAdd" path="/JSP/masterspage/consortiumPartnerAdd.jsp" />
+			<!-- <forward name="search" path="/consortiumPartnerMasterBehindAction.do" /> -->
+		 	<forward name="editConsortium" path="/JSP/masterspage/consortiumPartnerAdd.jsp"></forward> 
+		</action>
+		
+		<action input="/JSP/masterspage/consortiumPartnerAdd.jsp" path="/consortiumPartnerAdd"
+			validate="false" parameter="method" scope="request"
+			name="ConsortiumPartnerAddDyanavalidatiorForm" type="com.masters.actions.ConsortiumPartnerDispatchAction">
+			<forward name="searchPage" path="/consortiumPartnerMasterBehindAction.do" />
+			<forward name="success" path="/JSP/masterspage/consortiumPartnerAdd.jsp" />
+			</action>
+			
+				<action path="/ConsortiumPartnerSearch" scope="request" type="com.masters.actions.ConsortiumPartnerMasterBehindAction"
+		            name="ConsortiumPartnerAddDyanavalidatiorForm">
+			<forward name="success" path="/JSP/masterspage/ConsortiumPartnerSearch.jsp" />
+		</action>
+
+ <!-- shreyansh for mobile user mapping starts -->
+   
+              <action path="/MobileUserMappingAction" scope="request"  type="com.masters.actions.MobileUserAction">
+			       <forward name="success" path="/mobileUserMasterSearch.do?method=searchmobileUser"></forward>
+               </action>
+   
+   
+            <action  path="/mobileUserMasterSearch"  name="CommonDynaValidatorForm" parameter="method" scope="request" 
+            input="/JSP/masterspage/addMobUser.jsp" type="com.masters.actions.MobileUserDispatchAction">
+                     <forward name="addMobileUser" path="/JSP/masterspage/addMobUser.jsp"></forward>
+                     <forward name="success" path="/JSP/masterspage/searchMobUser.jsp"></forward> 
+                     <forward name="modifyDetails" path="/JSP/masterspage/addMobUser.jsp"></forward>
+		             <forward name="getMobileNo" path="/JSP/masterspage/ajaxMobUser.jsp"></forward>
+		   </action>
+   
+   
+         <action  path="/mobileUserMasterModify"  name="CommonDynaValidatorForm" input="/JSP/masterspage/addMobUser.jsp" parameter="method" scope="request" type="com.masters.actions.MobileUserMasterModifyAction">
+		</action>  
+		
+  <!-- shreyansh for mobile user mapping ends -->
+            <!-- Vishal changes start for vehicle approval grid -->
+		  <action path="/vehicleApprovalGridBehindAction" parameter="method" scope="request"
+			name="vehicleApprovalDyanavalidatiorForm" type="com.masters.actions.VehicleApprovalGridBehindAction">
+			<forward name="success" path="/JSP/masterspage/vehicleApprovalSearch.jsp" />		
+		</action>
+		<action path="/vehicleApprovalGridDispatchAction" parameter="method" scope="request"
+			name="vehicleApprovalDyanavalidatiorForm" type="com.masters.actions.VehicleApprovalGridDispatchAction">
+			<forward name="openAdd" path="/JSP/masterspage/vehicleApprovalAdd.jsp" />		
+			<forward name="saveData" path="/JSP/masterspage/vehicleApprovalAdd.jsp"></forward>
+			<forward name="editVehicle" path="/JSP/masterspage/vehicleApprovalAdd.jsp"></forward>
+	  		<forward name="search" path="/vehicleApprovalGridBehindAction.do"></forward>
+			<forward name="updateData" path="/JSP/masterspage/vehicleApprovalAdd.jsp"></forward>
+		</action>
+		
+      	<action input="/JSP/masterspage/vehicleApprovalAdd.jsp" path="/vehicleApprovalAdd"
+			validate="false"  scope="request"  	name="vehicleApprovalDyanavalidatiorForm" 
+			type="com.masters.actions.VehicleApprovalGridDispatchAction"   parameter="method">
+			<forward name="success" path="/vehicleApprovalGridBehindAction.do" />
+		</action>
+	     <!-- Vishal changes end for vehicle Approval grid -->
+		 
+		 <!-- Pooja Code for SBL & GBL Master Master Start -->
+		<action path="/SBLGBLMasterSearch" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.SBLMasterDispatchAction" >
+			<forward name="openAdd" path="/JSP/masterspage/sblMasterAdd.jsp"></forward>
+			<forward name="search" path="/SBLGBLMasterBehind.do" />
+			<forward name="editProduct" path="/JSP/masterspage/sblMasterAdd.jsp"></forward>
+		</action>
+
+		<action path="/SBLGBLMasterBehind" parameter="method" scope="request"
+			name="CommonDynaValidatorForm" type="com.masters.actions.SBLMasterBehindAction">
+			<forward name="success" path="/JSP/masterspage/sblMasterSearch.jsp" />
+		</action>
+
+		<action input="/JSP/masterspage/sblMasterAdd.jsp" path="/sblMasterAdd"
+			validate="false" parameter="method" scope="request"
+			name="GBLSBLMasterAddDyanavalidatiorForm" type="com.masters.actions.SBLMasterDispatchAction">
+		</action>
+		<!-- Pooja Code for SBL & GBL Master Master End -->
+	</action-mappings>
+	
+	
+	<!--DynaValidatorForm Action End -->
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

@@ -1,0 +1,280 @@
+ <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+	
+	<form-bean name="CommonPayDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="searchActivityCode" type="java.lang.String" />
+			<form-property name="searchActivityDesc" type="java.lang.String" />
+			<form-property name="searchTaxCode" type="java.lang.String" />
+			<form-property name="searchTaxPer" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="searchBpName" type="java.lang.String" />
+			<form-property name="searchSchemeName" type="java.lang.String" />
+			<form-property name="searchNarration" type="java.lang.String" />
+			<form-property name="searchPaymentType" type="java.lang.String" />
+			<form-property name="searchActivityId" type="java.lang.String" />
+			<form-property name="searchStartDate" type="java.lang.String" />
+			<form-property name="searchEndDate" type="java.lang.String" />
+			<form-property name="searchStartMonth" type="java.lang.String" />
+			<form-property name="searchEndMonth" type="java.lang.String" />
+		</form-bean>
+      <form-bean name="ActivityMasterDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="activityCode" type="java.lang.String" />
+			<form-property name="activityDesc" type="java.lang.String" />
+			<form-property name="sourceId" type="java.lang.String" />
+			<form-property name="mappingCode" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="TaxMasterDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="taxId" type="java.lang.String" />
+			<form-property name="taxName" type="java.lang.String" />
+			<form-property name="activityCode" type="java.lang.String" />
+			<form-property name="lbxActivityCode" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="taxPer" type="java.lang.String" />
+			<form-property name="stateId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="bpMasterDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="bpId" type="java.lang.String" />
+			<form-property name="bpName" type="java.lang.String" />
+			<form-property name="activityCode" type="java.lang.String" />
+			<form-property name="lbxActivityCode" type="java.lang.String" />
+			<form-property name="bpAdd" type="java.lang.String" />
+			<form-property name="txtStateCode" type="java.lang.String" />
+			<form-property name="stateId" type="java.lang.String" />
+			<form-property name="txtDistCode" type="java.lang.String" />
+			<form-property name="districtId" type="java.lang.String" />
+			<form-property name="sourceId" type="java.lang.String" />
+			<form-property name="mappingCode" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="bpMobile" type="java.lang.String" />
+			<form-property name="bpPhone" type="java.lang.String" />
+			<form-property name="cpMobile" type="java.lang.String" />
+			<form-property name="cpAdd" type="java.lang.String" />
+			<form-property name="cpName" type="java.lang.String" />
+			<form-property name="txtCountryCode" type="java.lang.String" />
+			<form-property name="cpCountryCode" type="java.lang.String" />
+			<form-property name="cpDistCode" type="java.lang.String" />
+			<form-property name="cpStateCode" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="schemeMasterDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="schemeId" type="java.lang.String" />
+			<form-property name="schemeName" type="java.lang.String" />
+			<form-property name="narration" type="java.lang.String" />
+			<form-property name="effectiveDate" type="java.lang.String" />
+			<form-property name="schemeParameter" type="java.lang.String" />
+			<form-property name="serviceTaxApp" type="java.lang.String" />
+			<form-property name="tdsApp" type="java.lang.String" />
+			<form-property name="districtId" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="tat" type="java.lang.String" />
+			<form-property name="cpDistCode" type="java.lang.String" />
+			<form-property name="commissionPerCaseR" type="java.lang.String" />
+			<form-property name="commissionPerCaseP" type="java.lang.String" />
+			<form-property name="caseFrom" type="java.lang.String[]" />
+			<form-property name="caseTo" type="java.lang.String[]" />
+			<form-property name="caseFromP" type="java.lang.String[]" />
+			<form-property name="caseToP" type="java.lang.String[]" />
+			<form-property name="commissionP" type="java.lang.String[]" />
+			<form-property name="commissionR" type="java.lang.String[]" />
+			<form-property name="caseFromA" type="java.lang.String[]" />
+			<form-property name="caseToA" type="java.lang.String[]" />
+			<form-property name="commissionA" type="java.lang.String[]" />
+			<form-property name="slabOn" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="schemeBpMapDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="mapId" type="java.lang.String" />
+			<form-property name="bpName" type="java.lang.String" />
+			 <form-property name="lbxBpId" type="java.lang.String" />
+			  <form-property name="activityCode" type="java.lang.String" />
+			  <form-property name="lbxActivityCode" type="java.lang.String" />
+			   <form-property name="schemeName" type="java.lang.String" />
+			  <form-property name="lbxSchemeName" type="java.lang.String" />
+			  <form-property name="specificTime" type="java.lang.String" />
+			  <form-property name="targetForSt" type="java.lang.String" />
+			  <form-property name="commissionForTarget" type="java.lang.String" />
+			  <form-property name="priority" type="java.lang.String" />
+			   <form-property name="specificTarOn" type="java.lang.String" />
+			   <form-property name="specificTar" type="java.lang.String" />
+			  <form-property name="recStatus" type="java.lang.String" />
+		</form-bean>
+		<form-bean name="paymentReceiptDynaForm" 
+		            type="org.apache.struts.validator.DynaValidatorForm">
+		    <form-property name="bpName" type="java.lang.String" />
+			 <form-property name="lbxBpId" type="java.lang.String" />
+			 <form-property name="paymentId" type="java.lang.String" />
+			 <form-property name="paymentMode" type="java.lang.String" />     
+			 <form-property name="paymentType" type="java.lang.String" />        
+			 <form-property name="paymentDate" type="java.lang.String" />        
+			 <form-property name="paymentAmount" type="java.lang.String" />  
+			  <form-property name="instrumentNo" type="java.lang.String" /> 
+			   <form-property name="instrumentDate" type="java.lang.String" />  
+			    <form-property name="makerRemark" type="java.lang.String" />      
+			 <form-property name="recStatus" type="java.lang.String" /> 
+			 <form-property name="decision" type="java.lang.String" /> 
+			 <form-property name="authorRemark" type="java.lang.String" /> 
+			 <form-property name="allocateAmount" type="java.lang.String" /> 
+			 <form-property name="tds" type="java.lang.String" /> 
+			 <form-property name="totalAllocatedAmount" type="java.lang.String" /> 
+			  </form-bean>
+			  <!--Code By Ritesh Starts Here -->
+			  <form-bean name="scheduleMasterDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="activityId" type="java.lang.String" />
+			<form-property name="startDate" type="java.lang.String" />
+			<form-property name="endDate" type="java.lang.String" />
+			<form-property name="startMonth" type="java.lang.String" />
+			<form-property name="endMonth" type="java.lang.String" />
+			<form-property name="recStatus" type="java.lang.String" />
+			<form-property name="lbxActivityCode" type="java.lang.String" />
+			<form-property name="batch_sch_id" type="java.lang.String" />
+		</form-bean>
+		
+		   <!--Code By Ritesh Ends Here -->
+		   
+		  <form-bean name="commonReportDynaForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="sourceId" type="java.lang.String" />
+			<form-property name="sourceDesc" type="java.lang.String" />
+			 <form-property name="activityCode" type="java.lang.String" />
+			 <form-property name="lbxActivityCode" type="java.lang.String" />
+			 <form-property name="reportType" type="java.lang.String" />
+			 <form-property name="bpName" type="java.lang.String" />
+			 <form-property name="lbxBpId" type="java.lang.String" />
+			 <form-property name="schemeName" type="java.lang.String" />
+			 <form-property name="lbxSchemeName" type="java.lang.String" />
+			 <form-property name="fromDate" type="java.lang.String" />
+		     <form-property name="toDate" type="java.lang.String" />
+			 <form-property name="paySumParameter" type="java.lang.String" />
+			 
+		</form-bean>
+		
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+
+
+	</global-forwards>
+
+	
+	<action-mappings >
+   
+       <action  input="/JSP/PAYJSP/activityMasterAdd.jsp" path="/activityMasterDispatch" parameter="method" scope="request"
+         name="ActivityMasterDynaForm"      type="com.payout.actions.ActivityMasterDispatchAction">
+      	
+        <forward name="openAdd" path="/JSP/PAYJSP/activityMasterAdd.jsp"></forward>
+         <forward name="search" path="/JSP/PAYJSP/activitySearch.jsp"></forward>
+    </action>
+  
+    <action input="/JSP/PAYJSP/activitySearch.jsp"     path="/activityMasterBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.ActivityMasterBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/activitySearch.jsp"></forward>
+      </action>
+    
+		<action input="/JSP/PAYJSP/taxMasterSearch.jsp"     path="/taxMasterBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.TaxMasterBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/taxMasterSearch.jsp"></forward>
+      </action>
+     
+       <action  input="/JSP/PAYJSP/taxMasterAdd.jsp" path="/taxMasterDispatch" parameter="method" scope="request"
+         name="TaxMasterDynaForm"      type="com.payout.actions.TaxMasterDispatchAction">
+      	  <forward name="openAdd" path="/JSP/PAYJSP/taxMasterAdd.jsp"></forward>
+         <forward name="search" path="/JSP/PAYJSP/taxSearch.jsp"></forward>
+    </action>
+    <action input="/JSP/PAYJSP/bpSearch.jsp"     path="/bpMasterBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.BpMasterBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/bpSearch.jsp"></forward>
+      </action>
+      <action  input="/JSP/PAYJSP/bpAdd.jsp" path="/bpMasterDispatch" parameter="method" scope="request"
+         name="bpMasterDynaForm"      type="com.payout.actions.BpMasterDispatchAction">
+      	<forward name="openAdd" path="/JSP/PAYJSP/bpAdd.jsp"></forward>
+        <forward name="search" path="/JSP/PAYJSP/bpSearch.jsp"></forward>
+    </action>
+     <action input="/JSP/PAYJSP/schemeSearch.jsp"     path="/schemeMasterBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.SchemeMasterBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/schemeSearch.jsp"></forward>
+      </action>
+         <action  input="/JSP/PAYJSP/schemeAdd.jsp" path="/schemeMasterDispatch" parameter="method" scope="request"
+         name="schemeMasterDynaForm"      type="com.payout.actions.SchemeMasterDispatchAction">
+      	<forward name="openAdd" path="/JSP/PAYJSP/schemeAdd.jsp"></forward>
+        <forward name="search" path="/JSP/PAYJSP/schemeSearch.jsp"></forward>
+    </action>
+    
+    <action input="/JSP/PAYJSP/schemeBpMapSearch.jsp"     path="/schemeBpMapBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.SchemeBpMapBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/schemeBpMapSearch.jsp"></forward>
+      </action>
+      <action  input="/JSP/PAYJSP/schemeBpMapAdd.jsp" path="/schemeBpMapDispatch" parameter="method" scope="request"
+         name="schemeBpMapDynaForm"      type="com.payout.actions.SchemeBpMapDispatchAction">
+      	<forward name="openAdd" path="/JSP/PAYJSP/schemeBpMapAdd.jsp"></forward>
+        <forward name="search" path="/JSP/PAYJSP/schemeBpMapSearch.jsp"></forward>
+    </action>
+    
+    
+     <action input="/JSP/PAYJSP/paymentReceiptSearch.jsp"     path="/paymentReceiptBehind"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.PaymentReceiptBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/paymentReceiptSearch.jsp"></forward>
+      </action>
+       <action  input="/JSP/PAYJSP/paymentReceiptAdd.jsp" path="/paymentReceiptDispatch" parameter="method" scope="request"
+         name="paymentReceiptDynaForm"      type="com.payout.actions.PaymentReceiptDispatchAction">
+      	<forward name="openAdd" path="/JSP/PAYJSP/paymentReceiptAdd.jsp"></forward>
+        <forward name="search" path="/JSP/PAYJSP/paymentReceiptSearch.jsp"></forward>
+        <forward name="allocatePayRec" path="/JSP/PAYJSP/allocatePaymentReceipt.jsp"></forward>
+         <forward name="openAuthor" path="/JSP/PAYJSP/pay_frames_paymentReceiptAuthor.jsp"></forward>
+         <forward name="openAuthorMain" path="/JSP/PAYJSP/paymentReceiptAuthor.jsp"></forward>
+        </action>
+        
+      <action input="/JSP/PAYJSP/paymentReceiptAuthorSearch.jsp"     path="/paymentReceiptBehindAuthor"  scope="request"
+      name="CommonPayDynaForm" attribute="CommonPayDynaForm"     type="com.payout.actions.PaymentReceiptAuthorBehindAction">
+      <forward name="success" path="/JSP/PAYJSP/paymentReceiptAuthorSearch.jsp"></forward>
+      </action>
+      <!--Code By Ritesh Starts Here -->
+          <action     input="/JSP/PAYJSP/scheduleMasterSearch.jsp"      name="CommonPayDynaForm" 
+	      attribute="CommonPayDynaForm" 
+	      path="/scheduleMasterBehind"
+	      scope="request"
+	      type="com.payout.actions.ScheduleMasterBehindAction">
+           <forward name="success" path="/JSP/PAYJSP/scheduleMasterSearch.jsp" />
+          </action>
+    
+   
+       <action  input="/JSP/PAYJSP/scheduleMasterAdd.jsp" path="/scheduleMasterDispatch" parameter="method" scope="request"
+         name="scheduleMasterDynaForm"      type="com.payout.actions.ScheduleMasterDispatchAction">
+      	  <forward name="openAdd" path="/JSP/PAYJSP/scheduleMasterAdd.jsp"></forward>
+         <forward name="search" path="/JSP/PAYJSP/scheduleMasterSearch.jsp"></forward>
+    </action>
+    <!--Code By Ritesh Ends Here -->
+    
+    
+      <action    path="/payReportAction"  scope="request"
+      name="commonReportDynaForm" attribute="commonReportDynaForm"  parameter="method"
+      type="com.payout.actions.PayReportAction">
+      <forward name="openJsp" path="/JSP/PAYJSP/bpListReport.jsp"></forward>
+      <forward name="openTransactionSummaryJsp" path="/JSP/PAYJSP/transactionSummaryReport.jsp"></forward>
+      <forward name="openPaymentSummaryReportJsp" path="/JSP/PAYJSP/paymentSummaryReport.jsp"></forward>
+      </action>
+	</action-mappings>
+
+
+	
+
+	<message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
+	</plug-in>
+
+</struts-config>
+

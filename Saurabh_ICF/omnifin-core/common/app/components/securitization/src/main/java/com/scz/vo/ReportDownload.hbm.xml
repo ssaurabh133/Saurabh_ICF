@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	
+	<class name="com.scz.vo.DownloadedReportFlags" table="scz_payment_allocation_flag" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="poolID" column ="POOL_ID" />
+		<property name="monthOfReport" column ="MONTH_OF_REPORT" />
+		<property name="reportType" column ="REPORT_TYPE" />
+	</class>
+	
+	<class name="com.scz.vo.BuyBackUploadTempVO" table="scz_buyback_upload_temp" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="poolId" column="POOL_ID"  />
+		<property name="loanId" column="LOAN_ID" />
+		<property name="makerDate" column="MAKER_DATE" />
+		<property name="userId" column ="USER_ID" />
+	</class>
+	
+	<class name="com.scz.vo.MonthlyCollectionReoportVO" table="scz_monthly_collection" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="poolId" column="POOL_ID"  />
+		<property name="loanId" column ="LOAN_ID" />
+		<property name="openingOverdue" column ="OPENING_OVERDUE" type="big_decimal" precision="22" scale="4"  />
+		<property name="billingForMonth" column ="BILLING_FOR_MONTH" type="big_decimal" precision="22" scale="4"  />
+		<property name="cloasingOverdue" column="CLOASING_OVERDUE" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionForMonth" column ="COLLECTION_FOR_MONTH" type="big_decimal"  scale="4" precision="22" />
+		<property name="monthOfReport" column="MONTH_OF_REPORT" />
+	</class>
+	
+	<class name="com.scz.vo.PaymentAllocationReportExcelDataVO" table="scz_payment_allocation_excel_report" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		
+		<property name="pool_id" column ="POOL_ID" />
+		<property name="pool_name" column ="POOL_NAME" />
+		<property name="loan_no" column ="LOAN_NO" />
+		<property name="omniFinLoanNo" column ="OMNI_FIN_LOAN_NO" />
+		<property name="customer_Name" column ="CUSTOMER_NAME" />
+		
+		<property name="expiryDate" column ="EXPIRY_DATE" />
+		<property name="lastDateOfCollMonth" column ="LAST_DATE_OF_COLL_MONTH" />
+		<property name="opening_POS" column="OPENING_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="opening_Future_Flow" column="OPENING_FUTURE_FLOW" type="big_decimal" precision="22" scale="4" />
+		
+		<property name="opening_Overdue" column="OPENING_OVERDUE" type="big_decimal" precision="22" scale="4" />
+		<property name="openingOverduePos" column="OPENING_OVERDUE_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="openingOverdueInt" column="OPENING_OVERDUE_INT" type="big_decimal" precision="22" scale="4" />
+		<property name="actualEMI" column="ACTUAL_EMI" type="big_decimal" precision="22" scale="4" />
+		<property name="pos" column="POS" type="big_decimal" precision="22" scale="4" />
+		
+		<property name="totalIntAsPerBank" column="TOTAL_INT_AS_PER_BANK" type="big_decimal" precision="22" scale="4" />
+		<property name="totalIntAsPerAU" column="TOTAL_INT_AS_PER_AU" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionAgainstOpeningOverdue" column="COLLECTION_AGAINST_OPENING_OVERDUE" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionAgainstOpeningOverduePOS" column="COLLECTION_AGAINST_OPENING_OVERDUE_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionAgainstOpeningOverdueINT" column="COLLECTION_AGAINST_OPENING_OVERDUE_INT" type="big_decimal" precision="22" scale="4" />
+		
+		<property name="collectionAgainstCurrentBilling" column="COLLECTION_AGAINST_CURRENT_BILLING" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionAgainstCurrentBillingPOS" column="COLLECTION_AGAINST_CURRENT_BILLING_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="collectionAgainstCurrentBillingINT" column="COLLECTION_AGAINST_CURRENT_BILLING_INT" type="big_decimal" precision="22" scale="4" />
+		<property name="totalCollectionAgainstPOS" column="TOTAL_COLLECTION_AGAINST_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="totalCollectionAgainstINT" column="TOTAL_COLLECTION_AGAINST_INT" type="big_decimal" precision="22" scale="4" />
+		
+		<property name="totalCollection" column="TOTAL_COLLECTION" type="big_decimal" precision="22" scale="4" />
+		<property name="excessAmountOtherThanEmi" column="EXCESS_AMOUNT_OTHER_THAN_EMI" type="big_decimal" precision="22" scale="4" />
+		<property name="preClosureAmount" column ="PRE_CLOSURE_AMOUNT" type="big_decimal"  scale="4" precision="22" />
+		<property name="dpd" column="DPD" />
+		
+		<property name="dpdBucket" column="DPD_BUCKET" />
+		<property name="totalClosingOverdue" column="TOTAL_CLOSING_OVERDUE"  type="big_decimal" scale="4" precision="22" />
+		<property name="closingOverduePos" column="CLOSING_OVERDUE_POS" type="big_decimal" scale="4" precision="22" />
+		<property name="totalClosingOverdueExculdingInsurance" column="CLOSING_NTEREST"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="closingFuturePos" column="CLOSING_FUTURE_POS" type="big_decimal" scale="4" precision="22" />
+		<property name="closingFutureFlow" column="CLOSING_FUTURE_FLOW" type="big_decimal" scale="4" precision="22" />
+		<property name="posAtCustomerEnd" column="POS_AT_CUSTOMER_END" type="big_decimal" precision="22" scale="4" />
+		<property name="emiAtCustomerEnd" column="EMI_AT_CUSTOMER_END" type="big_decimal" precision="22" scale="4" />
+		<property name="status" column="Status" />
+		
+		<property name="emiPattern" column="EMI_PATTERN"  />
+		<property name="dateOfRepo" column="DATE_OF_REPO"  />
+		<property name="vehicleCateogry" column="VEHICLE_CATEOGRY"  />
+		<property name="make" column="MAKE" />
+		<property name="classification" column="CLASSIFICATION"  />
+		
+		<property name="branch" column="BRANCH" />
+		<property name="state" column="STATE" />
+		<property name="month" column ="MONTH_OF_REPORT" />
+		<property name="makerID" column="MAKER_ID" />
+	</class>
+	 
+	<class name="com.scz.vo.PaymentAllocationReportTempVO" table="scz_payment_allocation_report" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="pool_id" column ="POOL_ID" />
+		<property name="loan_no" column ="LOAN_NO" />
+		<property name="openingPOS" column="OPENING_POS" type="big_decimal" precision="22" scale="4" />
+		<property name="openingFutureFlow" column="OPENING_FUTURE_FLOW" type="big_decimal" precision="22" scale="4" />
+		<property name="openingOverdue" column ="OPENING_OVERDUE" type="big_decimal"  scale="4" precision="22" />
+		<property name="openingOverduePos" column="OPENING_OVERDUE_POS"  type="big_decimal" scale="4" precision="22" />
+		<property name="openingOverdueInt" column="OPENING_OVERDUE_INT" type="big_decimal" precision="22" scale="4" />
+		<property name="acctualEmi" column="ACCTUAL_EMI" type="big_decimal" precision="22" scale="4" />
+		<property name="pos" column="POS" type="big_decimal"  scale="4" precision="22" />
+		<property name="totalIntBank" column="TOTAL_INT_BANK"  type="big_decimal" scale="4" precision="22" />
+		<property name="totalIntAu" column="TOTAL_INT_AU" type="big_decimal" scale="4" precision="22" />
+		<property name="collOverdue" column="COLL_OVERDUE" type="big_decimal"  scale="4" precision="22" />
+		<property name="collOverduePos" column="COLL_OVERDUE_POS"  type="big_decimal" scale="4" precision="22" />
+		<property name="collOverdueInt" column="COLL_OVERDUE_INT" type="big_decimal" scale="4" precision="22" />
+		<property name="currBilling" column="CURR_BILLING" type="big_decimal" scale="4" precision="22" />
+		<property name="currBillingPos" column="CURR_BILLING_POS" type="big_decimal"  scale="4" precision="22" />
+		<property name="currBillingInt" column="CURR_BILLING_INT"  type="big_decimal" scale="4" precision="22" />
+		<property name="excessAmt" column="EXCESS_AMT" type="big_decimal" scale="4" precision="22" />
+		<property name="totalCloasingOverdue" column="TOTAL_CLOASING_OVERDUE" type="big_decimal" scale="4" precision="22" />
+		<property name="totalCloasingFuturePos" column="TOTAL_CLOASING_FUTURE_POS" type="big_decimal" scale="4" precision="22" />
+		<property name="totalCloasingFutureInt" column="TOTAL_CLOASING_FUTURE_INT" type="big_decimal" scale="4" precision="22" />
+		<property name="month" column ="MONTH_OF_REPORT" type="java.sql.Date"   />
+	</class>
+	
+	
+	<class name="com.scz.vo.PaymentScheduleReportTempVO" table="scz_payment_schedule_report" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="pool_id" column ="POOL_ID" />
+		<property name="accrual_Month" column ="ACCRUAL_MONTH" length="55"  />
+		<property name="instl_Date" column ="INSTL_DATE" type="java.sql.Date" />
+		<property name="Total_Principle_Amort" column="TOTAL_PRINCIPLE_AMORT" type="big_decimal" precision="22" scale="4" />
+		<property name="interest" column ="INTEREST" type="big_decimal"  scale="4" precision="22" />
+		<property name="residual_Principle" column="RESIDUAL_PRINCIPLE"  type="big_decimal" scale="4" precision="22" />
+		<property name="monthly_Cash_Flow" column="MONTHLY_CASH_FLOW" type="big_decimal"  scale="4" precision="22" />
+		<property name="total_EMI" column="TOTAL_EMI"  type="big_decimal" scale="4" precision="22" />
+		<property name="difference" column="DIFFERENCE" type="big_decimal" scale="4" precision="22" />
+	</class>
+	
+	
+	<class name="com.scz.vo.FutureFlowReportTempVO" table="scz_future_flow_report" dynamic-update="true">
+		<id name="id" column="ID" type="int" unsaved-value="null">
+			<generator class="native" />
+		</id>
+		<property name="loan_id" column ="LOAN_ID" />
+		<property name="loan_no" column ="LOAN_NO"  />
+		<property name="reference_No" column ="REFERENCE_NO" />	
+		<property name="product" column ="PRODUCT"  />
+		<property name="branch_Code" column ="BRANCH_CODE" />	
+		<property name="branch" column ="BRANCH"  />
+		<property name="future_Cash_flow" column ="FUTURE_CASH_FLOW"  type="big_decimal" scale="4" precision="22" />	
+		<property name="tenure" column ="TENURE" />	
+		
+		<property name="month1" column ="MONTH1"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month2" column ="MONTH2"  type="big_decimal" scale="4" precision="22" />
+		<property name="month3" column ="MONTH3"  type="big_decimal" scale="4" precision="22" />
+		<property name="month4" column ="MONTH4"  type="big_decimal" scale="4" precision="22" />
+		<property name="month5" column ="MONTH5"  type="big_decimal" scale="4" precision="22" />
+		<property name="month6" column ="MONTH6"  type="big_decimal" scale="4" precision="22" />
+		<property name="month7" column ="MONTH7"  type="big_decimal" scale="4" precision="22" />
+		<property name="month8" column ="MONTH8"  type="big_decimal" scale="4" precision="22" />
+		<property name="month9" column ="MONTH9"  type="big_decimal" scale="4" precision="22" />
+		<property name="month10" column ="MONTH10"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month11" column ="MONTH11"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month12" column ="MONTH12"  type="big_decimal" scale="4" precision="22" />
+		<property name="month13" column ="MONTH13"  type="big_decimal" scale="4" precision="22" />
+		<property name="month14" column ="MONTH14"  type="big_decimal" scale="4" precision="22" />
+		<property name="month15" column ="MONTH15"  type="big_decimal" scale="4" precision="22" />
+		<property name="month16" column ="MONTH16"  type="big_decimal" scale="4" precision="22" />
+		<property name="month17" column ="MONTH17"  type="big_decimal" scale="4" precision="22" />
+		<property name="month18" column ="MONTH18"  type="big_decimal" scale="4" precision="22" />
+		<property name="month19" column ="MONTH19"  type="big_decimal" scale="4" precision="22" />
+		<property name="month20" column ="MONTH20"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month21" column ="MONTH21"  type="big_decimal" scale="4" precision="22" />
+		<property name="month22" column ="MONTH22"  type="big_decimal" scale="4" precision="22" />
+		<property name="month23" column ="MONTH23"  type="big_decimal" scale="4" precision="22" />
+		<property name="month24" column ="MONTH24"  type="big_decimal" scale="4" precision="22" />
+		<property name="month25" column ="MONTH25"  type="big_decimal" scale="4" precision="22" />
+		<property name="month26" column ="MONTH26"  type="big_decimal" scale="4" precision="22" />
+		<property name="month27" column ="MONTH27"  type="big_decimal" scale="4" precision="22" />
+		<property name="month28" column ="MONTH28"  type="big_decimal" scale="4" precision="22" />
+		<property name="month29" column ="MONTH29"  type="big_decimal" scale="4" precision="22" />
+		<property name="month30" column ="MONTH30"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month31" column ="MONTH31"  type="big_decimal" scale="4" precision="22" />
+		<property name="month32" column ="MONTH32"  type="big_decimal" scale="4" precision="22" />
+		<property name="month33" column ="MONTH33"  type="big_decimal" scale="4" precision="22" />
+		<property name="month34" column ="MONTH34"  type="big_decimal" scale="4" precision="22" />
+		<property name="month35" column ="MONTH35"  type="big_decimal" scale="4" precision="22" />
+		<property name="month36" column ="MONTH36"  type="big_decimal" scale="4" precision="22" />
+		<property name="month37" column ="MONTH37"  type="big_decimal" scale="4" precision="22" />
+		<property name="month38" column ="MONTH38"  type="big_decimal" scale="4" precision="22" />
+		<property name="month39" column ="MONTH39"  type="big_decimal" scale="4" precision="22" />
+		<property name="month40" column ="MONTH40"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month41" column ="MONTH41"  type="big_decimal" scale="4" precision="22" />
+		<property name="month42" column ="MONTH42"  type="big_decimal" scale="4" precision="22" />
+		<property name="month43" column ="MONTH43"  type="big_decimal" scale="4" precision="22" />
+		<property name="month44" column ="MONTH44"  type="big_decimal" scale="4" precision="22" />
+		<property name="month45" column ="MONTH45"  type="big_decimal" scale="4" precision="22" />
+		<property name="month46" column ="MONTH46"  type="big_decimal" scale="4" precision="22" />
+		<property name="month47" column ="MONTH47"  type="big_decimal" scale="4" precision="22" />
+		<property name="month48" column ="MONTH48"  type="big_decimal" scale="4" precision="22" />
+		<property name="month49" column ="MONTH49"  type="big_decimal" scale="4" precision="22" />
+		<property name="month50" column ="MONTH50"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month51" column ="MONTH51"  type="big_decimal" scale="4" precision="22" />
+		<property name="month52" column ="MONTH52"  type="big_decimal" scale="4" precision="22" />
+		<property name="month53" column ="MONTH53"  type="big_decimal" scale="4" precision="22" />
+		<property name="month54" column ="MONTH54"  type="big_decimal" scale="4" precision="22" />
+		<property name="month55" column ="MONTH55"  type="big_decimal" scale="4" precision="22" />
+		<property name="month56" column ="MONTH56"  type="big_decimal" scale="4" precision="22" />
+		<property name="month57" column ="MONTH57"  type="big_decimal" scale="4" precision="22" />
+		<property name="month58" column ="MONTH58"  type="big_decimal" scale="4" precision="22" />
+		<property name="month59" column ="MONTH59"  type="big_decimal" scale="4" precision="22" />
+		<property name="month60" column ="MONTH60"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month61" column ="MONTH61"  type="big_decimal" scale="4" precision="22" />
+		<property name="month62" column ="MONTH62"  type="big_decimal" scale="4" precision="22" />
+		<property name="month63" column ="MONTH63"  type="big_decimal" scale="4" precision="22" />
+		<property name="month64" column ="MONTH64"  type="big_decimal" scale="4" precision="22" />
+		<property name="month65" column ="MONTH65"  type="big_decimal" scale="4" precision="22" />
+		<property name="month66" column ="MONTH66"  type="big_decimal" scale="4" precision="22" />
+		<property name="month67" column ="MONTH67"  type="big_decimal" scale="4" precision="22" />
+		<property name="month68" column ="MONTH68"  type="big_decimal" scale="4" precision="22" />
+		<property name="month69" column ="MONTH69"  type="big_decimal" scale="4" precision="22" />
+		<property name="month70" column ="MONTH70"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month71" column ="MONTH71"  type="big_decimal" scale="4" precision="22" />
+		<property name="month72" column ="MONTH72"  type="big_decimal" scale="4" precision="22" />
+		<property name="month73" column ="MONTH73"  type="big_decimal" scale="4" precision="22" />
+		<property name="month74" column ="MONTH74"  type="big_decimal" scale="4" precision="22" />
+		<property name="month75" column ="MONTH75"  type="big_decimal" scale="4" precision="22" />
+		<property name="month76" column ="MONTH76"  type="big_decimal" scale="4" precision="22" />
+		<property name="month77" column ="MONTH77"  type="big_decimal" scale="4" precision="22" />
+		<property name="month78" column ="MONTH78"  type="big_decimal" scale="4" precision="22" />
+		<property name="month79" column ="MONTH79"  type="big_decimal" scale="4" precision="22" />
+		<property name="month80" column ="MONTH80"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month81" column ="MONTH81"  type="big_decimal" scale="4" precision="22" />
+		<property name="month82" column ="MONTH82"  type="big_decimal" scale="4" precision="22" />
+		<property name="month83" column ="MONTH83"  type="big_decimal" scale="4" precision="22" />
+		<property name="month84" column ="MONTH84"  type="big_decimal" scale="4" precision="22" />
+		<property name="month85" column ="MONTH85"  type="big_decimal" scale="4" precision="22" />
+		<property name="month86" column ="MONTH86"  type="big_decimal" scale="4" precision="22" />
+		<property name="month87" column ="MONTH87"  type="big_decimal" scale="4" precision="22" />
+		<property name="month88" column ="MONTH88"  type="big_decimal" scale="4" precision="22" />
+		<property name="month89" column ="MONTH89"  type="big_decimal" scale="4" precision="22" />
+		<property name="month90" column ="MONTH90"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month91" column ="MONTH91"  type="big_decimal" scale="4" precision="22" />
+		<property name="month92" column ="MONTH92"  type="big_decimal" scale="4" precision="22" />
+		<property name="month93" column ="MONTH93"  type="big_decimal" scale="4" precision="22" />
+		<property name="month94" column ="MONTH94"  type="big_decimal" scale="4" precision="22" />
+		<property name="month95" column ="MONTH95"  type="big_decimal" scale="4" precision="22" />
+		<property name="month96" column ="MONTH96"  type="big_decimal" scale="4" precision="22" />
+		<property name="month97" column ="MONTH97"  type="big_decimal" scale="4" precision="22" />
+		<property name="month98" column ="MONTH98"  type="big_decimal" scale="4" precision="22" />
+		<property name="month99" column ="MONTH99"  type="big_decimal" scale="4" precision="22" />
+		<property name="month100" column ="MONTH100"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month101" column ="MONTH101" type="big_decimal" scale="4" precision="22" />
+		<property name="month102" column ="MONTH102"  type="big_decimal" scale="4" precision="22" />
+		<property name="month103" column ="MONTH103"  type="big_decimal" scale="4" precision="22" />
+		<property name="month104" column ="MONTH104"  type="big_decimal" scale="4" precision="22" />
+		<property name="month105" column ="MONTH105"  type="big_decimal" scale="4" precision="22" />
+		<property name="month106" column ="MONTH106"  type="big_decimal" scale="4" precision="22" />
+		<property name="month107" column ="MONTH107"  type="big_decimal" scale="4" precision="22" />
+		<property name="month108" column ="MONTH108"  type="big_decimal" scale="4" precision="22" />
+		<property name="month109" column ="MONTH109"  type="big_decimal" scale="4" precision="22" />
+		<property name="month110" column ="MONTH110"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month111" column ="MONTH111"  type="big_decimal" scale="4" precision="22" />
+		<property name="month112" column ="MONTH112"  type="big_decimal" scale="4" precision="22" />
+		<property name="month113" column ="MONTH113"  type="big_decimal" scale="4" precision="22" />
+		<property name="month114" column ="MONTH114"  type="big_decimal" scale="4" precision="22" />
+		<property name="month115" column ="MONTH115"  type="big_decimal" scale="4" precision="22" />
+		<property name="month116" column ="MONTH116"  type="big_decimal" scale="4" precision="22" />
+		<property name="month117" column ="MONTH117"  type="big_decimal" scale="4" precision="22" />
+		<property name="month118" column ="MONTH118"  type="big_decimal" scale="4" precision="22" />
+		<property name="month119" column ="MONTH119"  type="big_decimal" scale="4" precision="22" />
+		<property name="month120" column ="MONTH120"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month121" column ="MONTH121"  type="big_decimal" scale="4" precision="22" />
+		<property name="month122" column ="MONTH122"  type="big_decimal" scale="4" precision="22" />
+		<property name="month123" column ="MONTH123"  type="big_decimal" scale="4" precision="22" />
+		<property name="month124" column ="MONTH124"  type="big_decimal" scale="4" precision="22" />
+		<property name="month125" column ="MONTH125"  type="big_decimal" scale="4" precision="22" />
+		<property name="month126" column ="MONTH126"  type="big_decimal" scale="4" precision="22" />
+		<property name="month127" column ="MONTH127"  type="big_decimal" scale="4" precision="22" />
+		<property name="month128" column ="MONTH128"  type="big_decimal" scale="4" precision="22" />
+		<property name="month129" column ="MONTH129"  type="big_decimal" scale="4" precision="22" />
+		<property name="month130" column ="MONTH130"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month131" column ="MONTH131"  type="big_decimal" scale="4" precision="22" />
+		<property name="month132" column ="MONTH132"  type="big_decimal" scale="4" precision="22" />
+		<property name="month133" column ="MONTH133"  type="big_decimal" scale="4" precision="22" />
+		<property name="month134" column ="MONTH134"  type="big_decimal" scale="4" precision="22" />
+		<property name="month135" column ="MONTH135"  type="big_decimal" scale="4" precision="22" />
+		<property name="month136" column ="MONTH136"  type="big_decimal" scale="4" precision="22" />
+		<property name="month137" column ="MONTH137"  type="big_decimal" scale="4" precision="22" />
+		<property name="month138" column ="MONTH138"  type="big_decimal" scale="4" precision="22" />
+		<property name="month139" column ="MONTH139"  type="big_decimal" scale="4" precision="22" />
+		<property name="month140" column ="MONTH140"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month141" column ="MONTH141"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month142" column ="MONTH142"  type="big_decimal" scale="4" precision="22" />
+		<property name="month143" column ="MONTH143"  type="big_decimal" scale="4" precision="22" />
+		<property name="month144" column ="MONTH144"  type="big_decimal" scale="4" precision="22" />
+		<property name="month145" column ="MONTH145"  type="big_decimal" scale="4" precision="22" />
+		<property name="month146" column ="MONTH146"  type="big_decimal" scale="4" precision="22" />
+		<property name="month147" column ="MONTH147"  type="big_decimal" scale="4" precision="22" />
+		<property name="month148" column ="MONTH148"  type="big_decimal" scale="4" precision="22" />
+		<property name="month149" column ="MONTH149"  type="big_decimal" scale="4" precision="22" />
+		<property name="month150" column ="MONTH150"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month151" column ="MONTH151"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month152" column ="MONTH152"  type="big_decimal" scale="4" precision="22" />
+		<property name="month153" column ="MONTH153"  type="big_decimal" scale="4" precision="22" />
+		<property name="month154" column ="MONTH154"  type="big_decimal" scale="4" precision="22" />
+		<property name="month155" column ="MONTH155"  type="big_decimal" scale="4" precision="22" />
+		<property name="month156" column ="MONTH156"  type="big_decimal" scale="4" precision="22" />
+		<property name="month157" column ="MONTH157"  type="big_decimal" scale="4" precision="22" />
+		<property name="month158" column ="MONTH158"  type="big_decimal" scale="4" precision="22" />
+		<property name="month159" column ="MONTH159"  type="big_decimal" scale="4" precision="22" />
+		<property name="month160" column ="MONTH160"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month161" column ="MONTH161"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month162" column ="MONTH162"  type="big_decimal" scale="4" precision="22" />
+		<property name="month163" column ="MONTH163"  type="big_decimal" scale="4" precision="22" />
+		<property name="month164" column ="MONTH164"  type="big_decimal" scale="4" precision="22" />
+		<property name="month165" column ="MONTH165"  type="big_decimal" scale="4" precision="22" />
+		<property name="month166" column ="MONTH166"  type="big_decimal" scale="4" precision="22" />
+		<property name="month167" column ="MONTH167"  type="big_decimal" scale="4" precision="22" />
+		<property name="month168" column ="MONTH168"  type="big_decimal" scale="4" precision="22" />
+		<property name="month169" column ="MONTH169"  type="big_decimal" scale="4" precision="22" />
+		<property name="month170" column ="MONTH170"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month171" column ="MONTH171"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month172" column ="MONTH172"  type="big_decimal" scale="4" precision="22" />
+		<property name="month173" column ="MONTH173"  type="big_decimal" scale="4" precision="22" />
+		<property name="month174" column ="MONTH174"  type="big_decimal" scale="4" precision="22" />
+		<property name="month175" column ="MONTH175"  type="big_decimal" scale="4" precision="22" />
+		<property name="month176" column ="MONTH176"  type="big_decimal" scale="4" precision="22" />
+		<property name="month177" column ="MONTH177"  type="big_decimal" scale="4" precision="22" />
+		<property name="month178" column ="MONTH178"  type="big_decimal" scale="4" precision="22" />
+		<property name="month179" column ="MONTH179"  type="big_decimal" scale="4" precision="22" />
+		<property name="month180" column ="MONTH180"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month181" column ="MONTH181"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month182" column ="MONTH182"  type="big_decimal" scale="4" precision="22" />
+		<property name="month183" column ="MONTH183"  type="big_decimal" scale="4" precision="22" />
+		<property name="month184" column ="MONTH184"  type="big_decimal" scale="4" precision="22" />
+		<property name="month185" column ="MONTH185"  type="big_decimal" scale="4" precision="22" />
+		<property name="month186" column ="MONTH186"  type="big_decimal" scale="4" precision="22" />
+		<property name="month187" column ="MONTH187"  type="big_decimal" scale="4" precision="22" />
+		<property name="month188" column ="MONTH188"  type="big_decimal" scale="4" precision="22" />
+		<property name="month189" column ="MONTH189"  type="big_decimal" scale="4" precision="22" />
+		<property name="month190" column ="MONTH190"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month191" column ="MONTH191"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month192" column ="MONTH192"  type="big_decimal" scale="4" precision="22" />
+		<property name="month193" column ="MONTH193"  type="big_decimal" scale="4" precision="22" />
+		<property name="month194" column ="MONTH194"  type="big_decimal" scale="4" precision="22" />
+		<property name="month195" column ="MONTH195"  type="big_decimal" scale="4" precision="22" />
+		<property name="month196" column ="MONTH196"  type="big_decimal" scale="4" precision="22" />
+		<property name="month197" column ="MONTH197"  type="big_decimal" scale="4" precision="22" />
+		<property name="month198" column ="MONTH198"  type="big_decimal" scale="4" precision="22" />
+		<property name="month199" column ="MONTH199"  type="big_decimal" scale="4" precision="22" />
+		<property name="month200" column ="MONTH200"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month201" column ="MONTH201"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month202" column ="MONTH202"  type="big_decimal" scale="4" precision="22" />
+		<property name="month203" column ="MONTH203"  type="big_decimal" scale="4" precision="22" />
+		<property name="month204" column ="MONTH204"  type="big_decimal" scale="4" precision="22" />
+		<property name="month205" column ="MONTH205"  type="big_decimal" scale="4" precision="22" />
+		<property name="month206" column ="MONTH206"  type="big_decimal" scale="4" precision="22" />
+		<property name="month207" column ="MONTH207"  type="big_decimal" scale="4" precision="22" />
+		<property name="month208" column ="MONTH208"  type="big_decimal" scale="4" precision="22" />
+		<property name="month209" column ="MONTH209"  type="big_decimal" scale="4" precision="22" />
+		<property name="month210" column ="MONTH210"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month211" column ="MONTH211"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month212" column ="MONTH212"  type="big_decimal" scale="4" precision="22" />
+		<property name="month213" column ="MONTH213"  type="big_decimal" scale="4" precision="22" />
+		<property name="month214" column ="MONTH214"  type="big_decimal" scale="4" precision="22" />
+		<property name="month215" column ="MONTH215"  type="big_decimal" scale="4" precision="22" />
+		<property name="month216" column ="MONTH216"  type="big_decimal" scale="4" precision="22" />
+		<property name="month217" column ="MONTH217"  type="big_decimal" scale="4" precision="22" />
+		<property name="month218" column ="MONTH218"  type="big_decimal" scale="4" precision="22" />
+		<property name="month219" column ="MONTH219"  type="big_decimal" scale="4" precision="22" />
+		<property name="month220" column ="MONTH220"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month221" column ="MONTH221"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month222" column ="MONTH222"  type="big_decimal" scale="4" precision="22" />
+		<property name="month223" column ="MONTH223"  type="big_decimal" scale="4" precision="22" />
+		<property name="month224" column ="MONTH224"  type="big_decimal" scale="4" precision="22" />
+		<property name="month225" column ="MONTH225"  type="big_decimal" scale="4" precision="22" />
+		<property name="month226" column ="MONTH226"  type="big_decimal" scale="4" precision="22" />
+		<property name="month227" column ="MONTH227"  type="big_decimal" scale="4" precision="22" />
+		<property name="month228" column ="MONTH228"  type="big_decimal" scale="4" precision="22" />
+		<property name="month229" column ="MONTH229"  type="big_decimal" scale="4" precision="22" />
+		<property name="month230" column ="MONTH230"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="month231" column ="MONTH231"  type="big_decimal" scale="4" precision="22" />	
+		<property name="month232" column ="MONTH232"  type="big_decimal" scale="4" precision="22" />
+		<property name="month233" column ="MONTH233"  type="big_decimal" scale="4" precision="22" />
+		<property name="month234" column ="MONTH234"  type="big_decimal" scale="4" precision="22" />
+		<property name="month235" column ="MONTH235"  type="big_decimal" scale="4" precision="22" />
+		<property name="month236" column ="MONTH236"  type="big_decimal" scale="4" precision="22" />
+		<property name="month237" column ="MONTH237"  type="big_decimal" scale="4" precision="22" />
+		<property name="month238" column ="MONTH238"  type="big_decimal" scale="4" precision="22" />
+		<property name="month239" column ="MONTH239"  type="big_decimal" scale="4" precision="22" />
+		<property name="month240" column ="MONTH240"  type="big_decimal" scale="4" precision="22" />
+		
+		<property name="fr" column ="FR"  type="big_decimal" scale="4" precision="22" />	
+		<property name="maker_id" column ="MAKER_ID" />	
+		<property name="report_Type" column ="REPORT_TYPE" />	
+		
+		
+	</class>
+	
+	
+
+</hibernate-mapping>
+
+	
